@@ -16,24 +16,14 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     include    
 )
 
-# Find and link raylib
-find_library(RAYLIB_LIB raylib HINTS lib)
-if(NOT RAYLIB_LIB)
-    message(FATAL_ERROR "raylib library not found in lib directory")
-endif()
-
-target_link_libraries(${PROJECT_NAME} ${RAYLIB_LIB})
-
-# Platform-specific libraries that raylib needs
+# Platform-specific build steps
 if(WIN32)
+    find_library(RAYLIB_LIB raylib HINTS lib)
+    target_link_libraries(${PROJECT_NAME} ${RAYLIB_LIB})
     target_link_libraries(${PROJECT_NAME} winmm gdi32)
-elseif(APPLE)
-    target_link_libraries(${PROJECT_NAME} 
-        "-framework OpenGL" 
-        "-framework Cocoa" 
-        "-framework IOKit" 
-        "-framework CoreVideo"
-    )
+    if(NOT RAYLIB_LIB)
+        message(FATAL_ERROR "raylib library not found in lib directory")
+    endif()
 elseif(UNIX)
-    target_link_libraries(${PROJECT_NAME} GL m pthread dl rt X11)
+    target_link_libraries(${PROJECT_NAME} GL m pthread dl rt X11 raylib)
 endif()
