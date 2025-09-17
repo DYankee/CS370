@@ -1,7 +1,8 @@
 ﻿// CS370.cpp : Defines the entry point for the application.
 //
 
-#include "CS370.h"
+#include <iostream>
+#include "../include/raylib.h"
 
 using namespace std;
 
