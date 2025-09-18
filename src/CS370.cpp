@@ -37,29 +37,22 @@ int main()
 	// Create the main window	
 	const int screenWidth = 1920;
 	const int screenHeight = 1080;
+	const int screenWidth = 1920;
+	const int screenHeight = 1080;
 	InitWindow(screenWidth, screenHeight, "CS370");
 	ToggleFullscreen();
 
-    // Load TMX map
-    TmxMap* stage1 = LoadTMX("../assets/tiled/stage1.tmx");
-    if (!stage1) {
-        cout << "Failed to load stage1.tmx" << endl;
-        CloseWindow();
-        return -1;
-    }
 	
 	//init variables
-	const float gravity = 1000.0f;
 
 	 // Box properties
-    Vector2 boxPosition = {400.0f, 300.0f};   // Start in middle
+    Vector2 boxPosition = {400, 300};   // Start in middle
     Vector2 boxSize = {50, 50};         // Width & height
-	Vector2 boxVol = {0.0f, 0.0f};      // Box Volocity
     float speed = 400.0f;               // Pixels per second
-	float jumpStrength = -400.0f;       // Initial upward velocity
 
-	// Load cow texture
-	Texture2D cow = LoadTexture("../assets/sprites/cow.png");
+
+	/* ball
+	Texture2D ball = LoadTexture("../assets/cool-sports-ball.png");
 
 	int frameWidth = cow.width;
     int frameHeight = cow.height;
@@ -77,26 +70,20 @@ int main()
     Vector2 origin = { 0, 0 };
 
     int rotation = 0;
+	*/
 
 	// Main game loop
     SetTargetFPS(60);
 	while (!WindowShouldClose()) // Detect window close button or ESC key
 	{
 
-		float dt = GetFrameTime(); // Time since last frame
-
-		boxVol.y += gravity * dt; // Update volocity based on gravity
+		 float dt = GetFrameTime(); // Time since last frame
 
 		// Move box based on key input
-		if (IsKeyPressed(KEY_SPACE)) // if player hits space jump 
-		{
-   			boxVol.y = jumpStrength; // player jumps using jump strength
-		}
-
-		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt; // move left
-		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt; // move right
-
-		boxPosition.y += boxVol.y * dt; // update player position based on volocity
+		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt;
+		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt;
+		if (IsKeyDown(KEY_W)) boxPosition.y -= speed * dt;
+		if (IsKeyDown(KEY_S)) boxPosition.y += speed * dt;
 
 		// Constrain box to stay within screen bounds
 		if (boxPosition.x < 0) boxPosition.x = 0;
@@ -104,14 +91,17 @@ int main()
 		if (boxPosition.x > screenWidth - boxSize.x) boxPosition.x = screenWidth - boxSize.x;
 		if (boxPosition.y > screenHeight - boxSize.y) boxPosition.y = screenHeight - boxSize.y;
 
-		// Update cow texture position to follow the box
-		destRec.x = boxPosition.x;
-		destRec.y = boxPosition.y;
+		// Update
+		//rotation++;
 
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
 
-		DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, GREEN);
+		
+		 DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the box
+
+         DrawText("Move with W A S D", 10, 10, 20, BLACK);
+		//DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, GREEN);
 
 		EndDrawing();
 	}
