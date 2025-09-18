@@ -57,11 +57,26 @@ int main()
     Vector2 origin = { 0, 0 };
 
     int rotation = 0;
+	*/
 
 	// Main game loop
     SetTargetFPS(60);
 	while (!WindowShouldClose()) // Detect window close button or ESC key
 	{
+
+		 float dt = GetFrameTime(); // Time since last frame
+
+		// Move box based on key input
+		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt;
+		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt;
+		if (IsKeyDown(KEY_W)) boxPosition.y -= speed * dt;
+		if (IsKeyDown(KEY_S)) boxPosition.y += speed * dt;
+
+		// Constrain box to stay within screen bounds
+		if (boxPosition.x < 0) boxPosition.x = 0;
+		if (boxPosition.y < 0) boxPosition.y = 0;
+		if (boxPosition.x > screenWidth - boxSize.x) boxPosition.x = screenWidth - boxSize.x;
+		if (boxPosition.y > screenHeight - boxSize.y) boxPosition.y = screenHeight - boxSize.y;
 
 		float dt = GetFrameTime(); // Time since last frame
 
