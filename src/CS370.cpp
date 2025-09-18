@@ -42,7 +42,7 @@ int main()
 
 		ClearBackground(RAYWHITE);
 
-		DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, WHITE);
+		DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, GREEN);
 
 		EndDrawing();
 	}
