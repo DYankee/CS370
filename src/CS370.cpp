@@ -4,8 +4,8 @@
 #include <iostream>
 #include "../include/raylib.h"
 
-#define CHAR_WIDTH 32
-#define CHAR_HEIGHT 64
+#define CHAR_WIDTH 32.0f
+#define CHAR_HEIGHT 64.0f
 
 #define RAYTMX_IMPLEMENTATION
 #include "../include/raytmx.h"
@@ -75,6 +75,7 @@ int main()
 	{
 		float dt = GetFrameTime(); // Time since last frame
 
+		// Update
 		update(registry, dt);
 
 		float dt = GetFrameTime(); // Time since last frame
