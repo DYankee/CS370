@@ -11,6 +11,7 @@
 
 using namespace std;
 
+/*
 struct My_Transform {
 	Vector2 position;
 	Vector2 size;
@@ -26,14 +27,16 @@ struct My_Texture {
 		sourceRec = { 0.0f, 0.0f, (float)frameW, (float)frameH};
 	}
 };
+*/
 
 void update(entt::registry& registry, float dt) {
 
 	// Update all entities with Transform and Texture components
-	registry.view<My_Transform>().each([dt](auto& transform) {
+	registry.view<Transform>().each([dt](auto& transform) {
 		// Example update logic: Move the entity to the right
-		transform.position.x += 1.0f * dt; // Move right by 1 unit per update
+		transform += 1.0f * dt; // Move right by 1 unit per update
 	});
+
 	// Move box based on key input
 	/*
 	if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt;
@@ -51,7 +54,7 @@ void update(entt::registry& registry, float dt) {
 
 void draw(entt::registry& registry) {
 	// Draw all entities with Transform and Texture components
-	registry.view<My_Transform, My_Texture>().each([](auto& transform, auto& texture) {
+	registry.view<Transform, Texture>().each([](auto& transform, auto& texture) {
 		// Draw the texture at the entity's position
 		DrawTexturePro(texture.texture,
 			texture.sourceRec,
@@ -78,15 +81,18 @@ int main()
 
 	//init entt registry
 	entt::registry registry;
+	Texture texture();
 
+	
 
 
 	//init test entities
 	for (size_t i = 0; i < 10; i++)
 	{
+		//create a new entity
 		entt::entity entity = registry.create();
-		registry.emplace<My_Transform>(entity, Vector2{float(i * 50), float(i * 50)}, Vector2{CHAR_WIDTH, CHAR_HEIGHT}, 0.0f);
-		registry.emplace<My_Texture>(entity, "../../../assets/advnt_full.png", CHAR_WIDTH, CHAR_HEIGHT);
+		registry.emplace<Transform>(entity, Vector2{float(i * 50), float(i * 50)}, Vector2{CHAR_WIDTH, CHAR_HEIGHT}, 0.0f);
+		registry.emplace<Texture>(entity, "../../../assets/advnt_full.png", CHAR_WIDTH, CHAR_HEIGHT);
 	}
 
 
