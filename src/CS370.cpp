@@ -139,6 +139,7 @@ int main()
 	const int screenHeight = 1080;
 	InitWindow(screenWidth, screenHeight, "CS370");
 	ToggleFullscreen();
+
 	
 	//init variables
 	const float gravity = 1000.0f;
@@ -159,12 +160,13 @@ int main()
     //Rectangle sourceRec = { 0.0f, 0.0f, (float)frameWidth, (float)frameHeight};
 
     // Destination rectangle (screen rectangle where drawing part of texture)
-    //Rectangle destRec = { boxPosition.x, boxPosition.y, (float)boxSize.x, (float)boxSize.y };
+    Rectangle destRec = { screenWidth/2.0f, screenHeight/2.0f, frameWidth/2.0f, frameHeight/2.0f };
 
     // Origin of the texture (rotation/scale point), it's relative to destination rectangle size
-    //Vector2 origin = { 0, 0 };
+    Vector2 origin = { destRec.width/2, destRec.height/2 };
 
-    //int rotation = 0;
+    int rotation = 0;
+	*/
 
 	// Main game loop
     SetTargetFPS(60);
@@ -185,6 +187,10 @@ int main()
 		if (boxPosition.x > screenWidth - boxSize.x) boxPosition.x = screenWidth - boxSize.x;
 		if (boxPosition.y > screenHeight - boxSize.y) boxPosition.y = screenHeight - boxSize.y;
 
+		// Update cow texture position to follow the box
+		destRec.x = boxPosition.x;
+		destRec.y = boxPosition.y;
+
 		float dt = GetFrameTime(); // Time since last frame
 
 		Update(registry, entityMap, dt);
@@ -192,20 +198,15 @@ int main()
 
 		// Draw
 		BeginDrawing();
-		DrawTexturePro(background, 
-			{0, 0, (float)background.width, (float)background.height}, 
-			{0, 0, (float)screenWidth, (float)screenHeight}, 
-			{0, 0}, 0, WHITE);
-        DrawText("Move with W A S D", 10, 10, 20, BLACK);
-		Draw(registry);
-		//DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draw cow over the box
+
+		ClearBackground(RAYWHITE);
+
+		
+		 DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the box
+
+         DrawText("Move with W A S D", 10, 10, 20, BLACK);
 		//DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, GREEN);
 		EndDrawing();
 	}
-
-	// Cleanup
-	UnloadTexture(background);
-	CloseWindow();
-
 	return 0;
 }
