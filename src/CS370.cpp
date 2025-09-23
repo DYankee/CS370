@@ -130,15 +130,20 @@ int main()
 	while (!WindowShouldClose()) // Detect window close button or ESC key
 	{
 
-<<<<<<< HEAD
-=======
-		 float dt = GetFrameTime(); // Time since last frame
+		float dt = GetFrameTime(); // Time since last frame
+
+		boxVol.y += gravity * dt; // Update volocity based on gravity
 
 		// Move box based on key input
-		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt;
-		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt;
-		if (IsKeyDown(KEY_W)) boxPosition.y -= speed * dt;
-		if (IsKeyDown(KEY_S)) boxPosition.y += speed * dt;
+		if (IsKeyPressed(KEY_W)) // if player hits W jump
+		{
+   			boxVol.y = jumpStrength; // player jumps using jump strength
+		}
+
+		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt; // move left
+		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt; // move right
+
+		boxPosition.y += boxVol.y * dt; // update player position based on volocity
 
 		// Constrain box to stay within screen bounds
 		if (boxPosition.x < 0) boxPosition.x = 0;
