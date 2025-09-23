@@ -16,6 +16,10 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     include    
 )
 
+add_custom_command(TARGET ${PROJECT_NAME}
+    POST_BUILD
+    COMMAND cp -r ${PROJECT_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}  )
+
 # Platform-specific build steps
 if(WIN32)
     find_library(RAYLIB_LIB raylib HINTS lib)
