@@ -178,7 +178,7 @@ int main()
 		boxVol.y += gravity * dt; // Update volocity based on gravity
 
 		// Move box based on key input
-		if (IsKeyPressed(KEY_W)) // if player hits W jump
+		if (IsKeyPressed(KEY_SPACE)) // if player hits space jump 
 		{
    			boxVol.y = jumpStrength; // player jumps using jump strength
 		}
