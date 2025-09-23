@@ -128,8 +128,10 @@ int main()
 		destRec.y = boxPosition.y;
 
 		BeginDrawing();
-		ClearBackground(RAYWHITE);
+
+		//ClearBackground(RAYWHITE);
 		// Draw background texture scaled to screen size
+		
 		DrawTexturePro(background, 
 			{0, 0, (float)background.width, (float)background.height}, 
 			{0, 0, (float)screenWidth, (float)screenHeight}, 
