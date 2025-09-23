@@ -72,7 +72,6 @@ int main()
     Vector2 origin = { 0, 0 };
 
     int rotation = 0;
-	*/
 
 	// Main game loop
     SetTargetFPS(60);
@@ -130,6 +129,11 @@ int main()
 
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
+		// Draw background texture scaled to screen size
+		DrawTexturePro(background, 
+			{0, 0, (float)background.width, (float)background.height}, 
+			{0, 0, (float)screenWidth, (float)screenHeight}, 
+			{0, 0}, 0, WHITE);
 
 		// Draw background texture scaled to screen size
 		
