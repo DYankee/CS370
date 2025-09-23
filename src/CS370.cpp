@@ -10,6 +10,7 @@ extern "C" {
 
 using namespace std;
 
+<<<<<<< HEAD
 // Player and physics constants
 #define CHAR_WIDTH 32
 #define CHAR_HEIGHT 32
@@ -30,6 +31,93 @@ static TmxLayer* FindLayerByName(TmxLayer* layers, int layersLength, const char*
         }
     }
     return NULL;
+=======
+int main()
+{
+	// Create the main window	
+	const int screenWidth = 1920;
+	const int screenHeight = 1080;
+	InitWindow(screenWidth, screenHeight, "CS370");
+	ToggleFullscreen();
+	
+	//init variables
+
+	 // Box properties
+    Vector2 boxPosition = {400, 300};   // Start in middle
+    Vector2 boxSize = {50, 50};         // Width & height
+    float speed = 400.0f;               // Pixels per second
+
+	// Load cow texture
+	Texture2D cow = LoadTexture("../assets/cow.png");
+
+	// Load background texture
+	Texture2D background = LoadTexture("../assets/bg.png");
+
+    int frameWidth = cow.width;
+    int frameHeight = cow.height;
+
+    // Source rectangle (part of the texture to use for drawing)
+    Rectangle sourceRec = { 0.0f, 0.0f, (float)frameWidth, (float)frameHeight};
+
+    // Destination rectangle (screen rectangle where drawing part of texture)
+    Rectangle destRec = { boxPosition.x, boxPosition.y, (float)boxSize.x, (float)boxSize.y };
+
+    // Origin of the texture (rotation/scale point), it's relative to destination rectangle size
+    Vector2 origin = { 0, 0 };
+
+    int rotation = 0;
+
+	// Main game loop
+    SetTargetFPS(60);
+	while (!WindowShouldClose()) // Detect window close button or ESC key
+	{
+
+		 float dt = GetFrameTime(); // Time since last frame
+
+		// Move box based on key input
+		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt;
+		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt;
+		if (IsKeyDown(KEY_W)) boxPosition.y -= speed * dt;
+		if (IsKeyDown(KEY_S)) boxPosition.y += speed * dt;
+
+		// Constrain box to stay within screen bounds
+		if (boxPosition.x < 0) boxPosition.x = 0;
+		if (boxPosition.y < 0) boxPosition.y = 0;
+		if (boxPosition.x > screenWidth - boxSize.x) boxPosition.x = screenWidth - boxSize.x;
+		if (boxPosition.y > screenHeight - boxSize.y) boxPosition.y = screenHeight - boxSize.y;
+
+		// Update cow texture position to follow the box
+		destRec.x = boxPosition.x;
+		destRec.y = boxPosition.y;
+
+		// Update
+		//rotation++;
+
+		BeginDrawing();
+
+		ClearBackground(RAYWHITE);
+		// Draw background texture scaled to screen size
+		DrawTexturePro(background, 
+			{0, 0, (float)background.width, (float)background.height}, 
+			{0, 0, (float)screenWidth, (float)screenHeight}, 
+			{0, 0}, 0, WHITE);
+
+		 DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
+		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draw cow over the box
+
+         DrawText("Move with W A S D", 10, 10, 20, BLACK);
+		//DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, GREEN);
+
+		EndDrawing();
+	}
+
+	// Cleanup
+	UnloadTexture(cow);
+	UnloadTexture(background);
+	CloseWindow();
+
+	return 0;
+>>>>>>> 3e558d3 (added test ui elements to draw over the background and cube)
 }
 
 int main() {

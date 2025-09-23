@@ -1,0 +1,33 @@
+{
+  "tests": 3,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "AssetDataFixture",
+      "tests": 1,
+      "testsuite": [
+        {
+          "name": "TextureLoading",
+          "file": "C:\\Users\\Kent\\CS370\\tests\\test_controller.cpp",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "name": "MapFunctions",
+      "tests": 2,
+      "testsuite": [
+        {
+          "name": "FindObjTest",
+          "file": "C:\\Users\\Kent\\CS370\\tests\\test_controller.cpp",
+          "line": 35
+        },
+        {
+          "name": "GetObjectPropertiesTest",
+          "file": "C:\\Users\\Kent\\CS370\\tests\\test_controller.cpp",
+          "line": 54
+        }
+      ]
+    }
+  ]
+}
