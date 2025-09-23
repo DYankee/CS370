@@ -20,7 +20,7 @@ int main()
 	ToggleFullscreen();
 	
 	//init variables
-	const float gravity = 800.0f;
+	const float gravity = 1000.0f;
 
 	 // Box properties
     Vector2 boxPosition = {400.0f, 300.0f};   // Start in middle
@@ -59,7 +59,7 @@ int main()
 		boxVol.y += gravity * dt; // Update volocity based on gravity
 
 		// Move box based on key input
-		if (IsKeyPressed(KEY_W)) // if player hits W jump
+		if (IsKeyPressed(KEY_SPACE)) // if player hits space jump 
 		{
    			boxVol.y = jumpStrength; // player jumps using jump strength
 		}
