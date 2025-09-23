@@ -78,7 +78,7 @@ int main()
 	while (!WindowShouldClose()) // Detect window close button or ESC key
 	{
 
-		 float dt = GetFrameTime(); // Time since last frame
+		float dt = GetFrameTime(); // Time since last frame
 
 		boxVol.y += gravity * dt; // Update volocity based on gravity
 
