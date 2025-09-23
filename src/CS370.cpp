@@ -18,44 +18,56 @@ int main()
 	const int screenHeight = 1080;
 	InitWindow(screenWidth, screenHeight, "CS370");
 	ToggleFullscreen();
-
-
-	//init entt registry
-	entt::registry registry;
-	Texture texture();
-
 	
+	//init variables
+	const float gravity = 800.0f;
 
-
-	//init test entities
-	for (size_t i = 0; i < 10; i++)
-	{
-		//create a new entity
-		entt::entity entity = registry.create();
-		registry.emplace<Transform>(entity, Vector2{float(i * 50), float(i * 50)}, Vector2{CHAR_WIDTH, CHAR_HEIGHT}, 0.0f);
-		registry.emplace<Texture>(entity, "../../../assets/advnt_full.png", CHAR_WIDTH, CHAR_HEIGHT);
-	}
-
-
-	// Box properties
-	/*
-	Vector2 boxPosition = {400, 300};   // Start in middle
-    Vector2 boxSize = {32, 64};         // Width & height
+	 // Box properties
+    Vector2 boxPosition = {400.0f, 300.0f};   // Start in middle
+    Vector2 boxSize = {50, 50};         // Width & height
+	Vector2 boxVol = {0.0f, 0.0f};      // Box Volocity
     float speed = 400.0f;               // Pixels per second
-	*/
+	float jumpStrength = -400.0f;       // Initial upward velocity
 
-	
+	// Load cow texture
+	Texture2D cow = LoadTexture("../assets/cow.png");
+
+	// Load background texture
+	Texture2D background = LoadTexture("../assets/bg.png");
+
+    int frameWidth = cow.width;
+    int frameHeight = cow.height;
+
+    // Source rectangle (part of the texture to use for drawing)
+    Rectangle sourceRec = { 0.0f, 0.0f, (float)frameWidth, (float)frameHeight};
+
+    // Destination rectangle (screen rectangle where drawing part of texture)
+    Rectangle destRec = { boxPosition.x, boxPosition.y, (float)boxSize.x, (float)boxSize.y };
+
+    // Origin of the texture (rotation/scale point), it's relative to destination rectangle size
+    Vector2 origin = { 0, 0 };
+
+    int rotation = 0;
+
 	// Main game loop
     SetTargetFPS(60);
 	while (!WindowShouldClose()) // Detect window close button or ESC key
 	{
+
 		float dt = GetFrameTime(); // Time since last frame
 
+		boxVol.y += gravity * dt; // Update volocity based on gravity
+
 		// Move box based on key input
-		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt;
-		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt;
-		if (IsKeyDown(KEY_W)) boxPosition.y -= speed * dt;
-		if (IsKeyDown(KEY_S)) boxPosition.y += speed * dt;
+		if (IsKeyPressed(KEY_W)) // if player hits W jump
+		{
+   			boxVol.y = jumpStrength; // player jumps using jump strength
+		}
+
+		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt; // move left
+		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt; // move right
+
+		boxPosition.y += boxVol.y * dt; // update player position based on volocity
 
 		// Constrain box to stay within screen bounds
 		if (boxPosition.x < 0) boxPosition.x = 0;
