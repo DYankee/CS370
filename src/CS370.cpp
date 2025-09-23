@@ -12,7 +12,7 @@ int main()
 	const int screenWidth = 1920;
 	const int screenHeight = 1080;
 	InitWindow(screenWidth, screenHeight, "CS370");
-	ToggleFullscreen();
+//	ToggleFullscreen();
 
 	
 	//init variables
@@ -21,6 +21,11 @@ int main()
     Vector2 boxPosition = {400, 300};   // Start in middle
     Vector2 boxSize = {50, 50};         // Width & height
     float speed = 400.0f;               // Pixels per second
+	Rectangle box = {boxPosition.x, boxPosition.y, boxSize.x, boxSize.y};
+
+	// platform test
+	Rectangle platform1 = {screenWidth/3, screenHeight/2, 300, 50};
+
 
 
 	/* ball
@@ -49,16 +54,16 @@ int main()
 		 float dt = GetFrameTime(); // Time since last frame
 
 		// Move box based on key input
-		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt;
-		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt;
-		if (IsKeyDown(KEY_W)) boxPosition.y -= speed * dt;
-		if (IsKeyDown(KEY_S)) boxPosition.y += speed * dt;
+		if (IsKeyDown(KEY_D)) box.x += speed * dt;
+		if (IsKeyDown(KEY_A)) box.x -= speed * dt;
+		if (IsKeyDown(KEY_W)) box.y -= speed * dt;
+		if (IsKeyDown(KEY_S)) box.y += speed * dt;
 
 		// Constrain box to stay within screen bounds
-		if (boxPosition.x < 0) boxPosition.x = 0;
-		if (boxPosition.y < 0) boxPosition.y = 0;
-		if (boxPosition.x > screenWidth - boxSize.x) boxPosition.x = screenWidth - boxSize.x;
-		if (boxPosition.y > screenHeight - boxSize.y) boxPosition.y = screenHeight - boxSize.y;
+		if (box.x < 0) box.x = 0;
+		if (box.y < 0) box.y = 0;
+		if (box.x > screenWidth - boxSize.x) box.x = screenWidth - boxSize.x;
+		if (box.y > screenHeight - boxSize.y) box.y = screenHeight - boxSize.y;
 
 		// Update
 		//rotation++;
@@ -68,7 +73,16 @@ int main()
 		ClearBackground(RAYWHITE);
 
 		
-		 DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the box
+		//DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the box
+		DrawRectangleRec(box, BLUE);
+
+
+		DrawRectangleRec(platform1, BLACK); // Draw test platform
+
+		if (CheckCollisionRecs(box, platform1)) {
+			cout << "Collision!" << endl;
+		}
+
 
          DrawText("Move with W A S D", 10, 10, 20, BLACK);
 		//DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, GREEN);
