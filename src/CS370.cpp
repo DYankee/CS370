@@ -135,7 +135,6 @@ int main()
 
 		// Draw
 		BeginDrawing();
-		draw(registry);
 		ClearBackground(RAYWHITE);
 
 		DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, GREEN);
