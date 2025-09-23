@@ -70,12 +70,13 @@ int main()
     //Rectangle sourceRec = { 0.0f, 0.0f, (float)frameWidth, (float)frameHeight};
 
     // Destination rectangle (screen rectangle where drawing part of texture)
-    //Rectangle destRec = { boxPosition.x, boxPosition.y, (float)boxSize.x, (float)boxSize.y };
+    Rectangle destRec = { screenWidth/2.0f, screenHeight/2.0f, frameWidth/2.0f, frameHeight/2.0f };
 
     // Origin of the texture (rotation/scale point), it's relative to destination rectangle size
-    //Vector2 origin = { 0, 0 };
+    Vector2 origin = { destRec.width/2, destRec.height/2 };
 
-    //int rotation = 0;
+    int rotation = 0;
+	*/
 
 	// Main game loop
     SetTargetFPS(60);
