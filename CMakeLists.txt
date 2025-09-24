@@ -18,7 +18,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 
 add_custom_command(TARGET ${PROJECT_NAME}
     POST_BUILD
-    COMMAND cp -r ${PROJECT_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}  )
+    COMMAND cp -r ${PROJECT_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/../assets  )
 
 # Platform-specific build steps
 if(WIN32)
