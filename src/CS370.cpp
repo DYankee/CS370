@@ -4,6 +4,9 @@
 #include <iostream>
 #include "../include/raylib.h"
 
+#define RAYLIB_TILESON_IMPLEMENTATION
+#include "../include/raylib-tileson.h"
+
 using namespace std;
 
 int main()
@@ -25,10 +28,10 @@ int main()
 	float jumpStrength = -400.0f;       // Initial upward velocity
 
 	// Load cow texture
-	Texture2D cow = LoadTexture("../assets/cow.png");
+	Texture2D cow = LoadTexture("../assets/sprites/cow.png");
 
 	// Load background texture
-	Texture2D background = LoadTexture("../assets/bg.png");
+	Texture2D background = LoadTexture("../assets/sprites/bg.png");
 
     int frameWidth = cow.width;
     int frameHeight = cow.height;
