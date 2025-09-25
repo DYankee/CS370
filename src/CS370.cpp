@@ -128,31 +128,10 @@ int main()
 		destRec.y = boxPosition.y;
 
 		BeginDrawing();
-
-		//ClearBackground(RAYWHITE);
-		// Draw background texture scaled to screen size
-		
 		DrawTexturePro(background, 
 			{0, 0, (float)background.width, (float)background.height}, 
 			{0, 0, (float)screenWidth, (float)screenHeight}, 
 			{0, 0}, 0, WHITE);
-
-		// Draw background texture scaled to screen size
-		
-		/*DrawTexturePro(background, 
-		ClearBackground(RAYWHITE);
-
-		// Draw background texture scaled to screen size
-		
-		/*DrawTexturePro(background, 
-			{0, 0, (float)background.width, (float)background.height}, 
-			{0, 0, (float)screenWidth, (float)screenHeight}, 
-			{0, 0}, 0, WHITE);*/
-
-		// Draw the map
-        DrawTMX(stage1, NULL, 0, 0, WHITE);
-
-		 //DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
 
 		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE);
 
