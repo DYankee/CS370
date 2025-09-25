@@ -22,6 +22,9 @@ add_custom_command(TARGET ${PROJECT_NAME}
 
 # Platform-specific build steps
 if(WIN32)
+    add_custom_command( TARGET ${PROJECT_NAME}
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/assets ${CMAKE_INSTALL_PREFIX}/assets)
     find_library(RAYLIB_LIB raylib HINTS lib)
     target_link_libraries(${PROJECT_NAME} ${RAYLIB_LIB})
     target_link_libraries(${PROJECT_NAME} winmm gdi32)
@@ -29,5 +32,8 @@ if(WIN32)
         message(FATAL_ERROR "raylib library not found in lib directory")
     endif()
 elseif(UNIX)
+    add_custom_command( TARGET ${PROJECT_NAME}
+        POST_BUILD
+        COMMAND cp -r ${PROJECT_SOURCE_DIR}/assets ${CMAKE_INSTALL_PREFIX}/assets)
     target_link_libraries(${PROJECT_NAME} GL m pthread dl rt X11 raylib)
 endif()
