@@ -4,13 +4,8 @@
 #include <iostream>
 #include "../include/raylib.h"
 
-#define CHAR_WIDTH 32.0f
-#define CHAR_HEIGHT 64.0f
-
-#define RAYTMX_IMPLEMENTATION
-#include "../include/raytmx.h"
-#define RAYTMX_IMPLEMENTATION
-#include "../include/raytmx.h"
+#define RAYLIB_TILESON_IMPLEMENTATION
+#include "../include/raylib-tileson.h"
 
 using namespace std;
 
