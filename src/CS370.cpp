@@ -16,6 +16,9 @@ using namespace std;
 
 int main()
 {
+	// Create entt registry
+	entt::registry registry = entt::registry();
+	
 	// Create the main window	
 	const int screenWidth = 1920;
 	const int screenHeight = 1080;
@@ -63,15 +66,15 @@ int main()
 	//Texture2D background = LoadTexture("../assets/sprites/bg.png");
 
     // Source rectangle (part of the texture to use for drawing)
-    Rectangle sourceRec = { 0.0f, 0.0f, (float)frameWidth, (float)frameHeight};
+    //Rectangle sourceRec = { 0.0f, 0.0f, (float)frameWidth, (float)frameHeight};
 
     // Destination rectangle (screen rectangle where drawing part of texture)
-    Rectangle destRec = { boxPosition.x, boxPosition.y, (float)boxSize.x, (float)boxSize.y };
+    //Rectangle destRec = { boxPosition.x, boxPosition.y, (float)boxSize.x, (float)boxSize.y };
 
     // Origin of the texture (rotation/scale point), it's relative to destination rectangle size
-    Vector2 origin = { 0, 0 };
+    //Vector2 origin = { 0, 0 };
 
-    int rotation = 0;
+    //int rotation = 0;
 
 	// Main game loop
     SetTargetFPS(60);
@@ -141,7 +144,6 @@ int main()
 	}
 
 	// Cleanup
-	UnloadTexture(cow);
 	UnloadTexture(background);
 	UnloadTMX(stage1);
 	CloseWindow();
