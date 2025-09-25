@@ -33,6 +33,6 @@ if(WIN32)
 elseif(UNIX)
     add_custom_command( TARGET ${PROJECT_NAME}
         POST_BUILD
-        COMMAND ${CMAKE_COMMAND} cp -r ${PROJECT_SOURCE_DIR}/assets ${CMAKE_INSTALL_PREFIX}/assets)
+        COMMAND cp -r ${PROJECT_SOURCE_DIR}/assets ${CMAKE_INSTALL_PREFIX}/assets)
     target_link_libraries(${PROJECT_NAME} GL m pthread dl rt X11 raylib)
 endif()
