@@ -9,6 +9,9 @@ extern "C" {
     #include "../include/raytmx.h"
 }
 
+#define CHAR_WIDTH 32
+#define CHAR_HEIGHT 64
+
 #define RAYTMX_IMPLEMENTATION
 #include "../include/raytmx.h"
 
@@ -43,11 +46,11 @@ int main()
 	// Load cow texture
 	Texture2D cow = LoadTexture("../assets/sprites/cow.png");
 
-	// Load background texture
-	Texture2D background = LoadTexture("../assets/sprites/bg.png");
-
-    int frameWidth = cow.width;
+	int frameWidth = cow.width;
     int frameHeight = cow.height;
+
+	// Load background texture
+	//Texture2D background = LoadTexture("../assets/sprites/bg.png");
 
     // Source rectangle (part of the texture to use for drawing)
     Rectangle sourceRec = { 0.0f, 0.0f, (float)frameWidth, (float)frameHeight};
@@ -90,9 +93,6 @@ int main()
 		destRec.x = boxPosition.x;
 		destRec.y = boxPosition.y;
 
-		// Update
-		//rotation++;
-
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
 
@@ -106,19 +106,21 @@ int main()
 		// Draw the map
         DrawTMX(stage1, NULL, 0, 0, WHITE);
 
-		 //DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
+		//DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
 
-		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE);
+		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draws cow
 
-         DrawText("Move with W A S D", 10, 10, 20, BLACK);
-		//DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, GREEN);
+        // Draw text
+         const char* instructionText = "Move with W A S D. Jump with SPACE";
+         DrawRectangle(8, 8, MeasureText(instructionText, 20) + 4, 24, Fade(BLACK, 0.5f));
+         DrawText(instructionText, 10, 10, 20, WHITE);
 
 		EndDrawing();
 	}
 
 	// Cleanup
 	UnloadTexture(cow);
-	UnloadTexture(background);
+	//UnloadTexture(background);
 	UnloadTMX(stage1);
 	CloseWindow();
 
