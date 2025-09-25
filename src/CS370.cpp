@@ -69,25 +69,15 @@ int main()
 		destRec.x = boxPosition.x;
 		destRec.y = boxPosition.y;
 
-		// Update
-		//rotation++;
-
 		BeginDrawing();
-
-		//ClearBackground(RAYWHITE);
-		// Draw background texture scaled to screen size
-		
 		DrawTexturePro(background, 
 			{0, 0, (float)background.width, (float)background.height}, 
 			{0, 0, (float)screenWidth, (float)screenHeight}, 
 			{0, 0}, 0, WHITE);
 
-		 //DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
-
 		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draw cow over the box
 
          DrawText("Move with W A S D", 10, 10, 20, BLACK);
-		//DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, GREEN);
 
 		EndDrawing();
 	}
