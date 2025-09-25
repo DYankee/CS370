@@ -1,8 +1,6 @@
 ﻿// CS370.cpp
 #include <iostream>
 #include "../include/raylib.h"
-#include "../include/entt.hpp"
-
 
 #define CHAR_WIDTH 32
 #define CHAR_HEIGHT 64
