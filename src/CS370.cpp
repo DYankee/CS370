@@ -51,17 +51,31 @@ int main()
 	{
 		float dt = GetFrameTime(); // Time since last frame
 
-		update(registry, dt);
+		// Move box based on key input
+		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt;
+		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt;
+		if (IsKeyDown(KEY_W)) boxPosition.y -= speed * dt;
+		if (IsKeyDown(KEY_S)) boxPosition.y += speed * dt;
 
-				// Update
-		//rotation++;
+		// Constrain box to stay within screen bounds
+		if (boxPosition.x < 0) boxPosition.x = 0;
+		if (boxPosition.y < 0) boxPosition.y = 0;
+		if (boxPosition.x > screenWidth - boxSize.x) boxPosition.x = screenWidth - boxSize.x;
+		if (boxPosition.y > screenHeight - boxSize.y) boxPosition.y = screenHeight - boxSize.y;
+
+		// Update cow texture position to follow the box
+		destRec.x = boxPosition.x;
+		destRec.y = boxPosition.y;
 
 		BeginDrawing();
-		ClearBackground(RAYWHITE);
-		 DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the box
+		DrawTexturePro(background, 
+			{0, 0, (float)background.width, (float)background.height}, 
+			{0, 0, (float)screenWidth, (float)screenHeight}, 
+			{0, 0}, 0, WHITE);
+
+		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draw cow over the box
 
          DrawText("Move with W A S D", 10, 10, 20, BLACK);
-		//DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, GREEN);
 
 		EndDrawing();
 	}
