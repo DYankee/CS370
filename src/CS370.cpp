@@ -5,79 +5,98 @@
 #include "../include/raylib.h"
 #include "../include/entt.hpp"
 
-
-#define CHAR_WIDTH 32.0f
-#define CHAR_HEIGHT 64.0f
-
 using namespace std;
+
+//DEFINES
+//player stats
+#define START_POS_X 400.0f
+#define START_POS_Y 300.0f
+#define PLAYER_WIDTH 32.0f
+#define PLAYER_HEIGHT 32.0f
+#define PLAYER_SPEED 400.0f
+#define JUMP_STRENGTH -400.0f
+#define GRAVITY 1000.0f
+#define SCREEN_WIDTH 1920
+#define SCREEN_HEIGHT 1080
+
+enum EntityType{ PLAYER, ENEMY};
 
 struct My_Texture {
 	Texture2D texture;
-	float width;
-	float height;
+	Vector2 frameSize;
    	Rectangle sourceRec;
-
-	My_Texture(std::string filePath, float frameW, float frameH){
+	My_Texture(std::string filePath, Vector2 frameSize) {
 		// Default constructor
 		texture = LoadTexture(filePath.c_str());
-		width = frameW;
-		height = frameH;
-		sourceRec = { 0.0f, 0.0f, frameW, frameH};
+		sourceRec = { 0.0f, 0.0f, frameSize.x, frameSize.y};
 	}
 };
 
 struct Transform2D {
 	Vector2 translation;    // Translation
-	Vector2 scale;          // Scale
+	Vector2 size;          	// Scale
 	float rotation;			// Rotation
 
-	Transform2D(Vector2 pos, Vector2 scl, float rot) {
-		translation = pos;
-		scale = scl;
-		rotation = rot;
+	Transform2D(Vector2 position, Vector2 scale, float rotation) {
+		this->translation = position;
+		this->size = scale;
+		this->rotation = rotation;
+	}
+};
+struct EntityInfo {
+	EntityType type = PLAYER;
+
+	EntityInfo(EntityType type) {
+		this->type = type;
+	}
+};
+
+struct physicsObject {
+	Vector2 velocity;      // Velocity
+
+	physicsObject(Vector2 velocity) {
+		this->velocity = velocity;
 	}
 };
 
 struct Stats{
 	float moveSpeed = 0;
+	float jumpStrength = 0;
 
-	Stats(float speed) {
-		moveSpeed = speed;
+	Stats(float moveSpeed, float jumpStrength){
+		this->moveSpeed = moveSpeed;
+		this->jumpStrength = jumpStrength;
 	}
 };
 
-void update(entt::registry& registry, float dt) {
-
-	// Update all entities with Transform and Texture components
-	registry.view<Transform2D, Stats>().each([dt](auto& transform, auto& stats) {
-		// Example update logic: Move the entity to the right
-		transform.translation.x += stats.moveSpeed * dt; // Move right by 1 unit per update
-	});
-
-	// Move box based on key input
-	/*
-	if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt;
-	if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt;
-	if (IsKeyDown(KEY_W)) boxPosition.y -= speed * dt;
-	if (IsKeyDown(KEY_S)) boxPosition.y += speed * dt;
-	
-	// Constrain box to stay within screen bounds
-	if (boxPosition.x < 0) boxPosition.x = 0;
-	if (boxPosition.y < 0) boxPosition.y = 0;
-	if (boxPosition.x > screenWidth - boxSize.x) boxPosition.x = screenWidth - boxSize.x;
-	if (boxPosition.y > screenHeight - boxSize.y) boxPosition.y = screenHeight - boxSize.y;
-	*/
+void Update(entt::registry& registry, float dt) {
+	//Update the player
+	registry.view<Transform2D, Stats, physicsObject, EntityInfo>().each([dt](
+		auto& transform, auto& stats, auto& physicsObj, auto& entityInfo) {
+			if (entityInfo.type == PLAYER) {
+				PlayerMovement(transform, stats, physicsObj, dt);
+			}
+			std::string logInfo = "Player Position: x=" +
+			to_string(transform.translation.x) + ", y=" + 
+			to_string(transform.translation.y);
+			TraceLog(LOG_INFO, logInfo.c_str()); 
+		}
+		//update other entities
+	);
 }
 
-void draw(entt::registry& registry) {
+void Draw(entt::registry& registry) {
+
 	// Draw all entities with Transform and Texture components
 	registry.view<Transform2D, My_Texture>().each([](auto& transform, auto& texture) {
 		// Draw the texture at the entity's position
 		DrawTexturePro(texture.texture,
 			texture.sourceRec,
 			Rectangle{
-				transform.translation.x, transform.translation.y,
-				texture.width, texture.height
+				transform.translation.x,
+				transform.translation.y,
+				transform.translation.x + transform.size.x,
+				transform.translation.y + transform.size.y
 			},
 			{0.0f, 0.0f},
 			transform.rotation,
@@ -85,10 +104,35 @@ void draw(entt::registry& registry) {
 	});
 }
 
+void PlayerMovement(Transform2D& transform, Stats& stats, physicsObject& physicsObj, float dt) {
 
+		// Apply gravity to box velocity
+		physicsObj.velocity.y += GRAVITY * dt; // Update velocity based on gravity
+
+		// Move box based on key input
+		if (IsKeyPressed(KEY_SPACE)) // if player hits space jump 
+		{
+   			physicsObj.velocity.y = stats.jumpStrength; // player jumps using jump strength
+		}
+
+		if (IsKeyDown(KEY_D)) transform.translation.x += stats.moveSpeed * dt; // move left
+		if (IsKeyDown(KEY_A)) transform.translation.x -= stats.moveSpeed * dt; // move left
+
+		transform.translation.y += physicsObj.velocity.y * dt; // update player position based on velocity
+
+		// Constrain box to stay within screen bounds
+		if (transform.translation.x < 0) transform.translation.x = 0;
+		if (transform.translation.y < 0) transform.translation.y = 0;
+		if (transform.translation.x > SCREEN_WIDTH - transform.size.x) transform.translation.x = SCREEN_WIDTH - transform.size.x;
+		if (transform.translation.y > SCREEN_HEIGHT - transform.size.y) transform.translation.y = SCREEN_HEIGHT - transform.size.y;
+
+}
 
 int main()
 {
+	// Create entt registry
+	entt::registry registry = entt::registry();
+	
 	// Create the main window	
 	const int screenWidth = 1920;
 	const int screenHeight = 1080;
@@ -98,32 +142,27 @@ int main()
 	//init variables
 	const float gravity = 1000.0f;
 
-	 // Box properties
-    Vector2 boxPosition = {400.0f, 300.0f};   // Start in middle
-    Vector2 boxSize = {50, 50};         // Width & height
-	Vector2 boxVol = {0.0f, 0.0f};      // Box Volocity
-    float speed = 400.0f;               // Pixels per second
-	float jumpStrength = -400.0f;       // Initial upward velocity
-
-	// Load cow texture
-	Texture2D cow = LoadTexture("../assets/cow.png");
+	//init player
+	entt::entity entity = registry.create();
+	registry.emplace<EntityInfo>(entity, EntityInfo(PLAYER));
+	registry.emplace<Transform2D>(entity, Transform2D({START_POS_X, START_POS_Y}, {PLAYER_WIDTH, PLAYER_HEIGHT}, 0.0f));
+	registry.emplace<My_Texture>(entity, My_Texture("../assets/cow.png", { 32.0f, 32.0f }));
+	registry.emplace<Stats>(entity, Stats(PLAYER_SPEED, JUMP_STRENGTH));
+	registry.emplace<physicsObject>(entity, physicsObject({ 0.0f, 0.0f }));
 
 	// Load background texture
 	Texture2D background = LoadTexture("../assets/bg.png");
 
-    int frameWidth = cow.width;
-    int frameHeight = cow.height;
-
     // Source rectangle (part of the texture to use for drawing)
-    Rectangle sourceRec = { 0.0f, 0.0f, (float)frameWidth, (float)frameHeight};
+    //Rectangle sourceRec = { 0.0f, 0.0f, (float)frameWidth, (float)frameHeight};
 
     // Destination rectangle (screen rectangle where drawing part of texture)
-    Rectangle destRec = { boxPosition.x, boxPosition.y, (float)boxSize.x, (float)boxSize.y };
+    //Rectangle destRec = { boxPosition.x, boxPosition.y, (float)boxSize.x, (float)boxSize.y };
 
     // Origin of the texture (rotation/scale point), it's relative to destination rectangle size
-    Vector2 origin = { 0, 0 };
+    //Vector2 origin = { 0, 0 };
 
-    int rotation = 0;
+    //int rotation = 0;
 
 	// Main game loop
     SetTargetFPS(60);
@@ -132,32 +171,8 @@ int main()
 
 		float dt = GetFrameTime(); // Time since last frame
 
-		boxVol.y += gravity * dt; // Update volocity based on gravity
-
-		// Move box based on key input
-		if (IsKeyPressed(KEY_SPACE)) // if player hits space jump 
-		{
-   			boxVol.y = jumpStrength; // player jumps using jump strength
-		}
-
-		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt; // move left
-		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt; // move right
-
-		boxPosition.y += boxVol.y * dt; // update player position based on volocity
-
-		// Constrain box to stay within screen bounds
-		if (boxPosition.x < 0) boxPosition.x = 0;
-		if (boxPosition.y < 0) boxPosition.y = 0;
-		if (boxPosition.x > screenWidth - boxSize.x) boxPosition.x = screenWidth - boxSize.x;
-		if (boxPosition.y > screenHeight - boxSize.y) boxPosition.y = screenHeight - boxSize.y;
-
-		// Update cow texture position to follow the box
-		destRec.x = boxPosition.x;
-		destRec.y = boxPosition.y;
-
->>>>>>> 3e558d3 (added test ui elements to draw over the background and cube)
-		// Update
-		rotation++;
+		Update(registry, dt);		
+		
 
 		// Draw
 		BeginDrawing();
@@ -165,18 +180,14 @@ int main()
 			{0, 0, (float)background.width, (float)background.height}, 
 			{0, 0, (float)screenWidth, (float)screenHeight}, 
 			{0, 0}, 0, WHITE);
-
-		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draw cow over the box
-
-         DrawText("Move with W A S D", 10, 10, 20, BLACK);
+        DrawText("Move with W A S D", 10, 10, 20, BLACK);
+		Draw(registry);
+		//DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draw cow over the box
 		//DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, GREEN);
->>>>>>> 3e558d3 (added test ui elements to draw over the background and cube)
-
 		EndDrawing();
 	}
 
 	// Cleanup
-	UnloadTexture(cow);
 	UnloadTexture(background);
 	CloseWindow();
 
