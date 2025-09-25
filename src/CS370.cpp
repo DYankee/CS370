@@ -18,6 +18,7 @@ int main()
 {
 	// Create entt registry
 	entt::registry registry = entt::registry();
+	map<string, entt::entity> entityMap;
 	
 	// Create the main window	
 	const int screenWidth = 1920;
