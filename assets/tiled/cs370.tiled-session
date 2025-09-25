@@ -1,0 +1,46 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "stage1.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1124,
+                "y": 546
+            }
+        },
+        "test_tileset.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 8,
+            "scaleInEditor": 11
+        }
+    },
+    "last.exportedFilePath": "C:/Users/kentp/CS370/assets/tiled",
+    "last.imagePath": "C:/Users/kentp/CS370/assets/graphics/tileset",
+    "map.height": 67,
+    "map.lastUsedExportFilter": "All Files (*)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 120,
+    "openFiles": [
+    ],
+    "project": "cs370.tiled-project",
+    "recentFiles": [
+        "stage1.tmx",
+        "test_tileset.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

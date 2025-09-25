@@ -4,6 +4,12 @@
 #include <iostream>
 #include "../include/raylib.h"
 
+#define CHAR_WIDTH 32
+#define CHAR_HEIGHT 64
+
+#define RAYTMX_IMPLEMENTATION
+#include "../include/raytmx.h"
+
 using namespace std;
 
 int main()
@@ -13,6 +19,14 @@ int main()
 	const int screenHeight = 1080;
 	InitWindow(screenWidth, screenHeight, "CS370");
 	ToggleFullscreen();
+
+    // Load TMX map
+    TmxMap* stage1 = LoadTMX("../assets/tiled/stage1.tmx");
+    if (!stage1) {
+        cout << "Failed to load stage1.tmx" << endl;
+        CloseWindow();
+        return -1;
+    }
 	
 	//init variables
 	const float gravity = 1000.0f;
@@ -25,13 +39,13 @@ int main()
 	float jumpStrength = -400.0f;       // Initial upward velocity
 
 	// Load cow texture
-	Texture2D cow = LoadTexture("../assets/cow.png");
+	Texture2D cow = LoadTexture("../assets/sprites/cow.png");
+
+	int frameWidth = cow.width;
+    int frameHeight = cow.height;
 
 	// Load background texture
-	Texture2D background = LoadTexture("../assets/bg.png");
-
-    int frameWidth = cow.width;
-    int frameHeight = cow.height;
+	//Texture2D background = LoadTexture("../assets/sprites/bg.png");
 
     // Source rectangle (part of the texture to use for drawing)
     Rectangle sourceRec = { 0.0f, 0.0f, (float)frameWidth, (float)frameHeight};
@@ -74,32 +88,35 @@ int main()
 		destRec.x = boxPosition.x;
 		destRec.y = boxPosition.y;
 
-		// Update
-		//rotation++;
-
 		BeginDrawing();
+		ClearBackground(RAYWHITE);
 
-		//ClearBackground(RAYWHITE);
 		// Draw background texture scaled to screen size
 		
-		DrawTexturePro(background, 
+		/*DrawTexturePro(background, 
 			{0, 0, (float)background.width, (float)background.height}, 
 			{0, 0, (float)screenWidth, (float)screenHeight}, 
-			{0, 0}, 0, WHITE);
+			{0, 0}, 0, WHITE);*/
 
-		 //DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
+		// Draw the map
+        DrawTMX(stage1, NULL, 0, 0, WHITE);
 
-		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draw cow over the box
+		//DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
 
-         DrawText("Move with W A S D", 10, 10, 20, BLACK);
-		//DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, GREEN);
+		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draws cow
+
+        // Draw text
+         const char* instructionText = "Move with W A S D. Jump with SPACE";
+         DrawRectangle(8, 8, MeasureText(instructionText, 20) + 4, 24, Fade(BLACK, 0.5f));
+         DrawText(instructionText, 10, 10, 20, WHITE);
 
 		EndDrawing();
 	}
 
 	// Cleanup
 	UnloadTexture(cow);
-	UnloadTexture(background);
+	//UnloadTexture(background);
+	UnloadTMX(stage1);
 	CloseWindow();
 
 	return 0;
