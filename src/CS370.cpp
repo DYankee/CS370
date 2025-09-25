@@ -72,6 +72,7 @@ void PlayerMovement(entt::registry& registry, map<string, entt::entity> entityMa
 	Stats& stats = registry.get<Stats>(entityMap["player"]);
 	physicsObject& physicsObj = registry.get<physicsObject>(entityMap["player"]);
 
+	transform.rotation += 100.0f * dt;
 	// Apply gravity to box velocity
 	physicsObj.velocity.y += GRAVITY * dt; // Update velocity based on gravity
 
@@ -91,6 +92,7 @@ void PlayerMovement(entt::registry& registry, map<string, entt::entity> entityMa
 	if (transform.translation.y < 0) transform.translation.y = 0;
 	if (transform.translation.x > SCREEN_WIDTH - transform.size.x) transform.translation.x = SCREEN_WIDTH - transform.size.x;
 	if (transform.translation.y > SCREEN_HEIGHT - transform.size.y) transform.translation.y = SCREEN_HEIGHT - transform.size.y;
+
 }
 
 void Update(entt::registry& registry, map<string, entt::entity> entityMap,  float dt) {
@@ -103,6 +105,10 @@ void Draw(entt::registry& registry) {
 	// Draw all entities with Transform and Texture components
 	registry.view<Transform2D, My_Texture>().each([](auto& transform, auto& texture) {
 		// Draw the texture at the entity's position
+		TraceLog(LOG_INFO, "Drawing entity at position (%f, %f) Rotation (%f)",
+			transform.translation.x,
+			transform.translation.y,
+			transform.rotation);
 		DrawTexturePro(texture.texture,
 			texture.sourceRec,
 			Rectangle{
