@@ -3,65 +3,26 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "stage2.tmx",
+    "activeFile": "",
     "expandedProjectPaths": [
-        "."
     ],
-    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
-        "maintileset.tsx": {
-            "scaleInDock": 4,
-            "scaleInEditor": 1
-        },
-        "stage1.tmx": {
-            "scale": 0.125,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": -180,
-                "y": 404
-            }
-        },
-        "stage2.tmx": {
-            "expandedGroupLayers": [
-                5
-            ],
-            "scale": 0.0625,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 2216,
-                "y": -1480
-            }
-        },
         "test_tileset.tsx": {
-            "dynamicWrapping": false,
-            "scaleInDock": 8,
-            "scaleInEditor": 11
+            "dynamicWrapping": false
         }
     },
     "last.exportedFilePath": "C:/Users/kentp/CS370/assets/tiled",
     "last.imagePath": "C:/Users/kentp/CS370/assets/graphics/tileset",
-    "last.worldFilePath": "C:/Users/alaib/Software_Engineering_Project/CS370/assets/tiled",
-    "loadedWorlds": [
-        "C:/Users/alaib/Software_Engineering_Project/CS370/assets/tiled/milksong_world.world",
-        "C:/Users/alaib/Software_Engineering_Project/CS370/assets/tiled/milksong_world.world"
-    ],
-    "map.height": 68,
-    "map.lastUsedExportFilter": "All Files (*)",
+    "map.height": 67,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "map.width": 120,
     "openFiles": [
-        "stage1.tmx",
-        "stage2.tmx",
-        "maintileset.tsx"
     ],
     "project": "cs370.tiled-project",
     "recentFiles": [
-        "stage1.tmx",
-        "maintileset.tsx",
-        "stage2.tmx",
-        "test_tileset.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
