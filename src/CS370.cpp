@@ -9,6 +9,8 @@
 
 #define RAYTMX_IMPLEMENTATION
 #include "../include/raytmx.h"
+#define RAYTMX_IMPLEMENTATION
+#include "../include/raytmx.h"
 
 using namespace std;
 
@@ -19,6 +21,14 @@ int main()
 	const int screenHeight = 1080;
 	InitWindow(screenWidth, screenHeight, "CS370");
 	ToggleFullscreen();
+
+    // Load TMX map
+    TmxMap* stage1 = LoadTMX("../assets/tiled/stage1.tmx");
+    if (!stage1) {
+        cout << "Failed to load stage1.tmx" << endl;
+        CloseWindow();
+        return -1;
+    }
 
     // Load TMX map
     TmxMap* stage1 = LoadTMX("../assets/tiled/stage1.tmx");
@@ -98,6 +108,11 @@ int main()
 		// Draw background texture scaled to screen size
 		
 		/*DrawTexturePro(background, 
+		ClearBackground(RAYWHITE);
+
+		// Draw background texture scaled to screen size
+		
+		/*DrawTexturePro(background, 
 			{0, 0, (float)background.width, (float)background.height}, 
 			{0, 0, (float)screenWidth, (float)screenHeight}, 
 			{0, 0}, 0, WHITE);*/
@@ -105,21 +120,18 @@ int main()
 		// Draw the map
         DrawTMX(stage1, NULL, 0, 0, WHITE);
 
-		//DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
+		 //DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
 
-		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draws cow
+		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE);
 
-        // Draw text
-         const char* instructionText = "Move with W A S D. Jump with SPACE";
-         DrawRectangle(8, 8, MeasureText(instructionText, 20) + 4, 24, Fade(BLACK, 0.5f));
-         DrawText(instructionText, 10, 10, 20, WHITE);
+         DrawText("Move with W A S D", 10, 10, 20, BLACK);
 
 		EndDrawing();
 	}
 
 	// Cleanup
 	UnloadTexture(cow);
-	//UnloadTexture(background);
+	UnloadTexture(background);
 	UnloadTMX(stage1);
 	CloseWindow();
 
