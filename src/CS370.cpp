@@ -9,8 +9,8 @@
 #define CHAR_WIDTH 32
 #define CHAR_HEIGHT 64
 
-#define RAYLIB_TILESON_IMPLEMENTATION
-#include "../include/raylib-tileson.h"
+#define RAYTMX_IMPLEMENTATION
+#include "../include/raytmx.h"
 
 using namespace std;
 
@@ -21,6 +21,14 @@ int main()
 	const int screenHeight = 1080;
 	InitWindow(screenWidth, screenHeight, "CS370");
 	ToggleFullscreen();
+
+    // Load TMX map
+    TmxMap* stage1 = LoadTMX("../assets/tiled/stage1.tmx");
+    if (!stage1) {
+        cout << "Failed to load stage1.tmx" << endl;
+        CloseWindow();
+        return -1;
+    }
 	
 	//init variables
 	const float gravity = 1000.0f;
@@ -83,12 +91,21 @@ int main()
 		destRec.y = boxPosition.y;
 
 		BeginDrawing();
-		DrawTexturePro(background, 
+		ClearBackground(RAYWHITE);
+
+		// Draw background texture scaled to screen size
+		
+		/*DrawTexturePro(background, 
 			{0, 0, (float)background.width, (float)background.height}, 
 			{0, 0, (float)screenWidth, (float)screenHeight}, 
-			{0, 0}, 0, WHITE);
+			{0, 0}, 0, WHITE);*/
 
-		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draw cow over the box
+		// Draw the map
+        DrawTMX(stage1, NULL, 0, 0, WHITE);
+
+		 //DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
+
+		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE);
 
          DrawText("Move with W A S D", 10, 10, 20, BLACK);
 
@@ -98,6 +115,7 @@ int main()
 	// Cleanup
 	UnloadTexture(cow);
 	UnloadTexture(background);
+	UnloadTMX(stage1);
 	CloseWindow();
 
 	return 0;
