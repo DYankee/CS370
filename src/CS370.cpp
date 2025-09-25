@@ -9,8 +9,8 @@ using namespace std;
 //player stats
 #define START_POS_X 400.0f
 #define START_POS_Y 300.0f
-#define PLAYER_WIDTH 32.0f
-#define PLAYER_HEIGHT 32.0f
+#define PLAYER_WIDTH 50.0f
+#define PLAYER_HEIGHT 50.0f
 #define PLAYER_SPEED 400.0f
 #define JUMP_STRENGTH -400.0f
 #define GRAVITY 1000.0f
@@ -23,10 +23,10 @@ struct My_Texture {
 	Texture2D texture;
 	Vector2 frameSize;
    	Rectangle sourceRec;
-	My_Texture(std::string filePath, Vector2 frameSize) {
+	My_Texture(std::string filePath) {
 		// Default constructor
 		texture = LoadTexture(filePath.c_str());
-		sourceRec = { 0.0f, 0.0f, frameSize.x, frameSize.y};
+		sourceRec = { 0.0f, 0.0f, float(texture.width), float(texture.height)};
 	}
 };
 
@@ -93,12 +93,12 @@ void Draw(entt::registry& registry) {
 			Rectangle{
 				transform.translation.x,
 				transform.translation.y,
-				transform.translation.x + transform.size.x,
-				transform.translation.y + transform.size.y
+				transform.size.x,
+				transform.size.y
 			},
 			{0.0f, 0.0f},
 			transform.rotation,
-			BLACK);
+			WHITE);
 	});
 }
 
@@ -146,7 +146,7 @@ int main()
 	entt::entity entity = registry.create();
 	registry.emplace<EntityInfo>(entity, EntityInfo(PLAYER));
 	registry.emplace<Transform2D>(entity, Transform2D({START_POS_X, START_POS_Y}, {PLAYER_WIDTH, PLAYER_HEIGHT}, 0.0f));
-	registry.emplace<My_Texture>(entity, My_Texture("../assets/cow.png", { 32.0f, 32.0f }));
+	registry.emplace<My_Texture>(entity, My_Texture("../assets/cow.png"));
 	registry.emplace<Stats>(entity, Stats(PLAYER_SPEED, JUMP_STRENGTH));
 	registry.emplace<physicsObject>(entity, physicsObject({ 0.0f, 0.0f }));
 
