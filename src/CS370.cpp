@@ -69,20 +69,35 @@ struct Stats{
 	}
 };
 
-void Update(entt::registry& registry, float dt) {
+void PlayerMovement(entt::registry& registry, map<string, entt::entity> entityMap,  float dt) {
+	Transform2D& transform = registry.get<Transform2D>(entityMap["player"]);
+	Stats& stats = registry.get<Stats>(entityMap["player"]);
+	physicsObject& physicsObj = registry.get<physicsObject>(entityMap["player"]);
+
+	// Apply gravity to box velocity
+	physicsObj.velocity.y += GRAVITY * dt; // Update velocity based on gravity
+
+	// Move box based on key input
+	if (IsKeyPressed(KEY_SPACE)) // if player hits space jump 
+	{
+  			physicsObj.velocity.y = stats.jumpStrength; // player jumps using jump strength
+	}
+
+	if (IsKeyDown(KEY_D)) transform.translation.x += stats.moveSpeed * dt; // move left
+	if (IsKeyDown(KEY_A)) transform.translation.x -= stats.moveSpeed * dt; // move left
+
+	transform.translation.y += physicsObj.velocity.y * dt; // update player position based on velocity
+
+	// Constrain box to stay within screen bounds
+	if (transform.translation.x < 0) transform.translation.x = 0;
+	if (transform.translation.y < 0) transform.translation.y = 0;
+	if (transform.translation.x > SCREEN_WIDTH - transform.size.x) transform.translation.x = SCREEN_WIDTH - transform.size.x;
+	if (transform.translation.y > SCREEN_HEIGHT - transform.size.y) transform.translation.y = SCREEN_HEIGHT - transform.size.y;
+}
+
+void Update(entt::registry& registry, map<string, entt::entity> entityMap,  float dt) {
 	//Update the player
-	registry.view<Transform2D, Stats, physicsObject, EntityInfo>().each([dt](
-		auto& transform, auto& stats, auto& physicsObj, auto& entityInfo) {
-			if (entityInfo.type == PLAYER) {
-				PlayerMovement(transform, stats, physicsObj, dt);
-			}
-			std::string logInfo = "Player Position: x=" +
-			to_string(transform.translation.x) + ", y=" + 
-			to_string(transform.translation.y);
-			TraceLog(LOG_INFO, logInfo.c_str()); 
-		}
-		//update other entities
-	);
+	PlayerMovement(registry, entityMap, dt);
 }
 
 void Draw(entt::registry& registry) {
@@ -104,34 +119,13 @@ void Draw(entt::registry& registry) {
 	});
 }
 
-void PlayerMovement(Transform2D& transform, Stats& stats, physicsObject& physicsObj, float dt) {
 
-		// Apply gravity to box velocity
-		physicsObj.velocity.y += GRAVITY * dt; // Update velocity based on gravity
-
-		// Move box based on key input
-		if (IsKeyPressed(KEY_SPACE)) // if player hits space jump 
-		{
-   			physicsObj.velocity.y = stats.jumpStrength; // player jumps using jump strength
-		}
-
-		if (IsKeyDown(KEY_D)) transform.translation.x += stats.moveSpeed * dt; // move left
-		if (IsKeyDown(KEY_A)) transform.translation.x -= stats.moveSpeed * dt; // move left
-
-		transform.translation.y += physicsObj.velocity.y * dt; // update player position based on velocity
-
-		// Constrain box to stay within screen bounds
-		if (transform.translation.x < 0) transform.translation.x = 0;
-		if (transform.translation.y < 0) transform.translation.y = 0;
-		if (transform.translation.x > SCREEN_WIDTH - transform.size.x) transform.translation.x = SCREEN_WIDTH - transform.size.x;
-		if (transform.translation.y > SCREEN_HEIGHT - transform.size.y) transform.translation.y = SCREEN_HEIGHT - transform.size.y;
-
-}
 
 int main()
 {
 	// Create entt registry
 	entt::registry registry = entt::registry();
+	map<string, entt::entity> entityMap;
 	
 	// Create the main window	
 	const int screenWidth = 1920;
@@ -143,12 +137,13 @@ int main()
 	const float gravity = 1000.0f;
 
 	//init player
-	entt::entity entity = registry.create();
-	registry.emplace<EntityInfo>(entity, EntityInfo(PLAYER));
-	registry.emplace<Transform2D>(entity, Transform2D({START_POS_X, START_POS_Y}, {PLAYER_WIDTH, PLAYER_HEIGHT}, 0.0f));
-	registry.emplace<My_Texture>(entity, My_Texture("../assets/cow.png"));
-	registry.emplace<Stats>(entity, Stats(PLAYER_SPEED, JUMP_STRENGTH));
-	registry.emplace<physicsObject>(entity, physicsObject({ 0.0f, 0.0f }));
+	entt::entity player = registry.create();
+	entityMap["player"] = player;
+	registry.emplace<EntityInfo>(player, EntityInfo(PLAYER));
+	registry.emplace<Transform2D>(player, Transform2D({START_POS_X, START_POS_Y}, {PLAYER_WIDTH, PLAYER_HEIGHT}, 0.0f));
+	registry.emplace<My_Texture>(player, My_Texture("../assets/cow.png"));
+	registry.emplace<Stats>(player, Stats(PLAYER_SPEED, JUMP_STRENGTH));
+	registry.emplace<physicsObject>(player, physicsObject({ 0.0f, 0.0f }));
 
 	// Load background texture
 	Texture2D background = LoadTexture("../assets/bg.png");
@@ -171,7 +166,7 @@ int main()
 
 		float dt = GetFrameTime(); // Time since last frame
 
-		Update(registry, dt);		
+		Update(registry, entityMap, dt);
 		
 
 		// Draw
