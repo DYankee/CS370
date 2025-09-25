@@ -75,6 +75,7 @@ void PlayerMovement(entt::registry& registry, map<string, entt::entity> entityMa
 	physicsObject& physicsObj = registry.get<physicsObject>(entityMap["player"]);
 
 	transform.rotation += 100.0f * dt;
+	if (transform.rotation > 360.0f) transform.rotation -= 360.0f;
 	// Apply gravity to box velocity
 	physicsObj.velocity.y += GRAVITY * dt; // Update velocity based on gravity
 
