@@ -23,7 +23,7 @@ int main() {
     const int screenWidth = 1920;
     const int screenHeight = 1080;
     InitWindow(screenWidth, screenHeight, "CS370");
-    ToggleFullscreen();
+    //ToggleFullscreen();
  	SetTargetFPS(60);
     // Load TMX map using RayTMX
     TmxMap* map = LoadTMX("../assets/tiled/stage1.tmx");
@@ -106,6 +106,22 @@ int main() {
             // No collision: accept movement
             boxPosition = nextPos;
         }
+
+
+		// Load new map if player walks out of bounds
+		if(boxPosition.x < 0.0f) {
+			UnloadTMX(map);
+			TmxMap* map = LoadTMX("../assets/tiled/stage2.tmx");
+    		if (!map) {
+        		cerr << "Failed to load TMX map" << endl;
+        		CloseWindow();
+        		return -1;
+    		}
+			boxPosition.x = screenWidth - 0.05f;
+			boxPosition.y = 0.0f;
+		}
+		
+			
 
         // Update destination rectangle for drawing
         dstRec.x = boxPosition.x;
