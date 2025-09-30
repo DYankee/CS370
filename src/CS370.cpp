@@ -33,16 +33,18 @@ int main()
 
 	 // Box properties
     Vector2 boxPosition = {400.0f, 300.0f};   // Start in middle
-    Vector2 boxSize = {50, 50};         // Width & height
+    Vector2 boxSize = {16, 16};         // Width & height
 	Vector2 boxVol = {0.0f, 0.0f};      // Box Volocity
     float speed = 400.0f;               // Pixels per second
 	float jumpStrength = -400.0f;       // Initial upward velocity
 
-	// Load cow texture
-	Texture2D cow = LoadTexture("../assets/sprites/cow.png");
+	// Load cow textures
+	Texture2D cowR = LoadTexture("../assets/sprites/cowR.png");
+	Texture2D cowL = LoadTexture("../assets/sprites/cowL.png");
+	Texture2D currentCow = cowR; // Default to right-facing cow
 
-	int frameWidth = cow.width;
-    int frameHeight = cow.height;
+	int frameWidth = cowR.width;
+    int frameHeight = cowR.height;
 
 	// Load background texture
 	//Texture2D background = LoadTexture("../assets/sprites/bg.png");
@@ -73,8 +75,16 @@ int main()
    			boxVol.y = jumpStrength; // player jumps using jump strength
 		}
 
-		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt; // move left
-		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt; // move right
+		if (IsKeyDown(KEY_D)) 
+		{
+			boxPosition.x += speed * dt; // move right
+			currentCow = cowR; // Use right-facing cow
+		}
+		if (IsKeyDown(KEY_A)) 
+		{
+			boxPosition.x -= speed * dt; // move left
+			currentCow = cowL; // Use left-facing cow
+		}
 
 		boxPosition.y += boxVol.y * dt; // update player position based on volocity
 
@@ -103,7 +113,7 @@ int main()
 
 		//DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
 
-		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draws cow
+		 DrawTexturePro(currentCow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draws cow
 
         // Draw text
          const char* instructionText = "Move with W A S D. Jump with SPACE";
@@ -114,7 +124,8 @@ int main()
 	}
 
 	// Cleanup
-	UnloadTexture(cow);
+	UnloadTexture(cowR);
+	UnloadTexture(cowL);
 	//UnloadTexture(background);
 	UnloadTMX(stage1);
 	CloseWindow();
