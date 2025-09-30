@@ -33,19 +33,21 @@ int main()
 
 	 // Box properties
     Vector2 boxPosition = {400.0f, 300.0f};   // Start in middle
-    Vector2 boxSize = {50, 50};         // Width & height
+    Vector2 boxSize = {16, 16};         // Width & height
 	Vector2 boxVol = {0.0f, 0.0f};      // Box Volocity
     float speed = 400.0f;               // Pixels per second
 	float jumpStrength = -400.0f;       // Initial upward velocity
 
-	// Load cow texture
-	Texture2D cow = LoadTexture("../assets/sprites/cow.png");
+	// Load cow textures
+	Texture2D cowR = LoadTexture("../assets/sprites/cowR.png");
+	Texture2D cowL = LoadTexture("../assets/sprites/cowL.png");
+	Texture2D currentCow = cowR; // Default to right-facing cow
+
+	int frameWidth = cowR.width;
+    int frameHeight = cowR.height;
 
 	// Load background texture
-	Texture2D background = LoadTexture("../assets/sprites/bg.png");
-
-    int frameWidth = cow.width;
-    int frameHeight = cow.height;
+	//Texture2D background = LoadTexture("../assets/sprites/bg.png");
 
     // Source rectangle (part of the texture to use for drawing)
     Rectangle sourceRec = { 0.0f, 0.0f, (float)frameWidth, (float)frameHeight};
@@ -73,8 +75,16 @@ int main()
    			boxVol.y = jumpStrength; // player jumps using jump strength
 		}
 
-		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt; // move left
-		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt; // move right
+		if (IsKeyDown(KEY_D)) 
+		{
+			boxPosition.x += speed * dt; // move right
+			currentCow = cowR; // Use right-facing cow
+		}
+		if (IsKeyDown(KEY_A)) 
+		{
+			boxPosition.x -= speed * dt; // move left
+			currentCow = cowL; // Use left-facing cow
+		}
 
 		boxPosition.y += boxVol.y * dt; // update player position based on volocity
 
@@ -101,18 +111,22 @@ int main()
 		// Draw the map
         DrawTMX(stage1, NULL, 0, 0, WHITE);
 
-		 //DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
+		//DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
 
-		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE);
+		 DrawTexturePro(currentCow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draws cow
 
-         DrawText("Move with W A S D", 10, 10, 20, BLACK);
+        // Draw text
+         const char* instructionText = "Move with W A S D. Jump with SPACE";
+         DrawRectangle(8, 8, MeasureText(instructionText, 20) + 4, 24, Fade(BLACK, 0.5f));
+         DrawText(instructionText, 10, 10, 20, WHITE);
 
 		EndDrawing();
 	}
 
 	// Cleanup
-	UnloadTexture(cow);
-	UnloadTexture(background);
+	UnloadTexture(cowR);
+	UnloadTexture(cowL);
+	//UnloadTexture(background);
 	UnloadTMX(stage1);
 	CloseWindow();
 

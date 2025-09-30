@@ -5,10 +5,22 @@
     },
     "activeFile": "",
     "expandedProjectPaths": [
+        "."
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "stage1.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1124,
+                "y": 546
+            }
+        },
         "test_tileset.tsx": {
-            "dynamicWrapping": false
+            "dynamicWrapping": false,
+            "scaleInDock": 8,
+            "scaleInEditor": 11
         }
     },
     "last.exportedFilePath": "C:/Users/kentp/CS370/assets/tiled",
@@ -23,6 +35,8 @@
     ],
     "project": "cs370.tiled-project",
     "recentFiles": [
+        "stage1.tmx",
+        "test_tileset.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
