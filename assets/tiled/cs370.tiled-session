@@ -4,6 +4,7 @@
         "width": 2
     },
     "activeFile": "stage2.tmx",
+    "activeFile": "stage2.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -14,19 +15,25 @@
             "scaleInEditor": 1
         },
         "stage1.tmx": {
-            "scale": 0.5,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 961,
-                "y": 534
+                "x": 190,
+                "y": 1054
             }
         },
         "stage2.tmx": {
-            "scale": 0.5,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 957,
-                "y": 562
+                "x": 792.4242424242424,
+                "y": 392.4242424242424
             }
         },
         "test_tileset.tsx": {
@@ -36,8 +43,12 @@
         }
     },
     "last.exportedFilePath": "C:/Users/kentp/CS370/assets/tiled",
-    "last.imagePath": "C:/Users/Kent/CS370/assets/graphics/tileset",
-    "map.height": 68,
+    "last.imagePath": "C:/Users/kentp/CS370/assets/graphics/tileset",
+    "last.worldFilePath": "C:/Users/alaib/Software_Engineering_Project/CS370/assets/tiled",
+    "loadedWorlds": [
+        "C:/Users/alaib/Software_Engineering_Project/CS370/assets/tiled/levels.world"
+    ],
+    "map.height": 67,
     "map.lastUsedExportFilter": "All Files (*)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
@@ -45,13 +56,11 @@
     "map.width": 120,
     "openFiles": [
         "stage1.tmx",
-        "stage2.tmx",
-        "maintileset.tsx"
+        "stage2.tmx"
     ],
     "project": "cs370.tiled-project",
     "recentFiles": [
         "stage1.tmx",
-        "maintileset.tsx",
         "stage2.tmx",
         "test_tileset.tsx"
     ],
