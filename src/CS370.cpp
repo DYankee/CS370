@@ -175,7 +175,7 @@ int main() {
     ToggleFullscreen();
  	SetTargetFPS(60);
     // Load TMX map using RayTMX
-    TmxMap* map = LoadTMX("../assets/tiled/stage1.tmx");
+    TmxMap* map = LoadTMX("../assets/tiled/stage2.tmx");
     if (!map) {
         cerr << "Failed to load TMX map" << endl;
         CloseWindow();
