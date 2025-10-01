@@ -160,8 +160,8 @@ void Draw(entt::registry& registry) {
 }
 
 // Player and physics constants
-#define CHAR_WIDTH 64
-#define CHAR_HEIGHT 64
+#define CHAR_WIDTH 32
+#define CHAR_HEIGHT 32
 #define GRAVITY 1000.0f          // Gravity strength 
 #define SPEED 400.0f             // speed 
 #define JUMP_STRENGTH -500.0f    // Negative because y-axis goes down
@@ -181,10 +181,21 @@ int main() {
         CloseWindow();
         return -1;
     }
+
+    // Camera
+    Camera2D camera;
+    camera.zoom = 3.5f; // Adjust zoom level as needed -- 3.5 is zoomed enough to hide the empty bottom tiles
+    camera.target.x = (float)(map->width * map->tileWidth) / 2.0f;
+    camera.target.y = (float)(map->height * map->tileHeight) / 2.0f;
+    camera.offset.x = (float)screenWidth / 2.0f;
+    camera.offset.y = (float)screenHeight / 2.0f;
+    camera.rotation = 0.0f;
+
     // Player setup
     Vector2 boxPosition = {400.0f, 300.0f}; // Start in middle
     Vector2 boxVel = {0.0f, 0.0f};     // Box Velocity
     Vector2 boxSize = {CHAR_WIDTH, CHAR_HEIGHT}; // Width & height
+    camera.target = boxPosition; // Center camera on player
 
     // Load player sprites
     Texture2D cowR = LoadTexture("../assets/sprites/cowR.png"); 
@@ -260,13 +271,18 @@ int main() {
         dstRec.x = boxPosition.x;
         dstRec.y = boxPosition.y;
 
+        // Update camera to follow the player
+        camera.target = boxPosition;
+
         // Drawing
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
+        BeginMode2D(camera); // Start 2D camera mode
         AnimateTMX(map); // Update animated tiles
         DrawTMX(map, NULL, 0, 0, WHITE); // Draw tile map
         DrawTexturePro(currentCow, srcRec, dstRec, origin, 0.0f, WHITE); // Draws cow
+        EndMode2D(); // End 2D camera mode
 
         // Draw text
         const char* msg = "Move A/D, Jump SPACE";
