@@ -1,123 +1,164 @@
-﻿// CS370.cpp : Defines the entry point for the application.
-//
-
+﻿// CS370.cpp
 #include <iostream>
 #include "../include/raylib.h"
 
-#define CHAR_WIDTH 32
-#define CHAR_HEIGHT 64
-
-#define RAYTMX_IMPLEMENTATION
-#include "../include/raytmx.h"
+// Include RayTMX in C linkage
+extern "C" {
+    #define RAYTMX_IMPLEMENTATION
+    #include "../include/raytmx.h"
+}
 
 using namespace std;
 
-int main()
-{
-	// Create the main window	
-	const int screenWidth = 1920;
-	const int screenHeight = 1080;
-	InitWindow(screenWidth, screenHeight, "CS370");
-	ToggleFullscreen();
+// Player and physics constants
+#define CHAR_WIDTH 32
+#define CHAR_HEIGHT 32
+#define GRAVITY 1000.0f          // Gravity strength 
+#define SPEED 400.0f             // speed 
+#define JUMP_STRENGTH -500.0f    // Negative because y-axis goes down
 
-    // Load TMX map
-    TmxMap* stage1 = LoadTMX("../assets/tiled/stage1.tmx");
-    if (!stage1) {
-        cout << "Failed to load stage1.tmx" << endl;
+int main() {
+    // Window setup
+   
+    const int screenWidth = 1920;
+    const int screenHeight = 1080;
+    InitWindow(screenWidth, screenHeight, "CS370");
+    ToggleFullscreen();
+ 	SetTargetFPS(60);
+    // Load TMX map using RayTMX
+    TmxMap* map = LoadTMX("../assets/tiled/stage1.tmx");
+    if (!map) {
+        cerr << "Failed to load TMX map" << endl;
         CloseWindow();
         return -1;
     }
-	
-	//init variables
-	const float gravity = 1000.0f;
 
-	 // Box properties
-    Vector2 boxPosition = {400.0f, 300.0f};   // Start in middle
-    Vector2 boxSize = {50, 50};         // Width & height
-	Vector2 boxVol = {0.0f, 0.0f};      // Box Volocity
-    float speed = 400.0f;               // Pixels per second
-	float jumpStrength = -400.0f;       // Initial upward velocity
+    // Camera
+    Camera2D camera;
+    camera.zoom = 3.5f; // Adjust zoom level as needed -- 3.5 is zoomed enough to hide the empty bottom tiles
+    camera.target.x = (float)(map->width * map->tileWidth) / 2.0f;
+    camera.target.y = (float)(map->height * map->tileHeight) / 2.0f;
+    camera.offset.x = (float)screenWidth / 2.0f;
+    camera.offset.y = (float)screenHeight / 2.0f;
+    camera.rotation = 0.0f;
 
-	// Load cow texture
-	Texture2D cow = LoadTexture("../assets/sprites/cow.png");
+    // Player setup
+    Vector2 boxPosition = {400.0f, 300.0f}; // Start in middle
+    Vector2 boxVel = {0.0f, 0.0f};     // Box Velocity
+    Vector2 boxSize = {CHAR_WIDTH, CHAR_HEIGHT}; // Width & height
+    camera.target = boxPosition; // Center camera on player
 
-	int frameWidth = cow.width;
-    int frameHeight = cow.height;
+    // Load player sprites
+    Texture2D cowR = LoadTexture("../assets/sprites/cowR.png"); 
+    Texture2D cowL = LoadTexture("../assets/sprites/cowL.png"); 
+    Texture2D currentCow = cowR;  // Default to right-facing cow
 
-	// Load background texture
-	//Texture2D background = LoadTexture("../assets/sprites/bg.png");
+    // Define source and destination rectangles for drawing
+    Rectangle srcRec = {0, 0, (float)cowR.width, (float)cowR.height};
+    Rectangle dstRec = {boxPosition.x, boxPosition.y, boxSize.x, boxSize.y};
+    Vector2 origin = {0, 0}; // Top-left origin
 
-    // Source rectangle (part of the texture to use for drawing)
-    Rectangle sourceRec = { 0.0f, 0.0f, (float)frameWidth, (float)frameHeight};
+    // Main game loop
+    while (!WindowShouldClose()) {
+        float dt = GetFrameTime(); // Time since last frame
+		// Update velocity based on gravity
+        boxVel.y += GRAVITY * dt;
 
-    // Destination rectangle (screen rectangle where drawing part of texture)
-    Rectangle destRec = { boxPosition.x, boxPosition.y, (float)boxSize.x, (float)boxSize.y };
+        // Move box based on key input
+        if (IsKeyDown(KEY_D)) {
+            boxVel.x = SPEED;    // Move right
+            currentCow = cowR;   // Use right-facing cow
+        } else if (IsKeyDown(KEY_A)) {
+            boxVel.x = -SPEED;   // Move left
+            currentCow = cowL;   // Use left-facing cow
+        } else {
+            boxVel.x = 0;        // No horizontal movement
+        }
+        // Only allow jump if player is on the ground
+        if (IsKeyPressed(KEY_SPACE)) {
+            Rectangle testRec = { boxPosition.x, boxPosition.y + 1, boxSize.x, boxSize.y };
+            TmxObject collidedObj;
+            bool onGround = CheckCollisionTMXTileLayersRec(
+                map, map->layers, map->layersLength, testRec, &collidedObj
+            );
+            if (onGround) {
+                boxVel.y = JUMP_STRENGTH;
+            }
+        }
+        // Calculate new position
+        Vector2 nextPos = { boxPosition.x + boxVel.x * dt, boxPosition.y + boxVel.y * dt };
+        Rectangle playerRec = { nextPos.x, nextPos.y, boxSize.x, boxSize.y };
 
-    // Origin of the texture (rotation/scale point), it's relative to destination rectangle size
-    Vector2 origin = { 0, 0 };
+        // Check collisions against tile layers
+        TmxObject hitObj;
+        bool collided = CheckCollisionTMXTileLayersRec(
+            map, map->layers, map->layersLength, playerRec, &hitObj
+        );
 
-    int rotation = 0;
+        if (collided) {
+            // Vertical collision only
+            Vector2 vertPos = { boxPosition.x, nextPos.y };
+            Rectangle vertRec = { vertPos.x, vertPos.y, boxSize.x, boxSize.y };
+            if (!CheckCollisionTMXTileLayersRec(map, map->layers, map->layersLength, vertRec, &hitObj)) {
+                boxPosition.y = nextPos.y;
+            } else {
+                boxVel.y = 0; // Stop vertical movement
+            }
 
-	// Main game loop
-    SetTargetFPS(60);
-	while (!WindowShouldClose()) // Detect window close button or ESC key
-	{
+            // Horizontal collision only
+            Vector2 horizPos = { nextPos.x, boxPosition.y };
+            Rectangle horizRec = { horizPos.x, horizPos.y, boxSize.x, boxSize.y };
+            if (!CheckCollisionTMXTileLayersRec(map, map->layers, map->layersLength, horizRec, &hitObj)) {
+                boxPosition.x = nextPos.x;
+            } else {
+                boxVel.x = 0; // Stop horizontal movement
+            }
+        } else {
+            // No collision: accept movement
+            boxPosition = nextPos;
+        }
 
-		float dt = GetFrameTime(); // Time since last frame
-
-		boxVol.y += gravity * dt; // Update volocity based on gravity
-
-		// Move box based on key input
-		if (IsKeyPressed(KEY_SPACE)) // if player hits space jump 
-		{
-   			boxVol.y = jumpStrength; // player jumps using jump strength
+        // Load new map if player walks out of bounds
+		if(boxPosition.x < 0.0f) {
+			UnloadTMX(map);
+			TmxMap* map = LoadTMX("../assets/tiled/stage2.tmx");
+    		if (!map) {
+        		cerr << "Failed to load TMX map" << endl;
+        		CloseWindow();
+        		return -1;
+    		}
+			boxPosition = {400.0f, 300.0f}; // Start in middle
 		}
 
-		if (IsKeyDown(KEY_D)) boxPosition.x += speed * dt; // move left
-		if (IsKeyDown(KEY_A)) boxPosition.x -= speed * dt; // move right
+        // Update destination rectangle for drawing
+        dstRec.x = boxPosition.x;
+        dstRec.y = boxPosition.y;
 
-		boxPosition.y += boxVol.y * dt; // update player position based on volocity
+        // Update camera to follow the player
+        camera.target = boxPosition;
 
-		// Constrain box to stay within screen bounds
-		if (boxPosition.x < 0) boxPosition.x = 0;
-		if (boxPosition.y < 0) boxPosition.y = 0;
-		if (boxPosition.x > screenWidth - boxSize.x) boxPosition.x = screenWidth - boxSize.x;
-		if (boxPosition.y > screenHeight - boxSize.y) boxPosition.y = screenHeight - boxSize.y;
+        // Drawing
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
 
-		// Update cow texture position to follow the box
-		destRec.x = boxPosition.x;
-		destRec.y = boxPosition.y;
-
-		BeginDrawing();
-		ClearBackground(RAYWHITE);
-
-		// Draw background texture scaled to screen size
-		
-		/*DrawTexturePro(background, 
-			{0, 0, (float)background.width, (float)background.height}, 
-			{0, 0, (float)screenWidth, (float)screenHeight}, 
-			{0, 0}, 0, WHITE);*/
-
-		// Draw the map
-        DrawTMX(stage1, NULL, 0, 0, WHITE);
-
-		//DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the blue box
-
-		 DrawTexturePro(cow, sourceRec, destRec, origin, (float)rotation, WHITE); // Draws cow
+        BeginMode2D(camera); // Start 2D camera mode
+        AnimateTMX(map); // Update animated tiles
+        DrawTMX(map, &camera, 0, 0, WHITE); // Draw tile map with parallax support
+        DrawTexturePro(currentCow, srcRec, dstRec, origin, 0.0f, WHITE); // Draws cow
+        EndMode2D(); // End 2D camera mode
 
         // Draw text
-         const char* instructionText = "Move with W A S D. Jump with SPACE";
-         DrawRectangle(8, 8, MeasureText(instructionText, 20) + 4, 24, Fade(BLACK, 0.5f));
-         DrawText(instructionText, 10, 10, 20, WHITE);
+        const char* msg = "Move A/D, Jump SPACE";
+        DrawRectangle(8, 8, MeasureText(msg, 20) + 4, 24, Fade(BLACK, 0.5f));
+        DrawText(msg, 10, 10, 20, WHITE);
 
-		EndDrawing();
-	}
+        EndDrawing();
+    }
+    // Cleanup
+    UnloadTexture(cowR);
+    UnloadTexture(cowL);
+    UnloadTMX(map);
+    CloseWindow();
 
-	// Cleanup
-	UnloadTexture(cow);
-	//UnloadTexture(background);
-	UnloadTMX(stage1);
-	CloseWindow();
-
-	return 0;
+    return 0;
 }
