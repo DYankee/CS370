@@ -121,7 +121,7 @@ int main() {
         // Load new map if player walks out of bounds
 		if(boxPosition.x < 0.0f) {
 			UnloadTMX(map);
-			TmxMap* map = LoadTMX("../assets/tiled/stage2.tmx");
+			map = LoadTMX("../assets/tiled/stage2.tmx");
     		if (!map) {
         		cerr << "Failed to load TMX map" << endl;
         		CloseWindow();
