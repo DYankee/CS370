@@ -13,8 +13,8 @@ extern "C" {
 using namespace std;
 
 // Player and physics constants
-#define CHAR_WIDTH 64
-#define CHAR_HEIGHT 64
+#define CHAR_WIDTH 16
+#define CHAR_HEIGHT 16
 #define GRAVITY 1000.0f          // Gravity strength 
 #define SPEED 400.0f             // speed 
 #define JUMP_STRENGTH -500.0f    // Negative because y-axis goes down
@@ -34,6 +34,16 @@ int main() {
         CloseWindow();
         return -1;
     }
+
+    // Camera
+    Camera2D camera;
+    camera.zoom = 1.0f; // Adjust zoom level as needed
+    camera.target.x = (float)(map->width * map->tileWidth) / 2.0f;
+    camera.target.y = (float)(map->height * map->tileHeight) / 2.0f;
+    camera.offset.x = (float)screenWidth / 2.0f;
+    camera.offset.y = (float)screenHeight / 2.0f;
+    camera.rotation = 0.0f;
+
     // Player setup
     Vector2 boxPosition = {400.0f, 300.0f}; // Start in middle
     Vector2 boxVel = {0.0f, 0.0f};     // Box Velocity
@@ -48,6 +58,8 @@ int main() {
     Rectangle srcRec = {0, 0, (float)cowR.width, (float)cowR.height};
     Rectangle dstRec = {boxPosition.x, boxPosition.y, boxSize.x, boxSize.y};
     Vector2 origin = {0, 0}; // Top-left origin
+    camera.target = boxPosition;
+
 
     // Main game loop
     while (!WindowShouldClose()) {
