@@ -118,6 +118,19 @@ int main() {
             boxPosition = nextPos;
         }
 
+        // Load new map if player walks out of bounds
+		if(boxPosition.x < 0.0f) {
+			UnloadTMX(map);
+			TmxMap* map = LoadTMX("../assets/tiled/stage2.tmx");
+    		if (!map) {
+        		cerr << "Failed to load TMX map" << endl;
+        		CloseWindow();
+        		return -1;
+    		}
+			boxPosition.x = screenWidth - 0.05f;
+			boxPosition.y = 0.0f;
+		}
+
         // Update destination rectangle for drawing
         dstRec.x = boxPosition.x;
         dstRec.y = boxPosition.y;
@@ -131,7 +144,7 @@ int main() {
 
         BeginMode2D(camera); // Start 2D camera mode
         AnimateTMX(map); // Update animated tiles
-        DrawTMX(map, NULL, 0, 0, WHITE); // Draw tile map
+        DrawTMX(map, &camera, 0, 0, WHITE); // Draw tile map with parallax support
         DrawTexturePro(currentCow, srcRec, dstRec, origin, 0.0f, WHITE); // Draws cow
         EndMode2D(); // End 2D camera mode
 
