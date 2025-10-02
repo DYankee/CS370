@@ -15,25 +15,22 @@
             "scaleInEditor": 1
         },
         "stage1.tmx": {
-            "expandedObjectLayers": [
-                2
-            ],
-            "scale": 0.5,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 838,
-                "y": 578
+                "x": 110.66666666666669,
+                "y": 833.3333333333333
             }
         },
         "stage2.tmx": {
             "expandedGroupLayers": [
                 5
             ],
-            "scale": 1,
+            "scale": 0.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 206,
-                "y": 688
+                "x": 428,
+                "y": 684
             }
         },
         "test_tileset.tsx": {
@@ -44,11 +41,7 @@
     },
     "last.exportedFilePath": "C:/Users/kentp/CS370/assets/tiled",
     "last.imagePath": "C:/Users/kentp/CS370/assets/graphics/tileset",
-    "last.worldFilePath": "C:/Users/alaib/Software_Engineering_Project/CS370/assets/tiled",
-    "loadedWorlds": [
-        "C:/Users/alaib/Software_Engineering_Project/CS370/assets/tiled/levels.world"
-    ],
-    "map.height": 67,
+    "map.height": 68,
     "map.lastUsedExportFilter": "All Files (*)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
