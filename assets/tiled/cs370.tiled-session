@@ -14,11 +14,11 @@
             "scaleInEditor": 1
         },
         "stage1.tmx": {
-            "scale": 1.5,
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 110.66666666666669,
-                "y": 833.3333333333333
+                "x": 996.9696969696968,
+                "y": 678.7878787878788
             }
         },
         "stage2.tmx": {
@@ -26,10 +26,10 @@
                 5
             ],
             "scale": 0.5,
-            "selectedLayer": 4,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 428,
-                "y": 684
+                "x": 894,
+                "y": 624
             }
         },
         "test_tileset.tsx": {
