@@ -26,7 +26,7 @@ int main() {
     ToggleFullscreen();
  	SetTargetFPS(60);
     // Load TMX map using RayTMX
-    TmxMap* map = LoadTMX("../assets/tiled/stage2.tmx");
+    TmxMap* map = LoadTMX("../assets/tiled/stage1.tmx");
     if (!map) {
         cerr << "Failed to load TMX map" << endl;
         CloseWindow();
@@ -127,8 +127,7 @@ int main() {
         		CloseWindow();
         		return -1;
     		}
-			boxPosition.x = screenWidth - 0.05f;
-			boxPosition.y = 0.0f;
+			boxPosition = {400.0f, 300.0f}; // Start in middle
 		}
 
         // Update destination rectangle for drawing
