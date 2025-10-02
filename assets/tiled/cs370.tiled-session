@@ -23,10 +23,10 @@
         },
         "stage2.tmx": {
             "scale": 0.5,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 800,
-                "y": 662
+                "x": 957,
+                "y": 562
             }
         },
         "test_tileset.tsx": {
@@ -36,7 +36,7 @@
         }
     },
     "last.exportedFilePath": "C:/Users/kentp/CS370/assets/tiled",
-    "last.imagePath": "C:/Users/kentp/CS370/assets/sprites",
+    "last.imagePath": "C:/Users/Kent/CS370/assets/graphics/tileset",
     "map.height": 68,
     "map.lastUsedExportFilter": "All Files (*)",
     "map.lastUsedFormat": "tmx",
