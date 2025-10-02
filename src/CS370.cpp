@@ -17,6 +17,7 @@ using namespace std;
 #define SPEED 400.0f             // speed 
 #define JUMP_STRENGTH -500.0f    // Negative because y-axis goes down
 
+
 int main() {
     // Window setup
    
@@ -109,18 +110,29 @@ int main() {
 
 
 		// Load new map if player walks out of bounds
-		if(boxPosition.x < 0.0f) {
-			UnloadTMX(map);
-			TmxMap* map = LoadTMX("../assets/tiled/stage2.tmx");
-    		if (!map) {
-        		cerr << "Failed to load TMX map" << endl;
-        		CloseWindow();
-        		return -1;
-    		}
-			boxPosition.x = screenWidth - 0.05f;
-			boxPosition.y = 0.0f;
+        // is currently only for the two maps, needs to be changed
+		if(boxPosition.x < -10.0f) {
+		    UnloadTMX(map);
+		    TmxMap* map = LoadTMX("../assets/tiled/stage2.tmx");
+		    if (!map) {
+                cerr << "Failed to load TMX map" << endl;
+        	    CloseWindow();
+        	    return -1;
+    	    }
+            boxPosition.x = 1700.0f;
+            boxPosition.y = 600.0f;
 		}
-		
+        if(boxPosition.x > screenWidth) {
+		    UnloadTMX(map);
+		    TmxMap* map = LoadTMX("../assets/tiled/stage1.tmx");
+		    if (!map) {
+                cerr << "Failed to load TMX map" << endl;
+        	    CloseWindow();
+        	    return -1;
+    	    }
+            boxPosition.x = 75.0f;
+            boxPosition.y = 600.0f;            
+		}
 			
 
         // Update destination rectangle for drawing

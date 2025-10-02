@@ -13,22 +13,22 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.25,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 190,
-                "y": 1054
+                "x": 78.33333333333333,
+                "y": 916.3333333333333
             }
         },
         "stage2.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.25,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 2330,
-                "y": 1078
+                "x": 2012.3333333333333,
+                "y": 1125.6666666666665
             }
         },
         "test_tileset.tsx": {
