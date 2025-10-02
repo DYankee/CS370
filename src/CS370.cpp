@@ -118,8 +118,7 @@ int main() {
         		CloseWindow();
         		return -1;
     		}
-			boxPosition.x = screenWidth - 0.05f;
-			boxPosition.y = 0.0f;
+			boxPosition = {400.0f, 300.0f}; // Start in middle
 		}
 		
 			
