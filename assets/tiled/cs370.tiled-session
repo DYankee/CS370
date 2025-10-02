@@ -14,19 +14,25 @@
             "scaleInEditor": 1
         },
         "stage1.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
             "scale": 0.5,
-            "selectedLayer": 1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 961,
-                "y": 535
+                "x": 838,
+                "y": 578
             }
         },
         "stage2.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 1,
+            "expandedGroupLayers": [
+                5
+            ],
+            "scale": 1,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 957,
-                "y": 562
+                "x": 225,
+                "y": 710
             }
         },
         "test_tileset.tsx": {
