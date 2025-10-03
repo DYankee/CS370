@@ -12,8 +12,8 @@ extern "C" {
 using namespace std;
 
 // Player and physics constants
-#define CHAR_WIDTH 16
-#define CHAR_HEIGHT 16
+#define CHAR_WIDTH 32
+#define CHAR_HEIGHT 32
 #define GRAVITY 1000.0f          // Gravity strength 
 #define SPEED 400.0f             // speed 
 #define JUMP_STRENGTH -500.0f    // Negative because y-axis goes down
@@ -36,7 +36,7 @@ int main() {
 
     // Camera
     Camera2D camera;
-    camera.zoom = 1.0f; // Adjust zoom level as needed
+    camera.zoom = 2.0f; // Adjust zoom level as needed
     camera.target.x = (float)(map->width * map->tileWidth) / 2.0f;
     camera.target.y = (float)(map->height * map->tileHeight) / 2.0f;
     camera.offset.x = (float)screenWidth / 2.0f;
@@ -143,20 +143,16 @@ int main() {
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-		
-		//DrawRectangleV(boxPosition, boxSize, BLUE); // Draw the box
-		DrawRectangleRec(box, BLUE);
+        BeginMode2D(camera); // Start 2D camera mode
+        AnimateTMX(map); // Update animated tiles
+        DrawTMX(map, NULL, 0, 0, WHITE); // Draw tile map with parallax support
+        DrawTexturePro(currentCow, srcRec, dstRec, origin, 0.0f, WHITE); // Draws cow
+        EndMode2D(); // End 2D camera mode
 
-
-		DrawRectangleRec(platform1, BLACK); // Draw test platform
-
-		if (CheckCollisionRecs(box, platform1)) {
-			cout << "Collision!" << endl;
-		}
-
-
-         DrawText("Move with W A S D", 10, 10, 20, BLACK);
-		//DrawTexturePro(ball, sourceRec, destRec, origin, (float)rotation, GREEN);
+        // Draw text
+        const char* msg = "Move A/D, Jump SPACE";
+        DrawRectangle(8, 8, MeasureText(msg, 20) + 4, 24, Fade(BLACK, 0.5f));
+        DrawText(msg, 10, 10, 20, WHITE);
 
         EndDrawing();
     }
