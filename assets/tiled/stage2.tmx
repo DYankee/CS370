@@ -5,10 +5,10 @@
   <imagelayer id="9" name="bg" offsetx="0" offsety="-192" repeatx="1" repeaty="1">
    <image source="../graphics/bgart/sky.png" width="1920" height="1080"/>
   </imagelayer>
-  <imagelayer id="12" name="clouds" offsetx="-3.63636" offsety="-297.939" repeatx="1">
+  <imagelayer id="12" name="clouds" offsetx="-3.63636" offsety="-297.939" parallaxx="1.5" repeatx="1">
    <image source="../graphics/bgart/clouds.png" width="1920" height="1080"/>
   </imagelayer>
-  <imagelayer id="10" name="grass" offsetx="0" offsety="-304" parallaxx="1.5" repeatx="1">
+  <imagelayer id="10" name="grass" offsetx="0" offsety="-304" parallaxx="1.2" repeatx="1">
    <image source="../graphics/bgart/grass.png" width="1920" height="1080"/>
   </imagelayer>
   <imagelayer id="13" name="dirt" offsetx="-4.0048" offsety="14.6664" repeatx="1">
