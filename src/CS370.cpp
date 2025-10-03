@@ -25,6 +25,13 @@ int main() {
     InitWindow(screenWidth, screenHeight, "CS370");
     ToggleFullscreen();
  	SetTargetFPS(60);
+
+    // Music setup
+    InitAudioDevice();
+    Music music = LoadMusicStream("../assets/music/stardewsummer.mp3");
+    SetMusicVolume(music, 1.0f);
+    PlayMusicStream(music);
+
     // Load TMX map using RayTMX
     TmxMap* map = LoadTMX("../assets/tiled/stage1.tmx");
     if (!map) {
@@ -61,7 +68,10 @@ int main() {
 
     // Main game loop
     while (!WindowShouldClose()) {
+
+        UpdateMusicStream(music); // Keep music playing
         float dt = GetFrameTime(); // Time since last frame
+
 		// Update velocity based on gravity
         boxVel.y += GRAVITY * dt;
 
@@ -158,7 +168,9 @@ int main() {
     // Cleanup
     UnloadTexture(cowR);
     UnloadTexture(cowL);
+    UnloadMusicStream(music);
     UnloadTMX(map);
+    CloseAudioDevice();   
     CloseWindow();
 
     return 0;
