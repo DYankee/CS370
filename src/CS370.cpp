@@ -145,7 +145,7 @@ int main() {
 
         BeginMode2D(camera); // Start 2D camera mode
         AnimateTMX(map); // Update animated tiles
-        DrawTMX(map, NULL, 0, 0, WHITE); // Draw tile map with parallax support
+        DrawTMX(map, &camera, 0, 0, WHITE); // Draw tile map with parallax support
         DrawTexturePro(currentCow, srcRec, dstRec, origin, 0.0f, WHITE); // Draws cow
         EndMode2D(); // End 2D camera mode
 
