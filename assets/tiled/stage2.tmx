@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="1">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <group id="5" name="bg" offsetx="4" offsety="193.333">
   <imagelayer id="9" name="bg" offsetx="0" offsety="-192" repeatx="1" repeaty="1">
@@ -8,10 +8,10 @@
   <imagelayer id="12" name="clouds" offsetx="-3.63636" offsety="-297.939" parallaxx="1.2" repeatx="1">
    <image source="../graphics/bgart/clouds.png" width="1920" height="1080"/>
   </imagelayer>
-  <imagelayer id="15" name="city" offsetx="-387.879" offsety="-1079.82" parallaxx="1.3" repeatx="1">
-   <image source="../graphics/bgart/city.png" width="3840" height="2160"/>
+  <imagelayer id="16" name="city" offsetx="-4.18182" offsety="-312" parallaxx="1.4" repeatx="1">
+   <image source="../graphics/bgart/city.png" width="1920" height="1080"/>
   </imagelayer>
-  <imagelayer id="10" name="grass" offsetx="0" offsety="-304" parallaxx="1.4" repeatx="1">
+  <imagelayer id="10" name="grass" offsetx="0" offsety="-304" parallaxx="1.6" repeatx="1">
    <image source="../graphics/bgart/grass.png" width="1920" height="1080"/>
   </imagelayer>
   <imagelayer id="13" name="dirt" offsetx="-4.0048" offsety="14.6664" repeatx="1">
