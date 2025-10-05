@@ -15,11 +15,13 @@ using namespace std;
 #define CHAR_HEIGHT 32
 #define GRAVITY 1000.0f          // Gravity strength 
 #define SPEED 400.0f             // speed 
-#define JUMP_STRENGTH -500.0f    // Negative because y-axis goes down
+#define JUMP_STRENGTH -700.0f    // Negative because y-axis goes down
 
 int main() {
     // Window setup
-   
+   float accumulator = 0.0f;                     // Keeps track of leftover frame time
+    const float dt = 1.0f / 60.0f;        // 60 FPS physics step
+
     const int screenWidth = 1920;
     const int screenHeight = 1080;
     InitWindow(screenWidth, screenHeight, "CS370");
@@ -68,78 +70,85 @@ int main() {
 
     // Main game loop
     while (!WindowShouldClose()) {
+        // Add frame time to accumulator
+        accumulator += GetFrameTime();
 
         UpdateMusicStream(music); // Keep music playing
-        float dt = GetFrameTime(); // Time since last frame
+        while (accumulator >= dt) {
+        // Gravity
+            boxVel.y += GRAVITY * dt;
 
 		// Update velocity based on gravity
-        boxVel.y += GRAVITY * dt;
+            boxVel.y += GRAVITY * dt;
 
         // Move box based on key input
-        if (IsKeyDown(KEY_D)) {
-            boxVel.x = SPEED;    // Move right
-            currentCow = cowR;   // Use right-facing cow
-        } else if (IsKeyDown(KEY_A)) {
-            boxVel.x = -SPEED;   // Move left
-            currentCow = cowL;   // Use left-facing cow
-        } else {
-            boxVel.x = 0;        // No horizontal movement
-        }
-        // Only allow jump if player is on the ground
-        if (IsKeyPressed(KEY_SPACE)) {
-            Rectangle testRec = { boxPosition.x, boxPosition.y + 1, boxSize.x, boxSize.y };
-            TmxObject collidedObj;
-            bool onGround = CheckCollisionTMXTileLayersRec(
-                map, map->layers, map->layersLength, testRec, &collidedObj
+            if (IsKeyDown(KEY_D)) {
+                boxVel.x = SPEED;    // Move right
+                currentCow = cowR;   // Use right-facing cow
+            } else if (IsKeyDown(KEY_A)) {
+                boxVel.x = -SPEED;   // Move left
+                currentCow = cowL;   // Use left-facing cow
+            } else {
+                boxVel.x = 0;        // No horizontal movement
+            }
+            // Only allow jump if player is on the ground
+            if (IsKeyPressed(KEY_SPACE)) {
+                Rectangle testRec = { boxPosition.x, boxPosition.y + 1, boxSize.x, boxSize.y };
+                TmxObject collidedObj;
+                bool onGround = CheckCollisionTMXTileLayersRec(
+                    map, map->layers, map->layersLength, testRec, &collidedObj
+                );
+                if (onGround) {
+                    boxVel.y = JUMP_STRENGTH;
+                }
+            }
+            // Calculate new position
+            Vector2 nextPos = { boxPosition.x + boxVel.x * dt, boxPosition.y + boxVel.y * dt };
+            Rectangle playerRec = { nextPos.x, nextPos.y, boxSize.x, boxSize.y };
+
+            // Check collisions against tile layers
+            TmxObject hitObj;
+            bool collided = CheckCollisionTMXTileLayersRec(
+                map, map->layers, map->layersLength, playerRec, &hitObj
             );
-            if (onGround) {
-                boxVel.y = JUMP_STRENGTH;
-            }
-        }
-        // Calculate new position
-        Vector2 nextPos = { boxPosition.x + boxVel.x * dt, boxPosition.y + boxVel.y * dt };
-        Rectangle playerRec = { nextPos.x, nextPos.y, boxSize.x, boxSize.y };
 
-        // Check collisions against tile layers
-        TmxObject hitObj;
-        bool collided = CheckCollisionTMXTileLayersRec(
-            map, map->layers, map->layersLength, playerRec, &hitObj
-        );
+            if (collided) {
+                // Vertical collision only
+                Vector2 vertPos = { boxPosition.x, nextPos.y };
+                Rectangle vertRec = { vertPos.x, vertPos.y, boxSize.x, boxSize.y };
+                if (!CheckCollisionTMXTileLayersRec(map, map->layers, map->layersLength, vertRec, &hitObj)) {
+                    boxPosition.y = nextPos.y;
+                } else {
+                    boxVel.y = 0; // Stop vertical movement
+                }
 
-        if (collided) {
-            // Vertical collision only
-            Vector2 vertPos = { boxPosition.x, nextPos.y };
-            Rectangle vertRec = { vertPos.x, vertPos.y, boxSize.x, boxSize.y };
-            if (!CheckCollisionTMXTileLayersRec(map, map->layers, map->layersLength, vertRec, &hitObj)) {
-                boxPosition.y = nextPos.y;
+                // Horizontal collision only
+                Vector2 horizPos = { nextPos.x, boxPosition.y };
+                Rectangle horizRec = { horizPos.x, horizPos.y, boxSize.x, boxSize.y };
+                if (!CheckCollisionTMXTileLayersRec(map, map->layers, map->layersLength, horizRec, &hitObj)) {
+                    boxPosition.x = nextPos.x;
+                } else {
+                    boxVel.x = 0; // Stop horizontal movement
+                }
             } else {
-                boxVel.y = 0; // Stop vertical movement
+                // No collision: accept movement
+                boxPosition = nextPos;
             }
 
-            // Horizontal collision only
-            Vector2 horizPos = { nextPos.x, boxPosition.y };
-            Rectangle horizRec = { horizPos.x, horizPos.y, boxSize.x, boxSize.y };
-            if (!CheckCollisionTMXTileLayersRec(map, map->layers, map->layersLength, horizRec, &hitObj)) {
-                boxPosition.x = nextPos.x;
-            } else {
-                boxVel.x = 0; // Stop horizontal movement
-            }
-        } else {
-            // No collision: accept movement
-            boxPosition = nextPos;
+            // Load new map if player walks out of bounds
+		    if(boxPosition.x < 0.0f) {
+			    UnloadTMX(map);
+			    map = LoadTMX("../assets/tiled/stage2.tmx");
+    		    if (!map) {
+        		    cerr << "Failed to load TMX map" << endl;
+        		    CloseWindow();
+        		    return -1;
+    		    }
+			    boxPosition = {400.0f, 300.0f}; // Start in middle
+		    }
+            // Decrease accumulator by one physics step
+            accumulator -= dt;
         }
-
-        // Load new map if player walks out of bounds
-		if(boxPosition.x < 0.0f) {
-			UnloadTMX(map);
-			map = LoadTMX("../assets/tiled/stage2.tmx");
-    		if (!map) {
-        		cerr << "Failed to load TMX map" << endl;
-        		CloseWindow();
-        		return -1;
-    		}
-			boxPosition = {400.0f, 300.0f}; // Start in middle
-		}
 
         // Update destination rectangle for drawing
         dstRec.x = boxPosition.x;
