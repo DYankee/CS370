@@ -218,6 +218,16 @@ int main() {
     		    }
 			    boxPosition = {400.0f, 300.0f}; // Start in middle
 		    }
+            if(boxPosition.y > screenWidth) {
+                UnloadTMX(map);
+			    map = LoadTMX("../assets/tiled/stage1.tmx");
+    		    if (!map) {
+        		    cerr << "Failed to load TMX map" << endl;
+        		    CloseWindow();
+        		    return -1;
+    		    }
+			    boxPosition = {400.0f, 300.0f}; // Start in middle
+            }
             // Decrease accumulator by one physics step
             accumulator -= dt;
         }
