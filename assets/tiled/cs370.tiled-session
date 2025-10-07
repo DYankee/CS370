@@ -15,22 +15,22 @@
             "scaleInEditor": 1
         },
         "stage1.tmx": {
-            "scale": 0.33,
+            "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 959.090909090909,
-                "y": 534.848484848485
+                "x": -180,
+                "y": 404
             }
         },
         "stage2.tmx": {
             "expandedGroupLayers": [
                 5
             ],
-            "scale": 0.5,
+            "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 941,
-                "y": 834
+                "x": 2216,
+                "y": -1480
             }
         },
         "test_tileset.tsx": {
@@ -41,6 +41,11 @@
     },
     "last.exportedFilePath": "C:/Users/kentp/CS370/assets/tiled",
     "last.imagePath": "C:/Users/kentp/CS370/assets/graphics/tileset",
+    "last.worldFilePath": "C:/Users/alaib/Software_Engineering_Project/CS370/assets/tiled",
+    "loadedWorlds": [
+        "C:/Users/alaib/Software_Engineering_Project/CS370/assets/tiled/milksong_world.world",
+        "C:/Users/alaib/Software_Engineering_Project/CS370/assets/tiled/milksong_world.world"
+    ],
     "map.height": 68,
     "map.lastUsedExportFilter": "All Files (*)",
     "map.lastUsedFormat": "tmx",
