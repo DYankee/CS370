@@ -28,12 +28,12 @@ int main() {
 
     // Music setup
     InitAudioDevice();
-    Music music = LoadMusicStream("../assets/music/stardewsummer.mp3");
+    Music music = LoadMusicStream("assets/music/stardewsummer.mp3");
     SetMusicVolume(music, 1.0f);
     PlayMusicStream(music);
 
     // Load TMX map using RayTMX
-    TmxMap* map = LoadTMX("../assets/tiled/stage1.tmx");
+    TmxMap* map = LoadTMX("assets/tiled/stage1.tmx");
     if (!map) {
         cerr << "Failed to load TMX map" << endl;
         CloseWindow();
@@ -55,8 +55,8 @@ int main() {
     Vector2 boxSize = {CHAR_WIDTH, CHAR_HEIGHT}; // Width & height
 
     // Load player sprites
-    Texture2D cowR = LoadTexture("../assets/sprites/cowR.png"); 
-    Texture2D cowL = LoadTexture("../assets/sprites/cowL.png"); 
+    Texture2D cowR = LoadTexture("assets/sprites/cowR.png"); 
+    Texture2D cowL = LoadTexture("assets/sprites/cowL.png"); 
     Texture2D currentCow = cowR;  // Default to right-facing cow
 
     // Define source and destination rectangles for drawing
@@ -132,7 +132,7 @@ int main() {
         // Load new map if player walks out of bounds
 		if(boxPosition.x < 0.0f) {
 			UnloadTMX(map);
-			map = LoadTMX("../assets/tiled/stage2.tmx");
+			map = LoadTMX("assets/tiled/stage2.tmx");
     		if (!map) {
         		cerr << "Failed to load TMX map" << endl;
         		CloseWindow();
