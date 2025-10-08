@@ -202,17 +202,30 @@ int main() {
                 boxPosition = nextPos;
             }
 
-        // Load new map if player walks out of bounds
-		if(boxPosition.x < 0.0f) {
-			UnloadTMX(map);
-			map = LoadTMX("assets/tiled/stage2.tmx");
-    		if (!map) {
-        		cerr << "Failed to load TMX map" << endl;
-        		CloseWindow();
-        		return -1;
-    		}
-			boxPosition = {400.0f, 300.0f}; // Start in middle
-		}
+            // Load new map if player walks out of bounds
+		    if(boxPosition.x < 0.0f) {
+			    UnloadTMX(map);
+			    map = LoadTMX("assets/tiled/stage2.tmx");
+    		    if (!map) {
+        		    cerr << "Failed to load TMX map" << endl;
+        		    CloseWindow();
+        		    return -1;
+    		    }
+			    boxPosition = {400.0f, 300.0f}; // Start in middle
+		    }
+            if(boxPosition.y > screenWidth) {
+                UnloadTMX(map);
+			    map = LoadTMX("assets/tiled/stage1.tmx");
+    		    if (!map) {
+        		    cerr << "Failed to load TMX map" << endl;
+        		    CloseWindow();
+        		    return -1;
+    		    }
+			    boxPosition = {400.0f, 300.0f}; // Start in middle
+            }
+            // Decrease accumulator by one physics step
+            accumulator -= dt;
+        }
 
         // Update destination rectangle for drawing
         dstRec.x = boxPosition.x;
