@@ -83,7 +83,7 @@ int main() {
     Texture2D cowL = LoadTexture("assets/sprites/cowL.png"); 
     Texture2D currentCow = cowR;  // Default to right-facing cow
     // load health sprite 
-    Texture2D heart = LoadTexture("../assets/sprites/CowFace.png");
+    Texture2D heart = LoadTexture("assets/sprites/CowFace.png");
     Vector2 healthPos = { 20, 30 }; // top left
     const int iconSpacing = 50;     // space between icons
 
