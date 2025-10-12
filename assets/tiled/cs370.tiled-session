@@ -4,7 +4,6 @@
         "width": 2
     },
     "activeFile": "stage2.tmx",
-    "activeFile": "stage2.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -54,11 +53,13 @@
     "map.width": 120,
     "openFiles": [
         "stage1.tmx",
-        "stage2.tmx"
+        "stage2.tmx",
+        "maintileset.tsx"
     ],
     "project": "cs370.tiled-project",
     "recentFiles": [
         "stage1.tmx",
+        "maintileset.tsx",
         "stage2.tmx",
         "test_tileset.tsx"
     ],

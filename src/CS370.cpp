@@ -1,8 +1,6 @@
 ﻿// CS370.cpp
-// CS370.cpp
 #include <iostream>
 #include "../include/raylib.h"
-#include "../include/entt.hpp"
 
 // Include RayTMX in C linkage
 extern "C" {
@@ -42,7 +40,7 @@ int main() {
     const int screenWidth = 1920;
     const int screenHeight = 1080;
     InitWindow(screenWidth, screenHeight, "CS370");
-    //ToggleFullscreen();
+    ToggleFullscreen();
  	SetTargetFPS(60);
 
     // Music setup
@@ -232,6 +230,9 @@ int main() {
         // Update destination rectangle for drawing
         dstRec.x = boxPosition.x;
         dstRec.y = boxPosition.y;
+
+        // Update camera to follow the player
+        camera.target = boxPosition;
 
         // Drawing
         BeginDrawing();
