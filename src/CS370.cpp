@@ -13,7 +13,7 @@ using namespace std;
 // Player and physics constants
 #define CHAR_WIDTH 32
 #define CHAR_HEIGHT 32
-#define GRAVITY 1000.0f          // Gravity strength 
+#define GRAVITY 2000.0f          // Gravity strength 
 #define SPEED 400.0f             // speed 
 #define JUMP_STRENGTH -700.0f    // Negative because y-axis goes down
 
@@ -108,9 +108,6 @@ int main() {
         UpdateMusicStream(music); // Keep music playing
         while (accumulator >= dt) {
         // Gravity
-            boxVel.y += GRAVITY * dt;
-
-		// Update velocity based on gravity
             boxVel.y += GRAVITY * dt;
 
         // Move box based on key input
@@ -216,6 +213,16 @@ int main() {
     		    }
 			    boxPosition = {400.0f, 300.0f}; // Start in middle
 		    }
+            if(boxPosition.y > screenWidth) {
+                UnloadTMX(map);
+			    map = LoadTMX("../assets/tiled/stage1.tmx");
+    		    if (!map) {
+        		    cerr << "Failed to load TMX map" << endl;
+        		    CloseWindow();
+        		    return -1;
+    		    }
+			    boxPosition = {400.0f, 300.0f}; // Start in middle
+            }
             // Decrease accumulator by one physics step
             accumulator -= dt;
         }
