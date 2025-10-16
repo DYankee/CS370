@@ -84,12 +84,7 @@ int main() {
 
     // Player setup
     // Create player entity
-    createPlayer(registry);
-
-    Vector2 boxPosition = {400.0f, 300.0f}; // Start in middle
-    Vector2 boxVel = {0.0f, 0.0f};     // Box Velocity
-    Vector2 boxSize = {CHAR_WIDTH, CHAR_HEIGHT}; // Width & height
-
+    createPlayer(registry, camera);
 
     // load health sprite 
     Texture2D heart = LoadTexture("assets/sprites/CowFace.png");
@@ -97,9 +92,7 @@ int main() {
     const int iconSpacing = 50;     // space between icons
 
     // Define source and destination rectangles for drawing
-    Rectangle dstRec = {boxPosition.x, boxPosition.y, boxSize.x, boxSize.y};
-    Vector2 origin = {0, 0}; // Top-left origin
-    camera.target = boxPosition;
+    // camera.target = boxPosition;
 
     //collision settings
     float iFrames = 0.0f;        // remaining i frame
