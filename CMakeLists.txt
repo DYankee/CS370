@@ -8,8 +8,19 @@ set(SOURCES
     src/CS370.cpp
 )
 
+# Add component, entity, and system sources
+list(APPEND SOURCES
+    src/components/sprite_data.cpp
+    src/systems/asset_loader.cpp
+)
+
 # create executable
 add_executable(${PROJECT_NAME} ${SOURCES})
+
+# Make sure the compiler can find project headers under src/ and include/
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${PROJECT_SOURCE_DIR}/src
+)
 
 # fetch raylib using FetchContent
 include(FetchContent)
