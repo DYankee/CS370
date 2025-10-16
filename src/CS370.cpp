@@ -5,7 +5,7 @@
 #include "../include/entt.hpp"
 
 // Include all ECS headers
-#include "entities/player.hpp"
+#include "entities/entities.hpp"
 #include "components/components.hpp"
 #include "systems/systems.hpp"
 
@@ -23,21 +23,6 @@ using namespace std;
 #define GRAVITY 1000.0f          // Gravity strength 
 #define SPEED 400.0f             // speed 
 #define JUMP_STRENGTH -700.0f    // Negative because y-axis goes down
-
-//find an object/group layer by name
-static TmxLayer* FindLayerByName(TmxLayer* layers, int layersLength, const char* name) {
-    if (!layers || layersLength == 0 || !name){
-         return NULL;
-    }
-    for (int i = 0; i < layersLength; ++i) {
-        if (layers[i].name && strcmp(layers[i].name, name) == 0) return &layers[i];
-        if (layers[i].type == LAYER_TYPE_GROUP && layers[i].layersLength > 0) {
-            TmxLayer* found = FindLayerByName(layers[i].layers, layers[i].layersLength, name);
-            if (found) return found;
-        }
-    }
-    return NULL;
-}
 
 int main() {
     // Create entt registry
@@ -66,6 +51,7 @@ int main() {
     float flashTimer = 0.0f;   
     const float flashSpeed = 10.0f;
 
+
     // Load TMX map using RayTMX
     TmxMap* map = LoadTMX("assets/tiled/stage1.tmx");
     if (!map) {
@@ -73,7 +59,10 @@ int main() {
         CloseWindow();
         return -1;
     }
-
+    entt::entity mapEntity = registry.create();
+    registry.emplace<TmxMap>(mapEntity, map);
+    registry.emplace<Map>(mapEntity, Map());
+    
     // Camera
     Camera2D camera;
     camera.zoom = 2.0f; // Adjust zoom level as needed
@@ -109,50 +98,9 @@ int main() {
 
         UpdateMusicStream(music); // Keep music playing
         while (accumulator >= dt) {
-        // Gravity
-            boxVel.y += GRAVITY * dt;
-
-		// Update velocity based on gravity
-            boxVel.y += GRAVITY * dt;
-
-        // Move box based on key input
-            if (IsKeyDown(KEY_D)) {
-                boxVel.x = SPEED;    // Move right
-
-                // find all entities with both a SpriteData and Player Component
-                registry.view<SpriteData, Player>().each([](SpriteData sprite) {
-                    sprite.setTexture("cowR");
-                });
-            } else if (IsKeyDown(KEY_A)) {
-                boxVel.x = -SPEED;   // Move left
-
-                // find all entities with both a SpriteData and Player Component
-                registry.view<SpriteData, Player>().each([](SpriteData sprite) {
-                    sprite.setTexture("cowL");
-                });
-            } else {
-                boxVel.x = 0;        // No horizontal movement
-            }
-            // Only allow jump if player is on the ground
-            if (IsKeyPressed(KEY_SPACE)) {
-                Rectangle testRec = { boxPosition.x, boxPosition.y + 1, boxSize.x, boxSize.y };
-                TmxObject collidedObj;
-                bool onGround = CheckCollisionTMXTileLayersRec(
-                    map, map->layers, map->layersLength, testRec, &collidedObj
-                );
-                if (onGround) {
-                    boxVel.y = JUMP_STRENGTH;
-                }
-            }
-            // Calculate new position
-            Vector2 nextPos = { boxPosition.x + boxVel.x * dt, boxPosition.y + boxVel.y * dt };
-            Rectangle playerRec = { nextPos.x, nextPos.y, boxSize.x, boxSize.y };
-
-            if (iFrames <= 0.0f) {
             // Check collisions with spike objects
-            {
+            if (iFrames <= 0.0f) {
                 
-
                 // find object layer named "Spikes"
                 TmxLayer* spikesLayer = FindLayerByName(map->layers, map->layersLength, "Spikes");
                 if (spikesLayer != NULL && spikesLayer->type == LAYER_TYPE_OBJECT_GROUP) {
