@@ -1,6 +1,8 @@
 ﻿// CS370.cpp
 #include <iostream>
 #include "../include/raylib.h"
+#include "systems/asset_loader.hpp"
+#include "components/sprite_data.hpp"
 
 // Include RayTMX in C linkage
 extern "C" {
@@ -79,16 +81,19 @@ int main() {
     Vector2 boxSize = {CHAR_WIDTH, CHAR_HEIGHT}; // Width & height
 
     // Load player sprites
-    Texture2D cowR = LoadTexture("assets/sprites/cowR.png"); 
-    Texture2D cowL = LoadTexture("assets/sprites/cowL.png"); 
-    Texture2D currentCow = cowR;  // Default to right-facing cow
+    SpriteData cowSprite = SpriteData(loadTextures({
+        {"cowR", "assets/sprites/cowR.png"},
+        {"cowL", "assets/sprites/cowL.png"}
+    }));
+    cowSprite.setTexture("cowR");
+
     // load health sprite 
     Texture2D heart = LoadTexture("assets/sprites/CowFace.png");
     Vector2 healthPos = { 20, 30 }; // top left
     const int iconSpacing = 50;     // space between icons
 
     // Define source and destination rectangles for drawing
-    Rectangle srcRec = {0, 0, (float)cowR.width, (float)cowR.height};
+    Rectangle srcRec = {0, 0, (float)cowSprite.curentTexture->width, (float)cowSprite.curentTexture->height};
     Rectangle dstRec = {boxPosition.x, boxPosition.y, boxSize.x, boxSize.y};
     Vector2 origin = {0, 0}; // Top-left origin
     camera.target = boxPosition;
@@ -113,10 +118,10 @@ int main() {
         // Move box based on key input
             if (IsKeyDown(KEY_D)) {
                 boxVel.x = SPEED;    // Move right
-                currentCow = cowR;   // Use right-facing cow
+                cowSprite.setTexture("cowR");   // Use right-facing cow
             } else if (IsKeyDown(KEY_A)) {
                 boxVel.x = -SPEED;   // Move left
-                currentCow = cowL;   // Use left-facing cow
+                cowSprite.setTexture("cowL");   // Use left-facing cow
             } else {
                 boxVel.x = 0;        // No horizontal movement
             }
@@ -241,7 +246,7 @@ int main() {
         BeginMode2D(camera); // Start 2D camera mode
         AnimateTMX(map); // Update animated tiles
         DrawTMX(map, &camera, 0, 0, WHITE); // Draw tile map with parallax support
-        DrawTexturePro(currentCow, srcRec, dstRec, origin, 0.0f, cowColor); // Draws cow
+        DrawTexturePro(*cowSprite.curentTexture, srcRec, dstRec, origin, 0.0f, cowColor); // Draws cow
         EndMode2D(); // End 2D camera mode
         
         //show health
@@ -262,8 +267,6 @@ int main() {
         EndDrawing();
     }
     // Cleanup
-    UnloadTexture(cowR);
-    UnloadTexture(cowL);
     UnloadMusicStream(music);
     UnloadTMX(map);
     CloseAudioDevice();   
