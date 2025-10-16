@@ -45,7 +45,7 @@ void createPlayer(entt::registry &registry, Camera2D camera) {
 void playerMovementSystem(entt::registry &registry, float dt, float gravity) {
 
     // Get the Transform and PhysicsObject from the Player Component
-    registry.view<Transform, PhysicsObject, SpriteData, Player>().each([dt, gravity](Transform transform, PhysicsObject physics, SpriteData sprite) {
+    registry.view<Transform, PhysicsObject, SpriteData, Player>().each([dt, gravity, &registry](Transform transform, PhysicsObject physics, SpriteData sprite) {
 
         transform.translation.y += gravity * dt;
         // Move box based on key input
@@ -61,19 +61,20 @@ void playerMovementSystem(entt::registry &registry, float dt, float gravity) {
 
         // Only allow jump if player is on the ground
         if (IsKeyPressed(KEY_SPACE)) {
-            Rectangle testRec = { boxPosition.x, boxPosition.y + 1, boxSize.x, boxSize.y };
-            TmxObject collidedObj;
-            bool onGround = CheckCollisionTMXTileLayersRec(
-                map, map->layers, map->layersLength, testRec, &collidedObj
-            );
-            if (onGround) {
-                boxVel.y = JUMP_STRENGTH;
-            }
+            registry.view<TmxMap>().each([&transform, &physics, &sprite](TmxMap* map){{
+                Rectangle testRec = { transform.translation.x, transform.translation.y + 1, transform.scale.x, transform.scale.y };
+                TmxObject collidedObj;
+                bool onGround = CheckCollisionTMXTileLayersRec(
+                    map, map->layers, map->layersLength, testRec, &collidedObj
+                );
+                if (onGround) {
+                    physics.velocity.y = JUMP_STRENGTH;
+                }
+            }});
         }
         // Calculate new position
-        Vector2 nextPos = { boxPosition.x + boxVel.x * dt, boxPosition.y + boxVel.y * dt };
-        Rectangle playerRec = { nextPos.x, nextPos.y, boxSize.x, boxSize.y };
-
+        transform.translation.x += physics.velocity.x * dt;
+        transform.translation.y += physics.velocity.y * dt;
     });
 }
     // Constants

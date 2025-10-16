@@ -8,6 +8,8 @@
 #define CHAR_WIDTH 32
 #define CHAR_HEIGHT 32
 #define SPEED 400.0f
+#define JUMP_STRENGTH -700.0f    // Negative because y-axis goes down
+
 
 // Empty struct for entity tagging
 struct Player{
