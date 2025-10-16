@@ -2,8 +2,12 @@
 // CS370.cpp
 #include <iostream>
 #include "../include/raylib.h"
-#include "systems/asset_loader.hpp"
-#include "components/sprite_data.hpp"
+#include "../include/entt.hpp"
+
+// Include all ECS headers
+#include "entities/player.hpp"
+#include "components/components.hpp"
+#include "systems/systems.hpp"
 
 // Include RayTMX in C linkage
 extern "C" {
@@ -36,6 +40,9 @@ static TmxLayer* FindLayerByName(TmxLayer* layers, int layersLength, const char*
 }
 
 int main() {
+    // Create entt registry
+    entt::registry registry = entt::registry();
+
     // Window setup
     float accumulator = 0.0f;                     // Keeps track of leftover frame time
     const float dt = 1.0f / 60.0f;        // 60 FPS physics step
@@ -77,16 +84,13 @@ int main() {
     camera.rotation = 0.0f;
 
     // Player setup
+    // Create player entity
+    createPlayer(registry);
+
     Vector2 boxPosition = {400.0f, 300.0f}; // Start in middle
     Vector2 boxVel = {0.0f, 0.0f};     // Box Velocity
     Vector2 boxSize = {CHAR_WIDTH, CHAR_HEIGHT}; // Width & height
 
-    // Load player sprites
-    SpriteData cowSprite = SpriteData(loadTextures({
-        {"cowR", "assets/sprites/cowR.png"},
-        {"cowL", "assets/sprites/cowL.png"}
-    }));
-    cowSprite.setTexture("cowR");
 
     // load health sprite 
     Texture2D heart = LoadTexture("assets/sprites/CowFace.png");
@@ -94,7 +98,6 @@ int main() {
     const int iconSpacing = 50;     // space between icons
 
     // Define source and destination rectangles for drawing
-    Rectangle srcRec = {0, 0, (float)cowSprite.curentTexture->width, (float)cowSprite.curentTexture->height};
     Rectangle dstRec = {boxPosition.x, boxPosition.y, boxSize.x, boxSize.y};
     Vector2 origin = {0, 0}; // Top-left origin
     camera.target = boxPosition;
@@ -122,10 +125,18 @@ int main() {
         // Move box based on key input
             if (IsKeyDown(KEY_D)) {
                 boxVel.x = SPEED;    // Move right
-                cowSprite.setTexture("cowR");   // Use right-facing cow
+
+                // find all entities with both a SpriteData and Player Component
+                registry.view<SpriteData, Player>().each([](SpriteData sprite) {
+                    sprite.setTexture("cowR");
+                });
             } else if (IsKeyDown(KEY_A)) {
                 boxVel.x = -SPEED;   // Move left
-                cowSprite.setTexture("cowL");   // Use left-facing cow
+
+                // find all entities with both a SpriteData and Player Component
+                registry.view<SpriteData, Player>().each([](SpriteData sprite) {
+                    sprite.setTexture("cowL");
+                });
             } else {
                 boxVel.x = 0;        // No horizontal movement
             }
@@ -247,7 +258,15 @@ int main() {
         BeginMode2D(camera); // Start 2D camera mode
         AnimateTMX(map); // Update animated tiles
         DrawTMX(map, &camera, 0, 0, WHITE); // Draw tile map with parallax support
-        DrawTexturePro(*cowSprite.curentTexture, srcRec, dstRec, origin, 0.0f, cowColor); // Draws cow
+
+        // Draw player
+        auto cowSprite = registry.view<SpriteData, Player>();
+        
+        cowSprite.each([](auto entity, SpriteData sprite, Player&) {
+            DrawTexturePro(*sprite.curentTexture, sprite.srcRec, dstRec, origin, 0.0f, cowColor);
+        });
+
+        
         EndMode2D(); // End 2D camera mode
         
         //show health
