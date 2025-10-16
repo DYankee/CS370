@@ -3,5 +3,6 @@
 
 // Include all system headers here
 #include "asset_loader.hpp"
+#include "collision_system.hpp"
 
 #endif

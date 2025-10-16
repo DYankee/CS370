@@ -3,5 +3,6 @@
 
 // Include all entity headers here
 #include "player.hpp"
+#include "map.hpp"
 
 #endif // ENTITIES_HPP
