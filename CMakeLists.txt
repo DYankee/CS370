@@ -11,6 +11,8 @@ set(SOURCES
 # Add component, entity, and system sources
 list(APPEND SOURCES
     src/components/sprite_data.cpp
+    src/components/physics_object.cpp
+    src/entities/player.cpp
     src/systems/asset_loader.cpp
 )
 
