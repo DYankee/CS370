@@ -7,16 +7,19 @@
 
     struct SpriteData
     {
-        Texture2D *curentTexture;
         std::map<std::string, Texture2D> textures;
+        Texture2D *curentTexture;
+        Rectangle srcRec;
+        Color color;
 
         // Constructor
-        SpriteData(std::map<std::string, Texture2D> textures);
+        SpriteData(std::map<std::string, Texture2D> textures, Color color);
         // Deconstructor
         ~SpriteData();
 
         // Methods
         void setTexture(std::string name);
+        void setSrcRec(Texture2D texture);
         void addTexture(std::string name, std::string path);
     };
 

@@ -1,8 +1,9 @@
 #include "sprite_data.hpp"
 
     // Constructor to initialize textures and set the current texture to the first one
-    SpriteData::SpriteData(std::map<std::string, Texture2D> textures)
+    SpriteData::SpriteData(std::map<std::string, Texture2D> textures, Color color)
     {
+            this->color = color;
             this->textures = textures;
             this->curentTexture = &this->textures.begin()->second;
     };
@@ -15,10 +16,17 @@
         }
     }
 
+    // Set source rectangle based on texture size
+    void SpriteData::setSrcRec(Texture2D texture) {
+        srcRec = {0, 0, (float)texture.width, (float)texture.height};
+    }
+
+    // Set the current texture by name
     void SpriteData::setTexture(std::string name) {
         auto texture = textures.find(name);
         if (texture != textures.end()) {
             curentTexture = &texture->second;
+            setSrcRec(texture->second);
         } else {
             TraceLog(LOG_ERROR, "Texture '%s' not found!", name.c_str());
         }
