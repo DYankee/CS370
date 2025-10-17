@@ -13,14 +13,13 @@
 
 // Empty struct for entity tagging
 struct Player{
-
-    // Takes in a pointer to an entt entity
-    void CreatePlayer(entt::registry &registry, Camera2D camera);
-    
-    // Function to handle player movement
-    void PlayerMovementSystem(entt::registry &registry, float dt, float gravity);
 };
 
+// Takes in a pointer to an entt entity
+void CreatePlayer(entt::registry &registry, Camera2D camera);
+
+// Function to handle player movement
+void PlayerMovementSystem(entt::registry &registry, float dt, float gravity);
 
 
 #endif
