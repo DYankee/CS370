@@ -10,10 +10,14 @@ set(SOURCES
 
 # Add component, entity, and system sources
 list(APPEND SOURCES
-    src/components/sprite_data.cpp
     src/components/physics_object.cpp
+    src/components/player_stats.cpp
+    src/components/sprite_data.cpp
+    src/entities/map.cpp
     src/entities/player.cpp
     src/systems/asset_loader.cpp
+    src/systems/collision_system.cpp
+    src/systems/player_movement.cpp
 )
 
 # create executable
