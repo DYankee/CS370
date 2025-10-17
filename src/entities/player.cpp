@@ -7,7 +7,7 @@
 Player::Player(){};
 
 // Function to create the player entity
-void createPlayer(entt::registry &registry, Camera2D camera) {
+void Player::CreatePlayer(entt::registry &registry, Camera2D camera) {
 
     // Add Player entity to the registry
     entt::entity playerEnt = registry.create();
@@ -23,7 +23,7 @@ void createPlayer(entt::registry &registry, Camera2D camera) {
             {"cowL", "assets/sprites/cowL.png"}}),
         WHITE
     );
-    cowSprite.setTexture("cowR");
+    cowSprite.SetTexture("cowR");
     // Add SpriteData component to the entity
     registry.emplace<SpriteData>(playerEnt, cowSprite);
 
@@ -42,7 +42,7 @@ void createPlayer(entt::registry &registry, Camera2D camera) {
 };
 
 // Player movement system
-void playerMovementSystem(entt::registry &registry, float dt, float gravity) {
+void Player::PlayerMovementSystem(entt::registry &registry, float dt, float gravity) {
 
     // Get the Transform and PhysicsObject from the Player Component
     registry.view<Transform, PhysicsObject, SpriteData, Player>().each([dt, gravity, &registry](Transform transform, PhysicsObject physics, SpriteData sprite) {
@@ -51,10 +51,10 @@ void playerMovementSystem(entt::registry &registry, float dt, float gravity) {
         // Move box based on key input
         if (IsKeyDown(KEY_D)) {
             physics.velocity.x = SPEED;    // Move right
-            sprite.setTexture("cowR");
+            sprite.SetTexture("cowR");
         } else if (IsKeyDown(KEY_A)) {
             physics.velocity.x = -SPEED;   // Move left
-            sprite.setTexture("cowL");
+            sprite.SetTexture("cowL");
         } else {
             physics.velocity.x = 0;        // No horizontal movement
         }
