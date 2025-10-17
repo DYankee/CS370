@@ -1,10 +1,4 @@
-#include <map>
-#include <string>
-#include <vector>
-#include <iostream>
-#include <raylib.h>
-
-
+#include "asset_loader.hpp"
 
 // Function to load multiple textures and store them in a map
 // Created by Zachary Geary
