@@ -4,7 +4,7 @@
 Map::Map(){};
 
 // Function to create and setup a map entity
-void Map::CreateMap(entt::registry &registry, std::string tmxFilePath, Music music) {
+void CreateMap(entt::registry &registry, std::string tmxFilePath, Music music) {
     entt::entity mapEntity = registry.create();
     TmxMap* map = LoadTMX(tmxFilePath.c_str());
     if (!map) {
@@ -19,7 +19,7 @@ void Map::CreateMap(entt::registry &registry, std::string tmxFilePath, Music mus
 
 
 // Function to update map state
-void Map::UpdateMap(entt::registry &registry, float dt) {
+void UpdateMap(entt::registry &registry, float dt) {
     registry.view<Map, TmxMap, Music>().each([dt](TmxMap &tmxMap, Music &music) {
         UpdateMusicStream(music);
     });
