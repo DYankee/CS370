@@ -44,3 +44,4 @@ All asset loading should log failures at the LOG_ERROR level
 Any large change to the game state such as:  
 - Adding an entity
 - Destroying an entity
+Should log at the LOG_INFO level
