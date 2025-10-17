@@ -1,10 +1,6 @@
 #include "player.hpp"
-#include "../components/components.hpp"
 
 
-
-// Player struct constructor
-Player::Player(){};
 
 // Function to create the player entity
 void CreatePlayer(entt::registry &registry, Camera2D camera) {
@@ -32,49 +28,15 @@ void CreatePlayer(entt::registry &registry, Camera2D camera) {
     registry.emplace<Transform>(playerEnt, playerTransform);
 
     // Add Camera component to the entity
-    registry.emplace<Camera>(playerEnt, camera);
+    registry.emplace<Camera2D>(playerEnt, camera);
 
     // Add PhysicsObject component to the entity
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
     registry.emplace<PhysicsObject>(playerEnt, physics);
 
+    // Add PlayerStats component to the entity
+    PlayerStats stats = PlayerStats(MAX_HEALTH, MAX_IFRAMES, SPEED, JUMP_STRENGTH, GRAVITY);
+    registry.emplace<PlayerStats>(playerEnt, stats);
+
     // Add the rest of the components needed for the player here
 };
-
-// Player movement system
-void PlayerMovementSystem(entt::registry &registry, float dt, float gravity) {
-
-    // Get the Transform and PhysicsObject from the Player Component
-    registry.view<Transform, PhysicsObject, SpriteData, Player>().each([dt, gravity, &registry](Transform transform, PhysicsObject physics, SpriteData sprite) {
-
-        transform.translation.y += gravity * dt;
-        // Move box based on key input
-        if (IsKeyDown(KEY_D)) {
-            physics.velocity.x = SPEED;    // Move right
-            sprite.SetTexture("cowR");
-        } else if (IsKeyDown(KEY_A)) {
-            physics.velocity.x = -SPEED;   // Move left
-            sprite.SetTexture("cowL");
-        } else {
-            physics.velocity.x = 0;        // No horizontal movement
-        }
-
-        // Only allow jump if player is on the ground
-        if (IsKeyPressed(KEY_SPACE)) {
-            registry.view<TmxMap>().each([&transform, &physics, &sprite](TmxMap* map){{
-                Rectangle testRec = { transform.translation.x, transform.translation.y + 1, transform.scale.x, transform.scale.y };
-                TmxObject collidedObj;
-                bool onGround = CheckCollisionTMXTileLayersRec(
-                    map, map->layers, map->layersLength, testRec, &collidedObj
-                );
-                if (onGround) {
-                    physics.velocity.y = JUMP_STRENGTH;
-                }
-            }});
-        }
-        // Calculate new position
-        transform.translation.x += physics.velocity.x * dt;
-        transform.translation.y += physics.velocity.y * dt;
-    });
-}
-    // Constants
