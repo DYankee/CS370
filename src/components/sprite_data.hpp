@@ -18,9 +18,9 @@
         ~SpriteData();
 
         // Methods
-        void setTexture(std::string name);
-        void setSrcRec(Texture2D texture);
-        void addTexture(std::string name, std::string path);
+        void SetTexture(std::string name);
+        void SetSrcRec(Texture2D texture);
+        void AddTexture(std::string name, std::string path);
     };
 
 #endif // SPRITE_DATA
