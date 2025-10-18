@@ -1,8 +1,7 @@
 #ifndef PHYSICS_OBJECT_HPP
 #define PHYSICS_OBJECT_HPP
 
-#include "../../include/entt.hpp"
-#include "../../include/raylib.h"
+#include "components.hpp"
 
 struct PhysicsObject {
     float mass;

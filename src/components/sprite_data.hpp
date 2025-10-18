@@ -1,7 +1,7 @@
 #ifndef SPRITE_DATA_HPP
 #define SPRITE_DATA_HPP
 
-#include <raylib.h>
+#include "../../include/raylib.h"
 #include <map>
 #include <string>
 

@@ -1,7 +1,7 @@
 #include "collision_system.hpp" //find an object/group layer by name
 
-static TmxLayer* FindLayerByName(TmxLayer* layers, int layersLength, const char* name) {
-    if (!layers || layersLength == 0 || !name){
+static TmxLayer* FindLayerByName(TmxLayer* layers, int layersLength, const char *name) {
+    if (!layers || layersLength == 0){
          return NULL;
     }
     for (int i = 0; i < layersLength; ++i) {

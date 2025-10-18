@@ -1,18 +1,16 @@
 ﻿// CS370.cpp
 #include <iostream>
-#include "../include/raylib.h"
-#include "../include/entt.hpp"
 
 // Include all ECS headers
 #include "entities/entities.hpp"
 #include "components/components.hpp"
 #include "systems/systems.hpp"
 
-// Include RayTMX in C linkage
-extern "C" {
-    #define RAYTMX_IMPLEMENTATION
-    #include "../include/raytmx.h"
-}
+#include "../include/raytmx.h"
+
+
+
+
 
 using namespace std;
 

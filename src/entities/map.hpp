@@ -2,6 +2,7 @@
 #define MAP_HPP
 #include "../../include/entt.hpp"
 #include "../../include/raylib.h"
+#define RAYTMX_IMPLEMENTATION
 #include "../../include/raytmx.h"
 
 // Map component for tagging map entities and storing functions that operate on them
