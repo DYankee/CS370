@@ -1,12 +1,8 @@
-#ifndef PLAYER_MOVMENT_HPP
-#define PLAYER_MOVMENT_HPP
+#ifndef PLAYER_MOVEMENT_HPP
+#define PLAYER_MOVEMENT_HPP
 #include "../../include/entt.hpp"
+#include "../../include/raytmx.h"
 #include "../entities/entities.hpp"
-
-extern "C" {
-    #define RAYTMX_IMPLEMENTATION
-    #include "../../include/raytmx.h"
-}
 
 void PlayerMovementSystem(entt::registry &registry, float dt);
 

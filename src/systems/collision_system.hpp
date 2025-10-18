@@ -2,14 +2,10 @@
 #define COLLISION_SYSTEM_HPP
 
 #include "../../include/entt.hpp"
-#include "../../include/raylib.h"
+#include "../../include/raytmx.h"
 #include "../entities/entities.hpp"
 #include "../components/components.hpp"
-
-extern "C" {
-    #define RAYTMX_IMPLEMENTATION
-    #include "../../include/raytmx.h"
-}
+#include "systems.hpp"
 
 //find an object/group layer by name
 static TmxLayer* FindLayerByName(TmxLayer *layers, int layersLength, const char *name);
