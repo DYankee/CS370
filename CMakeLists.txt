@@ -18,6 +18,7 @@ list(APPEND SOURCES
     src/systems/asset_loader.cpp
     src/systems/collision_system.cpp
     src/systems/player_movement.cpp
+    src/systems/map_manager.cpp
 )
 
 # create executable
