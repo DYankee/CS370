@@ -10,7 +10,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         TraceLog(LOG_INFO, "Player current velocity: %f,%f", physics.velocity.x, physics.velocity.y);
 
         // Apply gravity
-        transform.translation.y += stats.gravity * dt;
+        physics.velocity.y += stats.gravity * dt;
         
         // Move box based on key input
         if (IsKeyDown(KEY_D)) {
