@@ -1,6 +1,7 @@
 #include "collision_system.hpp" //find an object/group layer by name
 
 static TmxLayer* FindLayerByName(TmxLayer* layers, int layersLength, const char *name) {
+    TraceLog(LOG_TRACE, "Entering Function: FindLayerByName");
     if (!layers || layersLength == 0){
          return NULL;
     }
@@ -15,6 +16,9 @@ static TmxLayer* FindLayerByName(TmxLayer* layers, int layersLength, const char 
 }
 
 void SpikeCollision(entt::registry &registry, float dt) {
+    TraceLog(LOG_TRACE, "Entering Function: SpikeCollision");
+    TraceLog(LOG_INFO, "Starting spike collision check");
+
     registry.view<Player, PhysicsObject, Transform, PlayerStats>().each([dt, &registry](PhysicsObject &physics, Transform &transform, PlayerStats &stats) {
         // Check collisions with spike objects
         if (stats.iFrames <= 0.0f) {
@@ -49,21 +53,31 @@ void SpikeCollision(entt::registry &registry, float dt) {
 
 // Check collisions against tile layers
 void TileCollision(entt::registry& registry, float dt){
+    TraceLog(LOG_TRACE, "Entering Function: TileCollision");
+    TraceLog(LOG_INFO, "Starting tile collision check");
+
     registry.view<Player, PhysicsObject, Transform>().each([dt, &registry](PhysicsObject &physics, Transform &transform) {
         registry.view<Map, TmxMap>().each([&physics, &transform, dt](TmxMap &map) {
             TmxObject hitObj;
             
+            // Log current pos
+            TraceLog(LOG_INFO, "Player Current Pos: %f,%f", transform.translation.x, transform.translation.y);
+
             // Calculate next position
             Vector3 nextPos = {
                 transform.translation.x + physics.velocity.x * dt,
                 transform.translation.y + physics.velocity.y * dt,
                 transform.translation.z
             };
+            // Log new Pos
+            TraceLog(LOG_INFO, "Player Current Pos: %f,%f", nextPos.x, nextPos.y);
+
             Rectangle playerDestRec = { nextPos.x, nextPos.y, transform.scale.x, transform.scale.y };
 
             bool collided = CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRec, &hitObj);
 
             if (collided) {
+                TraceLog(LOG_INFO, "Collision detected at position (%f, %f)", nextPos.x, nextPos.y);
                 // Vertical collision detection
                 if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRec, &hitObj)) {
                     transform.translation.y = nextPos.y;

@@ -3,6 +3,7 @@
 
 #include "../../include/entt.hpp"
 #include "../../include/raylib.h"
+#include "../../include/raytmx.h"
 #include "../components/components.hpp"
 #include "../entities/entities.hpp"
 
