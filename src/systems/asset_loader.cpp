@@ -2,7 +2,9 @@
 
 // Function to load multiple textures and store them in a map
 // Created by Zachary Geary
-std::map<std::string, Texture2D> loadTextures(std::map<std::string, std::string> texturePaths){
+std::map<std::string, Texture2D> LoadTextures(std::map<std::string, std::string> texturePaths){
+    TraceLog(LOG_TRACE, "Entering Function: LoadTextures");
+        
     std::map<std::string, Texture2D> textures;
     //Loop through the provided paths and load each texture into the map
     for (const auto pair : texturePaths) {
@@ -12,7 +14,7 @@ std::map<std::string, Texture2D> loadTextures(std::map<std::string, std::string>
         if (texture.id != 0) { // Check if texture loaded successfully
             textures[name] = texture;
         } else {
-            std::cerr << "Failed to load texture: " << path << std::endl;
+            TraceLog(LOG_ERROR, "Failed to load texture: %s", path.c_str());
         }
     }
     return textures;
