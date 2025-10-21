@@ -3,8 +3,10 @@
 
 
 // Function to create the player entity
-void CreatePlayer(entt::registry &registry, Camera2D camera) {
-
+void CreatePlayer(entt::registry &registry) {
+    TraceLog(LOG_TRACE, "Entering Function: CreatePlayer");
+    TraceLog(LOG_INFO, "Creating Player Entity");
+    
     // Add Player entity to the registry
     entt::entity playerEnt = registry.create();
 
@@ -14,7 +16,7 @@ void CreatePlayer(entt::registry &registry, Camera2D camera) {
 
 
     // Load player sprites
-    SpriteData cowSprite = SpriteData(loadTextures({
+    SpriteData cowSprite = SpriteData(LoadTextures({
             {"cowR", "assets/sprites/cowR.png"},
             {"cowL", "assets/sprites/cowL.png"}}),
         WHITE
@@ -24,11 +26,8 @@ void CreatePlayer(entt::registry &registry, Camera2D camera) {
     registry.emplace<SpriteData>(playerEnt, cowSprite);
 
     // Add Transform component to the entity
-    Transform playerTransform = Transform{ {400.0f, 300.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {CHAR_WIDTH, CHAR_HEIGHT} };
+    Transform playerTransform = Transform{ {500.0f, 400.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {CHAR_WIDTH, CHAR_HEIGHT} };
     registry.emplace<Transform>(playerEnt, playerTransform);
-
-    // Add Camera component to the entity
-    registry.emplace<Camera2D>(playerEnt, camera);
 
     // Add PhysicsObject component to the entity
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});

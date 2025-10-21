@@ -2,8 +2,10 @@
 
 // Change the current map to a new TMX file and set player start position
 void ChangeMap(entt::registry &registry, std::string tmxFilePath, Vector2 startPosition) {
+    TraceLog(LOG_TRACE, "Entering Function: ChangingMap");
+    TraceLog(LOG_INFO, "Changing map to: %s", tmxFilePath.c_str());
+
     registry.view<Map, TmxMap>().each([&registry, &tmxFilePath, &startPosition](TmxMap &oldMap) {
-        
         // Load new map
         TmxMap* newMapPtr = LoadTMX(tmxFilePath.c_str());
         if (!newMapPtr) {
@@ -29,6 +31,8 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath, Vector2 startP
 
 // Check if the player has reached map boundaries to trigger a map change
 void CheckForMapChange(entt::registry &registry){
+    TraceLog(LOG_TRACE, "Entering Function: CheckForMapChange");
+    TraceLog(LOG_INFO, "Checking for map change");
     registry.view<Player, Transform>().each([&registry](Transform &transform) {
         Vector2 playerPos = { transform.translation.x, transform.translation.y };
         registry.view<Map, TmxMap>().each([&registry, &playerPos](TmxMap &map) {
@@ -44,4 +48,13 @@ void CheckForMapChange(entt::registry &registry){
             }
         });
     });    
+}
+
+// Function to update map state
+void UpdateMap(entt::registry &registry, float dt) {
+    TraceLog(LOG_TRACE, "Entering Function: UpdateMap");
+
+    registry.view<Map, TmxMap, Music>().each([dt](TmxMap &tmxMap, Music &music) {
+        UpdateMusicStream(music);
+    });
 }

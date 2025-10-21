@@ -17,6 +17,6 @@ struct Player{
 };
 
 // Takes in a pointer to an entt entity
-void CreatePlayer(entt::registry &registry, Camera2D camera);
+void CreatePlayer(entt::registry &registry);
 
 #endif

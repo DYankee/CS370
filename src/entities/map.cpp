@@ -3,6 +3,9 @@
 
 // Function to create and setup a map entity
 void CreateMap(entt::registry &registry, std::string tmxFilePath, Music music) {
+    TraceLog(LOG_TRACE, "Entering Function: CreateMap");
+    TraceLog(LOG_INFO, "Loading TMX map: %s", tmxFilePath.c_str());
+    
     entt::entity mapEntity = registry.create();
     TmxMap *mapPtr = LoadTMX(tmxFilePath.c_str());
     if (!mapPtr) {
@@ -17,9 +20,3 @@ void CreateMap(entt::registry &registry, std::string tmxFilePath, Music music) {
 }
 
 
-// Function to update map state
-void UpdateMap(entt::registry &registry, float dt) {
-    registry.view<Map, TmxMap, Music>().each([dt](TmxMap &tmxMap, Music &music) {
-        UpdateMusicStream(music);
-    });
-}
