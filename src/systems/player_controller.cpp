@@ -64,21 +64,24 @@ void MovePlayer(entt::registry &registry, float dt){
             TraceLog(LOG_INFO, "Player Destination Pos: %f,%f", nextPos.x, nextPos.y);
 
             Rectangle playerDestRec = { nextPos.x, nextPos.y, transform.scale.x, transform.scale.y };
+            Rectangle playerDestRecX = { nextPos.x, transform.translation.y, transform.scale.x, transform.scale.y };
+            Rectangle playerDestRecY = { transform.translation.x, nextPos.y, transform.scale.x, transform.scale.y };
 
             bool collided = CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRec, &hitObj);
 
             if (collided) {
                 TraceLog(LOG_INFO, "Collision detected at position (%f, %f)", nextPos.x, nextPos.y);
                 // Vertical collision detection
-                if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRec, &hitObj)) {
+                if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRecY, &hitObj)) {
                     transform.translation.y = nextPos.y;
                 } else {
                     physics.velocity.y = 0; // Stop vertical movement
                 }
                 
                 // Horizontal collision only
-                if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRec, &hitObj)) {
+                if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRecX, &hitObj)) {
                     transform.translation.x = nextPos.x;
+                    physics.velocity.x -= physics.velocity.x / 2;
                 } else {
                     physics.velocity.x = 0; // Stop horizontal movement
                 }

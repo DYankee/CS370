@@ -21,7 +21,6 @@ using namespace std;
 #define CHAR_HEIGHT 32
 #define GRAVITY 1000.0f          // Gravity strength 
 #define SPEED 400.0f             // speed 
-#define JUMP_STRENGTH -700.0f    // Negative because y-axis goes down
 
 
 
@@ -31,7 +30,7 @@ void Update(entt::registry &registry, float dt) {
     MovePlayer(registry, dt);
     CameraUpdate(registry, dt);
     SpikeCollision(registry, dt);
-    //CheckForMapChange(registry);
+    CheckForMapChange(registry);
     UpdateMap(registry, dt);
 };
 
@@ -50,21 +49,20 @@ void Render(entt::registry &registry, float dt) {
                 AnimateTMX(&map); // Update animated tiles
                 DrawTMX(&map, &camera, 0, 0, WHITE); // Draw tile map with parallax support 
             });
-            EndMode2D(); // End 2D camera mode
             
             
             // Draw player
             TraceLog(LOG_TRACE, "Drawing Player");
             registry.view<SpriteData, Player>().each([&transform](SpriteData &sprite) {
                 Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
-                Vector2 origin = {transform.translation.x, transform.translation.y}; // Top-left corner as origin
+                Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
                 TraceLog(LOG_INFO, "Drawing Player at: %f,%f", dstRec.x, dstRec.y);
                 TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
                 DrawTexturePro(*sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
             });
-        
-        //show health
-        //for (int i = 0; i < stats.maxHealth; i++) {
+            
+            //show health
+            //for (int i = 0; i < stats.maxHealth; i++) {
             //    Vector2 pos = { healthPos.x + i * iconSpacing, healthPos.y };
         //    if (i < playerHealth) {
             //        DrawTexture(heart, pos.x, pos.y, WHITE);
@@ -74,13 +72,15 @@ void Render(entt::registry &registry, float dt) {
                 //}
                 
                 // Draw text
-            const char* msg = "Move A/D, Jump SPACE";
-            //DrawRectangle(8, 8, MeasureText(msg, 20) + 4, 24, Fade(BLACK, 0.5f));
-            //DrawText(msg, 10, 10, 20, WHITE);
+                const char* msg = "Move A/D, Jump SPACE";
+                //DrawRectangle(8, 8, MeasureText(msg, 20) + 4, 24, Fade(BLACK, 0.5f));
+                //DrawText(msg, 10, 10, 20, WHITE);
         
-            EndDrawing();
-        });
+            });
+            EndMode2D(); // End 2D camera mode
     });
+    EndDrawing();
+    TraceLog(LOG_TRACE, "Exiting Function: Render (main)");
 }
 
 
