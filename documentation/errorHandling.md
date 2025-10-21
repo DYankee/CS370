@@ -1,4 +1,4 @@
-# Error handling guide
+# Logging and Error handling guide
 
 ## About Tracelog
 
@@ -36,6 +36,10 @@ SetTraceLogLevel(LOG_FATAL);
 Unless specified in the following section all logging should use your best judgment on when to use it and at what level. In general if an action can fail it should probably be logged.  
 
 Items in the following sections should always be logged
+
+### Functions
+All Functions should start with a LOG_TRACE 
+
 
 ### Asset Loading
 All asset loading should log failures at the LOG_ERROR level
