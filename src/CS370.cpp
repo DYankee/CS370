@@ -29,56 +29,56 @@ void Update(entt::registry &registry, float dt) {
     PlayerInputSystem(registry, dt);
     MovePlayer(registry, dt);
     CameraUpdate(registry, dt);
-    // SpikeCollision(registry, dt);
-    // CheckForMapChange(registry);
+    SpikeCollision(registry, dt);
+    //CheckForMapChange(registry);
     UpdateMap(registry, dt);
 };
 
 void Render(entt::registry &registry, float dt) {
     TraceLog(LOG_TRACE, "Entering Function: Render (main)");
-    // Update camera to follow the player
-    registry.view<Transform, Player, PlayerStats>().each([&registry](Transform &transform, PlayerStats &stats) {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
+    BeginDrawing();
+    
+    registry.view<Camera2D, PlayerCamera>().each([&registry](Camera2D camera){
+        BeginMode2D(camera);
+        registry.view<Transform, Player, PlayerStats>().each([&registry, &camera](Transform &transform, PlayerStats &stats) {
+            ClearBackground(RAYWHITE);
         
-        // Draw TMX map
-        
-        TraceLog(LOG_TRACE, "Drawing Map");
-        registry.view<Camera2D, PlayerCamera>().each([&registry](Camera2D camera){
-            BeginMode2D(camera);
+            // Draw TMX map
+            TraceLog(LOG_TRACE, "Drawing Map");
             registry.view<TmxMap, Map>().each([&camera](TmxMap &map) {
                 AnimateTMX(&map); // Update animated tiles
                 DrawTMX(&map, &camera, 0, 0, WHITE); // Draw tile map with parallax support 
-        });
-        EndMode2D(); // End 2D camera mode
-    });
-        
-        
-        // Draw player
-        TraceLog(LOG_TRACE, "Drawing Player");
-        registry.view<SpriteData, Player>().each([&transform](SpriteData &sprite) {
-            Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
-            Vector2 origin = {transform.translation.x, transform.translation.y}; // Top-left corner as origin
-            DrawTexturePro(*sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
-        });
-        EndMode2D(); // End 2D camera mode
+            });
+            EndMode2D(); // End 2D camera mode
+            
+            
+            // Draw player
+            TraceLog(LOG_TRACE, "Drawing Player");
+            registry.view<SpriteData, Player>().each([&transform](SpriteData &sprite) {
+                Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
+                Vector2 origin = {transform.translation.x, transform.translation.y}; // Top-left corner as origin
+                TraceLog(LOG_INFO, "Drawing Player at: %f,%f", dstRec.x, dstRec.y);
+                TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
+                DrawTexturePro(*sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
+            });
         
         //show health
         //for (int i = 0; i < stats.maxHealth; i++) {
-        //    Vector2 pos = { healthPos.x + i * iconSpacing, healthPos.y };
+            //    Vector2 pos = { healthPos.x + i * iconSpacing, healthPos.y };
         //    if (i < playerHealth) {
-        //        DrawTexture(heart, pos.x, pos.y, WHITE);
-        //    } else {
-        //        DrawTexture(heart, pos.x, pos.y, Fade(WHITE, 0.2f));
-        //    }
-        //}
+            //        DrawTexture(heart, pos.x, pos.y, WHITE);
+            //    } else {
+                //        DrawTexture(heart, pos.x, pos.y, Fade(WHITE, 0.2f));
+                //    }
+                //}
+                
+                // Draw text
+            const char* msg = "Move A/D, Jump SPACE";
+            //DrawRectangle(8, 8, MeasureText(msg, 20) + 4, 24, Fade(BLACK, 0.5f));
+            //DrawText(msg, 10, 10, 20, WHITE);
         
-        // Draw text
-        const char* msg = "Move A/D, Jump SPACE";
-        DrawRectangle(8, 8, MeasureText(msg, 20) + 4, 24, Fade(BLACK, 0.5f));
-        DrawText(msg, 10, 10, 20, WHITE);
-
-        EndDrawing();
+            EndDrawing();
+        });
     });
 }
 
@@ -95,9 +95,8 @@ int main() {
     float accumulator = 0.0f;             // Keeps track of leftover frame time
     const float dt = 1.0f / 60.0f;        // 60 FPS physics step
 
-    const int screenWidth = 1920;
-    const int screenHeight = 1080;
-    InitWindow(screenWidth, screenHeight, "CS370");
+    const Vector2 screenSize { 1920, 1080};
+    InitWindow(screenSize.x, screenSize.y, "CS370");
     // ToggleFullscreen();
  	SetTargetFPS(60);
 
@@ -109,7 +108,7 @@ int main() {
 
     // Load TMX map using RayTMX
     CreateMap(registry, "assets/tiled/stage1.tmx", music);
-    CreateCamera(registry); 
+    CreateCamera(registry, screenSize); 
 
     // Player setup
     // Create player entity

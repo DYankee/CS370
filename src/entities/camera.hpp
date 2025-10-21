@@ -6,7 +6,7 @@
 
 struct PlayerCamera{};
 
-void CreateCamera(entt::registry &registry);
+void CreateCamera(entt::registry &registry, Vector2 screenSize);
 
 void SetCameraPos(Camera2D &camera, Transform newPos);
 
