@@ -15,7 +15,7 @@
         // Constructor
         SpriteData(std::map<std::string, Texture2D> textures, Color color);
         // Deconstructor
-        ~SpriteData();
+        //~SpriteData();
 
         // Methods
         void SetTexture(std::string name);
