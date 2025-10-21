@@ -22,9 +22,13 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath, Vector2 startP
         oldMap = newMap;
         
         // Set player start position
-        registry.view<Player, Transform>().each([&startPosition](Transform &transform) {
+        registry.view<Player, Transform>().each([&startPosition, &registry](Transform &transform) {
             transform.translation.x = startPosition.x;
             transform.translation.y = startPosition.y;
+
+            registry.view<PlayerCamera, Camera2D>().each([&transform](Camera2D &camera){
+                SetCameraPos(camera, transform);
+            });
         });
     });
 }
@@ -43,7 +47,7 @@ void CheckForMapChange(entt::registry &registry){
             }
 
             // Change to stage1 if player goes past bottom edge
-            if (playerPos.y > 600) {
+            if (playerPos.y > 3600) {
                 ChangeMap(registry, "assets/tiled/stage1.tmx", {400.0f, 300.0f});
             }
         });
