@@ -8,7 +8,7 @@
 #define CHAR_HEIGHT 32
 #define MAX_HEALTH 3
 #define SPEED 400.0f             // player move speed
-#define JUMP_STRENGTH -700.0f    // Negative because y-axis goes down
+#define JUMP_STRENGTH -1000.0f   // Negative because y-axis goes down
 #define GRAVITY 2000.0f          // Gravity strength 
 #define MAX_IFRAMES 1.0f         // Max i-frames duration in seconds
 

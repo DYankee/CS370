@@ -18,7 +18,8 @@ void CreatePlayer(entt::registry &registry) {
     // Load player sprites
     SpriteData cowSprite = SpriteData(LoadTextures({
             {"cowR", "assets/sprites/cowR.png"},
-            {"cowL", "assets/sprites/cowL.png"}}),
+            {"cowL", "assets/sprites/cowL.png"}
+        }),
         WHITE
     );
     cowSprite.SetTexture("cowR");
