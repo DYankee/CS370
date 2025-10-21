@@ -26,7 +26,7 @@ void CreatePlayer(entt::registry &registry) {
     registry.emplace<SpriteData>(playerEnt, cowSprite);
 
     // Add Transform component to the entity
-    Transform playerTransform = Transform{ {500.0f, 400.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {CHAR_WIDTH, CHAR_HEIGHT} };
+    Transform playerTransform = Transform{ {400.0f, 300.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {CHAR_WIDTH, CHAR_HEIGHT} };
     registry.emplace<Transform>(playerEnt, playerTransform);
 
     // Add PhysicsObject component to the entity
