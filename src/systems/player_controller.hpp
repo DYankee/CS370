@@ -4,6 +4,7 @@
 #include "../../include/raytmx.h"
 #include "../entities/entities.hpp"
 
-void PlayerMovementSystem(entt::registry &registry, float dt);
+void PlayerInputSystem(entt::registry &registry, float dt);
+void MovePlayer(entt::registry &registry, float dt);
 
 #endif
