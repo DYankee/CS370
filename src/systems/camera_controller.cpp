@@ -6,7 +6,7 @@ void CameraUpdate(entt::registry &registry, float dt) {
 
     // Update camera to follow the player
     registry.view<PlayerCamera, Camera2D>().each([&registry](Camera2D &camera) {
-        registry.view<Transform, Player>().each([&camera](Transform &transform) {
+        registry.view<Transform, Player>().each([&camera, &registry](Transform &transform) {
             SetCameraPos(camera, transform);
         });
     });
