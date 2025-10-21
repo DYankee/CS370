@@ -9,12 +9,12 @@
     };
 
     // Deconstructor to unload textures
-    SpriteData::~SpriteData(){
+    //SpriteData::~SpriteData(){
         // Unload all textures in the map
-        for (auto& pair : textures) {
-            UnloadTexture(pair.second);
-        }
-    }
+    //    for (auto& pair : textures) {
+    //        UnloadTexture(pair.second);
+    //    }
+    //}
 
     // Set source rectangle based on texture size
     void SpriteData::SetSrcRec(Texture2D texture) {
@@ -26,12 +26,13 @@
         auto texture = textures.find(name);
         if (texture != textures.end()) {
             curentTexture = &texture->second;
-            SetSrcRec(texture->second);
+            SetSrcRec(*curentTexture);
         } else {
             TraceLog(LOG_ERROR, "Texture '%s' not found!", name.c_str());
         }
     }
 
+    // Add texture to map
     void SpriteData::AddTexture(std::string name, std::string path) {
         Texture2D texture = LoadTexture(path.c_str());
         if (texture.id != 0) { // Check if texture loaded successfully
