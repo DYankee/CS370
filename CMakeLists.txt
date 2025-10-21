@@ -13,12 +13,14 @@ list(APPEND SOURCES
     src/components/physics_object.cpp
     src/components/player_stats.cpp
     src/components/sprite_data.cpp
+    src/entities/camera.cpp
     src/entities/map.cpp
     src/entities/player.cpp
     src/systems/asset_loader.cpp
     src/systems/collision_system.cpp
-    src/systems/player_movement.cpp
+    src/systems/player_controller.cpp
     src/systems/map_manager.cpp
+    src/systems/camera_controller.cpp
 )
 
 # create executable
