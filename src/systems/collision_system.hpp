@@ -1,0 +1,19 @@
+#ifndef COLLISION_SYSTEM_HPP
+#define COLLISION_SYSTEM_HPP
+
+#include "../../include/entt.hpp"
+#include "../../include/raytmx.h"
+#include "../entities/entities.hpp"
+#include "../components/components.hpp"
+#include "systems.hpp"
+
+//find an object/group layer by name
+static TmxLayer* FindLayerByName(TmxLayer *layers, int layersLength, const char *name);
+
+// Check for collisions between player and spike objects
+void SpikeCollision(entt::registry &registry, float dt);
+
+// Check for collisions between player and tile layers
+void TileCollision(entt::registry &registry, float dt);
+
+#endif // COLLISION_SYSTEM_HPP
