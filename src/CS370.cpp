@@ -9,10 +9,6 @@
 #include "../include/raytmx.h"
 #include "../include/raylib.h"
 
-
-
-
-
 using namespace std;
 
 // Player and physics constants
@@ -21,7 +17,7 @@ using namespace std;
 #define GRAVITY 2000.0f          // Gravity strength 
 #define SPEED 400.0f             // speed 
 
-
+typedef enum GameScreen { TITLE = 0, GAMEPLAY } GameScreen;
 
 void Update(entt::registry &registry, float dt) {
     TraceLog(LOG_TRACE, "Entering Function: Update (main)");
@@ -82,14 +78,28 @@ void Render(entt::registry &registry, float dt) {
     TraceLog(LOG_TRACE, "Exiting Function: Render (main)");
 }
 
+void RenderTitleScreen(const Vector2 &screenSize) {
+    BeginDrawing();
+    ClearBackground(BLACK);
+    
+    // Draw title
+    const char* title = "Milksong";
+    int titleFontSize = 80;
+    int titleWidth = MeasureText(title, titleFontSize);
+    DrawText(title, (screenSize.x - titleWidth) / 2, screenSize.y / 3, titleFontSize, WHITE);
+    
+    // Draw instructions
+    const char* instructions = "PRESS ENTER TO START";
+    int instructionsFontSize = 30;
+    int instructionsWidth = MeasureText(instructions, instructionsFontSize);
+    DrawText(instructions, (screenSize.x - instructionsWidth) / 2, screenSize.y / 2 + 50, instructionsFontSize, GRAY);
+    
+    EndDrawing();
+}
 
 int main() {
     // Set log level
     SetTraceLogLevel(LOG_ALL);
-
-
-    // Create entt registry
-    entt::registry registry = entt::registry();
 
     // Window setup
     float accumulator = 0.0f;             // Keeps track of leftover frame time
@@ -106,40 +116,85 @@ int main() {
     SetMusicVolume(music, 1.0f);
     // PlayMusicStream(music);
 
-    // Load TMX map using RayTMX
-    CreateMap(registry, "assets/tiled/stage1.tmx", music);
-    CreateCamera(registry, screenSize); 
+    // Game state
+    GameScreen currentScreen = TITLE;
 
-    // Player setup
-    // Create player entity
-    CreatePlayer(registry);
+    // Create entt registry
+    entt::registry registry = entt::registry();
+    bool gameInitialized = false;
 
     // load health sprite 
     // Texture2D heart = LoadTexture("assets/sprites/CowFace.png");
     // Vector2 healthPos = { 20, 30 }; // top left
     // const int iconSpacing = 50;     // space between icons
 
-
     // Main game loop
     while (!WindowShouldClose()) {
-        float dt = GetFrameTime();
-        // Update Game State
+    float frameTime = GetFrameTime();
+
+    // Handle ESC key to close
         if (IsKeyDown(KEY_ESCAPE)) {
-            CloseWindow();
+            break;
         }
-        Update(registry, dt);
 
-            //if (iFrames > 0.0f) {
-            //iFrames -= dt;
-            //cowColor = Fade(RED, 0.5f);
-            //}
-            //else {
-            //    cowColor = WHITE;
-            //}
+        // Update based on current screen
+        switch (currentScreen) {
+            case TITLE:
+            {
+                // Press enter to start the game
+                if (IsKeyPressed(KEY_ENTER)) {
+                    currentScreen = GAMEPLAY;
+                    
+                    // Initialize game only once
+                    if (!gameInitialized) {
+                        // Load TMX map using RayTMX
+                        CreateMap(registry, "assets/tiled/stage1.tmx", music);
+                        CreateCamera(registry, screenSize); 
 
-        // Drawing
-        Render(registry, dt);
+                        // Player setup
+                        // Create player entity
+                        CreatePlayer(registry);
+                        
+                        gameInitialized = true;
+                    }
+                }
+            } break;
+            
+            case GAMEPLAY:
+            {
+                // Update Game State
+                Update(registry, frameTime);
+
+                //if (iFrames > 0.0f) {
+                //iFrames -= dt;
+                //cowColor = Fade(RED, 0.5f);
+                //}
+                //else {
+                //    cowColor = WHITE;
+                //}
+            } break;
+            
+            default: break;
+        }
+
+        // Render based on current screen
+        switch (currentScreen) {
+            case TITLE:
+            {
+                // Drawing title screen
+                RenderTitleScreen(screenSize);
+            } break;
+            
+            case GAMEPLAY:
+            {
+                // Drawing gameplay
+                Render(registry, frameTime);
+            } break;
+            
+            default: break;
+        }
     }
+    
     // Cleanup
     UnloadMusicStream(music);
     CloseAudioDevice();   
