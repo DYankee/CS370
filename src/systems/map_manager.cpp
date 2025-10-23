@@ -5,7 +5,7 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath, Vector2 startP
     TraceLog(LOG_TRACE, "Entering Function: ChangingMap");
     TraceLog(LOG_INFO, "Changing map to: %s", tmxFilePath.c_str());
 
-    registry.view<Map, TmxMap>().each([&registry, &tmxFilePath, &startPosition](TmxMap &oldMap) {
+    registry.view<Map, TmxMap>().each([&registry, &tmxFilePath, &startPosition](TmxMap &currentMap) {
         // Load new map
         TmxMap* newMapPtr = LoadTMX(tmxFilePath.c_str());
         if (!newMapPtr) {
@@ -13,13 +13,11 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath, Vector2 startP
             CloseWindow();
             return;
         }
-        TmxMap newMap = *newMapPtr;
-
         // Unload old map
-        UnloadTMX(&oldMap);
+        //UnloadTMX(&currentMap);
         
         // Update to the newmap
-        oldMap = newMap;
+        currentMap = *newMapPtr;
         
         // Set player start position
         registry.view<Player, Transform>().each([&startPosition, &registry](Transform &transform) {

@@ -5,6 +5,28 @@
 -- VSCode CMake extension  
 -- A properly configured build profile in CMakePresets.json  
 
+## How to Build
+-- In VSCode press control+shift+p to open the command pallet  
+-- run the command: CMAKE: RESET CMAKE TOOLS EXTENSION SUITE. (only way I can find to easily change build profile)  
+-- once cmake resets it will ask you to select a profile. Select the one with your name  
+-- press control+shift+p to open the command pallet again and run the command: CMAKE: install  
+
+## Adding source files
+Anytime you add a file ending in .cpp you will need to add it to the following section of the CMakeLists.txt file
+This will likely be made easier in the future.
+```
+# Add component, entity, and system sources
+list(APPEND SOURCES
+    src/components/physics_object.cpp
+    src/components/sprite_data.cpp
+    src/entities/camera.cpp
+    src/entities/map.cpp
+    src/systems/asset_loader.cpp
+    src/systems/map_manager.cpp
+    src/systems/camera_controller.cpp
+    ...
+)
+```
 
 ## Adding a build profile
 I have gone ahead and added windows debug build profile for everyone in the CmakePresets.json file.
@@ -15,15 +37,6 @@ you will each need to find the profile with your name and alter the following li
                "CMAKE_CXX_COMPILER": "C:/code/mingw64/bin/g++.exe",
        },
 ``` 
-
-## How to Build
--- In VSCode press control+shift+p to open the command pallet  
--- run the command: CMAKE: RESET CMAKE TOOLS EXTENSION SUITE. (only way I can find to easily change build profile)  
--- once cmake resets it will ask you to select a profile. Select the one with your name  
--- press control+shift+p to open the command pallet again and run the command: CMAKE: install  
-
-
-This should build the game using the selected profile and the copy the assets to the install folder  
 
 ## About build system
 ### CMakeLists.txt
@@ -84,6 +97,7 @@ install(DIRECTORY ${PROJECT_SOURCE_DIR}/assets
 ```
 
 ### CMakePresets.json
+This file contains all the build presets for each of our development setups
 ```
 {
    "version": 8,
