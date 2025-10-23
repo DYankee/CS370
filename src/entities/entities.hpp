@@ -5,5 +5,6 @@
 #include "player.hpp"
 #include "map.hpp"
 #include "camera.hpp"
+#include "enemy.hpp"
 
 #endif // ENTITIES_HPP
