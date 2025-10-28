@@ -1,0 +1,38 @@
+{
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "maintileset.tsx": {
+            "scaleInEditor": 1
+        },
+        "stage1.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 890.6666666666665,
+                "y": 848.6666666666665
+            }
+        },
+        "stage2.tmx": {
+            "scale": 0.5630729166666666,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 960.7991860142448,
+                "y": 584.29377485894
+            }
+        },
+        "test_tileset.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "map.lastUsedFormat": "tmx",
+    "openFiles": [
+    ],
+    "project": "",
+    "recentFiles": [
+        "maintileset.tsx",
+        "stage1.tmx"
+    ]
+}
