@@ -16,6 +16,7 @@ using namespace std;
 #define CHAR_HEIGHT 32
 #define GRAVITY 2000.0f          // Gravity strength 
 #define SPEED 400.0f             // speed 
+#define NUM_FRAMES  3            // Number of frames for button sprite (normal, hover, pressed)
 
 typedef enum GameScreen { TITLE = 0, GAMEPLAY } GameScreen;
 
@@ -80,7 +81,7 @@ void Render(entt::registry &registry, float dt) {
     TraceLog(LOG_TRACE, "Exiting Function: Render (main)");
 }
 
-void RenderTitleScreen(const Vector2 &screenSize) {
+void RenderTitleScreen(const Vector2 &screenSize, Texture2D buttonTexture, Rectangle btnBounds, Rectangle sourceRec) {
     BeginDrawing();
     ClearBackground(BLACK);
     
@@ -90,11 +91,8 @@ void RenderTitleScreen(const Vector2 &screenSize) {
     int titleWidth = MeasureText(title, titleFontSize);
     DrawText(title, (screenSize.x - titleWidth) / 2, screenSize.y / 3, titleFontSize, WHITE);
     
-    // Draw instructions
-    const char* instructions = "PRESS ENTER TO START";
-    int instructionsFontSize = 30;
-    int instructionsWidth = MeasureText(instructions, instructionsFontSize);
-    DrawText(instructions, (screenSize.x - instructionsWidth) / 2, screenSize.y / 2 + 50, instructionsFontSize, GRAY);
+    // Draw texture button
+    DrawTextureRec(buttonTexture, sourceRec, (Vector2){ btnBounds.x, btnBounds.y }, WHITE);
     
     EndDrawing();
 }
@@ -118,6 +116,25 @@ int main() {
     SetMusicVolume(music, 1.0f);
     // PlayMusicStream(music);
 
+    // Load button texture
+    Texture2D buttonTexture = LoadTexture("assets/graphics/testbutton.png");
+    
+    // Define frame rectangle for drawing (assuming 3 frames: normal, hover, pressed)
+    float frameHeight = (float)buttonTexture.height / NUM_FRAMES;
+    Rectangle sourceRec = { 0, 0, (float)buttonTexture.width, frameHeight };
+    
+    // Define button bounds on screen
+    Rectangle btnBounds = { 
+        screenSize.x/2.0f - buttonTexture.width/2.0f, 
+        screenSize.y/2.0f + 50, 
+        (float)buttonTexture.width, 
+        frameHeight 
+    };
+    
+    int btnState = 0;               // Button state: 0-NORMAL, 1-MOUSE_HOVER, 2-PRESSED
+    bool btnAction = false;         // Button action should be activated
+    Vector2 mousePoint = { 0.0f, 0.0f };
+
     // Game state
     GameScreen currentScreen = TITLE;
 
@@ -132,9 +149,11 @@ int main() {
 
     // Main game loop
     while (!WindowShouldClose()) {
-    float frameTime = GetFrameTime();
+        float frameTime = GetFrameTime();
+        mousePoint = GetMousePosition();
+        btnAction = false;
 
-    // Handle ESC key to close
+        // Handle ESC key to close
         if (IsKeyDown(KEY_ESCAPE)) {
             break;
         }
@@ -143,8 +162,21 @@ int main() {
         switch (currentScreen) {
             case TITLE:
             {
-                // Press enter to start the game
-                if (IsKeyPressed(KEY_ENTER)) {
+                // Check button state
+                if (CheckCollisionPointRec(mousePoint, btnBounds)) {
+                    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) btnState = 2;  // PRESSED
+                    else btnState = 1;  // MOUSE_HOVER
+
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) btnAction = true;
+                } else {
+                    btnState = 0;  // NORMAL
+                }
+
+                // Calculate button frame rectangle to draw depending on button state
+                sourceRec.y = btnState * frameHeight;
+                
+                // Check if button was clicked to start the game
+                if (btnAction) {
                     currentScreen = GAMEPLAY;
                     
                     // Initialize game only once
@@ -183,8 +215,8 @@ int main() {
         switch (currentScreen) {
             case TITLE:
             {
-                // Drawing title screen
-                RenderTitleScreen(screenSize);
+                // Drawing title screen with texture button
+                RenderTitleScreen(screenSize, buttonTexture, btnBounds, sourceRec);
             } break;
             
             case GAMEPLAY:
@@ -198,6 +230,7 @@ int main() {
     }
     
     // Cleanup
+    UnloadTexture(buttonTexture);  // Unload button texture
     UnloadMusicStream(music);
     CloseAudioDevice();   
     CloseWindow();
