@@ -60,18 +60,6 @@ void Render(entt::registry &registry, float dt) {
                 TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
                 DrawTexturePro(*sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
             });
-
-
-            
-            //show health
-            //for (int i = 0; i < stats.maxHealth; i++) {
-            //    Vector2 pos = { healthPos.x + i * iconSpacing, healthPos.y };
-        //    if (i < playerHealth) {
-            //        DrawTexture(heart, pos.x, pos.y, WHITE);
-            //    } else {
-                //        DrawTexture(heart, pos.x, pos.y, Fade(WHITE, 0.2f));
-                //    }
-                //}
                 
                 // Draw text
                 const char* msg = "Move A/D, Jump SPACE";
