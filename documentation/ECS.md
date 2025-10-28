@@ -123,3 +123,51 @@ void CreatePlayer(entt::registry &registry) {
     // Add the rest of the components needed for the player here
 };
 ```
+
+## Usage guidelines
+
+### Views
+The main reason we pass the registry to functions it so we have access to views. Views are how you view and interact with components in the registry.
+Think of a view as a database query. It takes in a list of components and returns a iterable list of all entities that contain at least all of the components listed.
+#### Creating a view
+```
+entt::view view = registry.view<Transform, PhysicsObject>();
+```
+Using the tags I mentioned earlier we can select just the player entity by adding the 'Player' component to our list like so:
+```
+entt::view view = registry.view<Player, Transform, PhysicsObject>();
+```
+This will return a view with only entities with all 3 components which should only be one.
+
+#### Using a view
+There are a couple ways you can use a view to interact with the components in it.
+```
+for(entt::entity entity: view) {
+    // a component at a time ...
+    &Transform pos = view.get<Transform>(entity);
+    &PhysicsObject phys = view.get<PhysicsObject>(entity);
+
+    // ... multiple components ...
+    auto [pos, phys] = view.get<Transform, PhysicsObject>(entity);
+
+    // ... all components at once
+    auto [pos, vel] = view.get(entity);
+}
+```
+
+#### Combining the Two
+It's also possible to combine these two steps into one using the each function
+```
+registry.view<Player, Transform, PhysicsObject>().each([dt, &registry](Transform &transform, PhysicsObject &physics){
+    // You can then freely interact with  
+    });
+```
+Note the 'dt' and '&registry' variables passed to the loop in the [] this allows us access to the variables inside the loop.
+This can be used to create nested views which have access to multiple components
+```
+registry.view<Player, Transform, PhysicsObject>().each([&registry, dt](Transform &transform, PhysicsObject &physics){
+    registry.view<Map, TmxMap>().each([&physics, &transform, dt](TmxMap &map) {
+        // You can access components from both entities here
+    });
+});
+```
