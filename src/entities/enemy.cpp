@@ -1,4 +1,5 @@
 #include "enemy.hpp"
+#include "../include/raylib.h"
 
 void CreateEnemy(entt::registry &registry) {
     TraceLog(LOG_TRACE, "Entering Function: CreateEnemy");
@@ -11,7 +12,24 @@ void CreateEnemy(entt::registry &registry) {
     Enemy enemyComponent;
     registry.emplace<Enemy>(enemyEnt, enemyComponent);
 
-    // TODO
+    // Add sprites
+    // test sprite for now
+    SpriteData enemySprite = SpriteData(LoadTextures({
+        {"FarmerR", "assets/sprites/FarmerR.png"}
+    }),
+    WHITE
+    );
+    enemySprite.SetTexture("FarmerR");
+    registry.emplace<SpriteData>(enemyEnt, enemySprite);
+
+    // add Transform component
+    Transform enemyTransform = Transform{ {450.0f, 300.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
+                                                                                        //test values
+    registry.emplace<Transform>(enemyEnt, enemyTransform);
+
+    // Add PhysicsObject component to the entity
+    PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
+    registry.emplace<PhysicsObject>(enemyEnt, physics);
 
 
 };
