@@ -1,18 +1,22 @@
 {
-    "activeFile": "",
+    "activeFile": "stage1.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "SpikesNew.tsx": {
+            "scaleInDock": 1
+        },
         "maintileset.tsx": {
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "stage1.tmx": {
-            "scale": 1.5,
+            "scale": 0.33,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 890.6666666666665,
-                "y": 848.6666666666665
+                "x": 960.6060606060606,
+                "y": 669.6969696969697
             }
         },
         "stage2.tmx": {
@@ -29,10 +33,13 @@
     },
     "map.lastUsedFormat": "tmx",
     "openFiles": [
+        "stage1.tmx",
+        "stage2.tmx"
     ],
     "project": "",
     "recentFiles": [
-        "maintileset.tsx",
-        "stage1.tmx"
+        "stage2.tmx",
+        "stage1.tmx",
+        "maintileset.tsx"
     ]
 }
