@@ -79,9 +79,14 @@ void Render(entt::registry &registry, float dt) {
     TraceLog(LOG_TRACE, "Exiting Function: Render (main)");
 }
 
-void RenderTitleScreen(const Vector2 &screenSize, Texture2D buttonTexture, Rectangle btnBounds, Rectangle sourceRec) {
+void RenderTitleScreen(const Vector2 &screenSize, Texture2D buttonTexture, Rectangle btnBounds, Rectangle sourceRec, Texture2D backgroundTexture) {
     BeginDrawing();
-    ClearBackground(BLACK);
+
+    // Draw background
+    Rectangle bgSource = { 0, 0, (float)backgroundTexture.width, (float)backgroundTexture.height };
+    Rectangle bgDest = { 0, 0, screenSize.x, screenSize.y };
+    Vector2 bgOrigin = { 0, 0 };
+    DrawTexturePro(backgroundTexture, bgSource, bgDest, bgOrigin, 0.0f, WHITE);
     
     // Draw title
     const char* title = "Milksong";
@@ -90,7 +95,8 @@ void RenderTitleScreen(const Vector2 &screenSize, Texture2D buttonTexture, Recta
     DrawText(title, (screenSize.x - titleWidth) / 2, screenSize.y / 3, titleFontSize, WHITE);
     
     // Draw texture button
-    DrawTextureRec(buttonTexture, sourceRec, (Vector2){ btnBounds.x, btnBounds.y }, WHITE);
+    Vector2 btnPosition = { btnBounds.x, btnBounds.y };
+    DrawTextureRec(buttonTexture, sourceRec, btnPosition, WHITE);
     
     EndDrawing();
 }
@@ -116,6 +122,9 @@ int main() {
 
     // Load button texture
     Texture2D buttonTexture = LoadTexture("assets/graphics/testbutton.png");
+
+    // Load background texture
+    Texture2D backgroundTexture = LoadTexture("assets/graphics/bgart/mainbackground.png");
     
     // Define frame rectangle for drawing (assuming 3 frames: normal, hover, pressed)
     float frameHeight = (float)buttonTexture.height / NUM_FRAMES;
@@ -214,7 +223,7 @@ int main() {
             case TITLE:
             {
                 // Drawing title screen with texture button
-                RenderTitleScreen(screenSize, buttonTexture, btnBounds, sourceRec);
+                RenderTitleScreen(screenSize, buttonTexture, btnBounds, sourceRec, backgroundTexture);
             } break;
             
             case GAMEPLAY:
@@ -228,7 +237,8 @@ int main() {
     }
     
     // Cleanup
-    UnloadTexture(buttonTexture);  // Unload button texture
+    UnloadTexture(buttonTexture);
+    UnloadTexture(backgroundTexture);
     UnloadMusicStream(music);
     CloseAudioDevice();   
     CloseWindow();
