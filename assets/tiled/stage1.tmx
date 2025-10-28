@@ -19,13 +19,7 @@
    <image source="../graphics/bgart/dirt.png" width="1920" height="1080"/>
   </imagelayer>
  </group>
- <objectgroup id="22" name="Spikes" visible="0">
-  <object id="103" name="Spike" gid="1025" x="1213.33" y="980.333" width="32" height="32"/>
-  <object id="104" name="Spike" gid="1025" x="1243.67" y="979.333" width="32" height="32"/>
-  <object id="105" name="Spike" gid="1025" x="1274" y="978.333" width="32" height="32"/>
-  <object id="110" x="1214.73" y="940.909" width="93.4545" height="25.0909"/>
-  <object id="111" name="Spkie" x="1262.91" y="990.727"/>
- </objectgroup>
+ <objectgroup id="22" name="Spikes"/>
  <layer id="1" name="Tile Layer 1" width="120" height="68">
   <data encoding="csv">
 0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,67,
