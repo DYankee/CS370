@@ -56,6 +56,8 @@ void Render(entt::registry &registry, float dt) {
                 TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
                 DrawTexturePro(*sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
             });
+
+
             
             //show health
             //for (int i = 0; i < stats.maxHealth; i++) {
