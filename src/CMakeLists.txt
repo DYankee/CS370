@@ -45,4 +45,3 @@ elseif(UNIX)
   target_link_libraries(${PROJECT_NAME} PRIVATE GL m pthread dl rt X11)
 endif()
 
-install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION . COMPONENT Runtime)
