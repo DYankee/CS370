@@ -186,6 +186,8 @@ int main() {
                         // Player setup
                         // Create player entity
                         CreatePlayer(registry);
+
+                        CreateEnemy(registry);
                         
                         gameInitialized = true;
                     }
