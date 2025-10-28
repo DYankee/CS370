@@ -3,10 +3,12 @@
 cmake_minimum_required(VERSION 3.14)
 
 set(MILK_SOURCES
+    components/enemy_stats.cpp
     components/physics_object.cpp
     components/player_stats.cpp
     components/sprite_data.cpp
     entities/camera.cpp
+    entities/enemy.cpp
     entities/map.cpp
     entities/player.cpp
     systems/asset_loader.cpp
@@ -14,6 +16,8 @@ set(MILK_SOURCES
     systems/player_controller.cpp
     systems/map_manager.cpp
     systems/camera_controller.cpp
+    systems/iframes_system.cpp
+    systems/hud_system.cpp
 )
 
 add_library(milk_lib STATIC ${MILK_SOURCES})
