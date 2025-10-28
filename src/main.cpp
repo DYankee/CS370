@@ -19,7 +19,6 @@ using namespace std;
 #define CHAR_HEIGHT 32
 #define GRAVITY 2000.0f          // Gravity strength 
 #define SPEED 400.0f             // speed 
-#define NUM_FRAMES  3            // Number of frames for button sprite (normal, hover, pressed)
 
 typedef enum GameScreen { TITLE = 0, GAMEPLAY } GameScreen;
 
@@ -122,19 +121,17 @@ int main() {
     // Load background texture
     Texture2D backgroundTexture = LoadTexture("assets/graphics/bgart/mainbackground.png");
     
-    // Define frame rectangle for drawing (assuming 3 frames: normal, hover, pressed)
-    float frameHeight = (float)buttonTexture.height / NUM_FRAMES;
-    Rectangle sourceRec = { 0, 0, (float)buttonTexture.width, frameHeight };
+    // Define source rectangle for button
+    Rectangle sourceRec = { 0, 0, (float)buttonTexture.width, (float)buttonTexture.height };
     
     // Define button bounds on screen
     Rectangle btnBounds = { 
         screenSize.x/2.0f - buttonTexture.width/2.0f, 
         screenSize.y/2.0f + 50, 
         (float)buttonTexture.width, 
-        frameHeight 
+        (float)buttonTexture.height 
     };
     
-    int btnState = 0;               // Button state: 0-NORMAL, 1-MOUSE_HOVER, 2-PRESSED
     bool btnAction = false;         // Button action should be activated
     Vector2 mousePoint = { 0.0f, 0.0f };
 
@@ -162,16 +159,8 @@ int main() {
             {
                 // Check button state
                 if (CheckCollisionPointRec(mousePoint, btnBounds)) {
-                    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) btnState = 2;  // PRESSED
-                    else btnState = 1;  // MOUSE_HOVER
-
                     if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) btnAction = true;
-                } else {
-                    btnState = 0;  // NORMAL
                 }
-
-                // Calculate button frame rectangle to draw depending on button state
-                sourceRec.y = btnState * frameHeight;
                 
                 // Check if button was clicked to start the game
                 if (btnAction) {
