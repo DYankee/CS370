@@ -42,11 +42,10 @@ void CheckForMapChange(entt::registry &registry){
             // Change to stage2 if player goes past left edge
             if (playerPos.x < 0) {
                 ChangeMap(registry, "assets/tiled/stage2.tmx", {100.0f, 100.0f});
-                ChangeMap(registry, "assets/tiled/stage2.tmx", {100.0f, 100.0f});
             }
 
-            // Change to stage1 if player goes past right edge
-            if (playerPos.x > 1920) {
+            // Change to stage1 if player goes past bottom edge
+            if (playerPos.y > 3600) {
                 ChangeMap(registry, "assets/tiled/stage1.tmx", {100.0f, 100.0f});
             }
         });
