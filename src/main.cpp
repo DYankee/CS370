@@ -8,6 +8,9 @@
 
 #include "../include/raytmx.h"
 #include "../include/raylib.h"
+#include "components/player_hud.hpp"
+#include "systems/hud_system.hpp"
+#include "systems/iframes_system.hpp"
 
 using namespace std;
 
@@ -28,6 +31,7 @@ void Update(entt::registry &registry, float dt) {
     SpikeCollision(registry, dt);
     CheckForMapChange(registry);
     UpdateMap(registry, dt);
+    UpdateIFrames(registry, dt);
 };
 
 void Render(entt::registry &registry, float dt) {
@@ -56,18 +60,6 @@ void Render(entt::registry &registry, float dt) {
                 TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
                 DrawTexturePro(*sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
             });
-
-
-            
-            //show health
-            //for (int i = 0; i < stats.maxHealth; i++) {
-            //    Vector2 pos = { healthPos.x + i * iconSpacing, healthPos.y };
-        //    if (i < playerHealth) {
-            //        DrawTexture(heart, pos.x, pos.y, WHITE);
-            //    } else {
-                //        DrawTexture(heart, pos.x, pos.y, Fade(WHITE, 0.2f));
-                //    }
-                //}
                 
                 // Draw text
                 const char* msg = "Move A/D, Jump SPACE";
@@ -76,6 +68,8 @@ void Render(entt::registry &registry, float dt) {
         
             });
             EndMode2D(); // End 2D camera mode
+            // Draw HUD
+            DrawHealthHUD(registry);
     });
     EndDrawing();
     TraceLog(LOG_TRACE, "Exiting Function: Render (main)");
@@ -151,11 +145,6 @@ int main() {
     entt::registry registry = entt::registry();
     bool gameInitialized = false;
 
-    // load health sprite 
-    // Texture2D heart = LoadTexture("assets/sprites/CowFace.png");
-    // Vector2 healthPos = { 20, 30 }; // top left
-    // const int iconSpacing = 50;     // space between icons
-
     // Main game loop
     while (!WindowShouldClose()) {
         float frameTime = GetFrameTime();
@@ -207,14 +196,6 @@ int main() {
             {
                 // Update Game State
                 Update(registry, frameTime);
-
-                //if (iFrames > 0.0f) {
-                //iFrames -= dt;
-                //cowColor = Fade(RED, 0.5f);
-                //}
-                //else {
-                //    cowColor = WHITE;
-                //}
             } break;
             
             default: break;
@@ -244,6 +225,9 @@ int main() {
     UnloadMusicStream(music);
     CloseAudioDevice();   
     CloseWindow();
+    registry.view<HUDResources>().each([&](HUDResources &hud) {
+        UnloadTexture(hud.heart);
+    });
 
     return 0;
 }
