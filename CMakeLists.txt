@@ -21,6 +21,8 @@ list(APPEND SOURCES
     src/systems/player_controller.cpp
     src/systems/map_manager.cpp
     src/systems/camera_controller.cpp
+    src/systems/hud_system.cpp
+    src/systems/iframes_system.cpp
 )
 
 # create executable

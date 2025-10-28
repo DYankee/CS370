@@ -1,6 +1,6 @@
 #include "player.hpp"
-
-
+#include "../components/player_hud.hpp"
+#include "../include/raylib.h"
 
 // Function to create the player entity
 void CreatePlayer(entt::registry &registry) {
@@ -38,5 +38,12 @@ void CreatePlayer(entt::registry &registry) {
     PlayerStats stats = PlayerStats(MAX_HEALTH, MAX_IFRAMES, SPEED, JUMP_STRENGTH, GRAVITY);
     registry.emplace<PlayerStats>(playerEnt, stats);
 
-    // Add the rest of the components needed for the player here
+    // Create hud
+    {
+        Texture2D heartTex = LoadTexture("assets/sprites/CowFace.png");
+        entt::entity hudEnt = registry.create();
+        registry.emplace<HUDResources>(hudEnt, HUDResources{ heartTex, Vector2{20.0f, 20.0f}, 48, playerEnt });
+    }
+
+  // Add the rest of the components needed for the player here
 };

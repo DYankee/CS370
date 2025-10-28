@@ -34,11 +34,11 @@ void SpikeCollision(entt::registry &registry, float dt) {
                         stats.health -= 1;
                         // Apply knockback
                         if (physics.velocity.x >= 0) { 
-                            physics.velocity.x = -300.0f;
+                            physics.velocity.x = -100.0f;
                         } else {              
                             physics.velocity.x = 300.0f;
                         }
-                        physics.velocity.y = 400.0f; // Upward knockback
+                        physics.velocity.y = -600.0f; // Upward knockback
 
                         //start I frames
                         stats.iFrames = stats.maxIFrames;
