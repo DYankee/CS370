@@ -1,12 +1,14 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
 
-#include "../../include/entt.hpp"
-#include "../../include/raylib.h"
+#include "../components/components.hpp"
+#include "../systems/systems.hpp"
 
-//empty struct
+// Create empty struct
 struct Enemy{};
 
 void CreateEnemy(entt::registry &registry);
+
+
 
 #endif
