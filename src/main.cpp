@@ -75,7 +75,7 @@ void Render(entt::registry &registry, float dt) {
     TraceLog(LOG_TRACE, "Exiting Function: Render (main)");
 }
 
-void RenderTitleScreen(const Vector2 &screenSize, Texture2D buttonTexture, Rectangle btnBounds, Rectangle sourceRec, Texture2D backgroundTexture) {
+void RenderTitleScreen(const Vector2 &screenSize, Texture2D buttonTexture, Rectangle btnBounds, Rectangle sourceRec, Texture2D backgroundTexture, Texture2D titleTexture) {
     BeginDrawing();
 
     // Draw background
@@ -84,11 +84,16 @@ void RenderTitleScreen(const Vector2 &screenSize, Texture2D buttonTexture, Recta
     Vector2 bgOrigin = { 0, 0 };
     DrawTexturePro(backgroundTexture, bgSource, bgDest, bgOrigin, 0.0f, WHITE);
     
-    // Draw title
-    const char* title = "Milksong";
-    int titleFontSize = 80;
-    int titleWidth = MeasureText(title, titleFontSize);
-    DrawText(title, (screenSize.x - titleWidth) / 2, screenSize.y / 3, titleFontSize, WHITE);
+    // Draw title texture
+    Rectangle titleSource = { 0, 0, (float)titleTexture.width, (float)titleTexture.height };
+    float titleScale = 1.0f;
+    Rectangle titleDest = { 
+        (screenSize.x - titleTexture.width * titleScale) / 2, 50.0f,
+        titleTexture.width * titleScale, 
+        titleTexture.height * titleScale 
+    };
+    Vector2 titleOrigin = { 0, 0 };
+    DrawTexturePro(titleTexture, titleSource, titleDest, titleOrigin, 0.0f, WHITE);
     
     // Draw texture button
     Vector2 btnPosition = { btnBounds.x, btnBounds.y };
@@ -114,10 +119,13 @@ int main() {
     InitAudioDevice();
     Music music = LoadMusicStream("assets/music/stardewsummer.mp3");
     SetMusicVolume(music, 1.0f);
-    // PlayMusicStream(music);
+    PlayMusicStream(music);
+
+    // Load title texture
+    Texture2D titleTexture = LoadTexture("assets/graphics/title.png");
 
     // Load button texture
-    Texture2D buttonTexture = LoadTexture("assets/graphics/testbutton.png");
+    Texture2D buttonTexture = LoadTexture("assets/graphics/button.png");
 
     // Load background texture
     Texture2D backgroundTexture = LoadTexture("assets/graphics/bgart/mainbackground.png");
@@ -128,7 +136,7 @@ int main() {
     // Define button bounds on screen
     Rectangle btnBounds = { 
         screenSize.x/2.0f - buttonTexture.width/2.0f, 
-        screenSize.y/2.0f + 50, 
+        screenSize.y/2.0f + 100.0f, 
         (float)buttonTexture.width, 
         (float)buttonTexture.height 
     };
@@ -197,8 +205,8 @@ int main() {
         switch (currentScreen) {
             case TITLE:
             {
-                // Drawing title screen with texture button
-                RenderTitleScreen(screenSize, buttonTexture, btnBounds, sourceRec, backgroundTexture);
+                // Drawing title screen
+                RenderTitleScreen(screenSize, buttonTexture, btnBounds, sourceRec, backgroundTexture, titleTexture);
             } break;
             
             case GAMEPLAY:
@@ -214,6 +222,7 @@ int main() {
     // Cleanup
     UnloadTexture(buttonTexture);
     UnloadTexture(backgroundTexture);
+    UnloadTexture(titleTexture);
     UnloadMusicStream(music);
     CloseAudioDevice();   
     CloseWindow();
