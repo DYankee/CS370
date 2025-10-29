@@ -7,14 +7,34 @@
 
 namespace fs = std::filesystem;
 
+// Takes in the path to a directory and tries to load all the assets in it
 int LoadTextureTest(std::string path){
     int entryCount = 0;
-    for (const auto &entry : fs::directory_iterator(path)){
+    int failures = 0;
+
+    Texture2D currTexture;
+
+    for (auto &entry : fs::directory_iterator(path)){
+        std::cout << "current path: " << entry.path() << std::endl;
+
+        currTexture = LoadTexture(entry.path().c_str());
+        if (currTexture.id <= 0){
+            failures += 1;
+        }
+        UnloadTexture(currTexture);
         entryCount += 1;
-        Texture2D currTexture = LoadTexture(path.c_str());
-        std::cout << entry.path() << std::endl;
     }
-    return entryCount;
+
+    return failures;
 };
+
+int assetTests(){
+    int failures = 0;
+    failures += LoadTextureTest("sprites");
+    failures += LoadTextureTest("graphics");
+    failures += LoadTextureTest("graphics/bgart");
+    failures += LoadTextureTest("graphics/tileset");
+    return failures;
+}
 
 #endif
