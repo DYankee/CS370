@@ -6,10 +6,10 @@ add_subdirectory(src)
 
 # Build tests
 option(BUILD_TESTING "Build tests" ON)
-#if(BUILD_TESTING)
-#  enable_testing()
-#  add_subdirectory(tests)
-#endif()
+if(BUILD_TESTING)
+  enable_testing()
+  add_subdirectory(tests)
+endif()
 
 # move target to installation dir
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION . COMPONENT Runtime)
