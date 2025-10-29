@@ -4,9 +4,16 @@
 
 
 int main(){
-    int result = 0;
-    std::cout << "Running test assets" << std::endl;
-    result = LoadTextureTest("sprites");
+    // Vars
+    int assetTestResult = 0;
 
-    return result;
+    // Init
+    InitWindow(1, 1, "Assets test");
+
+    std::cout << "Running asset check test" << std::endl;
+    assetTestResult = assetTests();
+    std::cout << assetTestResult << std::endl;
+
+    CloseWindow();
+    return assetTestResult;
 }
