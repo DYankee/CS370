@@ -7,6 +7,7 @@ set(MILK_SOURCES
     components/physics_object.cpp
     components/player_stats.cpp
     components/sprite_data.cpp
+    components/animation.cpp
     entities/camera.cpp
     entities/enemy.cpp
     entities/map.cpp
