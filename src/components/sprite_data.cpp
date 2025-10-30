@@ -5,7 +5,7 @@
     {
             this->color = color;
             this->textures = textures;
-            this->curentTexture = &this->textures.begin()->second;
+            this->curentTexture = this->textures.begin()->second;
     };
 
     // Deconstructor to unload textures
@@ -25,8 +25,8 @@
     void SpriteData::SetTexture(std::string name) {
         auto texture = textures.find(name);
         if (texture != textures.end()) {
-            curentTexture = &texture->second;
-            SetSrcRec(*curentTexture);
+            curentTexture = texture->second;
+            SetSrcRec(curentTexture);
         } else {
             TraceLog(LOG_ERROR, "Texture '%s' not found!", name.c_str());
         }
