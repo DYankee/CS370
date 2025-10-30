@@ -120,6 +120,9 @@ int main() {
     SetMusicVolume(music, 1.0f);
     PlayMusicStream(music);
 
+    // Load sound effects
+    Sound titleMooSound = LoadSound("assets/audio/titleMoo.mp3");
+
     // Load title texture
     Texture2D titleTexture = LoadTexture("assets/graphics/title.png");
 
@@ -172,6 +175,7 @@ int main() {
                 
                 // Check if button was clicked to start the game
                 if (btnAction) {
+                    PlaySound(titleMooSound);
                     currentScreen = GAMEPLAY;
                     
                     // Initialize game only once
@@ -222,6 +226,7 @@ int main() {
     UnloadTexture(buttonTexture);
     UnloadTexture(backgroundTexture);
     UnloadTexture(titleTexture);
+    UnloadSound(titleMooSound);
     UnloadMusicStream(music);
     CloseAudioDevice();   
     CloseWindow();
