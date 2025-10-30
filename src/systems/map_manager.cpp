@@ -1,5 +1,7 @@
 #include "map_manager.hpp"
 
+int mapIndex = 1;
+
 // Change the current map to a new TMX file and set player start position
 void ChangeMap(entt::registry &registry, std::string tmxFilePath, Vector2 startPosition) {
     TraceLog(LOG_TRACE, "Entering Function: ChangingMap");
@@ -39,14 +41,21 @@ void CheckForMapChange(entt::registry &registry){
         Vector2 playerPos = { transform.translation.x, transform.translation.y };
         registry.view<Map, TmxMap>().each([&registry, &playerPos](TmxMap &map) {
             
-            // Change to stage2 if player goes past left edge
+            // Change to earlier stage if player goes past left edge
             if (playerPos.x < 0) {
-                ChangeMap(registry, "assets/tiled/stage2.tmx", {100.0f, 100.0f});
+                mapIndex--;
+                if(mapIndex >= 1) {
+                    ChangeMap(registry, "assets/tiled/stage" + std::to_string(mapIndex)+ ".tmx", {1800.0f, 700.0f});
+                }
+                else {
+                    mapIndex = 2; // just goes back to stage1
+                }
             }
 
-            // Change to stage1 if player goes past right edge
+            // Change to next stage if player goes past right edge
             if (playerPos.x > 1920) {
-                ChangeMap(registry, "assets/tiled/stage1.tmx", {100.0f, 100.0f});
+                mapIndex++;
+                ChangeMap(registry, "assets/tiled/stage" + std::to_string(mapIndex) + ".tmx", {100.0f, 700.0f});
             }
         });
     });    
