@@ -35,6 +35,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
                 );
                 if (onGround) {
                     physics.velocity.y = stats.jumpStrength;
+                    PlaySound(stats.jumpSound);
                 }
             }});
         }

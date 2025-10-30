@@ -34,8 +34,11 @@ void CreatePlayer(entt::registry &registry) {
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
     registry.emplace<PhysicsObject>(playerEnt, physics);
 
+    // Load jump sound
+    Sound jumpSound = LoadSound("assets/audio/jumpMoo.mp3");
+
     // Add PlayerStats component to the entity
-    PlayerStats stats = PlayerStats(MAX_HEALTH, MAX_IFRAMES, SPEED, JUMP_STRENGTH, GRAVITY);
+    PlayerStats stats = PlayerStats(MAX_HEALTH, MAX_IFRAMES, SPEED, JUMP_STRENGTH, GRAVITY, jumpSound);
     registry.emplace<PlayerStats>(playerEnt, stats);
 
     // Create hud
