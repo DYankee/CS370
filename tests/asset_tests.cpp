@@ -52,9 +52,9 @@ bool LoadTextureTest(std::vector<std::string> files){
     return result;
 };
 
-//bool LoadMapTest(std::vector<std::string> files){
-//    bool result = false
-//
-//    return result;
-//}
+bool LoadMapTest(std::vector<std::string> files){
+    bool result = false;
+    
+    return result;
+}
 #endif
