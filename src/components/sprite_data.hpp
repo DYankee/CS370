@@ -8,7 +8,7 @@
     struct SpriteData
     {
         std::map<std::string, Texture2D> textures;
-        Texture2D *curentTexture;
+        Texture2D curentTexture;
         Rectangle srcRec;
         Color color;
 

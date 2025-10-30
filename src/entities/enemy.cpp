@@ -23,7 +23,7 @@ void CreateEnemy(entt::registry &registry) {
     registry.emplace<SpriteData>(enemyEnt, enemySprite);
 
     // add Transform component
-    Transform enemyTransform = Transform{ {450.0f, 300.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
+    Transform enemyTransform = Transform{ {240.0f, 930.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
                                             //test values
     registry.emplace<Transform>(enemyEnt, enemyTransform);
 
