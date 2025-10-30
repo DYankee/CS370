@@ -45,7 +45,7 @@ void CheckForMapChange(entt::registry &registry){
             if (playerPos.x < 0) {
                 mapIndex--;
                 if(mapIndex >= 1) {
-                    ChangeMap(registry, "assets/tiled/stage" + std::to_string(mapIndex)+ ".tmx", {1800.0f, 700.0f});
+                    ChangeMap(registry, "assets/tiled/stage" + std::to_string(mapIndex)+ ".tmx", {100.0f, 100.0f});
                 }
                 else {
                     mapIndex = 2; // just goes back to stage1
@@ -55,7 +55,7 @@ void CheckForMapChange(entt::registry &registry){
             // Change to next stage if player goes past right edge
             if (playerPos.x > 1920) {
                 mapIndex++;
-                ChangeMap(registry, "assets/tiled/stage" + std::to_string(mapIndex) + ".tmx", {100.0f, 700.0f});
+                ChangeMap(registry, "assets/tiled/stage" + std::to_string(mapIndex) + ".tmx", {100.0f, 100.0f});
             }
         });
     });    
