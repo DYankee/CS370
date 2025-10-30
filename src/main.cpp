@@ -54,12 +54,24 @@ void Render(entt::registry &registry, float dt) {
             // Draw player
             TraceLog(LOG_TRACE, "Drawing Player");
             registry.view<SpriteData, Player>().each([&transform](SpriteData &sprite) {
+                sprite.SetTexture("FarmerR");
                 Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
                 Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
                 TraceLog(LOG_INFO, "Drawing Player at: %f,%f", dstRec.x, dstRec.y);
                 TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
-                DrawTexturePro(*sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
+                DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
             });
+
+            // Draw Enemies
+            TraceLog(LOG_TRACE, "Drawing enemies");
+            registry.view<SpriteData, Transform, Enemy>().each([](SpriteData &sprite, Transform &pos){
+                Rectangle dstRec = {pos.translation.x, pos.translation.y, pos.scale.x, pos.scale.y};
+                Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
+                TraceLog(LOG_INFO, "Drawing Enemy at: %f,%f", dstRec.x, dstRec.y);
+                TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
+                DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, pos.rotation.x, sprite.color);
+            });
+
                 
                 // Draw text
                 const char* msg = "Move A/D, Jump SPACE";
