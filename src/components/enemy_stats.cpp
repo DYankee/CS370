@@ -1,3 +1,8 @@
 #include "enemy_stats.hpp"
 
-// TODO
+EnemyStats::EnemyStats(int enemyHealth, int enemyMaxHealth, float enemySpeed, bool followsPlayer) {
+    this->enemyHealth = enemyMaxHealth;
+    this->enemyMaxHealth = enemyMaxHealth;
+    this->enemySpeed = enemySpeed;
+    this->followsPlayer = followsPlayer;
+}
