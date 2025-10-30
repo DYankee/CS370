@@ -24,12 +24,14 @@ void CreateEnemy(entt::registry &registry) {
 
     // add Transform component
     Transform enemyTransform = Transform{ {450.0f, 300.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
-                                                                                        //test values
+                                            //test values
     registry.emplace<Transform>(enemyEnt, enemyTransform);
 
     // Add PhysicsObject component to the entity
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
     registry.emplace<PhysicsObject>(enemyEnt, physics);
 
+
+    // Add the rest of the enemy components here
 
 };
