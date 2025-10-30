@@ -1,19 +1,13 @@
 #include <iostream>
-#include "assets.cpp"
+#include "asset_tests.cpp"
+#include <gtest/gtest.h>
 
 
+TEST(AssetTests, TextureLoading){
+    InitWindow(1,1, "Tests");
+    Assets assets = GetAssets("./");
+    std::cout << assets.pngs[0];
 
-int main(){
-    // Vars
-    int assetTestResult = 0;
-
-    // Init
-    InitWindow(1, 1, "Assets test");
-
-    std::cout << "Running asset check test" << std::endl;
-    assetTestResult = assetTests();
-    std::cout << assetTestResult << std::endl;
-
+    EXPECT_TRUE(LoadTextureTest(assets.pngs));
     CloseWindow();
-    return assetTestResult;
 }
