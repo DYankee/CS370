@@ -45,7 +45,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE milk_lib)
 
 # Platform specific libraries
 if(WIN32)
-  target_link_libraries(${PROJECT_NAME} PRIVATE winmm gdi32)
+  # target_link_libraries(${PROJECT_NAME} PRIVATE winmm gdi32)
 elseif(UNIX)
   target_link_libraries(${PROJECT_NAME} PRIVATE GL m pthread dl rt X11)
 endif()
