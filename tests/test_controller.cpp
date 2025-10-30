@@ -3,11 +3,26 @@
 #include <gtest/gtest.h>
 
 
-TEST(AssetTests, TextureLoading){
-    InitWindow(1,1, "Tests");
-    Assets assets = GetAssets("./");
-    std::cout << assets.pngs[0];
+class AssetDataFixture : public ::testing::Test {
+    protected:
+        static Assets assets;
 
+        static void SetUpTestSuite(){
+            assets = GetAssets("./");
+            InitWindow(1,1,"Tests");
+        }
+
+        static void TearDownTestSuite(){
+            CloseWindow();
+        }
+};
+
+Assets AssetDataFixture::assets;
+
+TEST_F(AssetDataFixture, TextureLoading){
     EXPECT_TRUE(LoadTextureTest(assets.pngs));
-    CloseWindow();
 }
+
+//TEST_F(AssetDataFixture, MapLoading){
+//    EXPECT_TRUE(LoadMapTest(assets.maps));
+//}
