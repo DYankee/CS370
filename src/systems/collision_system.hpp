@@ -8,7 +8,10 @@
 #include "systems.hpp"
 
 //find an object/group layer by name
-static TmxLayer* FindLayerByName(TmxLayer *layers, int layersLength, const char *name);
+TmxLayer* FindLayerByName(TmxLayer *layers, int layersLength, const char *name);
+
+//find an object from a group by name
+TmxObject FindObjectByName(TmxObject *objects, int objectsLength, const char *name);
 
 // Check for collisions between player and spike objects
 void SpikeCollision(entt::registry &registry, float dt);
