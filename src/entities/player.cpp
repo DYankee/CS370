@@ -27,8 +27,15 @@ void CreatePlayer(entt::registry &registry) {
     registry.emplace<SpriteData>(playerEnt, cowSprite);
 
     // Add Transform component to the entity
-    Transform playerTransform = Transform{ {100.0f, 100.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {CHAR_WIDTH, CHAR_HEIGHT} };
-    registry.emplace<Transform>(playerEnt, playerTransform);
+    registry.view<Map, TmxMap>().each([&registry, &playerEnt](TmxMap &map){
+        TmxObjectGroup entities = FindLayerByName(map.layers, map.layersLength, "Entities")->exact.objectGroup;
+        TmxObject player = FindObjectByName(entities.objects, entities.objectsLength, "Player");
+
+
+        Transform playerTransform = Transform{ {(float)player.x, (float)player.y, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {CHAR_WIDTH, CHAR_HEIGHT} };
+
+        registry.emplace<Transform>(playerEnt, playerTransform);
+    });
 
     // Add PhysicsObject component to the entity
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});

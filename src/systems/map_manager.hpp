@@ -8,6 +8,6 @@
 #include "../entities/entities.hpp"
 
 void CheckForMapChange(entt::registry &registry);
-void ChangeMap(entt::registry &registry, std::string tmxFilePath, Vector2 startPosition); 
+void ChangeMap(entt::registry &registry, std::string tmxFilePath); 
 
 #endif
