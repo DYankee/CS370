@@ -33,7 +33,7 @@
             "scale": 0.33,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 748.4848484848486,
+                "x": 748.4848484848485,
                 "y": 190.909090909091
             }
         },
@@ -44,8 +44,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1036,
-                "y": 588
+                "x": 961,
+                "y": 585
             }
         },
         "test_tileset.tsx": {
