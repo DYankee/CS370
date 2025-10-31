@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="24" nextobjectid="112">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="113">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <group id="5" name="bg" offsetx="4" offsety="193.333">
@@ -19,6 +19,11 @@
    <image source="../graphics/bgart/dirt.png" width="1920" height="1080"/>
   </imagelayer>
  </group>
+ <objectgroup id="24" name="Entities">
+  <object id="112" name="Player" x="408.788" y="767.576">
+   <point/>
+  </object>
+ </objectgroup>
  <objectgroup id="22" name="Spikes">
   <object id="103" name="Spike" gid="1025" x="1213.33" y="980.333" width="32" height="32"/>
   <object id="104" name="Spike" gid="1025" x="1243.67" y="979.333" width="32" height="32"/>
