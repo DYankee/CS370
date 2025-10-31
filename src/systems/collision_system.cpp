@@ -1,6 +1,6 @@
 #include "collision_system.hpp" //find an object/group layer by name
 
-static TmxLayer* FindLayerByName(TmxLayer* layers, int layersLength, const char *name) {
+TmxLayer* FindLayerByName(TmxLayer* layers, int layersLength, const char *name) {
     TraceLog(LOG_TRACE, "Entering Function: FindLayerByName");
     if (!layers || layersLength == 0){
          return NULL;
@@ -13,6 +13,18 @@ static TmxLayer* FindLayerByName(TmxLayer* layers, int layersLength, const char 
         }
     }
     return NULL;
+}
+
+TmxObject FindObjectByName(TmxObject *objects, int objectsLength ,const char *name){
+    TraceLog(LOG_TRACE, "Entering Function: FindObjectByName");
+    TmxObject obj;
+    for (int i = 0; i < objectsLength; i++){
+        TraceLog(LOG_TRACE, "Object name: %s", objects[i].name);
+        if (strcmp(objects[i].name, name) == 0){
+            obj = objects[i];
+        }
+    }
+    return obj;
 }
 
 void SpikeCollision(entt::registry &registry, float dt) {
