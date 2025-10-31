@@ -20,11 +20,11 @@
   </imagelayer>
  </group>
  <objectgroup id="22" name="Spikes"/>
- <objectgroup id="24" name="Entities" offsetx="0" offsety="13.3333">
-  <object id="114" name="Player" x="56.3333" y="935.667">
+ <objectgroup id="24" name="Entities">
+  <object id="114" name="Player" x="200.167" y="924.084">
    <point/>
   </object>
-  <object id="115" name="Enemy" x="360.333" y="938.667">
+  <object id="115" name="Enemy" x="296.583" y="925.167">
    <point/>
   </object>
  </objectgroup>
