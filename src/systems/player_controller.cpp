@@ -4,7 +4,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
     TraceLog(LOG_TRACE, "Entering Function: PlayerInputSystem");
 
     // Get the Transform and PhysicsObject from the Player Component
-    registry.view<Transform, PhysicsObject, SpriteData, PlayerStats, Player>().each([dt, &registry](Transform &transform, PhysicsObject &physics, SpriteData &sprite, PlayerStats &stats) {
+    registry.view<Transform, PhysicsObject, SpriteData, PlayerStats, Player, Animation>().each([dt, &registry](Transform &transform, PhysicsObject &physics, SpriteData &sprite, PlayerStats &stats, Animation &animation) {
         
         // Log player starting velocity
         TraceLog(LOG_INFO, "Player current velocity: %f,%f", physics.velocity.x, physics.velocity.y);
@@ -15,15 +15,28 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         // Move box based on key input
         if (IsKeyDown(KEY_D)) {
             physics.velocity.x = stats.speed;    // Move right
-            TraceLog(LOG_INFO, "Setting cow sprite texture to: cowR");
-            sprite.SetTexture("cowR");
+            TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRWalk");
+            sprite.SetTexture("cowRWalk");
+            animation.PlaySequence("walkRight");
         } else if (IsKeyDown(KEY_A)) {
             physics.velocity.x = -stats.speed;   // Move left
-            TraceLog(LOG_INFO, "Setting cow sprite texture to: cowL");
-            sprite.SetTexture("cowL");
+            TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLWalk");
+            sprite.SetTexture("cowLWalk");
+            animation.PlaySequence("walkLeft");
         } else {
             physics.velocity.x = physics.velocity.x;        // No horizontal movement
+            // Set idle animation based on last direction
+            if (animation.currentSequence == "walkRight") {
+                sprite.SetTexture("cowR");
+                animation.PlaySequence("idleRight");
+            } else if (animation.currentSequence == "walkLeft") {
+                sprite.SetTexture("cowL");
+                animation.PlaySequence("idleLeft");
+            }
         }
+        
+        // Update animation
+        animation.Update(dt);
 
         // Only allow jump if player is on the ground
         if (IsKeyPressed(KEY_SPACE)) {

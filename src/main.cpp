@@ -52,13 +52,19 @@ void Render(entt::registry &registry, float dt) {
             
             // Draw player
             TraceLog(LOG_TRACE, "Drawing Player");
-            registry.view<SpriteData, Player>().each([&transform](SpriteData &sprite) {
-                sprite.SetTexture("FarmerR");
+            registry.view<SpriteData, Player, Animation>().each([&transform](SpriteData &sprite, Animation &animation) {
+                Rectangle srcRec = sprite.srcRec;
+                
+                // Use animation frame if animation is playing
+                if (animation.isPlaying) {
+                    srcRec = animation.GetCurrentFrame();
+                }
+                
                 Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
                 Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
                 TraceLog(LOG_INFO, "Drawing Player at: %f,%f", dstRec.x, dstRec.y);
                 TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
-                DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
+                DrawTexturePro(sprite.curentTexture, srcRec, dstRec, origin, transform.rotation.x, sprite.color);
             });
 
             // Draw Enemies
