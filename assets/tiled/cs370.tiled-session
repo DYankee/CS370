@@ -30,22 +30,39 @@
             "scaleInEditor": 1
         },
         "stage1.tmx": {
-            "scale": 0.33,
+            "expandedObjectLayers": [
+                24
+            ],
+            "scale": 0.5,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 748.4848484848485,
-                "y": 190.909090909091
+                "x": 316,
+                "y": 406
             }
         },
         "stage2.tmx": {
             "expandedGroupLayers": [
                 5
             ],
+            "expandedObjectLayers": [
+                24
+            ],
             "scale": 0.5,
-            "selectedLayer": 0,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 961,
-                "y": 585
+                "x": 158,
+                "y": 584
+            }
+        },
+        "stage3.tmx": {
+            "expandedObjectLayers": [
+                24
+            ],
+            "scale": 0.45601946721311476,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 975.8355333370781,
+                "y": 587.6942088412067
             }
         },
         "test_tileset.tsx": {
