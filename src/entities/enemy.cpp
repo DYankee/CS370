@@ -22,9 +22,15 @@ void CreateEnemy(entt::registry &registry, Vector2 spawnPoint) {
     enemySprite.SetTexture("FarmerR");
     registry.emplace<SpriteData>(enemyEnt, enemySprite);
 
-    // add Transform component
-    Transform enemyTransform = Transform{ {spawnPoint.x, spawnPoint.y, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };//test values
-    registry.emplace<Transform>(enemyEnt, enemyTransform);
+    // Add Transform component to the entity
+    registry.view<Map, TmxMap>().each([&registry, &enemyEnt, &spawnPoint](TmxMap &map){
+        TmxObjectGroup entities = FindLayerByName(map.layers, map.layersLength, "Entities")->exact.objectGroup;
+        TmxObject enemy = FindObjectByName(entities.objects, entities.objectsLength, "Enemy");
+
+        Transform enemyTransform = Transform{ {(float)enemy.x, (float)enemy.y, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
+
+        registry.emplace<Transform>(enemyEnt, enemyTransform);
+    });
 
     // Add PhysicsObject component to the entity
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
