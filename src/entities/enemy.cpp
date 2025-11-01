@@ -1,7 +1,7 @@
 #include "enemy.hpp"
 #include "../include/raylib.h"
 
-void CreateEnemy(entt::registry &registry) {
+void CreateEnemy(entt::registry &registry, Vector2 spawnPoint) {
     TraceLog(LOG_TRACE, "Entering Function: CreateEnemy");
     TraceLog(LOG_INFO, "Creating Enemy Entity");
     
@@ -23,14 +23,15 @@ void CreateEnemy(entt::registry &registry) {
     registry.emplace<SpriteData>(enemyEnt, enemySprite);
 
     // add Transform component
-    Transform enemyTransform = Transform{ {240.0f, 930.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
-                                            //test values
+    Transform enemyTransform = Transform{ {spawnPoint.x, spawnPoint.y, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };//test values
     registry.emplace<Transform>(enemyEnt, enemyTransform);
 
     // Add PhysicsObject component to the entity
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
     registry.emplace<PhysicsObject>(enemyEnt, physics);
 
+    // Add Vector2 to mark where the enemy spawned from
+    registry.emplace<Vector2>(enemyEnt, spawnPoint);
 
     // Add the rest of the enemy components here
 
