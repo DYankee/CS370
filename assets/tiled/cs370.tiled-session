@@ -64,14 +64,11 @@
             }
         },
         "stage3.tmx": {
-            "expandedObjectLayers": [
-                24
-            ],
-            "scale": 0.45601946721311476,
+            "scale": 3,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 975.8355333370781,
-                "y": 587.6942088412067
+                "x": 321.3333333333333,
+                "y": 885.3333333333333
             }
         },
         "test_tileset.tsx": {
