@@ -206,7 +206,7 @@ int main() {
                         // Create player entity
                         CreatePlayer(registry);
 
-                        CreateEnemy(registry);
+                        CreateEnemy(registry, {0, 0});
                         
                         gameInitialized = true;
                     }
