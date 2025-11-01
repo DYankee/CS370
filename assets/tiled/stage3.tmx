@@ -32,6 +32,9 @@
   <object id="114" name="Enemy" x="318.825" y="952.258">
    <point/>
   </object>
+  <object id="114" name="Enemy" x="1176.75" y="890.75">
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="22" name="Spikes"/>
  <layer id="1" name="Tile Layer 1" width="120" height="68">
