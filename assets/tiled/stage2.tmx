@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="113">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="114">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <group id="5" name="bg" offsetx="4" offsety="193.333">
@@ -20,7 +20,10 @@
   </imagelayer>
  </group>
  <objectgroup id="24" name="Entities">
-  <object id="112" name="Player" x="392.871" y="746.993">
+  <object id="112" name="Enemy" x="392.871" y="746.993">
+   <point/>
+  </object>
+  <object id="113" name="Player" x="441" y="747.25">
    <point/>
   </object>
  </objectgroup>
