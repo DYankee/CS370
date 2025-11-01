@@ -18,13 +18,54 @@ void CreatePlayer(entt::registry &registry) {
     // Load player sprites
     SpriteData cowSprite = SpriteData(LoadTextures({
             {"cowR", "assets/sprites/cowR.png"},
-            {"cowL", "assets/sprites/cowL.png"}
+            {"cowL", "assets/sprites/cowL.png"},
+            {"cowRWalk", "assets/sprites/cowRWalk.png"},
+            {"cowLWalk", "assets/sprites/cowLWalk.png"}
         }),
         WHITE
     );
     cowSprite.SetTexture("cowR");
     // Add SpriteData component to the entity
     registry.emplace<SpriteData>(playerEnt, cowSprite);
+
+    // Create Animation component
+    Animation playerAnimation;
+    
+    // Sprite sheet dimensions
+    int frameWidth = 16;
+    int frameHeight = 16;
+    int totalFrames = 4;  
+    
+    // Create walk right animation sequence (4 frames)
+    std::vector<AnimationFrame> walkRightFrames;
+    for (int i = 0; i < totalFrames; i++) {
+        walkRightFrames.push_back(AnimationFrame{
+            Rectangle{(float)(i * frameWidth), 0, (float)frameWidth, (float)frameHeight},
+            0.1f  // 0.1 seconds per frame
+        });
+    }
+    playerAnimation.AddSequence("walkRight", AnimationSequence(walkRightFrames, true));
+    
+    // Create walk left animation sequence (4 frames)
+    std::vector<AnimationFrame> walkLeftFrames;
+    for (int i = 0; i < totalFrames; i++) {
+        walkLeftFrames.push_back(AnimationFrame{
+            Rectangle{(float)(i * frameWidth), 0, (float)frameWidth, (float)frameHeight},
+            0.1f  // 0.1 seconds per frame
+        });
+    }
+    playerAnimation.AddSequence("walkLeft", AnimationSequence(walkLeftFrames, true));
+    
+    // Create idle animations (single frame - first frame of each animation)
+    playerAnimation.AddSequence("idleRight", AnimationSequence({
+        AnimationFrame{Rectangle{0, 0, (float)frameWidth, (float)frameHeight}, 1.0f}
+    }, true));
+    playerAnimation.AddSequence("idleLeft", AnimationSequence({
+        AnimationFrame{Rectangle{0, 0, (float)frameWidth, (float)frameHeight}, 1.0f}
+    }, true));
+    
+    // Add Animation component to the entity
+    registry.emplace<Animation>(playerEnt, playerAnimation);
 
     // Add Transform component to the entity
     registry.view<Map, TmxMap>().each([&registry, &playerEnt](TmxMap &map){
@@ -39,6 +80,7 @@ void CreatePlayer(entt::registry &registry) {
 
     // Add PhysicsObject component to the entity
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
+    physics.velocity = {0.0f, 0.0f}; // Ensure velocity starts at zero
     registry.emplace<PhysicsObject>(playerEnt, physics);
 
     // Load jump sound
@@ -47,6 +89,7 @@ void CreatePlayer(entt::registry &registry) {
     // Add PlayerStats component to the entity
     PlayerStats stats = PlayerStats(MAX_HEALTH, MAX_IFRAMES, SPEED, JUMP_STRENGTH, GRAVITY, jumpSound);
     registry.emplace<PlayerStats>(playerEnt, stats);
+
 
     // Create hud
     {
