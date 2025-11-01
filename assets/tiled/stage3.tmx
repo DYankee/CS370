@@ -26,7 +26,7 @@
   </imagelayer>
  </group>
  <objectgroup id="24" name="Entities">
-  <object id="112" name="Player" x="760.364" y="893.636">
+  <object id="112" name="Player" x="63.0253" y="566.896">
    <point/>
   </object>
   <object id="115" name="Enemy" x="1257.25" y="893.25">
