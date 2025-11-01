@@ -57,8 +57,8 @@ void Render(entt::registry &registry, float dt) {
             registry.view<SpriteData, Player, Animation>().each([&transform](SpriteData &sprite, Animation &animation) {
                 Rectangle srcRec = sprite.srcRec;
                 
-                // Use animation frame if animation is playing
-                if (animation.isPlaying) {
+                // Use animation frame if animation exists and has frames
+                if (!animation.sequences.empty() && animation.sequences.find(animation.currentSequence) != animation.sequences.end()) {
                     srcRec = animation.GetCurrentFrame();
                 }
                 
