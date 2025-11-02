@@ -26,6 +26,7 @@ void Update(entt::registry &registry, float dt) {
     TraceLog(LOG_TRACE, "Entering Function: Update (main)");
     PlayerInputSystem(registry, dt);
     MovePlayer(registry, dt);
+    UpdateEnemies(registry, dt);
     CameraUpdate(registry, dt);
     SpikeCollision(registry, dt);
     CheckForMapChange(registry);
