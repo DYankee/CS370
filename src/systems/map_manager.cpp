@@ -111,7 +111,7 @@ std::vector<TmxObject> FindObjectsByType(TmxObject *objects, int objectsLength ,
     for (int i = 0; i < objectsLength; i++){
         TraceLog(LOG_TRACE, "Object name: %s", objects[i].name);
         for (int j = 0; j < objects[i].propertiesLength; j++){
-            if (strcmp(objects[i].properties[j].name, "Type") == 0 && (strcmp(objects[i].properties[j].stringValue, type))) {
+            if ((strcmp(objects[i].properties[j].name, "Type") == 0) && ((strcmp(objects[i].properties[j].stringValue, type)) == 0)) {
                EnemyObjs.push_back(objects[i]); 
             }
         }
