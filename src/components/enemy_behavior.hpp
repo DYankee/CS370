@@ -1,11 +1,10 @@
 #ifndef ENEMY_BEHAVIOR_HPP
 #define ENEMY_BEHAVIOR_HPP
 
-#include "../../include/entt.hpp"
 #include "../../include/raylib.h"
+#include "enemy_stats.hpp"
 
-
-typedef void (*UpdateFunction)(entt::registry&, float);
+typedef void (*UpdateFunction)(float, EnemyStats&, Transform&);
 
 struct Enemy_behavior{
     UpdateFunction Update;
@@ -13,5 +12,6 @@ struct Enemy_behavior{
     Enemy_behavior(UpdateFunction Update);
 };
 
+void TestUpdateFunc(float, EnemyStats&, Transform&);
 
 #endif
