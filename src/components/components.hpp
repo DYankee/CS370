@@ -2,11 +2,11 @@
 #define COMPONENTS_HPP
 
 // Include all component headers here
-#include "sprite_data.hpp"
+#include "animation.hpp"
+#include "enemy_behavior.hpp"
+#include "enemy_stats.hpp"
 #include "physics_object.hpp"
 #include "player_stats.hpp"
-#include "enemy_stats.hpp"
-#include "animation.hpp"
-
+#include "sprite_data.hpp"
 
 #endif

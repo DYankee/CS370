@@ -7,5 +7,6 @@
 #include "player_controller.hpp"
 #include "map_manager.hpp"
 #include "camera_controller.hpp"
+#include "enemy_controller.hpp"
 
 #endif
