@@ -24,10 +24,7 @@ void CreateEnemy(entt::registry &registry, Vector2 spawnPoint) {
 
     // Add Transform component to the entity
     registry.view<Map, TmxMap>().each([&registry, &enemyEnt, &spawnPoint](TmxMap &map){
-        TmxObjectGroup entities = FindLayerByName(map.layers, map.layersLength, "Entities")->exact.objectGroup;
-        TmxObject enemy = FindObjectByName(entities.objects, entities.objectsLength, "Enemy");
-
-        Transform enemyTransform = Transform{ {(float)enemy.x, (float)enemy.y, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
+        Transform enemyTransform = Transform{ {spawnPoint.x, spawnPoint.y, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
 
         registry.emplace<Transform>(enemyEnt, enemyTransform);
     });
