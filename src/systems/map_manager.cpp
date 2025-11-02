@@ -76,3 +76,45 @@ void UpdateMap(entt::registry &registry, float dt) {
         UpdateMusicStream(music);
     });
 }
+
+TmxLayer* FindLayerByName(TmxLayer* layers, int layersLength, const char *name) {
+    TraceLog(LOG_TRACE, "Entering Function: FindLayerByName");
+    if (!layers || layersLength == 0){
+         return NULL;
+    }
+    for (int i = 0; i < layersLength; ++i) {
+        if (layers[i].name && strcmp(layers[i].name, name) == 0) return &layers[i];
+        if (layers[i].type == LAYER_TYPE_GROUP && layers[i].layersLength > 0) {
+            TmxLayer* found = FindLayerByName(layers[i].layers, layers[i].layersLength, name);
+            if (found) return found;
+        }
+    }
+    return NULL;
+}
+
+TmxObject FindObjectByName(TmxObject *objects, int objectsLength ,const char *name){
+    TraceLog(LOG_TRACE, "Entering Function: FindObjectByName");
+    TmxObject obj;
+    for (int i = 0; i < objectsLength; i++){
+        TraceLog(LOG_TRACE, "Object name: %s", objects[i].name);
+        if (strcmp(objects[i].name, name) == 0){
+            obj = objects[i];
+        }
+    }
+    return obj;
+}
+
+
+std::vector<TmxObject> FindObjectsByType(TmxObject *objects, int objectsLength ,const char *type){
+    TraceLog(LOG_TRACE, "Entering Function: FindObjectByName");
+    std::vector<TmxObject> EnemyObjs;
+    for (int i = 0; i < objectsLength; i++){
+        TraceLog(LOG_TRACE, "Object name: %s", objects[i].name);
+        for (int j = 0; j < objects[i].propertiesLength; j++){
+            if (strcmp(objects[i].properties[j].name, "Type") == 0 && (strcmp(objects[i].properties[j].stringValue, type))) {
+               EnemyObjs.push_back(objects[i]); 
+            }
+        }
+    }
+    return EnemyObjs;
+}
