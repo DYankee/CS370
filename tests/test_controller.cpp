@@ -43,10 +43,10 @@ TEST(MapFunctions, FindObjTest){
     }
     else{
         TmxObjectGroup entities = FindLayerByName(map->layers, map->layersLength, "Entities")->exact.objectGroup;
-        EXPECT_EQ(entities.objectsLength, 3);
+        EXPECT_EQ(entities.objectsLength, 4);
         std::vector<TmxObject> EnemyObjs = FindObjectsByType(entities.objects, entities.objectsLength, "Enemy");
         EnemiesFound = EnemyObjs.size();
     }
-    EXPECT_EQ(EnemiesFound, 2);
+    EXPECT_EQ(EnemiesFound, 3);
     CloseWindow();
 }
