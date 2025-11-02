@@ -25,6 +25,9 @@
    <point/>
   </object>
   <object id="115" name="Enemy" x="569.583" y="908.167">
+   <properties>
+    <property name="Type" value="Enemy"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
