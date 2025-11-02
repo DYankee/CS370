@@ -18,16 +18,16 @@ Assets GetAssets(std::string path){
     std::cout << "Getting assets" << std::endl;
     for (const auto &entry : fs::recursive_directory_iterator(path)){
         if (fs::is_regular_file(entry.status())){
-            std::string cPath = entry.path();
+            std::string cPath = entry.path().string();
             // Filter for png files and add them to the pngs vec
             if (cPath.find(".png") != std::string::npos){
                 std::cout << "Filtered paths:" << cPath << std::endl;
-                assets.pngs.push_back(entry.path());
+                assets.pngs.push_back(entry.path().string());
             }
             // Filter for tmx files and add them to the maps vec
             else if (cPath.find(".tmx") != std::string::npos){
                 std::cout << cPath << std::endl;
-                assets.maps.push_back(entry.path());
+                assets.maps.push_back(entry.path().string());
             }
         }
     }
