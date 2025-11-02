@@ -9,5 +9,6 @@
 
 void SpawnEnemies(entt::registry &registry);
 
+void DeSpawnEnemies(entt::registry &registry);
 
 #endif

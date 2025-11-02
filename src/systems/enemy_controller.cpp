@@ -9,10 +9,14 @@ void SpawnEnemies(entt::registry &registry){
         std::vector<TmxObject> enemySpawns = FindObjectsByType(entities.objects, entities.objectsLength, "Enemy");
         
         //loop through entity spawn
-        //for (TmxObject  : enemySpawns){
-
-        //}
-        //CreateEnemy()
-
+        for (TmxObject spawn : enemySpawns){
+            CreateEnemy(registry, Vector2{float(spawn.x), float(spawn.y)});
+        }
     });
+}
+
+void DeSpawnEnemies(entt::registry &registry){
+    for (const auto entity : registry.view<Enemy>()){
+        registry.destroy(entity);
+    }
 }
