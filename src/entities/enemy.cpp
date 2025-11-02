@@ -36,6 +36,14 @@ void CreateEnemy(entt::registry &registry, Vector2 spawnPoint) {
     // Add Vector2 to mark where the enemy spawned from
     registry.emplace<Vector2>(enemyEnt, spawnPoint);
 
+    // Add stats to enemy
+    EnemyStats stats = EnemyStats(3, 3, 10, false);
+    registry.emplace<EnemyStats>(enemyEnt, stats);
+
+    // Add update function
+    Enemy_behavior behavior = TestUpdateFunc;
+    registry.emplace<Enemy_behavior>(enemyEnt, behavior);
+
     // Add the rest of the enemy components here
 
 };
