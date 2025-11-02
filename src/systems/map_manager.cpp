@@ -7,6 +7,7 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath) {
     TraceLog(LOG_TRACE, "Entering Function: ChangeMap");
     TraceLog(LOG_INFO, "Changing map to: %s", tmxFilePath.c_str());
 
+    DeSpawnEnemies(registry);
     registry.view<Map, TmxMap>().each([&registry, &tmxFilePath](TmxMap &currentMap) {
         // Load new map
         TmxMap* newMapPtr = LoadTMX(tmxFilePath.c_str());
@@ -38,6 +39,7 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath) {
             });
         });
     });
+    SpawnEnemies(registry);
 }
 
 // Check if the player has reached map boundaries to trigger a map change
