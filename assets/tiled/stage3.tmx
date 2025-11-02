@@ -29,10 +29,6 @@
   <object id="112" name="Player" x="63.0253" y="566.896">
    <point/>
   </object>
-  <object id="114" name="Enemy" x="318.825" y="952.258">
-  <object id="112" name="Player" x="63.0253" y="566.896">
-   <point/>
-  </object>
   <object id="115" name="Enemy" x="1257.25" y="893.25">
    <properties>
     <property name="Type" value="Enemy"/>
