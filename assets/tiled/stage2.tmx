@@ -20,7 +20,10 @@
   </imagelayer>
  </group>
  <objectgroup id="24" name="Entities">
-  <object id="112" name="Enemy" x="394.871" y="784.993">
+  <object id="112" name="Enemy" x="392.871" y="746.993">
+   <properties>
+    <property name="Type" value="Enemy"/>
+   </properties>
    <point/>
   </object>
   <object id="113" name="Player" x="113" y="545.25">

@@ -24,7 +24,10 @@
   <object id="114" name="Player" x="112.167" y="627.584">
    <point/>
   </object>
-  <object id="115" name="Enemy" x="413.583" y="946.167">
+  <object id="115" name="Enemy" x="569.583" y="908.167">
+   <properties>
+    <property name="Type" value="Enemy"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
