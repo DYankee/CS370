@@ -23,3 +23,14 @@ void DeSpawnEnemies(entt::registry &registry){
         registry.destroy(entity);
     }
 }
+
+void UpdateEnemies(entt::registry &registry, float dt){
+    TraceLog(LOG_TRACE, "Entering function: UpdateEnemies");
+    registry.view<Enemy, Enemy_behavior, EnemyStats, Transform>().each([&registry, dt](
+        Enemy_behavior &update,
+        EnemyStats &stats,
+        Transform &pos)
+    {
+        update.Update(dt, stats, pos);
+    });
+}
