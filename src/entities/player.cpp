@@ -20,7 +20,10 @@ void CreatePlayer(entt::registry &registry) {
             {"cowR", "assets/sprites/cowR.png"},
             {"cowL", "assets/sprites/cowL.png"},
             {"cowRWalk", "assets/sprites/cowRWalk.png"},
-            {"cowLWalk", "assets/sprites/cowLWalk.png"}
+            {"cowLWalk", "assets/sprites/cowLWalk.png"},
+            {"cowRJump", "assets/sprites/cowRJump.png"},
+            {"cowLJump", "assets/sprites/cowLJump.png"}
+
         }),
         WHITE
     );
@@ -31,7 +34,7 @@ void CreatePlayer(entt::registry &registry) {
     // Create Animation component
     Animation playerAnimation;
     
-    // Sprite sheet dimensions
+    // Sprite sheet dimensions for walking
     int frameWidth = 16;
     int frameHeight = 16;
     int totalFrames = 4;  
@@ -63,6 +66,31 @@ void CreatePlayer(entt::registry &registry) {
     playerAnimation.AddSequence("idleLeft", AnimationSequence({
         AnimationFrame{Rectangle{0, 0, (float)frameWidth, (float)frameHeight}, 1.0f}
     }, true));
+    
+    // Sprite sheet dimensions for jumping
+    int jumpFrameWidth = 16;
+    int jumpFrameHeight = 16;
+    int jumpTotalFrames = 13;
+    
+    // Create jump right animation sequence (13 frames)
+    std::vector<AnimationFrame> jumpRightFrames;
+    for (int i = 0; i < jumpTotalFrames; i++) {
+        jumpRightFrames.push_back(AnimationFrame{
+            Rectangle{(float)(i * jumpFrameWidth), 0, (float)jumpFrameWidth, (float)jumpFrameHeight},
+            0.1f  // 0.1 seconds per frame
+        });
+    }
+    playerAnimation.AddSequence("jumpRight", AnimationSequence(jumpRightFrames, false));
+    
+    // Create jump left animation sequence (13 frames)
+    std::vector<AnimationFrame> jumpLeftFrames;
+    for (int i = 0; i < jumpTotalFrames; i++) {
+        jumpLeftFrames.push_back(AnimationFrame{
+            Rectangle{(float)(i * jumpFrameWidth), 0, (float)jumpFrameWidth, (float)jumpFrameHeight},
+            0.1f  // 0.1 seconds per frame
+        });
+    }
+    playerAnimation.AddSequence("jumpLeft", AnimationSequence(jumpLeftFrames, false));
     
     // Add Animation component to the entity
     registry.emplace<Animation>(playerEnt, playerAnimation);

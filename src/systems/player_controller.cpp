@@ -12,17 +12,25 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         // Apply gravity
         physics.velocity.y += stats.gravity * dt;
         
+        // Check if currently jumping (jump animation is playing and not finished)
+        bool isJumping = (animation.currentSequence == "jumpRight" || animation.currentSequence == "jumpLeft") && !animation.IsFinished();
+        
         // Move box based on key input
+        // Don't change animation if currently jumping
         if (IsKeyDown(KEY_D)) {
             physics.velocity.x = stats.speed;    // Move right
-            TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRWalk");
-            sprite.SetTexture("cowRWalk");
-            animation.PlaySequence("walkRight");
+            if (!isJumping) {
+                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRWalk");
+                sprite.SetTexture("cowRWalk");
+                animation.PlaySequence("walkRight");
+            }
         } else if (IsKeyDown(KEY_A)) {
             physics.velocity.x = -stats.speed;   // Move left
-            TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLWalk");
-            sprite.SetTexture("cowLWalk");
-            animation.PlaySequence("walkLeft");
+            if (!isJumping) {
+                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLWalk");
+                sprite.SetTexture("cowLWalk");
+                animation.PlaySequence("walkLeft");
+            }
         } else {
             physics.velocity.x = physics.velocity.x;        // No horizontal movement
             // Set idle animation based on last direction
@@ -30,6 +38,14 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
                 sprite.SetTexture("cowR");
                 animation.PlaySequence("idleRight");
             } else if (animation.currentSequence == "walkLeft") {
+                sprite.SetTexture("cowL");
+                animation.PlaySequence("idleLeft");
+            } else if (animation.currentSequence == "jumpRight" && animation.IsFinished()) {
+                // Transition from jump to idle when jump animation finishes
+                sprite.SetTexture("cowR");
+                animation.PlaySequence("idleRight");
+            } else if (animation.currentSequence == "jumpLeft" && animation.IsFinished()) {
+                // Transition from jump to idle when jump animation finishes
                 sprite.SetTexture("cowL");
                 animation.PlaySequence("idleLeft");
             }
@@ -40,7 +56,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
 
         // Only allow jump if player is on the ground
         if (IsKeyPressed(KEY_SPACE)) {
-            registry.view<TmxMap>().each([&transform, &physics, &sprite, &stats](TmxMap &map){{
+            registry.view<TmxMap>().each([&transform, &physics, &sprite, &stats, &animation](TmxMap &map){{
                 Rectangle testRec = { transform.translation.x, transform.translation.y + 1, transform.scale.x, transform.scale.y };
                 TmxObject collidedObj;
                 bool onGround = CheckCollisionTMXTileLayersRec(
@@ -49,6 +65,16 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
                 if (onGround) {
                     physics.velocity.y = stats.jumpStrength;
                     PlaySound(stats.jumpSound);
+                    // Play jump animation based on current direction
+                    if (animation.currentSequence == "walkLeft" || animation.currentSequence == "idleLeft" || animation.currentSequence == "jumpLeft") {
+                        TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLJump");
+                        sprite.SetTexture("cowLJump");
+                        animation.PlaySequence("jumpLeft");
+                    } else {
+                        TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRJump");
+                        sprite.SetTexture("cowRJump");
+                        animation.PlaySequence("jumpRight");
+                    }
                 }
             }});
         }
