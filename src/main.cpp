@@ -200,7 +200,7 @@ int main() {
                         // Create player entity
                         CreatePlayer(registry);
 
-                        CreateEnemy(registry);
+                        SpawnEnemies(registry);
                         
                         gameInitialized = true;
                     }

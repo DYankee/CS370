@@ -19,6 +19,7 @@ set(MILK_SOURCES
     systems/camera_controller.cpp
     systems/iframes_system.cpp
     systems/hud_system.cpp
+    systems/enemy_controller.cpp
 )
 
 add_library(milk_lib STATIC ${MILK_SOURCES})
