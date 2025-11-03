@@ -7,7 +7,7 @@
 // Create empty struct
 struct Enemy{};
 
-void CreateEnemy(entt::registry &registry, Vector2 spawnPoint);
+void CreateEnemy(entt::registry &registry, TmxObject enemyInfo);
 
 
 
