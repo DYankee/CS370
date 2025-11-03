@@ -1,7 +1,7 @@
 #include "enemy.hpp"
 #include "../include/raylib.h"
 
-void CreateEnemy(entt::registry &registry, Vector2 spawnPoint) {
+void CreateEnemy(entt::registry &registry, TmxObject enemyInfo) {
     TraceLog(LOG_TRACE, "Entering Function: CreateEnemy");
     TraceLog(LOG_INFO, "Creating Enemy Entity");
     
@@ -23,21 +23,23 @@ void CreateEnemy(entt::registry &registry, Vector2 spawnPoint) {
     registry.emplace<SpriteData>(enemyEnt, enemySprite);
 
     // Add Transform component to the entity
-    registry.view<Map, TmxMap>().each([&registry, &enemyEnt, &spawnPoint](TmxMap &map){
-        Transform enemyTransform = Transform{ {spawnPoint.x, spawnPoint.y, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
-
-        registry.emplace<Transform>(enemyEnt, enemyTransform);
-    });
+    Transform enemyTransform = Transform{ {enemyInfo.x, enemyInfo.y, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
+    registry.emplace<Transform>(enemyEnt, enemyTransform);
 
     // Add PhysicsObject component to the entity
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
     registry.emplace<PhysicsObject>(enemyEnt, physics);
 
     // Add Vector2 to mark where the enemy spawned from
-    registry.emplace<Vector2>(enemyEnt, spawnPoint);
+    registry.emplace<Vector2>(enemyEnt, Vector2{float(enemyInfo.x), float(enemyInfo.y)});
 
     // Add stats to enemy
-    EnemyStats stats = EnemyStats(3, 3, 10, false);
+    std::map<std::string, float> statsMap = GetObjectProperties(enemyInfo);
+    float health = statsMap["Health"];
+    float dmg = statsMap["DMG"];
+    float moveSpeed = statsMap["MoveSpeed"];
+
+    EnemyStats stats = EnemyStats(health, health, moveSpeed, dmg, false);
     registry.emplace<EnemyStats>(enemyEnt, stats);
 
     // Add update function
