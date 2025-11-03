@@ -19,4 +19,6 @@ TmxObject FindObjectByName(TmxObject *objects, int objectsLength, const char *na
 //find a group of objects by type
 std::vector<TmxObject> FindObjectsByType(TmxObject *objects, int objectsLength ,const char *type);
 
+// Get the properties from a TmxObject
+std::map<std::string, float> GetObjectProperties(TmxObject object);
 #endif
