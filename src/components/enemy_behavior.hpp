@@ -16,4 +16,7 @@ struct Enemy_behavior{
 
 void TestUpdateFunc(entt::registry&, float, entt::entity);
 
+
+void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy);
+
 #endif
