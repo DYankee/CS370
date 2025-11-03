@@ -16,12 +16,15 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     // Get components from enemy entity
     auto [pos, spawn, physics, stats] = registry.get<Transform, Vector2, PhysicsObject, EnemyStats>(enemy);
 
+    physics.velocity.y += GRAVITY * dt;
+
     if(!stats.followsPlayer){
-        
+        physics.velocity.x = stats.enemySpeed;
     }
     else{
 
     }
+    MoveEntity(registry, dt, enemy);
 }
 
 

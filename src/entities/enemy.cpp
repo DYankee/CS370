@@ -43,7 +43,7 @@ void CreateEnemy(entt::registry &registry, TmxObject enemyInfo) {
     registry.emplace<EnemyStats>(enemyEnt, stats);
 
     // Add update function
-    Enemy_behavior behavior = TestUpdateFunc;
+    Enemy_behavior behavior = BasicEnemyUpdate;
     registry.emplace<Enemy_behavior>(enemyEnt, behavior);
 
     // Add the rest of the enemy components here
