@@ -37,49 +37,51 @@ void SpikeCollision(entt::registry &registry, float dt) {
 }
 
 // Check collisions against tile layers
-void TileCollision(entt::registry& registry, float dt){
-    TraceLog(LOG_TRACE, "Entering Function: TileCollision");
-    TraceLog(LOG_INFO, "Starting tile collision check");
+void MoveEntity(entt::registry& registry, float dt, entt::entity entity){
+    TraceLog(LOG_TRACE, "Entering Function: MoveEntity");
+    registry.view<Map, TmxMap>().each([&registry, &entity, dt](TmxMap &map) {
+        TmxObject hitObj;
 
-    registry.view<Player, PhysicsObject, Transform>().each([dt, &registry](PhysicsObject &physics, Transform &transform) {
-        registry.view<Map, TmxMap>().each([&physics, &transform, dt](TmxMap &map) {
-            TmxObject hitObj;
-            
-            // Log current pos
-            TraceLog(LOG_INFO, "Player Current Pos: %f,%f", transform.translation.x, transform.translation.y);
+        // Get entity components
+        auto [pos, physics] = registry.get<Transform, PhysicsObject>(entity);
 
-            // Calculate next position
-            Vector3 nextPos = {
-                transform.translation.x + physics.velocity.x * dt,
-                transform.translation.y + physics.velocity.y * dt,
-                transform.translation.z
-            };
-            // Log new Pos
-            TraceLog(LOG_INFO, "Player Current Pos: %f,%f", nextPos.x, nextPos.y);
+        // Log current pos
+        TraceLog(LOG_INFO, "Player Current Pos: %f,%f", pos.translation.x, pos.translation.y);
 
-            Rectangle playerDestRec = { nextPos.x, nextPos.y, transform.scale.x, transform.scale.y };
 
-            bool collided = CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRec, &hitObj);
+        // Calculate next position
+        Vector3 nextPos = {
+            pos.translation.x + physics.velocity.x * dt,
+            pos.translation.y + physics.velocity.y * dt,
+            pos.translation.z
+        };
+        Rectangle playerDestRec = { nextPos.x, nextPos.y, pos.scale.x, pos.scale.y };
+        Rectangle playerDestRecX = { nextPos.x, pos.translation.y, pos.scale.x, pos.scale.y };
+        Rectangle playerDestRecY = { pos.translation.x, nextPos.y, pos.scale.x, pos.scale.y };
+        // Log new Pos
+        TraceLog(LOG_INFO, "Player Current Pos: %f,%f", nextPos.x, nextPos.y);
 
-            if (collided) {
-                TraceLog(LOG_INFO, "Collision detected at position (%f, %f)", nextPos.x, nextPos.y);
-                // Vertical collision detection
-                if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRec, &hitObj)) {
-                    transform.translation.y = nextPos.y;
-                } else {
-                    physics.velocity.y = 0; // Stop vertical movement
-                }
-                
-                // Horizontal collision only
-                if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRec, &hitObj)) {
-                    transform.translation.x = nextPos.x;
-                } else {
-                    physics.velocity.x = 0; // Stop horizontal movement
-                }
+        bool collided = CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRec, &hitObj);
+
+        if (collided) {
+            TraceLog(LOG_INFO, "Collision detected at position (%f, %f)", nextPos.x, nextPos.y);
+            // Vertical collision detection
+            if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRecY, &hitObj)) {
+                pos.translation.y = nextPos.y;
             } else {
-                // No collision: accept movement
-                transform.translation = nextPos;
+                physics.velocity.y = 0; // Stop vertical movement
             }
-        }); 
-    });
+
+            // Horizontal collision only
+            if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRecX, &hitObj)) {
+                pos.translation.x = nextPos.x;
+            } else {
+                physics.velocity.x = 0; // Stop horizontal movement
+            }
+        } 
+        else {
+            // No collision: accept movement
+            pos.translation = nextPos;
+        }
+    }); 
 }
