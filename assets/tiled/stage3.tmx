@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="120">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="122">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <group id="5" name="bg" offsetx="4" offsety="193.333">
@@ -29,23 +29,23 @@
   <object id="112" name="Player" x="63.0253" y="566.896">
    <point/>
   </object>
-  <object id="115" name="Enemy" type="Enemy" x="1257.25" y="893.25">
-   <properties>
-    <property name="DMG" type="int" value="1"/>
-    <property name="Health" type="int" value="3"/>
-    <property name="MoveSpeed" type="int" value="30"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="118" name="Enemy" type="Enemy" x="1160.5" y="893.5">
-   <properties>
-    <property name="DMG" type="int" value="1"/>
-    <property name="Health" type="int" value="3"/>
-    <property name="MoveSpeed" type="int" value="30"/>
-   </properties>
-   <point/>
-  </object>
   <object id="119" name="Enemy" type="Enemy" x="1064.5" y="894">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Health" type="float" value="3"/>
+    <property name="MoveSpeed" type="float" value="30"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="120" name="Enemy" type="Enemy" x="1144.5" y="892.5">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Health" type="float" value="3"/>
+    <property name="MoveSpeed" type="float" value="30"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="121" name="Enemy" type="Enemy" x="1241" y="893">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Health" type="float" value="3"/>
