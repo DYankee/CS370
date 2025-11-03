@@ -31,6 +31,6 @@ void UpdateEnemies(entt::registry &registry, float dt){
         EnemyStats &stats,
         Transform &pos)
     {
-        update.Update(dt, stats, pos);
+        update.Update(registry, dt, stats, pos);
     });
 }
