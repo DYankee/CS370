@@ -4,14 +4,16 @@
 #include "../../include/entt.hpp"
 #include "../../include/raylib.h"
 #include "enemy_stats.hpp"
+#include "physics_object.hpp"
+#include "enemy_stats.hpp"
 
-typedef void (*UpdateFunction)(entt::registry&, float, EnemyStats&, Transform&);
+typedef void (*UpdateFunction)(entt::registry&, float, entt::entity);
 struct Enemy_behavior{
     UpdateFunction Update;
 
     Enemy_behavior(UpdateFunction Update);
 };
 
-void TestUpdateFunc(entt::registry&, float, EnemyStats&, Transform&);
+void TestUpdateFunc(entt::registry&, float, entt::entity);
 
 #endif

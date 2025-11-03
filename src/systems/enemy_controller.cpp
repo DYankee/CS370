@@ -26,11 +26,13 @@ void DeSpawnEnemies(entt::registry &registry){
 
 void UpdateEnemies(entt::registry &registry, float dt){
     TraceLog(LOG_TRACE, "Entering function: UpdateEnemies");
-    registry.view<Enemy, Enemy_behavior, EnemyStats, Transform>().each([&registry, dt](
-        Enemy_behavior &update,
-        EnemyStats &stats,
-        Transform &pos)
-    {
-        update.Update(registry, dt, stats, pos);
-    });
+
+    auto view = registry.view<Enemy>();
+    for (auto enemy :view){
+        // Get the update function from the entity
+        Enemy_behavior update = registry.get<Enemy_behavior>(enemy);
+
+        // Call the function with the entity as an argument
+        update.Update(registry, dt, enemy);
+    }
 }
