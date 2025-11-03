@@ -7,13 +7,12 @@ void SpawnEnemies(entt::registry &registry){
         //get the entities group from the map
         TmxObjectGroup entities = FindLayerByName(map.layers, map.layersLength, "Entities")->exact.objectGroup;
         // Get the enemySpawns form the entities list
-        std::vector<TmxObject> enemySpawns = FindObjectsByType(entities.objects, entities.objectsLength, "Enemy");
-        
+        std::vector<TmxObject> enemies = FindObjectsByType(entities.objects, entities.objectsLength, "Enemy");
 
         //loop through entity spawn
-        for (TmxObject spawn : enemySpawns){
-            TraceLog(LOG_INFO, "Creating enemy at: %f,%f", float(spawn.x), float(spawn.y));
-            CreateEnemy(registry, Vector2{float(spawn.x), float(spawn.y)});
+        for (TmxObject enemy : enemies){
+            TraceLog(LOG_INFO, "Creating enemy at: %f,%f", float(enemy.x), float(enemy.y));
+            CreateEnemy(registry, enemy);
         }
     });
 }
