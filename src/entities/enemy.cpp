@@ -23,7 +23,7 @@ void CreateEnemy(entt::registry &registry, TmxObject enemyInfo) {
     registry.emplace<SpriteData>(enemyEnt, enemySprite);
 
     // Add Transform component to the entity
-    Transform enemyTransform = Transform{ {enemyInfo.x, enemyInfo.y, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
+    Transform enemyTransform = Transform{ {float(enemyInfo.x), float(enemyInfo.y), 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
     registry.emplace<Transform>(enemyEnt, enemyTransform);
 
     // Add PhysicsObject component to the entity
