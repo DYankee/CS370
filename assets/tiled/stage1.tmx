@@ -24,7 +24,7 @@
   <object id="114" name="Player" x="112.167" y="627.584">
    <point/>
   </object>
-  <object id="116" name="Enemy" type="Enemy" x="616.5" y="924">
+  <object id="116" name="Enemy" type="Enemy" x="633.167" y="816">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Health" type="float" value="2"/>
@@ -32,7 +32,7 @@
    </properties>
    <point/>
   </object>
-  <object id="117" name="Enemy" type="Enemy" x="568" y="922.667">
+  <object id="117" name="Enemy" type="Enemy" x="568" y="814.667">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Health" type="float" value="2"/>
