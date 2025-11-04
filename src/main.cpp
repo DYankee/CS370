@@ -145,7 +145,7 @@ int main() {
     Sound titleMooSound = LoadSound("assets/audio/titleMoo.mp3");
 
     // Load title texture
-    Texture2D titleTexture = LoadTexture("assets/graphics/title.png");
+    Texture2D titleTexture = LoadTexture("assets/graphics/milksong_logo.png");
 
     // Load button texture
     Texture2D buttonTexture = LoadTexture("assets/graphics/button.png");
