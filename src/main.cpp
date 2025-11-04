@@ -137,9 +137,11 @@ int main() {
 
     // Music setup
     InitAudioDevice();
-    Music music = LoadMusicStream("assets/music/stardewsummer.mp3");
-    SetMusicVolume(music, 1.0f);
-    PlayMusicStream(music);
+    Music titleMusic = LoadMusicStream("assets/audio/acnhtitle.mp3");
+    Music gameplayMusic = LoadMusicStream("assets/audio/stardewsummer.mp3");
+    SetMusicVolume(titleMusic, 1.0f);
+    SetMusicVolume(gameplayMusic, 1.0f);
+    PlayMusicStream(titleMusic);
 
     // Load sound effects
     Sound titleMooSound = LoadSound("assets/audio/titleMoo.mp3");
@@ -180,6 +182,10 @@ int main() {
         mousePoint = GetMousePosition();
         btnAction = false;
 
+        // Update music streams
+        UpdateMusicStream(titleMusic);
+        UpdateMusicStream(gameplayMusic);
+
         // Handle ESC key to close
         if (IsKeyDown(KEY_ESCAPE)) {
             break;
@@ -197,12 +203,14 @@ int main() {
                 // Check if button was clicked to start the game
                 if (btnAction) {
                     PlaySound(titleMooSound);
+                    StopMusicStream(titleMusic);
+                    PlayMusicStream(gameplayMusic);
                     currentScreen = GAMEPLAY;
                     
                     // Initialize game only once
                     if (!gameInitialized) {
                         // Load TMX map using RayTMX
-                        CreateMap(registry, "assets/tiled/stage1.tmx", music);
+                        CreateMap(registry, "assets/tiled/stage1.tmx", gameplayMusic);
                         CreateCamera(registry, screenSize); 
 
                         // Player setup
@@ -248,7 +256,8 @@ int main() {
     UnloadTexture(backgroundTexture);
     UnloadTexture(titleTexture);
     UnloadSound(titleMooSound);
-    UnloadMusicStream(music);
+    UnloadMusicStream(titleMusic);
+    UnloadMusicStream(gameplayMusic);
     CloseAudioDevice();   
     CloseWindow();
     registry.view<HUDResources>().each([&](HUDResources &hud) {
