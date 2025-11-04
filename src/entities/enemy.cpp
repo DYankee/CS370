@@ -38,8 +38,12 @@ void CreateEnemy(entt::registry &registry, TmxObject enemyInfo) {
     float health = statsMap["Health"];
     float dmg = statsMap["DMG"];
     float moveSpeed = statsMap["MoveSpeed"];
+    Direction direction = LEFT;
+    if (statsMap["Direction"] > 0){
+        direction = RIGHT;
+    }
 
-    EnemyStats stats = EnemyStats(health, health, moveSpeed, dmg, false);
+    EnemyStats stats = EnemyStats(health, health, moveSpeed, dmg, direction, false);
     registry.emplace<EnemyStats>(enemyEnt, stats);
 
     // Add update function
