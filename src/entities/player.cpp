@@ -77,7 +77,7 @@ void CreatePlayer(entt::registry &registry) {
     for (int i = 0; i < jumpTotalFrames; i++) {
         jumpRightFrames.push_back(AnimationFrame{
             Rectangle{(float)(i * jumpFrameWidth), 0, (float)jumpFrameWidth, (float)jumpFrameHeight},
-            0.1f  // 0.1 seconds per frame
+            0.05f  // 0.1 seconds per frame
         });
     }
     playerAnimation.AddSequence("jumpRight", AnimationSequence(jumpRightFrames, false));
@@ -87,7 +87,7 @@ void CreatePlayer(entt::registry &registry) {
     for (int i = 0; i < jumpTotalFrames; i++) {
         jumpLeftFrames.push_back(AnimationFrame{
             Rectangle{(float)(i * jumpFrameWidth), 0, (float)jumpFrameWidth, (float)jumpFrameHeight},
-            0.1f  // 0.1 seconds per frame
+            0.05f  // 0.1 seconds per frame
         });
     }
     playerAnimation.AddSequence("jumpLeft", AnimationSequence(jumpLeftFrames, false));
