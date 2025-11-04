@@ -20,6 +20,7 @@ set(MILK_SOURCES
     systems/camera_controller.cpp
     systems/iframes_system.cpp
     systems/hud_system.cpp
+    systems/player_enemy_collision.cpp
     systems/enemy_controller.cpp
 )
 

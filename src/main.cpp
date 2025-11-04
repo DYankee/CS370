@@ -11,6 +11,7 @@
 #include "components/player_hud.hpp"
 #include "systems/hud_system.hpp"
 #include "systems/iframes_system.hpp"
+#include "systems/player_enemy_collision.hpp"
 
 using namespace std;
 
@@ -27,6 +28,7 @@ void Update(entt::registry &registry, float dt) {
     PlayerInputSystem(registry, dt);
     MovePlayer(registry, dt);
     UpdateEnemies(registry, dt);
+    PlayerEnemyCollisionSystem(registry, dt);
     CameraUpdate(registry, dt);
     SpikeCollision(registry, dt);
     CheckForMapChange(registry);
