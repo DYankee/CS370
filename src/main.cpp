@@ -19,8 +19,8 @@ using namespace std;
 // Player and physics constants
 #define CHAR_WIDTH 32
 #define CHAR_HEIGHT 32
-#define GRAVITY 1000.0f          // Gravity strength 
-#define SPEED 400.0f             // speed 
+#define GRAVITY 2000.0f          // Gravity strength 
+#define SPEED 300.0f             // speed 
 
 typedef enum GameScreen { TITLE = 0, GAMEPLAY } GameScreen;
 
