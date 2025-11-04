@@ -1,97 +1,37 @@
 {
-    "Map/SizeTest": {
-        "height": 4300,
-        "width": 2
-    },
-    "activeFile": "stage1.tmx",
+    "activeFile": "stage2.tmx",
     "expandedProjectPaths": [
+        "."
     ],
-    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
-        "C:/Users/kentp/2025SpringGameJam/data/maps/stage1.tmx": {
-            "scale": 0.4390324519230769,
-            "selectedLayer": 1,
-            "viewCenter": {
-                "x": 958.9268359455205,
-                "y": 831.3736226130998
-            }
-        },
-        "C:/Users/kentp/2025SpringGameJam/data/tilesets/Objects.tsx": {
-            "scaleInDock": 1
-        },
-        "C:/Users/kentp/2025SpringGameJam/data/tilesets/stage_tileset.tsx": {
-            "scaleInDock": 1
-        },
         "SpikesNew.tsx": {
             "scaleInDock": 1
         },
         "maintileset.tsx": {
-            "scaleInDock": 0.75,
-            "scaleInEditor": 1
-        },
-        "stage1.tmx": {
-            "expandedObjectLayers": [
-                24
-            ],
-            "scale": 0.5,
-            "expandedObjectLayers": [
-                24
-            ],
-            "scale": 0.5,
-            "selectedLayer": 7,
-            "viewCenter": {
-                "x": 316,
-                "y": 406
-                "x": 316,
-                "y": 406
-            }
+            "scaleInDock": 1
         },
         "stage2.tmx": {
-            "expandedGroupLayers": [
-                5
-            ],
-            "expandedObjectLayers": [
-                24
-            ],
-            "expandedObjectLayers": [
-                24
-            ],
-            "scale": 0.5,
+            "scale": 0.75,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 158,
-                "y": 584
+                "x": 113.33333333333331,
+                "y": 544.6666666666667
             }
         },
         "stage3.tmx": {
-            "scale": 3,
-            "selectedLayer": 8,
+            "scale": 0.39372438524590164,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 321.3333333333333,
-                "y": 885.3333333333333
+                "x": 975.3015418645501,
+                "y": 587.9747576605295
             }
-        },
-        "test_tileset.tsx": {
-            "scaleInDock": 1
         }
     },
-    "loadedWorlds": [
-        "C:/Users/alaib/Software_Engineering_Project/CS370/assets/tiled/milksong_world.world"
-    ],
-    "map.height": 68,
-    "map.lastUsedFormat": "tmx",
-    "map.tileHeight": 16,
-    "map.tileWidth": 16,
-    "map.width": 120,
     "openFiles": [
-        "stage1.tmx",
-        "stage2.tmx",
-        "maintileset.tsx"
+        "stage2.tmx"
     ],
     "project": "cs370.tiled-project",
     "recentFiles": [
-        "C:/Users/kentp/2025SpringGameJam/data/maps/stage1.tmx",
-        "stage2.tmx",
-        "stage1.tmx"
+        "stage2.tmx"
     ]
 }
