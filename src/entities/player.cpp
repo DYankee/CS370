@@ -113,6 +113,7 @@ void CreatePlayer(entt::registry &registry) {
 
     // Load jump sound
     Sound jumpSound = LoadSound("assets/audio/jumpMoo.mp3");
+    SetSoundVolume(jumpSound, 0.5f);
 
     // Add PlayerStats component to the entity
     PlayerStats stats = PlayerStats(MAX_HEALTH, MAX_IFRAMES, SPEED, JUMP_STRENGTH, GRAVITY, jumpSound);
