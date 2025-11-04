@@ -34,7 +34,7 @@ Tests for functions that act on maps
 // Make sure the correct number of objects are found
 TEST(MapFunctions, FindObjTest){
     InitWindow(1,1,"Tests");
-    TmxMap* map = LoadTMX("tiled/stage1.tmx");
+    TmxMap* map = LoadTMX("tiled/test.tmx");
     TmxObjectGroup entities;
     std::vector<TmxObject> EnemyObjs;
     int EnemiesFound = 0;
@@ -53,7 +53,7 @@ TEST(MapFunctions, FindObjTest){
 
 TEST(MapFunctions, GetObjectPropertiesTest){
     InitWindow(1,1,"Tests");
-    TmxMap* map = LoadTMX("tiled/stage1.tmx");
+    TmxMap* map = LoadTMX("tiled/test.tmx");
     TmxObjectGroup entities;
     std::vector<TmxObject> EnemyObjs;
     std::map<std::string, float> props;
@@ -67,7 +67,7 @@ TEST(MapFunctions, GetObjectPropertiesTest){
         props = GetObjectProperties(EnemyObjs[0]);
     }
 
-    EXPECT_EQ(props.size(), 3);
+    EXPECT_EQ(props.size(), 4);
     EXPECT_EQ(props["DMG"], 1.0);
 
     CloseWindow();
