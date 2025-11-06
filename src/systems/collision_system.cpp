@@ -36,6 +36,8 @@ void SpikeCollision(entt::registry &registry, float dt) {
     });
 }
 
+
+
 // Check collisions against tile layers
 void MoveEntity(entt::registry& registry, float dt, entt::entity entity){
     TraceLog(LOG_TRACE, "Entering Function: MoveEntity");

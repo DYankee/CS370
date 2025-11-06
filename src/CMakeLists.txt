@@ -13,6 +13,7 @@ set(MILK_SOURCES
     entities/enemy.cpp
     entities/map.cpp
     entities/player.cpp
+    entities/health_upgrade.cpp
     systems/asset_loader.cpp
     systems/collision_system.cpp
     systems/player_controller.cpp
@@ -22,6 +23,8 @@ set(MILK_SOURCES
     systems/hud_system.cpp
     systems/player_enemy_collision.cpp
     systems/enemy_controller.cpp
+    systems/health_upgrade_controller.cpp
+    systems/player_health_upgrade_collision.cpp
 )
 
 add_library(milk_lib STATIC ${MILK_SOURCES})

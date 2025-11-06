@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="118">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="119">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <group id="5" name="bg" offsetx="4" offsety="193.333">
@@ -24,7 +24,16 @@
   <object id="114" name="Player" x="112.167" y="627.584">
    <point/>
   </object>
-  <object id="116" name="Enemy" type="Enemy" x="791.833" y="813.333">
+  <object id="116" name="HealthUpgrade" type="HealthUpgrade" x="1000" y="900">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="200"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="118" name="Enemy" type="Enemy" x="791.833" y="813.333">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="1"/>

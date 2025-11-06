@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="122">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="127">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
+ <tileset firstgid="1026" source="test_tileset.tsx"/>
  <group id="5" name="bg" offsetx="4" offsety="193.333">
   <imagelayer id="9" name="bg" offsetx="0" offsety="-192" repeatx="1" repeaty="1">
    <image source="../graphics/bgart/skyNIGHT.png" width="1920" height="1080"/>
@@ -25,6 +26,9 @@
    <image source="../graphics/bgart/dirtNIGHT.png" width="1920" height="1080"/>
   </imagelayer>
  </group>
+ <objectgroup id="25" name="HealthUpgrades">
+  <object id="124" x="319.667" y="950.667"/>
+ </objectgroup>
  <objectgroup id="24" name="Entities">
   <object id="112" name="Player" x="63.0253" y="566.896">
    <point/>
@@ -45,7 +49,10 @@
    </properties>
    <point/>
   </object>
-  <object id="121" name="Enemy" type="Enemy" x="1241" y="893">
+  <object id="121" name="HealthUpgrade" type="HealthUpgrade" x="404" y="800">
+   <point/>
+  </object>
+  <object id="125" name="Enemy" type="Enemy" x="1241" y="893">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Health" type="float" value="3"/>
@@ -54,7 +61,6 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="22" name="Spikes"/>
  <layer id="1" name="Tile Layer 1" width="120" height="68">
   <data encoding="csv">
 0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,67,

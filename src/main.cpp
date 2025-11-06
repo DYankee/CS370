@@ -13,6 +13,8 @@
 #include "systems/hud_system.hpp"
 #include "systems/iframes_system.hpp"
 #include "systems/player_enemy_collision.hpp"
+#include "systems/health_upgrade_controller.hpp"
+#include "systems/player_health_upgrade_collision.hpp"
 
 using namespace std;
 
@@ -25,7 +27,6 @@ using namespace std;
 typedef enum GameScreen { TITLE = 0, GAMEPLAY } GameScreen;
 
 void Update(entt::registry &registry, float dt) {
-    TraceLog(LOG_TRACE, "Entering Function: Update (main)");
     PlayerInputSystem(registry, dt);
     MovePlayer(registry, dt);
     UpdateEnemies(registry, dt);
@@ -35,10 +36,11 @@ void Update(entt::registry &registry, float dt) {
     CheckForMapChange(registry);
     UpdateMap(registry, dt);
     UpdateIFrames(registry, dt);
+    UpdateHealthUpgrades(registry, dt);
+    PlayerHealthCollisionSystem(registry, dt);
 };
 
 void Render(entt::registry &registry, float dt) {
-    TraceLog(LOG_TRACE, "Entering Function: Render (main)");
     BeginDrawing();
     
     registry.view<Camera2D, PlayerCamera>().each([&registry](Camera2D camera){
@@ -47,7 +49,7 @@ void Render(entt::registry &registry, float dt) {
             ClearBackground(RAYWHITE);
         
             // Draw TMX map
-            TraceLog(LOG_TRACE, "Drawing Map");
+
             registry.view<TmxMap, Map>().each([&camera](TmxMap &map) {
                 AnimateTMX(&map); // Update animated tiles
                 DrawTMX(&map, &camera, 0, 0, WHITE); // Draw tile map with parallax support 
@@ -55,7 +57,7 @@ void Render(entt::registry &registry, float dt) {
             
             
             // Draw player
-            TraceLog(LOG_TRACE, "Drawing Player");
+
             registry.view<SpriteData, Player, Animation>().each([&transform](SpriteData &sprite, Animation &animation) {
                 Rectangle srcRec = sprite.srcRec;
                 
@@ -66,20 +68,25 @@ void Render(entt::registry &registry, float dt) {
                 
                 Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
                 Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
-                TraceLog(LOG_INFO, "Drawing Player at: %f,%f", dstRec.x, dstRec.y);
-                TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
                 DrawTexturePro(sprite.curentTexture, srcRec, dstRec, origin, transform.rotation.x, sprite.color);
             });
 
             // Draw Enemies
-            TraceLog(LOG_TRACE, "Drawing enemies");
             registry.view<SpriteData, Transform, Enemy>().each([](SpriteData &sprite, Transform &pos){
                 Rectangle dstRec = {pos.translation.x, pos.translation.y, pos.scale.x, pos.scale.y};
                 Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
-                TraceLog(LOG_INFO, "Drawing Enemy at: %f,%f", dstRec.x, dstRec.y);
-                TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
                 DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, pos.rotation.x, sprite.color);
             });
+            // Draw Health Upgrades
+TraceLog(LOG_TRACE, "Drawing Health Upgrades");
+registry.view<SpriteData, Transform, HealthUpgrade>().each([](SpriteData &sprite, Transform &transform){
+    Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
+    Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
+    TraceLog(LOG_INFO, "Drawing Health Upgrade at: %f,%f", dstRec.x, dstRec.y);
+    TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
+    DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
+});
+
 
                 
                 // Draw text
@@ -211,6 +218,8 @@ int main() {
                         CreatePlayer(registry);
 
                         SpawnEnemies(registry);
+
+                        SpawnHealthUpgrades(registry);
                         
                         gameInitialized = true;
                     }
