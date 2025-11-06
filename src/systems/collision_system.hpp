@@ -11,6 +11,7 @@
 // Check for collisions between player and spike objects
 void SpikeCollision(entt::registry &registry, float dt);
 
+
 // Check for collisions between player and tile layers
 void MoveEntity(entt::registry &registry, float dt, entt::entity);
 
