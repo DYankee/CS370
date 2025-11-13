@@ -2,7 +2,8 @@
 #include "../components/player_stats.hpp"
 #include "../components/enemy_stats.hpp"
 #include "../components/physics_object.hpp"
-
+const float knockbackX = 300.0f;
+const float knockbackY = -600.0f;
 void PlayerEnemyCollisionSystem(entt::registry &registry, float dt) {
     registry.view<PlayerStats, Transform, PhysicsObject>().each(
         [&registry, dt](auto playerEntity, PlayerStats& playerStats, Transform& playerTransform, PhysicsObject& playerPhysics) {
@@ -22,36 +23,30 @@ void PlayerEnemyCollisionSystem(entt::registry &registry, float dt) {
                          playerTransform.translation.y + playerTransform.scale.y > enemyTransform.translation.y;
 
                     if (collisionX && collisionY) {
-                        float playerBottom = playerTransform.translation.y + playerTransform.scale.y;
-                        float enemyTop = enemyTransform.translation.y;
-                        bool stomping = playerPhysics.velocity.y > 0 &&
-                                        (playerBottom - playerPhysics.velocity.y * dt) <= enemyTop + 5;
-
-                        if (stomping) {
+                        // If attacking, destroy enemy
+                        if (playerStats.isAttacking) {
                             registry.destroy(enemyEntity);
-                            playerPhysics.velocity.y = -400.0f; // bounce
-                            stompedEnemy = true; 
                             return;
                         }
+                        // Else take damage
+                        else{
+                    
+                        playerStats.health -= static_cast<int>(enemyStats.dmg);
+                        playerStats.iFrames = playerStats.maxIFrames;
+                        
 
-                        if (!stompedEnemy) {
-                            playerStats.health -= static_cast<int>(enemyStats.dmg);
-                            playerStats.iFrames = playerStats.maxIFrames;
-
-                            const float knockbackX = 300.0f;
-                            const float knockbackY = -600.0f;
-
-                            if (playerTransform.translation.x < enemyTransform.translation.x) {
-                                playerPhysics.velocity.x = -knockbackX;
-                            } else {
-                                playerPhysics.velocity.x = knockbackX;
-                            }
-
-                            playerPhysics.velocity.y = knockbackY;
+                        if (playerTransform.translation.x < enemyTransform.translation.x) {
+                            playerPhysics.velocity.x = -knockbackX;
+                        } else {
+                            playerPhysics.velocity.x = knockbackX;
                         }
+                    }
+
+                        playerPhysics.velocity.y = knockbackY;
                     }
                 }
             );
         }
     );
 }
+
