@@ -1,9 +1,9 @@
 {
     "files.associations": {
-        "*.dbclient-js": "javascript",
-        ".fantomasignore": "ignore",
         "*.erd": "json",
         "*.vuerd": "json",
+        "*.dbclient-js": "javascript",
+        ".fantomasignore": "ignore",
         "map": "cpp",
         "ostream": "cpp",
         "iostream": "cpp",
@@ -82,7 +82,8 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "variant": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "locale": "cpp"
     },
     "FSharp.suggestGitignore": false
 }

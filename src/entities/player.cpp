@@ -22,7 +22,9 @@ void CreatePlayer(entt::registry &registry) {
             {"cowRWalk", "assets/sprites/cowRWalk.png"},
             {"cowLWalk", "assets/sprites/cowLWalk.png"},
             {"cowRJump", "assets/sprites/cowRJump.png"},
-            {"cowLJump", "assets/sprites/cowLJump.png"}
+            {"cowLJump", "assets/sprites/cowLJump.png"},
+            {"cowRHeadbutt", "assets/sprites/cowRHeadbutt.png"},
+            {"cowLHeadbutt", "assets/sprites/cowLHeadbutt.png"}
 
         }),
         WHITE
@@ -91,6 +93,31 @@ void CreatePlayer(entt::registry &registry) {
         });
     }
     playerAnimation.AddSequence("jumpLeft", AnimationSequence(jumpLeftFrames, false));
+    
+    // Sprite sheet dimensions for headbutt
+    int headbuttFrameWidth = 16;
+    int headbuttFrameHeight = 16;
+    int headbuttTotalFrames = 7;
+
+    // Create headbutt right animation sequence (7 frames)
+    std::vector<AnimationFrame> headbuttRightFrames;
+    for (int i = 0; i < headbuttTotalFrames; i++) {
+        headbuttRightFrames.push_back(AnimationFrame{
+            Rectangle{(float)(i * headbuttFrameWidth), 0, (float)headbuttFrameWidth, (float)headbuttFrameHeight},
+            0.1f  // 0.1 seconds per frame
+        });
+    }
+    playerAnimation.AddSequence("headbuttRight", AnimationSequence(headbuttRightFrames, false));
+    
+    // Create headbutt left animation sequence (7 frames)
+    std::vector<AnimationFrame> headbuttLeftFrames;
+    for (int i = 0; i < headbuttTotalFrames; i++) {
+        headbuttLeftFrames.push_back(AnimationFrame{
+            Rectangle{(float)(i * headbuttFrameWidth), 0, (float)headbuttFrameWidth, (float)headbuttFrameHeight},
+            0.1f  // 0.1 seconds per frame
+        });
+    }
+    playerAnimation.AddSequence("headbuttLeft", AnimationSequence(headbuttLeftFrames, false));
     
     // Add Animation component to the entity
     registry.emplace<Animation>(playerEnt, playerAnimation);
