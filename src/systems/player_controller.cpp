@@ -5,7 +5,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
 
     // Get the Transform and PhysicsObject from the Player Component
     registry.view<Transform, PhysicsObject, SpriteData, PlayerStats, Player, Animation>().each([dt, &registry](Transform &transform, PhysicsObject &physics, SpriteData &sprite, PlayerStats &stats, Animation &animation) {
-        
+        static float attackTimer;
         // Log player starting velocity
         TraceLog(LOG_INFO, "Player current velocity: %f,%f", physics.velocity.x, physics.velocity.y);
 
@@ -14,7 +14,20 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         
         // Check if currently jumping (jump animation is playing and not finished)
         bool isJumping = (animation.currentSequence == "jumpRight" || animation.currentSequence == "jumpLeft") && !animation.IsFinished();
-        
+        // Check if attacking and decrease timer
+        if (stats.isAttacking) {
+            attackTimer -= dt;
+            if (attackTimer <= 0.0f) {
+                stats.isAttacking = false;
+                TraceLog(LOG_INFO, "Attack ended.");
+            }
+        }
+        // If button pressed set attacking true
+        if (IsKeyPressed(KEY_R) && !stats.isAttacking) {
+            stats.isAttacking = true;
+            attackTimer = 1.0f;
+            TraceLog(LOG_INFO, "Player started attacking");
+        }
         // Move box based on key input
         // Don't change animation if currently jumping
         if (IsKeyDown(KEY_D)) {

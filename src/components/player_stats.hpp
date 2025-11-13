@@ -12,9 +12,9 @@ struct PlayerStats {
     float jumpStrength; //jump strength
     float gravity;      //gravity affecting player
     Sound jumpSound;    //jump sound effect
+    bool isAttacking = false; //is player attacking
 
-
-    PlayerStats(int maxHealth, float maxIFrames, float speed, float jumpStrength, float gravity, Sound jumpSound);
+    PlayerStats(int maxHealth, float maxIFrames, float speed, float jumpStrength, float gravity, Sound jumpSound, bool isAttacking);
 };
 
 #endif
