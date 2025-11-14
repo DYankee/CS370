@@ -149,20 +149,39 @@ void MovePlayer(entt::registry &registry, float dt){
             if (collided) {
                 TraceLog(LOG_INFO, "Collision detected at position (%f, %f)", nextPos.x, nextPos.y);
                 // Vertical collision detection
-                if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRecY, &hitObj)) {
-                    transform.translation.y = nextPos.y;
-                } else {
-                    physics.velocity.y = 0; // Stop vertical movement
-                }
-                
+
+                float nextX = playerDestRec.x + playerDestRec.width;
+                float nextY = playerDestRec.y + playerDestRec.height;
+
                 // Horizontal collision only
                 if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRecX, &hitObj)) {
                     transform.translation.x = nextPos.x;
                     physics.velocity.x -= physics.velocity.x / 2;
                 } else {
-                    physics.velocity.x = 0; // Stop horizontal movement
+                    physics.velocity.x = 0;
+                    // make sure player isn't inside the collided object
+                    if (transform.translation.x < hitObj.x){
+                        transform.translation.x = hitObj.x - transform.scale.x;
+                    } else {
+                        transform.translation.x = hitObj.x + hitObj.width;
+                    }
+                     // Stop horizontal movement
                 }
-            } else {
+ 
+
+                if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRecY, &hitObj)) {
+                    transform.translation.y = nextPos.y;
+                } else {
+                    physics.velocity.y = 0; // Stop vertical movement
+                    // make sure player isn't inside the collided object
+                    if (transform.translation.y < hitObj.y){
+                        transform.translation.y = hitObj.y - transform.scale.y;
+                    } else {
+                        transform.translation.y = hitObj.y + hitObj.height;
+                    }
+                }
+                
+           } else {
                 // No collision: accept movement
                 transform.translation = nextPos;
             }
