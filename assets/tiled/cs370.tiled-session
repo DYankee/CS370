@@ -22,11 +22,11 @@
             "expandedObjectLayers": [
                 24
             ],
-            "scale": 1.5,
+            "scale": 0.75,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 955,
-                "y": 1083
+                "x": 1179.9999999999998,
+                "y": 1128
             }
         },
         "stage2.tmx": {
@@ -36,23 +36,19 @@
             "expandedObjectLayers": [
                 22
             ],
-            "scale": 1.5,
-            "selectedLayer": 0,
+            "scale": 0.5,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 1372,
-                "y": 920.9999999999999
+                "x": 344,
+                "y": 780
             }
         },
         "stage3.tmx": {
-            "expandedObjectLayers": [
-                24,
-                25
-            ],
             "scale": 0.75,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 403.3333333333333,
-                "y": 800.6666666666667
+                "x": 1368,
+                "y": 801.3333333333333
             }
         },
         "test.tmx": {

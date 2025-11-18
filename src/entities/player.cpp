@@ -17,14 +17,14 @@ void CreatePlayer(entt::registry &registry) {
 
     // Load player sprites
     SpriteData cowSprite = SpriteData(LoadTextures({
-            {"cowR", "assets/sprites/cowR.png"},
-            {"cowL", "assets/sprites/cowL.png"},
-            {"cowRWalk", "assets/sprites/cowRWalk.png"},
-            {"cowLWalk", "assets/sprites/cowLWalk.png"},
-            {"cowRJump", "assets/sprites/cowRJump.png"},
-            {"cowLJump", "assets/sprites/cowLJump.png"},
-            {"cowRHeadbutt", "assets/sprites/cowRHeadbutt.png"},
-            {"cowLHeadbutt", "assets/sprites/cowLHeadbutt.png"}
+            {"cowR", "assets/sprites/cow/cowR.png"},
+            {"cowL", "assets/sprites/cow/cowL.png"},
+            {"cowRWalk", "assets/sprites/cow/cowRWalk.png"},
+            {"cowLWalk", "assets/sprites/cow/cowLWalk.png"},
+            {"cowRJump", "assets/sprites/cow/cowRJump.png"},
+            {"cowLJump", "assets/sprites/cow/cowLJump.png"},
+            {"cowRHeadbutt", "assets/sprites/cow/cowRHeadbutt.png"},
+            {"cowLHeadbutt", "assets/sprites/cow/cowLHeadbutt.png"}
 
         }),
         WHITE
