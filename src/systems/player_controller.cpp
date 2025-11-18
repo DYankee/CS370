@@ -25,11 +25,24 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         // If button pressed set attacking true
         if (IsKeyPressed(KEY_R) && !stats.isAttacking) {
             stats.isAttacking = true;
-            attackTimer = 1.0f;
+            attackTimer = .3f;
             TraceLog(LOG_INFO, "Player started attacking");
+             float lungePower = 500.0f;
+
+    bool facingLeft =
+        (animation.currentSequence == "walkLeft" ||
+         animation.currentSequence == "idleLeft" ||
+         animation.currentSequence == "jumpLeft");
+
+    if (facingLeft) {
+        physics.velocity.x = -lungePower;
+    } else {
+        physics.velocity.x = lungePower;
+    }
         }
         // Move box based on key input
         // Don't change animation if currently jumping
+        if (!stats.isAttacking) {
         if (IsKeyDown(KEY_D)) {
             physics.velocity.x = stats.speed;    // Move right
             if (!isJumping) {
@@ -63,6 +76,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
                 animation.PlaySequence("idleLeft");
             }
         }
+    }
         
         // Update animation
         animation.Update(dt);
