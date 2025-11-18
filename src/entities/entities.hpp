@@ -7,5 +7,6 @@
 #include "map.hpp"
 #include "player.hpp"
 #include "health_upgrade.hpp"
+#include "projectile.hpp"
 
 #endif // ENTITIES_HPP

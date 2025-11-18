@@ -50,6 +50,12 @@ void CheckForMapChange(entt::registry &registry){
         Vector2 playerPos = { transform.translation.x, transform.translation.y };
         registry.view<Map, TmxMap>().each([&registry, &playerPos](TmxMap &map) {
             
+
+            // Change to the testing/debug map
+            if (IsKeyDown(KEY_HOME)){
+                ChangeMap(registry, "assets/tiled/test.tmx");
+            }
+            
             // Change to earlier stage if player goes past left edge
             if (playerPos.x < 0) {
                 mapIndex--;

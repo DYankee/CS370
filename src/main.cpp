@@ -1,4 +1,5 @@
 ﻿// CS370.cpp
+// CS370.cpp
 #include <iostream>
 
 // Include all ECS headers
@@ -27,7 +28,6 @@ typedef enum GameScreen { TITLE = 0, GAMEPLAY } GameScreen;
 
 void Update(entt::registry &registry, float dt) {
     PlayerInputSystem(registry, dt);
-    MovePlayer(registry, dt);
     UpdateEnemies(registry, dt);
     PlayerEnemyCollisionSystem(registry, dt);
     CameraUpdate(registry, dt);

@@ -14,6 +14,10 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         
         // Check if currently jumping (jump animation is playing and not finished)
         bool isJumping = (animation.currentSequence == "jumpRight" || animation.currentSequence == "jumpLeft") && !animation.IsFinished();
+        
+        // Check if currently headbutting
+        bool isHeadbutting = (animation.currentSequence == "headbuttRight" || animation.currentSequence == "headbuttLeft") && !animation.IsFinished();
+        
         // Check if attacking and decrease timer
         if (stats.isAttacking) {
             attackTimer -= dt;
@@ -22,35 +26,34 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
                 TraceLog(LOG_INFO, "Attack ended.");
             }
         }
-        // If button pressed set attacking true
-        if (IsKeyPressed(KEY_R) && !stats.isAttacking) {
+        // If button pressed set attacking true and start headbutt animation
+        if (IsKeyPressed(KEY_R) && !stats.isAttacking && !isJumping) {
             stats.isAttacking = true;
-            attackTimer = .3f;
+            attackTimer = 0.5f;  // Duration matches animation (5 frames * 0.1s = 0.5s)
             TraceLog(LOG_INFO, "Player started attacking");
-             float lungePower = 500.0f;
-
-    bool facingLeft =
-        (animation.currentSequence == "walkLeft" ||
-         animation.currentSequence == "idleLeft" ||
-         animation.currentSequence == "jumpLeft");
-
-    if (facingLeft) {
-        physics.velocity.x = -lungePower;
-    } else {
-        physics.velocity.x = lungePower;
-    }
+            
+            // Play headbutt animation based on current direction
+            if (animation.currentSequence == "walkLeft" || animation.currentSequence == "idleLeft" || 
+                animation.currentSequence == "jumpLeft" || animation.currentSequence == "headbuttLeft") {
+                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLHeadbutt");
+                sprite.SetTexture("cowLHeadbutt");
+                animation.PlaySequence("headbuttLeft");
+            } else {
+                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRHeadbutt");
+                sprite.SetTexture("cowRHeadbutt");
+                animation.PlaySequence("headbuttRight");
+            }
         }
         // Move box based on key input
-        // Don't change animation if currently jumping
-        if (!stats.isAttacking) {
-        if (IsKeyDown(KEY_D)) {
+        // Don't change animation if currently jumping or headbutting
+        if (IsKeyDown(KEY_D) && !isHeadbutting) {
             physics.velocity.x = stats.speed;    // Move right
             if (!isJumping) {
                 TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRWalk");
                 sprite.SetTexture("cowRWalk");
                 animation.PlaySequence("walkRight");
             }
-        } else if (IsKeyDown(KEY_A)) {
+        } else if (IsKeyDown(KEY_A) && !isHeadbutting) {
             physics.velocity.x = -stats.speed;   // Move left
             if (!isJumping) {
                 TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLWalk");
@@ -74,9 +77,16 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
                 // Transition from jump to idle when jump animation finishes
                 sprite.SetTexture("cowL");
                 animation.PlaySequence("idleLeft");
+            } else if (animation.currentSequence == "headbuttRight" && animation.IsFinished()) {
+                // Transition from headbutt to idle when headbutt animation finishes
+                sprite.SetTexture("cowR");
+                animation.PlaySequence("idleRight");
+            } else if (animation.currentSequence == "headbuttLeft" && animation.IsFinished()) {
+                // Transition from headbutt to idle when headbutt animation finishes
+                sprite.SetTexture("cowL");
+                animation.PlaySequence("idleLeft");
             }
         }
-    }
         
         // Update animation
         animation.Update(dt);
@@ -109,8 +119,15 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         // Log new velocity
         TraceLog(LOG_INFO, "Player new velocity: %f,%f", physics.velocity.x, physics.velocity.y);
     });
-}
 
+    // Update the players position
+    auto players = registry.view<Player>();
+    entt::entity player = players.front();
+    if (player != entt::null){
+        MoveEntity(registry, dt, player);
+    }
+}
+/*
 void MovePlayer(entt::registry &registry, float dt){
     TraceLog(LOG_TRACE, "Entering Function: MovePlayer");
 
@@ -139,23 +156,43 @@ void MovePlayer(entt::registry &registry, float dt){
             if (collided) {
                 TraceLog(LOG_INFO, "Collision detected at position (%f, %f)", nextPos.x, nextPos.y);
                 // Vertical collision detection
-                if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRecY, &hitObj)) {
-                    transform.translation.y = nextPos.y;
-                } else {
-                    physics.velocity.y = 0; // Stop vertical movement
-                }
-                
+
+                float nextX = playerDestRec.x + playerDestRec.width;
+                float nextY = playerDestRec.y + playerDestRec.height;
+
                 // Horizontal collision only
                 if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRecX, &hitObj)) {
                     transform.translation.x = nextPos.x;
                     physics.velocity.x -= physics.velocity.x / 2;
                 } else {
-                    physics.velocity.x = 0; // Stop horizontal movement
+                    physics.velocity.x = 0;
+                    // make sure player isn't inside the collided object
+                    if (transform.translation.x < hitObj.x){
+                        transform.translation.x = hitObj.x - transform.scale.x;
+                    } else {
+                        transform.translation.x = hitObj.x + hitObj.width;
+                    }
+                     // Stop horizontal movement
                 }
-            } else {
+ 
+
+                if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRecY, &hitObj)) {
+                    transform.translation.y = nextPos.y;
+                } else {
+                    physics.velocity.y = 0; // Stop vertical movement
+                    // make sure player isn't inside the collided object
+                    if (transform.translation.y < hitObj.y){
+                        transform.translation.y = hitObj.y - transform.scale.y;
+                    } else {
+                        transform.translation.y = hitObj.y + hitObj.height;
+                    }
+                }
+                
+           } else {
                 // No collision: accept movement
                 transform.translation = nextPos;
             }
         }); 
     });
 }
+*/
