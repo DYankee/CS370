@@ -9,6 +9,7 @@
 #include "enemy_stats.hpp"
 
 typedef void (*UpdateFunction)(entt::registry&, float, entt::entity);
+
 struct Enemy_behavior{
     UpdateFunction Update;
 
