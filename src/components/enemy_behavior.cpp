@@ -14,14 +14,8 @@ void TestUpdateFunc(entt::registry &registry, float dt, entt::entity enemy){
 }
 
 void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
-    TraceLog(LOG_TRACE, "Entering Function BasicEnemyUpdate");
-    TraceLog(LOG_INFO, "Updating entity: %d", enemy);
-    float maxDistance = 50;
-    
-    // Get player position
-    auto players = registry.view<Player>();
-    entt::entity player = players.front();
-    auto& playerPos = registry.get<Transform>(player);
+    TraceLog(LOG_TRACE, "Entering TestUpdateFunc");
+    float maxDistance = 100;    
 
     // Get components from enemy entity
     auto [pos, spawn, physics, stats] = registry.get<Transform, Vector2, PhysicsObject, EnemyStats>(enemy);
@@ -62,17 +56,6 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
             stats.followsPlayer = true;
         }
     }
-
-    // Update velocity based on current direction
-    if(stats.CurrentDirection == LEFT){
-        physics.velocity.x = stats.enemySpeed * -1;
-        sprite.SetTexture("FarmerL");
-    }
-    else if(stats.CurrentDirection == RIGHT){
-        physics.velocity.x = stats.enemySpeed * 1;
-        sprite.SetTexture("FarmerR");
-    }
-    // Apply movement
     MoveEntity(registry, dt, enemy);
 }
 
