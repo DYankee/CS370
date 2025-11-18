@@ -9,5 +9,6 @@
 #include "player_stats.hpp"
 #include "sprite_data.hpp"
 #include "health_pickup.hpp"
+#include "projectile_stats.hpp"
 
 #endif
