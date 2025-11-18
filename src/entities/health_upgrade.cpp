@@ -16,7 +16,7 @@ void CreateHealthUpgrade(entt::registry &registry, Vector2 position) {
     registry.emplace<HealthUpgrade>(upgradeEnt, healthComp);
 
     // add sprite
-    SpriteData sprite = SpriteData(LoadTextures({{"Heart", "assets/sprites/CowFace.png"}}), WHITE);
+    SpriteData sprite = SpriteData(LoadTextures({{"Heart", "assets/sprites/powerups/CowFace.png"}}), WHITE);
     sprite.SetTexture("Heart");
     registry.emplace<SpriteData>(upgradeEnt, sprite);
 
