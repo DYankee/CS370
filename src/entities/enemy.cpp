@@ -14,13 +14,13 @@ void CreateEnemy(entt::registry &registry, TmxObject enemyInfo) {
 
     // Add sprites
     // test sprite for now
-    SpriteData enemySprite = SpriteData(LoadTextures({
-        {"FarmerR", "assets/sprites/enemies/FarmerR.png"}
+    SpriteData farmerSprite = SpriteData(LoadTextures({
+        {"FarmerR", "assets/sprites/enemies/farmer/FarmerR.png"}
     }),
     WHITE
     );
-    enemySprite.SetTexture("FarmerR");
-    registry.emplace<SpriteData>(enemyEnt, enemySprite);
+    farmerSprite.SetTexture("FarmerR");
+    registry.emplace<SpriteData>(enemyEnt, farmerSprite);
 
     // Add Transform component to the entity
     Transform enemyTransform = Transform{ {float(enemyInfo.x), float(enemyInfo.y), 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
