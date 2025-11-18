@@ -4,7 +4,7 @@
 #include "../../include/entt.hpp"
 #include "../../include/raylib.h"
 
-struct projectile{};
+struct Projectile{};
 
 void CreateProjectile(entt::registry, Transform, Vector2);
 
