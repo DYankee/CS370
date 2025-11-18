@@ -15,7 +15,7 @@ void CreateEnemy(entt::registry &registry, TmxObject enemyInfo) {
     // Add sprites
     // test sprite for now
     SpriteData enemySprite = SpriteData(LoadTextures({
-        {"FarmerR", "assets/sprites/FarmerR.png"}
+        {"FarmerR", "assets/sprites/enemies/FarmerR.png"}
     }),
     WHITE
     );
