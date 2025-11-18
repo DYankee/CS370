@@ -11,8 +11,5 @@
 #include "sprite_data.hpp"
 #include "health_pickup.hpp"
 #include "projectile_stats.hpp"
-#include "weapon.hpp"
-#include "dialogue.hpp"
-#include "range_pickup.hpp"
 
 #endif

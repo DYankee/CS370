@@ -6,6 +6,7 @@
 #include "../components/components.hpp"
 #include "../components/projectile_stats.hpp"
 
+struct Projectile{};
 
 struct Projectile{
     bool fromPlayer;
