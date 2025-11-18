@@ -134,13 +134,20 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
     // Log new velocity
     TraceLog(LOG_INFO, "Player new velocity: %f,%f", physics.velocity.x, physics.velocity.y);
 
+        // Log new velocity
+        TraceLog(LOG_INFO, "Player new velocity: %f,%f", physics.velocity.x, physics.velocity.y);
+    });
+
+    // Update the players position
+    auto players = registry.view<Player>();
+    entt::entity player = players.front();
     if (player != entt::null){
-        MovePlayer(registry, dt, player);
+        MoveEntity(registry, dt, player);
     }
 }
-
-void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
-    TraceLog(LOG_TRACE, "Entering Function: MovePlayer: ");
+/*
+void MovePlayer(entt::registry &registry, float dt){
+    TraceLog(LOG_TRACE, "Entering Function: MovePlayer");
 
     registry.view<Map, TmxMap>().each([&registry, &entity, dt](TmxMap &map) {
 
@@ -229,3 +236,4 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
         );
     });
 }
+*/

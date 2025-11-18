@@ -30,8 +30,13 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& spawn = registry.get<Vector2>(enemy);
     auto& sprite = registry.get<SpriteData>(enemy);
 
-    // Apply gravity
-    physics.velocity.y += GRAVITY * dt;
+    // Get components from enemy entity    auto& pos = registry.get<Transform>(enemy);
+    auto& pos = registry.get<Transform>(enemy);
+    auto& physics = registry.get<PhysicsObject>(enemy);
+    auto& stats = registry.get<EnemyStats>(enemy);
+    auto& spawn = registry.get<Vector2>(enemy);
+
+    physics.velocity.y += 2000.0f * dt;
 
     // Check if we are following the player
     if(stats.followsPlayer){
