@@ -41,6 +41,7 @@ void SpikeCollision(entt::registry &registry, float dt) {
 // Check collisions against tile layers
 void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
     TraceLog(LOG_TRACE, "Entering Function: MoveEntity");
+    TraceLog(LOG_INFO, "Moving entity: %d", entity);
 
     registry.view<Map, TmxMap>().each([&registry, &entity, dt](TmxMap &map) {
         TmxObject hitObj;
@@ -63,49 +64,47 @@ void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
         TraceLog(LOG_INFO, "Entity destination pos: %f,%f", nextPos.x, nextPos.y);
         
         Rectangle playerDestRec = { nextPos.x, nextPos.y, pos.scale.x, pos.scale.y };
-        Rectangle playerDestRecX = { nextPos.x, pos.translation.y, pos.scale.x, pos.scale.y };
-        Rectangle playerDestRecY = { pos.translation.x, nextPos.y, pos.scale.x, pos.scale.y };
-        // Log new Pos
-        TraceLog(LOG_INFO, "Player Current Pos: %f,%f", nextPos.x, nextPos.y);
-
         bool collided = CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRec, &hitObj);
-
+        
         if (collided) {
             TraceLog(LOG_INFO, "Collision detected at position (%f, %f)", nextPos.x, nextPos.y);
-            // Vertical collision detection
-
-            float nextX = playerDestRec.x + playerDestRec.width;
-            float nextY = playerDestRec.y + playerDestRec.height;
-
-            // Horizontal collision only
+            
+            
+            // Horizontal collision detection
+            Rectangle playerDestRecX = { nextPos.x, pos.translation.y, pos.scale.x, pos.scale.y };
             if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRecX, &hitObj)) {
                 pos.translation.x = nextPos.x;
                 physics.velocity.x -= physics.velocity.x / 2;
             } else {
-                physics.velocity.x = 0;
                 // make sure player isn't inside the collided object
                 if (pos.translation.x < hitObj.x){
-                pos.translation.x = hitObj.x - pos.scale.x;
-                    } else {
-                        pos.translation.x = hitObj.x + hitObj.width;
-                    }
-                     // Stop horizontal movement
-                }
- 
-                if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRecY, &hitObj)) {
-                    pos.translation.y = nextPos.y;
+                    pos.translation.x = hitObj.x - pos.scale.x;
+                    physics.velocity.x = -20;
                 } else {
+                    pos.translation.x = hitObj.x + hitObj.width;
+                    physics.velocity.x = 20;
+                }
+            }
+ 
+            // Vertical collision detection
+            Rectangle playerDestRecY = { pos.translation.x, nextPos.y, pos.scale.x, pos.scale.y };
+            if (!CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, playerDestRecY, &hitObj)) {
+                pos.translation.y = nextPos.y;
+            } else {
+                // make sure player isn't inside the collided object
+                if (pos.translation.y < hitObj.y){
+                    pos.translation.y = hitObj.y - pos.scale.y;
                     physics.velocity.y = 0; // Stop vertical movement
-                    // make sure player isn't inside the collided object
-                    if (pos.translation.y < hitObj.y){
-                        pos.translation.y = hitObj.y - pos.scale.y;
-                    } else {
-                        pos.translation.y = hitObj.y + hitObj.height;
-                    }
-                }    
+                } else {
+                    pos.translation.y = hitObj.y + hitObj.height;
+                    physics.velocity.y = 0; // Stop vertical movement
+                }
+            }
+
         } else {
             // No collision: accept movement
             pos.translation = nextPos;
+            TraceLog(LOG_INFO, "Entity moved to pos: %f,%f", nextPos.x, nextPos.y);
         }
     }); 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="118">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="135">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <group id="5" name="bg" offsetx="4" offsety="193.333">
@@ -21,10 +21,10 @@
  </group>
  <objectgroup id="22" name="Spikes"/>
  <objectgroup id="24" name="Entities">
-  <object id="114" name="Player" x="393.667" y="802.084">
+  <object id="114" name="Player" x="362.42" y="935.998">
    <point/>
   </object>
-  <object id="116" name="Enemy" type="Enemy" x="1243.83" y="871.333">
+  <object id="116" name="Enemy" type="Enemy" x="1022.87" y="943.87">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="1"/>
@@ -33,7 +33,160 @@
    </properties>
    <point/>
   </object>
-  <object id="117" name="Enemy" type="Enemy" x="981" y="879">
+  <object id="117" name="Enemy" type="Enemy" x="678.578" y="942.609">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="10"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="118" name="Enemy" type="Enemy" x="454.19" y="940.743">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="119" name="Enemy" type="Enemy" x="755.496" y="944.091">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="120" name="Enemy" type="Enemy" x="588.104" y="862.627">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="121" name="Enemy" type="Enemy" x="926.236" y="936.279">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="122" name="Enemy" type="Enemy" x="829.149" y="859.279">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="123" name="Enemy" type="Enemy" x="1081.35" y="946.323">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="124" name="Enemy" type="Enemy" x="967.526" y="940.859">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="1000"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="125" name="Enemy" type="Enemy" x="1129.34" y="944.091">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="126" name="Enemy" type="Enemy" x="1177.32" y="946.323">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="127" name="Enemy" type="Enemy" x="1274.41" y="939.627">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="128" name="Enemy" type="Enemy" x="1018.41" y="759.739">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="200"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="129" name="Enemy" type="Enemy" x="921.774" y="752.148">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="130" name="Enemy" type="Enemy" x="1076.89" y="762.192">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="131" name="Enemy" type="Enemy" x="963.064" y="756.728">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="1000"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="132" name="Enemy" type="Enemy" x="1124.88" y="759.96">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="133" name="Enemy" type="Enemy" x="1172.86" y="762.192">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="2"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="134" name="Enemy" type="Enemy" x="1269.95" y="755.496">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
