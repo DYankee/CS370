@@ -35,6 +35,7 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& physics = registry.get<PhysicsObject>(enemy);
     auto& stats = registry.get<EnemyStats>(enemy);
     auto& spawn = registry.get<Vector2>(enemy);
+    auto& sprite = registry.get<SpriteData>(enemy);
 
     physics.velocity.y += 2000.0f * dt;
 
