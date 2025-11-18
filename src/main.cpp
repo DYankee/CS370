@@ -248,12 +248,8 @@ int main() {
     // Load title texture
     Texture2D titleTexture = LoadTexture("assets/graphics/title/milksong_logo.png");
 
-    //Load death texture
-    Texture2D deathTexture = LoadTexture("assets/graphics/title/you_died.png");
-
-    // Load button textures
+    // Load button texture
     Texture2D buttonTexture = LoadTexture("assets/graphics/title/button.png");
-    Texture2D button2Texture = LoadTexture("assets/graphics/title/button2.png");
 
     // Load background texture
     Texture2D backgroundTexture = LoadTexture("assets/graphics/bgart/mainbackground.png");
