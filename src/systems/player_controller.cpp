@@ -39,21 +39,43 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
             stats.isAttacking = false;
             TraceLog(LOG_INFO, "Attack ended.");
         }
-    }
-    // If button pressed set attacking true and start headbutt animation
-    if (IsKeyPressed(KEY_R) && !stats.isAttacking && !isJumping) {
-        stats.isAttacking = true;
-        attackTimer = 0.5f;  // Duration matches animation (5 frames * 0.1s = 0.5s)
-        float lungePower = 1500.0f;
-        TraceLog(LOG_INFO, "Player started attacking");
+        // If button pressed set attacking true and start headbutt animation
+        if (IsKeyPressed(KEY_R) && !stats.isAttacking && !isJumping) {
+            stats.isAttacking = true;
+            attackTimer = 0.5f;  // Duration matches animation (5 frames * 0.1s = 0.5s)
+            float lungePower = 1500.0f;
+            TraceLog(LOG_INFO, "Player started attacking");
             
-        // Play headbutt animation based on current direction
-        if (animation.currentSequence == "walkLeft" || animation.currentSequence == "idleLeft" || 
-            animation.currentSequence == "jumpLeft" || animation.currentSequence == "headbuttLeft") {
-            TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLHeadbutt");
-            sprite.SetTexture("cowLHeadbutt");
-            animation.PlaySequence("headbuttLeft");
-            physics.velocity.x = -lungePower;
+            // Play headbutt animation based on current direction
+            if (animation.currentSequence == "walkLeft" || animation.currentSequence == "idleLeft" || 
+                animation.currentSequence == "jumpLeft" || animation.currentSequence == "headbuttLeft") {
+                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLHeadbutt");
+                sprite.SetTexture("cowLHeadbutt");
+                animation.PlaySequence("headbuttLeft");
+                physics.velocity.x = -lungePower;
+            } else {
+                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRHeadbutt");
+                sprite.SetTexture("cowRHeadbutt");
+                animation.PlaySequence("headbuttRight");
+                physics.velocity.x = lungePower;
+            }
+        }
+        // Move box based on key input
+        // Don't change animation if currently jumping or headbutting
+        if (IsKeyDown(KEY_D) && !isHeadbutting) {
+            physics.velocity.x = stats.speed;    // Move right
+            if (!isJumping) {
+                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRWalk");
+                sprite.SetTexture("cowRWalk");
+                animation.PlaySequence("walkRight");
+            }
+        } else if (IsKeyDown(KEY_A) && !isHeadbutting) {
+            physics.velocity.x = -stats.speed;   // Move left
+            if (!isJumping) {
+                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLWalk");
+                sprite.SetTexture("cowLWalk");
+                animation.PlaySequence("walkLeft");
+            }
         } else {
             TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRHeadbutt");
             sprite.SetTexture("cowRHeadbutt");
