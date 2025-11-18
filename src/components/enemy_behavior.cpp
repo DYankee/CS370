@@ -23,14 +23,9 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     entt::entity player = players.front();
     auto& playerPos = registry.get<Transform>(player);
 
-    // Get components from enemy entity    auto& pos = registry.get<Transform>(enemy);
-    auto& pos = registry.get<Transform>(enemy);
-    auto& physics = registry.get<PhysicsObject>(enemy);
-    auto& stats = registry.get<EnemyStats>(enemy);
-    auto& spawn = registry.get<Vector2>(enemy);
-    auto& sprite = registry.get<SpriteData>(enemy);
+    // Get components from enemy entity
+    auto [pos, spawn, physics, stats] = registry.get<Transform, Vector2, PhysicsObject, EnemyStats>(enemy);
 
-    // Apply gravity
     physics.velocity.y += GRAVITY * dt;
 
     // Check if we are following the player
