@@ -1,4 +1,5 @@
 #include "enemy_behavior.hpp"
+#include "sprite_data.hpp"
 
 void TestUpdateFunc(entt::registry &registry, float dt, entt::entity enemy){
     TraceLog(LOG_TRACE, "Entering TestUpdateFunc");
@@ -22,6 +23,7 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& physics = registry.get<PhysicsObject>(enemy);
     auto& stats = registry.get<EnemyStats>(enemy);
     auto& spawn = registry.get<Vector2>(enemy);
+    auto& sprite = registry.get<SpriteData>(enemy);
 
     physics.velocity.y += 2000.0f * dt;
 
@@ -33,9 +35,11 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
 
         if(stats.CurrentDirection == LEFT){
             physics.velocity.x = stats.enemySpeed * -1;
+            sprite.SetTexture("FarmerL");
         }
         else if(stats.CurrentDirection == RIGHT){
             physics.velocity.x = stats.enemySpeed * 1;
+            sprite.SetTexture("FarmerR");
         }
     }
     else{
