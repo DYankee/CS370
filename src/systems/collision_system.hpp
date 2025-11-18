@@ -13,6 +13,6 @@ void SpikeCollision(entt::registry &registry, float dt);
 
 
 // Check for collisions between player and tile layers
-void MoveEntity(entt::registry &registry, float dt, entt::entity);
+void MoveEntity(entt::registry &registry, float dt, entt::entity&);
 
 #endif // COLLISION_SYSTEM_HPP

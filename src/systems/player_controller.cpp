@@ -119,8 +119,15 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         // Log new velocity
         TraceLog(LOG_INFO, "Player new velocity: %f,%f", physics.velocity.x, physics.velocity.y);
     });
-}
 
+    // Update the players position
+    auto players = registry.view<Player>();
+    entt::entity player = players.front();
+    if (player != entt::null){
+        MoveEntity(registry, dt, player);
+    }
+}
+/*
 void MovePlayer(entt::registry &registry, float dt){
     TraceLog(LOG_TRACE, "Entering Function: MovePlayer");
 
@@ -188,3 +195,4 @@ void MovePlayer(entt::registry &registry, float dt){
         }); 
     });
 }
+*/

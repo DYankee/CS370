@@ -26,7 +26,7 @@ void UpdateEnemies(entt::registry &registry, float dt){
     TraceLog(LOG_TRACE, "Entering function: UpdateEnemies");
 
     auto view = registry.view<Enemy>();
-    for (auto enemy :view){
+    for (entt::entity enemy :view){
         // Get the update function from the entity
         Enemy_behavior update = registry.get<Enemy_behavior>(enemy);
 
