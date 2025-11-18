@@ -30,6 +30,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         if (IsKeyPressed(KEY_R) && !stats.isAttacking && !isJumping) {
             stats.isAttacking = true;
             attackTimer = 0.5f;  // Duration matches animation (5 frames * 0.1s = 0.5s)
+            float lungePower = 1500.0f;
             TraceLog(LOG_INFO, "Player started attacking");
             
             // Play headbutt animation based on current direction
@@ -38,10 +39,12 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
                 TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLHeadbutt");
                 sprite.SetTexture("cowLHeadbutt");
                 animation.PlaySequence("headbuttLeft");
+                physics.velocity.x = -lungePower;
             } else {
                 TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRHeadbutt");
                 sprite.SetTexture("cowRHeadbutt");
                 animation.PlaySequence("headbuttRight");
+                physics.velocity.x = lungePower;
             }
         }
         // Move box based on key input
