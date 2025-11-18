@@ -23,10 +23,10 @@
                 24
             ],
             "scale": 0.75,
-            "selectedLayer": 8,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 791.3333333333334,
-                "y": 813.3333333333333
+                "x": 1179.9999999999998,
+                "y": 1128
             }
         },
         "stage2.tmx": {
@@ -42,16 +42,16 @@
             "scale": 0.5,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 961,
-                "y": 582
+                "x": 344,
+                "y": 780
             }
         },
         "stage3.tmx": {
             "scale": 0.75,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 532.6666666666665,
-                "y": 894.6666666666665
+                "x": 1368,
+                "y": 801.3333333333333
             }
         },
         "test.tmx": {
