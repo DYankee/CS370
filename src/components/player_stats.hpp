@@ -4,7 +4,7 @@
 #include "../../include/raylib.h"
 
 struct PlayerStats {
-    int health;         //plater current health
+    int health;         //player current health
     int maxHealth;      //player max health
     float iFrames;      // remaining i frame
     float maxIFrames;   // max i frame duration in frames
@@ -17,6 +17,12 @@ struct PlayerStats {
     bool hasRanged = false; // Check if player has ranged attack
 
     PlayerStats(int maxHealth, float maxIFrames, float speed, float jumpStrength, float gravity, Sound jumpSound, bool isAttacking, bool hasRanged);
+};
+
+struct PlayerUpgrades {
+    bool testUpgrade;
+
+    PlayerUpgrades(bool testUpgrade);
 };
 
 #endif
