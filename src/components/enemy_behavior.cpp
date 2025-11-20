@@ -16,7 +16,7 @@ void TestUpdateFunc(entt::registry &registry, float dt, entt::entity enemy){
 void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     TraceLog(LOG_TRACE, "Entering Function BasicEnemyUpdate");
     TraceLog(LOG_INFO, "Updating entity: %d", enemy);
-    float maxDistance = 100;    
+    float maxDistance = 300;    
 
 
     // Get components from enemy entity    auto& pos = registry.get<Transform>(enemy);
@@ -27,14 +27,7 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& sprite = registry.get<SpriteData>(enemy);
     auto& animation = registry.get<Animation>(enemy);
 
-    // Check spawn pause timer
-    if (stats.spawnPauseTimer > 0) {
-        stats.spawnPauseTimer -= dt;
-        physics.velocity.x = 0; // Keep horizontal velocity at 0 during pause
-        physics.velocity.y += GRAVITY * dt; // Still apply gravity
-        MoveEntity(registry, dt, enemy);
-        return; // Skip rest of update during spawn pause
-    }
+    physics.velocity.y += GRAVITY * dt;
 
     // Apply gravity
     physics.velocity.y += GRAVITY * dt;
