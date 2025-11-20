@@ -131,7 +131,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
 }
 
 void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
-    TraceLog(LOG_TRACE, "Entering Function: MoveEntity");
+    TraceLog(LOG_TRACE, "Entering Function: MovePlayer");
     registry.view<Map, TmxMap>().each([&registry, &entity, dt](TmxMap &map) {
         TmxObject hitObj;
 
@@ -148,14 +148,14 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
             transform.translation.y + physics.velocity.y * dt,
             transform.translation.z
         };
-        TraceLog(LOG_INFO, "Entity: %d, destination pos: %f,%f",entity, nextPos.x, nextPos.y);
+        TraceLog(LOG_INFO, "Player destination pos: %f,%f",entity, nextPos.x, nextPos.y);
         
         Rectangle entityDestRec = { nextPos.x, nextPos.y, transform.scale.x, transform.scale.y };
 
         bool collided = CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityDestRec, &hitObj);
-        TraceLog(LOG_INFO, "Entity: %d collision? %d",entity, collided);
+        TraceLog(LOG_INFO, "Player collision? %s", collided ? "True" : "False");
         if (collided) {
-            TraceLog(LOG_INFO, "Collision detected at position (%f, %f)", nextPos.x, nextPos.y);
+            TraceLog(LOG_INFO, "Player collision detected at position (%f, %f)", nextPos.x, nextPos.y);
             
             // Horizontal collision detection
             Rectangle entityDestRecX = { nextPos.x, transform.translation.y, transform.scale.x, transform.scale.y };
@@ -171,10 +171,10 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
             } else {
                 physics.velocity.x -= physics.velocity.x / 2;
             }
-            TraceLog(LOG_INFO, "Entity: %d, position after x axis collision check (%f, %f)",entity, nextPos.x, nextPos.y);
+            TraceLog(LOG_INFO, "Player position after x axis collision check (%f, %f)",entity, nextPos.x, nextPos.y);
             
             // Vertical collision detection
-            Rectangle entityDestRecY = { transform.translation.x, nextPos.y, transform.scale.x, transform.scale.y };
+            Rectangle entityDestRecY = { nextPos.x, nextPos.y, transform.scale.x, transform.scale.y };
             if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityDestRecY, &hitObj)) {
                 // make sure player isn't inside the collided object
                 if (nextPos.y < hitObj.y){
@@ -185,8 +185,7 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
                     physics.velocity.y = 0; // Stop vertical movement
                 }
             }
-            TraceLog(LOG_INFO, "Entity: %d, position after y axis collision check (%f, %f)",entity, nextPos.x, nextPos.y);
-            
+            TraceLog(LOG_INFO, "Player position after y axis collision check (%f, %f)",entity, nextPos.x, nextPos.y);
             transform.translation = nextPos;
         } else {
             // No collision: accept movement
