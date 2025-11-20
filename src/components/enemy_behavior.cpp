@@ -14,7 +14,8 @@ void TestUpdateFunc(entt::registry &registry, float dt, entt::entity enemy){
 }
 
 void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
-    TraceLog(LOG_TRACE, "Entering TestUpdateFunc");
+    TraceLog(LOG_TRACE, "Entering Function BasicEnemyUpdate");
+    TraceLog(LOG_INFO, "Updating entity: %d", enemy);
     float maxDistance = 100;    
 
 
