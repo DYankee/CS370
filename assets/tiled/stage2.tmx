@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="114">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="115">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <group id="5" name="bg" offsetx="4" offsety="193.333">
@@ -19,26 +19,6 @@
    <image source="../graphics/bgart/dirt.png" width="1920" height="1080"/>
   </imagelayer>
  </group>
- <objectgroup id="24" name="Entities">
-  <object id="112" name="Enemy" type="Enemy" x="391.371" y="541.493">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Health" type="float" value="3"/>
-    <property name="MoveSpeed" type="float" value="30"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="113" name="Player" x="181" y="223.917">
-   <point/>
-  </object>
- </objectgroup>
- <objectgroup id="22" name="Spikes">
-  <object id="103" name="Spike" gid="1025" x="1213.33" y="980.333" width="32" height="32"/>
-  <object id="104" name="Spike" gid="1025" x="1243.67" y="979.333" width="32" height="32"/>
-  <object id="105" name="Spike" gid="1025" x="1274" y="978.333" width="32" height="32"/>
-  <object id="110" x="1214.73" y="940.909" width="93.4545" height="25.0909"/>
-  <object id="111" name="Spkie" x="1262.91" y="990.727"/>
- </objectgroup>
  <layer id="1" name="Tile Layer 1" width="120" height="68">
   <data encoding="csv">
 67,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,67,
@@ -111,8 +91,34 @@
 70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70
 </data>
  </layer>
- <objectgroup id="2" name="Object Layer 1">
-  <object id="1" x="694" y="840" width="406" height="18"/>
-  <object id="3" x="-134" y="1038" width="2106" height="28"/>
+ <objectgroup id="22" name="Spikes">
+  <object id="103" name="Spike" gid="1025" x="1213.33" y="980.333" width="32" height="32"/>
+  <object id="104" name="Spike" gid="1025" x="1243.67" y="979.333" width="32" height="32"/>
+  <object id="105" name="Spike" gid="1025" x="1274" y="978.333" width="32" height="32"/>
+  <object id="110" x="1214.73" y="940.909" width="93.4545" height="25.0909"/>
+  <object id="111" name="Spkie" x="1262.91" y="990.727"/>
+ </objectgroup>
+ <objectgroup id="24" name="Entities">
+  <object id="112" name="Enemy" type="Enemy" x="200.871" y="536.993">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="1"/>
+    <property name="Health" type="float" value="3"/>
+    <property name="MoveSpeed" type="float" value="100"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="113" name="Player" x="73" y="924.917">
+   <point/>
+  </object>
+  <object id="114" name="Enemy" type="Enemy" x="809" y="925.5">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="3"/>
+    <property name="MoveSpeed" type="float" value="30"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
 </map>
