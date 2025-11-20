@@ -122,64 +122,68 @@ void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
 
 void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
     TraceLog(LOG_TRACE, "Entering Function: MoveEntity");
+
     registry.view<Map, TmxMap>().each([&registry, &entity, dt](TmxMap &map) {
         TmxObject hitObj;
 
         // Get entity components
-        auto [transform, physics] = registry.get<Transform, PhysicsObject>(entity);
+        auto &transform = registry.get<Transform>(entity);
+        auto &physics = registry.get<PhysicsObject>(entity);
 
-        // Log current pos
-        TraceLog(LOG_INFO, "Entity Current Pos: %f,%f", transform.translation.x, transform.translation.y);
+        // Handle X Axis Movement & Collision
+        float originalX = transform.translation.x;
+        transform.translation.x += physics.velocity.x * dt;
 
-
-        // Calculate next position
-        Vector3 nextPos = {
-            transform.translation.x + physics.velocity.x * dt,
-            transform.translation.y + physics.velocity.y * dt,
-            transform.translation.z
+        Rectangle entityRectX = { 
+            transform.translation.x, 
+            transform.translation.y, 
+            transform.scale.x, 
+            transform.scale.y 
         };
-        TraceLog(LOG_INFO, "Entity: %d, destination pos: %f,%f",entity, nextPos.x, nextPos.y);
-        
-        Rectangle entityDestRec = { nextPos.x, nextPos.y, transform.scale.x, transform.scale.y };
 
-        bool collided = CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityDestRec, &hitObj);
-        TraceLog(LOG_INFO, "Entity: %d collision? %d",entity, collided);
-        if (collided) {
-            TraceLog(LOG_INFO, "Collision detected at position (%f, %f)", nextPos.x, nextPos.y);
-
-            // Vertical collision detection
-            Rectangle entityDestRecY = { transform.translation.x, nextPos.y, transform.scale.x, transform.scale.y };
-            if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityDestRecY, &hitObj)) {
-                // make sure player isn't inside the collided object
-                if (nextPos.y < hitObj.y){
-                    nextPos.y = hitObj.y - transform.scale.y;
-                    physics.velocity.y = 0; // Stop vertical movement
-                } else {
-                    nextPos.y = hitObj.y + hitObj.height;
-                    physics.velocity.y = 0; // Stop vertical movement
-                }
+        if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityRectX, &hitObj)) {
+            TraceLog(LOG_INFO, "X Axis Collision");
+            
+            // Determine direction based on velocity
+            if (physics.velocity.x > 0) {
+                // Moving Right - Snap to left side of object
+                transform.translation.x = hitObj.x - transform.scale.x;
+            } else if (physics.velocity.x < 0) {
+                // Moving Left - Snap to right side of object
+                transform.translation.x = hitObj.x + hitObj.width;
             }
-            TraceLog(LOG_INFO, "Entity: %d, position after y axis collision check (%f, %f)",entity, nextPos.x, nextPos.y);
-
-            // Horizontal collision detection
-            Rectangle entityDestRecX = { nextPos.x, nextPos.y, transform.scale.x, transform.scale.y };
-            if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityDestRecX, &hitObj)) {
-                // make sure player isn't inside the collided object
-                if (nextPos.x < hitObj.x){
-                    nextPos.x = hitObj.x - transform.scale.x;
-                    physics.velocity.x = 0;
-                } else {
-                    nextPos.x = hitObj.x + hitObj.width;
-                    physics.velocity.x = 0;
-                }
-            } else {
-                physics.velocity.x -= physics.velocity.x / 2;
-            }
-            TraceLog(LOG_INFO, "Entity: %d, position after x axis collision check (%f, %f)",entity, nextPos.x, nextPos.y);
-            transform.translation = nextPos;
-        } else {
-            // No collision: accept movement
-            transform.translation = nextPos;
+            
+            // Kill X momentum on impact
+            physics.velocity.x = 0;
         }
-    }); 
+
+        // Handle Y Axis Movement & Collision
+        float originalY = transform.translation.y;
+        transform.translation.y += physics.velocity.y * dt;
+
+        Rectangle entityRectY = { 
+            transform.translation.x, 
+            transform.translation.y, 
+            transform.scale.x, 
+            transform.scale.y 
+        };
+
+        if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityRectY, &hitObj)) {
+            TraceLog(LOG_INFO, "Y Axis Collision");
+
+            if (physics.velocity.y > 0) {
+                // Falling Down - Snap to top of object (Floor)
+                transform.translation.y = hitObj.y - transform.scale.y;
+            } else if (physics.velocity.y < 0) {
+                // Jumping Up - Snap to bottom of object (Ceiling)
+                transform.translation.y = hitObj.y + hitObj.height;
+            }
+            // Kill Y momentum on impact
+            physics.velocity.y = 0;
+            physics.velocity.x /= 1.5;
+        }
+
+        // Log final pos
+        TraceLog(LOG_INFO, "Entity Final Pos: %f, %f", transform.translation.x, transform.translation.y);
+    });
 }
