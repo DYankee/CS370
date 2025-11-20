@@ -97,7 +97,7 @@
   <object id="130" name="Spike" x="1184" y="944" width="64" height="16"/>
  </objectgroup>
  <objectgroup id="24" name="Entities">
-  <object id="112" name="Player" x="113.692" y="450.896">
+  <object id="112" name="Player" x="92.3586" y="604.229">
    <point/>
   </object>
   <object id="116" name="Farmer1" type="Enemy" x="387.167" y="877.5">
