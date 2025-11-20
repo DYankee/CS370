@@ -5,6 +5,6 @@
 #include "../entities/entities.hpp"
 
 void PlayerInputSystem(entt::registry &registry, float dt);
-void MovePlayer(entt::registry &registry, float dt);
+void MovePlayer(entt::registry &registry, float dt, entt::entity entity);
 
 #endif
