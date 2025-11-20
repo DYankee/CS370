@@ -21,7 +21,7 @@
  </group>
  <objectgroup id="22" name="Spikes"/>
  <objectgroup id="24" name="Entities">
-  <object id="114" name="Player" x="361.42" y="923.998">
+  <object id="114" name="Player" x="371.413" y="544.27">
    <point/>
   </object>
   <object id="118" name="Enemy" type="Enemy" x="456.19" y="923.743">

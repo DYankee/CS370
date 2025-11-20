@@ -34,7 +34,8 @@
                 5
             ],
             "expandedObjectLayers": [
-                22
+                22,
+                24
             ],
             "scale": 0.5,
             "selectedLayer": 8,
@@ -45,18 +46,18 @@
         },
         "stage3.tmx": {
             "scale": 0.75,
-            "selectedLayer": 9,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 976.6666666666665,
-                "y": 588.6666666666666
+                "x": 532.6666666666665,
+                "y": 894.6666666666665
             }
         },
         "test.tmx": {
             "scale": 0.4002864583333333,
-            "selectedLayer": 5,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 959.3129919979183,
-                "y": 583.3322490404007
+                "x": 960.562097456249,
+                "y": 582.0831435820702
             }
         },
         "test_tileset.tsx": {
