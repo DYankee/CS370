@@ -24,15 +24,6 @@
   <object id="114" name="Player" x="371.413" y="544.27">
    <point/>
   </object>
-  <object id="118" name="Enemy" type="Enemy" x="456.19" y="923.743">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="-1"/>
-    <property name="Health" type="float" value="2"/>
-    <property name="MoveSpeed" type="float" value="100"/>
-   </properties>
-   <point/>
-  </object>
  </objectgroup>
  <layer id="1" name="Tile Layer 1" width="120" height="68">
   <data encoding="csv">
