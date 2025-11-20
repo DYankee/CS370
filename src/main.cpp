@@ -29,7 +29,6 @@ typedef enum GameScreen { TITLE = 0, GAMEPLAY } GameScreen;
 void Update(entt::registry &registry, float dt) {
     UpdateEnemies(registry, dt);
     PlayerInputSystem(registry, dt);
-    MovePlayer(registry, dt);
     PlayerEnemyCollisionSystem(registry, dt);
     CameraUpdate(registry, dt);
     SpikeCollision(registry, dt);
