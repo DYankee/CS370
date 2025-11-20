@@ -97,7 +97,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         // Only allow jump if player is on the ground
         if (IsKeyPressed(KEY_SPACE)) {
             registry.view<TmxMap>().each([&transform, &physics, &sprite, &stats, &animation](TmxMap &map){{
-                Rectangle testRec = { transform.translation.x, transform.translation.y + 1, transform.scale.x, transform.scale.y };
+                Rectangle testRec = { transform.translation.x, transform.translation.y + 10, transform.scale.x, transform.scale.y };
                 TmxObject collidedObj;
                 bool onGround = CheckCollisionTMXTileLayersRec(
                     &map, map.layers, map.layersLength, testRec, &collidedObj
@@ -126,12 +126,13 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
     auto players = registry.view<Player>();
     entt::entity player = players.front();
     if (player != entt::null){
-        MovePlayer(registry, dt, player);
+        MoveEntity(registry, dt, player);
     }
 }
 
+/*
 void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
-    TraceLog(LOG_TRACE, "Entering Function: MovePlayer");
+    TraceLog(LOG_TRACE, "MoveEntity: Entering Function: MovePlayer");
     registry.view<Map, TmxMap>().each([&registry, &entity, dt](TmxMap &map) {
         TmxObject hitObj;
 
@@ -139,7 +140,7 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
         auto [transform, physics] = registry.get<Transform, PhysicsObject>(entity);
 
         // Log current pos
-        TraceLog(LOG_INFO, "Player Current Pos: %f,%f", transform.translation.x, transform.translation.y);
+        TraceLog(LOG_INFO, "MoveEntity: Player Current Pos: %f,%f", transform.translation.x, transform.translation.y);
 
 
         // Calculate next position
@@ -148,14 +149,14 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
             transform.translation.y + physics.velocity.y * dt,
             transform.translation.z
         };
-        TraceLog(LOG_INFO, "Player destination pos: %f,%f",entity, nextPos.x, nextPos.y);
+        TraceLog(LOG_INFO, "MoveEntity: Player destination pos: %f,%f",entity, nextPos.x, nextPos.y);
         
         Rectangle entityDestRec = { nextPos.x, nextPos.y, transform.scale.x, transform.scale.y };
 
         bool collided = CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityDestRec, &hitObj);
-        TraceLog(LOG_INFO, "Player collision? %s", collided ? "True" : "False");
+        TraceLog(LOG_INFO, "MoveEntity: Player collision? %s", collided ? "True" : "False");
         if (collided) {
-            TraceLog(LOG_INFO, "Player collision detected at position (%f, %f)", nextPos.x, nextPos.y);
+            TraceLog(LOG_INFO, "MoveEntity: Player collision detected at position (%f, %f)", nextPos.x, nextPos.y);
             
             // Horizontal collision detection
             Rectangle entityDestRecX = { nextPos.x, transform.translation.y, transform.scale.x, transform.scale.y };
@@ -171,7 +172,7 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
             } else {
                 physics.velocity.x -= physics.velocity.x / 2;
             }
-            TraceLog(LOG_INFO, "Player position after x axis collision check (%f, %f)",entity, nextPos.x, nextPos.y);
+            TraceLog(LOG_INFO, "MoveEntity: Player position after x axis collision check (%f, %f)",entity, nextPos.x, nextPos.y);
             
             // Vertical collision detection
             Rectangle entityDestRecY = { nextPos.x, nextPos.y, transform.scale.x, transform.scale.y };
@@ -185,11 +186,11 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
                     physics.velocity.y = 0; // Stop vertical movement
                 }
             }
-            TraceLog(LOG_INFO, "Player position after y axis collision check (%f, %f)",entity, nextPos.x, nextPos.y);
-            transform.translation = nextPos;
-        } else {
-            // No collision: accept movement
-            transform.translation = nextPos;
+            TraceLog(LOG_INFO, "MoveEntity: Player position after y axis collision check (%f, %f)",entity, nextPos.x, nextPos.y);
         }
+
+        // Update the players translation
+        transform.translation = nextPos;
     }); 
 }
+*/
