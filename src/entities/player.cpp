@@ -104,7 +104,7 @@ void CreatePlayer(entt::registry &registry) {
     for (int i = 0; i < headbuttTotalFrames; i++) {
         headbuttRightFrames.push_back(AnimationFrame{
             Rectangle{(float)(i * headbuttFrameWidth), 0, (float)headbuttFrameWidth, (float)headbuttFrameHeight},
-            0.1f  // 0.1 seconds per frame
+            0.05f  // 0.1 seconds per frame
         });
     }
     playerAnimation.AddSequence("headbuttRight", AnimationSequence(headbuttRightFrames, false));
@@ -114,7 +114,7 @@ void CreatePlayer(entt::registry &registry) {
     for (int i = 0; i < headbuttTotalFrames; i++) {
         headbuttLeftFrames.push_back(AnimationFrame{
             Rectangle{(float)(i * headbuttFrameWidth), 0, (float)headbuttFrameWidth, (float)headbuttFrameHeight},
-            0.1f  // 0.1 seconds per frame
+            0.05f  // 0.1 seconds per frame
         });
     }
     playerAnimation.AddSequence("headbuttLeft", AnimationSequence(headbuttLeftFrames, false));
