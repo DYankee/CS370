@@ -39,43 +39,21 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
             stats.isAttacking = false;
             TraceLog(LOG_INFO, "Attack ended.");
         }
-        // If button pressed set attacking true and start headbutt animation
-        if (IsKeyPressed(KEY_R) && !stats.isAttacking && !isJumping) {
-            stats.isAttacking = true;
-            attackTimer = 0.5f;  // Duration matches animation (5 frames * 0.1s = 0.5s)
-            float lungePower = 1500.0f;
-            TraceLog(LOG_INFO, "Player started attacking");
+    }
+    // If button pressed set attacking true and start headbutt animation
+    if (IsKeyPressed(KEY_R) && !stats.isAttacking && !isJumping) {
+        stats.isAttacking = true;
+        attackTimer = 0.5f;  // Duration matches animation (5 frames * 0.1s = 0.5s)
+        float lungePower = 1500.0f;
+        TraceLog(LOG_INFO, "Player started attacking");
             
-            // Play headbutt animation based on current direction
-            if (animation.currentSequence == "walkLeft" || animation.currentSequence == "idleLeft" || 
-                animation.currentSequence == "jumpLeft" || animation.currentSequence == "headbuttLeft") {
-                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLHeadbutt");
-                sprite.SetTexture("cowLHeadbutt");
-                animation.PlaySequence("headbuttLeft");
-                physics.velocity.x = -lungePower;
-            } else {
-                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRHeadbutt");
-                sprite.SetTexture("cowRHeadbutt");
-                animation.PlaySequence("headbuttRight");
-                physics.velocity.x = lungePower;
-            }
-        }
-        // Move box based on key input
-        // Don't change animation if currently jumping or headbutting
-        if (IsKeyDown(KEY_D) && !isHeadbutting) {
-            physics.velocity.x = stats.speed;    // Move right
-            if (!isJumping) {
-                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRWalk");
-                sprite.SetTexture("cowRWalk");
-                animation.PlaySequence("walkRight");
-            }
-        } else if (IsKeyDown(KEY_A) && !isHeadbutting) {
-            physics.velocity.x = -stats.speed;   // Move left
-            if (!isJumping) {
-                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLWalk");
-                sprite.SetTexture("cowLWalk");
-                animation.PlaySequence("walkLeft");
-            }
+        // Play headbutt animation based on current direction
+        if (animation.currentSequence == "walkLeft" || animation.currentSequence == "idleLeft" || 
+            animation.currentSequence == "jumpLeft" || animation.currentSequence == "headbuttLeft") {
+            TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLHeadbutt");
+            sprite.SetTexture("cowLHeadbutt");
+            animation.PlaySequence("headbuttLeft");
+            physics.velocity.x = -lungePower;
         } else {
             TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRHeadbutt");
             sprite.SetTexture("cowRHeadbutt");
@@ -153,55 +131,34 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         }
     }
 
-        // Only allow jump if player is on the ground
-        if (IsKeyPressed(KEY_SPACE)) {
-            registry.view<TmxMap>().each([&transform, &physics, &sprite, &stats, &animation](TmxMap &map){{
-                Rectangle testRec = { transform.translation.x, transform.translation.y + 1, transform.scale.x, transform.scale.y };
-                TmxObject collidedObj;
-                bool onGround = CheckCollisionTMXTileLayersRec(
-                    &map, map.layers, map.layersLength, testRec, &collidedObj
-                );
-                if (onGround) {
-                    physics.velocity.y += stats.jumpStrength;
-                    PlaySound(stats.jumpSound);
-                    // Play jump animation based on current direction
-                    if (animation.currentSequence == "walkLeft" || animation.currentSequence == "idleLeft" || animation.currentSequence == "jumpLeft") {
-                        TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLJump");
-                        sprite.SetTexture("cowLJump");
-                        animation.PlaySequence("jumpLeft");
-                    } else {
-                        TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRJump");
-                        sprite.SetTexture("cowRJump");
-                        animation.PlaySequence("jumpRight");
-                    }
-                }
-            }});
-        }
+    // Log new velocity
+    TraceLog(LOG_INFO, "Player new velocity: %f,%f", physics.velocity.x, physics.velocity.y);
 
-        // Log new velocity
-        TraceLog(LOG_INFO, "Player new velocity: %f,%f", physics.velocity.x, physics.velocity.y);
-    });
-
-    auto players = registry.view<Player>();
-    entt::entity player = players.front();
     if (player != entt::null){
         MovePlayer(registry, dt, player);
     }
 }
 
 void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
-    TraceLog(LOG_TRACE, "Entering Function: MoveEntity");
+    TraceLog(LOG_TRACE, "Entering Function: MovePlayer: ");
 
     registry.view<Map, TmxMap>().each([&registry, &entity, dt](TmxMap &map) {
-        TmxObject hitObj;
 
         // Get entity components
         auto &transform = registry.get<Transform>(entity);
         auto &physics = registry.get<PhysicsObject>(entity);
+        TraceLog(LOG_INFO, "MovePlayer: Player starting pos(%f,%f), vel(%f,%f)", 
+            transform.translation.x, transform.translation.y,
+            physics.velocity.x, physics.velocity.y
+        );
 
         // Handle X Axis Movement & Collision
         float originalX = transform.translation.x;
         transform.translation.x += physics.velocity.x * dt;
+        TraceLog(LOG_INFO, "MovePlayer: Player x destination pos(%f,%f), vel(%f,%f)", 
+            transform.translation.x, transform.translation.y,
+            physics.velocity.x, physics.velocity.y
+        );
 
         Rectangle entityRectX = { 
             transform.translation.x, 
@@ -209,25 +166,33 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
             transform.scale.x, 
             transform.scale.y 
         };
-
-        if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityRectX, &hitObj)) {
-            TraceLog(LOG_INFO, "X Axis Collision");
+        TmxObject hitObjX;
+        if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityRectX, &hitObjX)) {
+            TraceLog(LOG_INFO, "MovePlayer: X Axis Collision");
             
             // Determine direction based on velocity
             if (physics.velocity.x > 0) {
                 // Moving Right - Snap to left side of object
-                transform.translation.x = hitObj.x - transform.scale.x;
+                transform.translation.x = hitObjX.x - transform.scale.x;
                 physics.velocity.x = 0;
             } else if (physics.velocity.x < 0) {
                 // Moving Left - Snap to right side of object
-                transform.translation.x = hitObj.x + hitObj.width;
+                transform.translation.x = hitObjX.x + hitObjX.width;
                 physics.velocity.x = 0;
             }
         }
+        TraceLog(LOG_INFO, "MovePlayer: Player x after col pos(%f,%f), vel(%f,%f)", 
+            transform.translation.x, transform.translation.y,
+            physics.velocity.x, physics.velocity.y
+        );
 
         // Handle Y Axis Movement & Collision
         float originalY = transform.translation.y;
         transform.translation.y += physics.velocity.y * dt;
+        TraceLog(LOG_INFO, "MovePlayer: Player y destination pos(%f,%f), vel(%f,%f)", 
+            transform.translation.x, transform.translation.y,
+            physics.velocity.x, physics.velocity.y
+        );
 
         Rectangle entityRectY = { 
             transform.translation.x, 
@@ -235,23 +200,32 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
             transform.scale.x, 
             transform.scale.y 
         };
-
-        if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityRectY, &hitObj)) {
-            TraceLog(LOG_INFO, "Y Axis Collision");
+        TmxObject hitObjY;
+        if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityRectY, &hitObjY)) {
+            TraceLog(LOG_INFO, "MovePlayer: Y Axis Collision");
 
             if (physics.velocity.y > 0) {
                 // Falling Down - Snap to top of object (Floor)
-                transform.translation.y = hitObj.y - transform.scale.y;
+                transform.translation.y = hitObjY.y - transform.scale.y;
             } else if (physics.velocity.y < 0) {
                 // Jumping Up - Snap to bottom of object (Ceiling)
-                transform.translation.y = hitObj.y + hitObj.height;
+                transform.translation.y = hitObjY.y + hitObjY.height;
             }
             // Kill Y momentum on impact
             physics.velocity.y = 0;
+
+            // Slow x momentum while on floor/ceiling
             physics.velocity.x -= physics.velocity.x / 5;
         }
+        TraceLog(LOG_INFO, "MovePlayer: Player after y col pos(%f,%f), vel(%f,%f)", 
+            transform.translation.x, transform.translation.y,
+            physics.velocity.x, physics.velocity.y
+        );
 
         // Log final pos
-        TraceLog(LOG_INFO, "Entity Final Pos: %f, %f", transform.translation.x, transform.translation.y);
+        TraceLog(LOG_INFO, "MovePlayer: Player final pos(%f,%f), vel(%f,%f)", 
+            transform.translation.x, transform.translation.y,
+            physics.velocity.x, physics.velocity.y
+        );
     });
 }
