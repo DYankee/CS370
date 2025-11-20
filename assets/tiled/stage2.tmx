@@ -122,7 +122,10 @@
    </properties>
    <point/>
   </object>
-  <object id="119" name="Farmer2" type="Enemy" x="773.333" y="932">
+  <object id="113" name="Player" x="83" y="728.917">
+   <point/>
+  </object>
+  <object id="114" name="Enemy" type="Enemy" x="809" y="925.5">
    <properties>
     <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>

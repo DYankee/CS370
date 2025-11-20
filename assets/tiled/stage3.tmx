@@ -97,7 +97,7 @@
   <object id="130" name="Spike" x="1184" y="944" width="64" height="16"/>
  </objectgroup>
  <objectgroup id="24" name="Entities">
-  <object id="113" name="Player" x="56.3333" y="878.334">
+  <object id="112" name="Player" x="92.3586" y="604.229">
    <point/>
   </object>
   <object id="116" name="Farmer1" type="Enemy" x="387.167" y="877.5">
@@ -122,15 +122,7 @@
    </properties>
    <point/>
   </object>
-  <object id="119" name="Farmer1" type="Enemy" x="543.334" y="891">
-   <properties>
-    <property name="AttackCooldown" type="float" value="4"/>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="-1"/>
-    <property name="Health" type="float" value="1"/>
-    <property name="MoveSpeed" type="float" value="50"/>
-    <property name="Type" value="Farmer"/>
-   </properties>
+  <object id="121" name="HealthUpgrade" type="HealthUpgrade" x="416" y="900">
    <point/>
   </object>
   <object id="120" name="Farmer1" type="Enemy" x="780.333" y="840.333">

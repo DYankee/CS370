@@ -32,8 +32,8 @@
             "expandedObjectLayers": [
                 24
             ],
-            "scale": 1,
-            "selectedLayer": 13,
+            "scale": 0.75,
+            "selectedLayer": 8,
             "viewCenter": {
                 "x": 787.5,
                 "y": 783
@@ -61,38 +61,16 @@
             "scale": 0.5,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 887,
-                "y": 656
+                "x": 961,
+                "y": 582
             }
         },
         "stage4.tmx": {
             "scale": 0.5,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 951,
-                "y": 676
-            }
-        },
-        "stage5.tmx": {
-            "expandedGroupLayers": [
-                27
-            ],
-            "scale": 0.5,
-            "selectedLayer": 14,
-            "viewCenter": {
-                "x": 653,
-                "y": 614
-            }
-        },
-        "stage6.tmx": {
-            "expandedGroupLayers": [
-                5
-            ],
-            "scale": 0.75,
-            "selectedLayer": 14,
-            "viewCenter": {
-                "x": 1360.6666666666665,
-                "y": 729.3333333333334
+                "x": 976.6666666666665,
+                "y": 588.6666666666666
             }
         },
         "test.tmx": {
