@@ -130,8 +130,8 @@ void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
         auto &transform = registry.get<Transform>(entity);
         auto &physics = registry.get<PhysicsObject>(entity);
 
+
         // Handle X Axis Movement & Collision
-        float originalX = transform.translation.x;
         transform.translation.x += physics.velocity.x * dt;
 
         Rectangle entityRectX = { 
@@ -152,13 +152,11 @@ void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
                 // Moving Left - Snap to right side of object
                 transform.translation.x = hitObj.x + hitObj.width;
             }
-            
             // Kill X momentum on impact
             physics.velocity.x = 0;
         }
-
+        
         // Handle Y Axis Movement & Collision
-        float originalY = transform.translation.y;
         transform.translation.y += physics.velocity.y * dt;
 
         Rectangle entityRectY = { 
@@ -182,6 +180,7 @@ void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
             physics.velocity.y = 0;
             physics.velocity.x /= 1.5;
         }
+
 
         // Log final pos
         TraceLog(LOG_INFO, "Entity Final Pos: %f, %f", transform.translation.x, transform.translation.y);
