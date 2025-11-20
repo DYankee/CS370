@@ -31,6 +31,7 @@ void UpdateEnemies(entt::registry &registry, float dt){
         Enemy_behavior update = registry.get<Enemy_behavior>(enemy);
 
         // Call the function with the entity as an argument
+        TraceLog(LOG_TRACE, "Calling update function for enemy entity: %d", enemy);
         update.Update(registry, dt, enemy);
     }
 }
