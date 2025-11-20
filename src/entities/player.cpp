@@ -148,6 +148,10 @@ void CreatePlayer(entt::registry &registry) {
     PlayerStats stats = PlayerStats(MAX_HEALTH, MAX_IFRAMES, SPEED, JUMP_STRENGTH, GRAVITY, jumpSound, isAttacking);
     registry.emplace<PlayerStats>(playerEnt, stats);
 
+    // Add PlayerUpgrades component to the entity
+    PlayerUpgrades upgrades = PlayerUpgrades(false);
+    registry.emplace<PlayerUpgrades>(playerEnt, upgrades);
+
 
     // Create hud
     {

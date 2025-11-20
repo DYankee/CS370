@@ -4,7 +4,8 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
     TraceLog(LOG_TRACE, "Entering Function: PlayerInputSystem");
 
     // Get the Transform and PhysicsObject from the Player Component
-    registry.view<Transform, PhysicsObject, SpriteData, PlayerStats, Player, Animation>().each([dt, &registry](Transform &transform, PhysicsObject &physics, SpriteData &sprite, PlayerStats &stats, Animation &animation) {
+    registry.view<Transform, PhysicsObject, SpriteData, PlayerStats, PlayerUpgrades, Player, Animation>().each(
+                    [dt, &registry](Transform &transform, PhysicsObject &physics, SpriteData &sprite, PlayerStats &stats, PlayerUpgrades &upgrades, Animation &animation) {
         static float attackTimer;
         // Log player starting velocity
         TraceLog(LOG_INFO, "Player current velocity: %f,%f", physics.velocity.x, physics.velocity.y);
@@ -90,6 +91,12 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
                 animation.PlaySequence("idleLeft");
             }
         }
+
+
+        if(IsKeyDown(KEY_O) && upgrades.testUpgrade) {
+            TraceLog(LOG_INFO, "Test upgrade: active");
+        }
+
         
         // Update animation
         animation.Update(dt);

@@ -12,3 +12,7 @@
         this->jumpSound = jumpSound;
         this->isAttacking = isAttacking;
     }
+
+    PlayerUpgrades::PlayerUpgrades(bool testUpgrade) {
+        this->testUpgrade = testUpgrade;
+    }
