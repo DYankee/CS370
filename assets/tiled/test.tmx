@@ -21,10 +21,10 @@
  </group>
  <objectgroup id="22" name="Spikes"/>
  <objectgroup id="24" name="Entities">
-  <object id="114" name="Player" x="362.42" y="935.998">
+  <object id="114" name="Player" x="361.42" y="923.998">
    <point/>
   </object>
-  <object id="116" name="Enemy" type="Enemy" x="1022.87" y="943.87">
+  <object id="116" name="Enemy" type="Enemy" x="1021.87" y="920.87">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="1"/>
@@ -33,7 +33,7 @@
    </properties>
    <point/>
   </object>
-  <object id="117" name="Enemy" type="Enemy" x="678.578" y="942.609">
+  <object id="117" name="Enemy" type="Enemy" x="681.578" y="922.609">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="1"/>
@@ -42,7 +42,7 @@
    </properties>
    <point/>
   </object>
-  <object id="118" name="Enemy" type="Enemy" x="454.19" y="940.743">
+  <object id="118" name="Enemy" type="Enemy" x="456.19" y="923.743">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
@@ -51,7 +51,7 @@
    </properties>
    <point/>
   </object>
-  <object id="119" name="Enemy" type="Enemy" x="755.496" y="944.091">
+  <object id="119" name="Enemy" type="Enemy" x="758.496" y="924.091">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="1"/>
@@ -60,7 +60,7 @@
    </properties>
    <point/>
   </object>
-  <object id="120" name="Enemy" type="Enemy" x="588.104" y="862.627">
+  <object id="120" name="Enemy" type="Enemy" x="952.104" y="921.127">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="1"/>
@@ -69,7 +69,7 @@
    </properties>
    <point/>
   </object>
-  <object id="121" name="Enemy" type="Enemy" x="926.236" y="936.279">
+  <object id="121" name="Enemy" type="Enemy" x="925.236" y="921.779">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
@@ -78,7 +78,7 @@
    </properties>
    <point/>
   </object>
-  <object id="122" name="Enemy" type="Enemy" x="829.149" y="859.279">
+  <object id="122" name="Enemy" type="Enemy" x="1189.15" y="923.279">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
@@ -87,7 +87,7 @@
    </properties>
    <point/>
   </object>
-  <object id="123" name="Enemy" type="Enemy" x="1081.35" y="946.323">
+  <object id="123" name="Enemy" type="Enemy" x="1075.85" y="922.823">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="1"/>
@@ -96,7 +96,7 @@
    </properties>
    <point/>
   </object>
-  <object id="124" name="Enemy" type="Enemy" x="967.526" y="940.859">
+  <object id="124" name="Enemy" type="Enemy" x="969.026" y="921.359">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="1"/>
@@ -105,7 +105,7 @@
    </properties>
    <point/>
   </object>
-  <object id="125" name="Enemy" type="Enemy" x="1129.34" y="944.091">
+  <object id="125" name="Enemy" type="Enemy" x="1123.84" y="920.591">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="1"/>
@@ -114,7 +114,7 @@
    </properties>
    <point/>
   </object>
-  <object id="126" name="Enemy" type="Enemy" x="1177.32" y="946.323">
+  <object id="126" name="Enemy" type="Enemy" x="1168.82" y="922.823">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="1"/>
@@ -123,7 +123,7 @@
    </properties>
    <point/>
   </object>
-  <object id="127" name="Enemy" type="Enemy" x="1274.41" y="939.627">
+  <object id="127" name="Enemy" type="Enemy" x="1257.91" y="917.627">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
@@ -132,61 +132,7 @@
    </properties>
    <point/>
   </object>
-  <object id="128" name="Enemy" type="Enemy" x="1018.41" y="759.739">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="1"/>
-    <property name="Health" type="float" value="2"/>
-    <property name="MoveSpeed" type="float" value="200"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="129" name="Enemy" type="Enemy" x="921.774" y="752.148">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="-1"/>
-    <property name="Health" type="float" value="2"/>
-    <property name="MoveSpeed" type="float" value="100"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="130" name="Enemy" type="Enemy" x="1076.89" y="762.192">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="1"/>
-    <property name="Health" type="float" value="2"/>
-    <property name="MoveSpeed" type="float" value="100"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="131" name="Enemy" type="Enemy" x="963.064" y="756.728">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="1"/>
-    <property name="Health" type="float" value="2"/>
-    <property name="MoveSpeed" type="float" value="1000"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="132" name="Enemy" type="Enemy" x="1124.88" y="759.96">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="1"/>
-    <property name="Health" type="float" value="2"/>
-    <property name="MoveSpeed" type="float" value="100"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="133" name="Enemy" type="Enemy" x="1172.86" y="762.192">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="1"/>
-    <property name="Health" type="float" value="2"/>
-    <property name="MoveSpeed" type="float" value="100"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="134" name="Enemy" type="Enemy" x="1269.95" y="755.496">
+  <object id="134" name="Enemy" type="Enemy" x="721.45" y="922.996">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
