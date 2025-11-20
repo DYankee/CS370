@@ -286,11 +286,11 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
             if (physics.velocity.x > 0) {
                 // Moving Right - Snap to left side of object
                 transform.translation.x = hitObj.x - transform.scale.x;
-                physics.velocity.x = -50;
+                physics.velocity.x = 0;
             } else if (physics.velocity.x < 0) {
                 // Moving Left - Snap to right side of object
                 transform.translation.x = hitObj.x + hitObj.width;
-                physics.velocity.x = 50;
+                physics.velocity.x = 0;
             }
         }
 
