@@ -111,7 +111,7 @@
   <object id="133" x="933.773" y="465.455" width="184.954" height="25.0909"/>
  </objectgroup>
  <objectgroup id="24" name="Entities">
-  <object id="112" name="Enemy" type="Enemy" x="200.871" y="535.993">
+  <object id="112" name="Enemy" type="Enemy" x="200.871" y="536.993">
    <properties>
     <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
@@ -122,7 +122,7 @@
    </properties>
    <point/>
   </object>
-  <object id="113" name="Player" x="83" y="728.917">
+  <object id="113" name="Player" x="73" y="924.917">
    <point/>
   </object>
   <object id="114" name="Enemy" type="Enemy" x="809" y="925.5">

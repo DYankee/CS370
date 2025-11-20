@@ -97,7 +97,7 @@
   <object id="130" name="Spike" x="1184" y="944" width="64" height="16"/>
  </objectgroup>
  <objectgroup id="24" name="Entities">
-  <object id="112" name="Player" x="113.692" y="450.896">
+  <object id="112" name="Player" x="63.0253" y="566.896">
    <point/>
   </object>
   <object id="116" name="Farmer1" type="Enemy" x="387.167" y="877.5">
@@ -122,7 +122,7 @@
    </properties>
    <point/>
   </object>
-  <object id="121" name="HealthUpgrade" type="HealthUpgrade" x="416" y="900">
+  <object id="121" name="HealthUpgrade" type="HealthUpgrade" x="404" y="800">
    <point/>
   </object>
   <object id="120" name="Farmer1" type="Enemy" x="780.333" y="840.333">
