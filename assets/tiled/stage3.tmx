@@ -26,41 +26,6 @@
    <image source="../graphics/bgart/dirtNIGHT.png" width="1920" height="1080"/>
   </imagelayer>
  </group>
- <objectgroup id="25" name="HealthUpgrades">
-  <object id="124" x="319.667" y="950.667"/>
- </objectgroup>
- <objectgroup id="24" name="Entities">
-  <object id="112" name="Player" x="63.0253" y="566.896">
-   <point/>
-  </object>
-  <object id="119" name="Enemy" type="Enemy" x="1064.5" y="894">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Health" type="float" value="3"/>
-    <property name="MoveSpeed" type="float" value="30"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="120" name="Enemy" type="Enemy" x="1144.5" y="892.5">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Health" type="float" value="3"/>
-    <property name="MoveSpeed" type="float" value="30"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="121" name="HealthUpgrade" type="HealthUpgrade" x="404" y="800">
-   <point/>
-  </object>
-  <object id="125" name="Enemy" type="Enemy" x="1241" y="893">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Health" type="float" value="3"/>
-    <property name="MoveSpeed" type="float" value="30"/>
-   </properties>
-   <point/>
-  </object>
- </objectgroup>
  <layer id="1" name="Tile Layer 1" width="120" height="68">
   <data encoding="csv">
 0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,67,
@@ -133,4 +98,39 @@
 198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198
 </data>
  </layer>
+ <objectgroup id="25" name="HealthUpgrades">
+  <object id="124" x="319.667" y="950.667"/>
+ </objectgroup>
+ <objectgroup id="24" name="Entities">
+  <object id="112" name="Player" x="63.0253" y="566.896">
+   <point/>
+  </object>
+  <object id="119" name="Enemy" type="Enemy" x="1064.5" y="894">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Health" type="float" value="3"/>
+    <property name="MoveSpeed" type="float" value="30"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="120" name="Enemy" type="Enemy" x="1144.5" y="892.5">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Health" type="float" value="3"/>
+    <property name="MoveSpeed" type="float" value="30"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="121" name="HealthUpgrade" type="HealthUpgrade" x="404" y="800">
+   <point/>
+  </object>
+  <object id="125" name="Enemy" type="Enemy" x="1241" y="893">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Health" type="float" value="3"/>
+    <property name="MoveSpeed" type="float" value="30"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
 </map>
