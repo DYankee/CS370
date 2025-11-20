@@ -99,7 +99,7 @@
   <object id="111" name="Spkie" x="1262.91" y="990.727"/>
  </objectgroup>
  <objectgroup id="24" name="Entities">
-  <object id="112" name="Enemy" type="Enemy" x="200.871" y="535.993">
+  <object id="112" name="Enemy" type="Enemy" x="200.871" y="536.993">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="1"/>
@@ -108,7 +108,7 @@
    </properties>
    <point/>
   </object>
-  <object id="113" name="Player" x="83" y="728.917">
+  <object id="113" name="Player" x="73" y="924.917">
    <point/>
   </object>
   <object id="114" name="Enemy" type="Enemy" x="809" y="925.5">
