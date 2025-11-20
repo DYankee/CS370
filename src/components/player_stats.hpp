@@ -19,4 +19,10 @@ struct PlayerStats {
     PlayerStats(int maxHealth, float maxIFrames, float speed, float jumpStrength, float gravity, Sound jumpSound, bool isAttacking, bool hasRanged);
 };
 
+struct PlayerUpgrades {
+    bool testUpgrade;
+
+    PlayerUpgrades(bool testUpgrade);
+};
+
 #endif

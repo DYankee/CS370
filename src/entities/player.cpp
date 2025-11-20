@@ -149,7 +149,7 @@ void CreatePlayer(entt::registry &registry) {
     registry.emplace<PlayerStats>(playerEnt, stats);
 
     // Add PlayerUpgrades component to the entity
-    PlayerUpgrades upgrades = PlayerUpgrades(false, false);
+    PlayerUpgrades upgrades = PlayerUpgrades(false);
     registry.emplace<PlayerUpgrades>(playerEnt, upgrades);
 
 
