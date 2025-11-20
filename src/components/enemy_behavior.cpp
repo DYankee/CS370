@@ -14,8 +14,9 @@ void TestUpdateFunc(entt::registry &registry, float dt, entt::entity enemy){
 }
 
 void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
-    TraceLog(LOG_TRACE, "Entering TestUpdateFunc");
-    float maxDistance = 200;    
+    TraceLog(LOG_TRACE, "Entering Function BasicEnemyUpdate");
+    TraceLog(LOG_INFO, "Updating entity: %d", enemy);
+    float maxDistance = 300;    
 
 
     // Get components from enemy entity    auto& pos = registry.get<Transform>(enemy);
@@ -25,7 +26,7 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& spawn = registry.get<Vector2>(enemy);
     auto& sprite = registry.get<SpriteData>(enemy);
 
-    physics.velocity.y += 2000.0f * dt;
+    physics.velocity.y += GRAVITY * dt;
 
     if(!stats.followsPlayer){
         int distanceFromSpawn = abs(pos.translation.x - spawn.x);
@@ -41,9 +42,6 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
             physics.velocity.x = stats.enemySpeed * 1;
             sprite.SetTexture("FarmerR");
         }
-    }
-    else{
-
     }
     MoveEntity(registry, dt, enemy);
 }
