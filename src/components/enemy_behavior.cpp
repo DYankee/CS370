@@ -19,7 +19,7 @@ void TestUpdateFunc(entt::registry &registry, float dt, entt::entity enemy){
 void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     TraceLog(LOG_TRACE, "Entering Function BasicEnemyUpdate");
     TraceLog(LOG_INFO, "Updating entity: %d", enemy);
-    float maxDistance = 100;    
+    float maxDistance = 300;    
 
     // Get components from enemy entity    auto& pos = registry.get<Transform>(enemy);
     auto& pos = registry.get<Transform>(enemy);
@@ -35,7 +35,7 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& spawn = registry.get<Vector2>(enemy);
     auto& sprite = registry.get<SpriteData>(enemy);
 
-    physics.velocity.y += 2000.0f * dt;
+    physics.velocity.y += GRAVITY * dt;
 
     // Check if we are following the player
     if(stats.followsPlayer){
