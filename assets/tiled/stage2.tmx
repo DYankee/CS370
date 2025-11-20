@@ -108,7 +108,7 @@
    </properties>
    <point/>
   </object>
-  <object id="113" name="Player" x="73" y="924.917">
+  <object id="113" name="Player" x="83" y="728.917">
    <point/>
   </object>
   <object id="114" name="Enemy" type="Enemy" x="809" y="925.5">
