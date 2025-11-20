@@ -93,7 +93,7 @@
  </layer>
  <objectgroup id="22" name="Spikes"/>
  <objectgroup id="24" name="Entities">
-  <object id="114" name="Player" x="142.167" y="636.25">
+  <object id="114" name="Player" x="214.167" y="918.917">
    <point/>
   </object>
   <object id="116" name="HealthUpgrade" type="HealthUpgrade" x="1000" y="900">
