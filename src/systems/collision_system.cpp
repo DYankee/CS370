@@ -129,7 +129,7 @@ void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
         auto [transform, physics] = registry.get<Transform, PhysicsObject>(entity);
 
         // Log current pos
-        TraceLog(LOG_INFO, "Player Current Pos: %f,%f", transform.translation.x, transform.translation.y);
+        TraceLog(LOG_INFO, "Entity Current Pos: %f,%f", transform.translation.x, transform.translation.y);
 
 
         // Calculate next position
@@ -162,7 +162,7 @@ void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
             TraceLog(LOG_INFO, "Entity: %d, position after y axis collision check (%f, %f)",entity, nextPos.x, nextPos.y);
 
             // Horizontal collision detection
-            Rectangle entityDestRecX = { nextPos.x, transform.translation.y, transform.scale.x, transform.scale.y };
+            Rectangle entityDestRecX = { nextPos.x, nextPos.y, transform.scale.x, transform.scale.y };
             if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityDestRecX, &hitObj)) {
                 // make sure player isn't inside the collided object
                 if (nextPos.x < hitObj.x){
