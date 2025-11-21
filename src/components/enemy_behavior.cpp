@@ -83,6 +83,59 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     MoveEntity(registry, dt, enemy);
 }
 
+void RangedEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
+    TraceLog(LOG_TRACE, "Entering Function RangedEnemyUpdate:");
+    TraceLog(LOG_INFO, "Updating entity: %d", enemy);
+    
+    // Get player position
+    auto players = registry.view<Player>();
+    entt::entity player = players.front();
+    auto& playerPos = registry.get<Transform>(player);
+
+    // Get components from enemy entity    auto& pos = registry.get<Transform>(enemy);
+    auto& pos = registry.get<Transform>(enemy);
+    auto& physics = registry.get<PhysicsObject>(enemy);
+    auto& stats = registry.get<EnemyStats>(enemy);
+    auto& spawn = registry.get<Vector2>(enemy);
+    auto& sprite = registry.get<SpriteData>(enemy);
+
+    // Check if we are following the player
+    TraceLog(LOG_INFO, "RangedEnemyUpdate: Checking if enemy(%d) should attack", enemy);
+    TraceLog(LOG_INFO, "RangedEnemyUpdate: enemy(%d) shouldAttack(%s), cd(%f)",
+        enemy, stats.followsPlayer ? "True" : "False",
+        stats.attackCooldownTimer
+    );
+    if(stats.followsPlayer && stats.attackCooldownTimer < 0){
+        TraceLog(LOG_INFO, "RangedEnemyUpdate: enemy(%d) should attack", enemy);
+        TraceLog(LOG_INFO, "RangedEnemyUpdate: creating projectile at(%f,%f), with a target of(%f,%f)",
+            pos.translation.x, pos.translation.y,
+            playerPos.translation.x, playerPos.translation.y
+        );
+        CreateProjectile(registry, pos, playerPos.translation, ProjectileStats{100,1});
+        stats.attackCooldownTimer = stats.attackCooldown;
+    } 
+    else {
+        TraceLog(LOG_INFO, "RangedEnemyUpdate: reducing enemy(%d) attackCooldown from(%f) to(%f)", 
+            enemy,
+            stats.attackCooldownTimer,
+            stats.attackCooldownTimer -= dt
+        );
+        stats.attackCooldownTimer -= dt;
+    }
+
+    // Check for aggro/de-aggro
+    float dx = pos.translation.x - playerPos.translation.x;
+    float dy = pos.translation.y - playerPos.translation.y;
+    float distanceSquared = (dx * dx) + (dy * dy);
+    float PlayerDistance = std::sqrt(distanceSquared);
+    if(PlayerDistance < 500){
+        stats.followsPlayer = true;
+    }
+    else {
+        stats.followsPlayer = false;
+    }
+}
+
 
 Enemy_behavior::Enemy_behavior(UpdateFunction Update){
     this->Update = Update;

@@ -10,4 +10,5 @@
 #include "enemy_controller.hpp"
 #include "player_health_upgrade_collision.hpp"
 #include "health_upgrade_controller.hpp"
+#include "projectile_manager.hpp"
 #endif
