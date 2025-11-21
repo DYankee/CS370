@@ -19,7 +19,12 @@ void TestUpdateFunc(entt::registry &registry, float dt, entt::entity enemy){
 void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     TraceLog(LOG_TRACE, "Entering Function BasicEnemyUpdate");
     TraceLog(LOG_INFO, "Updating entity: %d", enemy);
-    float maxDistance = 300;    
+    float maxDistance = 50;
+    
+    // Get player position
+    auto players = registry.view<Player>();
+    entt::entity player = players.front();
+    auto& playerPos = registry.get<Transform>(player);
 
     // Get components from enemy entity    auto& pos = registry.get<Transform>(enemy);
     auto& pos = registry.get<Transform>(enemy);
@@ -28,13 +33,7 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& spawn = registry.get<Vector2>(enemy);
     auto& sprite = registry.get<SpriteData>(enemy);
 
-    // Get components from enemy entity    auto& pos = registry.get<Transform>(enemy);
-    auto& pos = registry.get<Transform>(enemy);
-    auto& physics = registry.get<PhysicsObject>(enemy);
-    auto& stats = registry.get<EnemyStats>(enemy);
-    auto& spawn = registry.get<Vector2>(enemy);
-    auto& sprite = registry.get<SpriteData>(enemy);
-
+    // Apply gravity
     physics.velocity.y += GRAVITY * dt;
 
     // Check if we are following the player
@@ -81,6 +80,12 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
         else if(stats.CurrentDirection == RIGHT){
             physics.velocity.x = stats.enemySpeed * 1;
             sprite.SetTexture("FarmerR");
+        }
+
+        // Check if we should start following the player
+        float distanceFromPlayer = abs(pos.translation.x - playerPos.translation.x);
+        if (distanceFromPlayer < 100){
+            stats.followsPlayer = true;
         }
     }
     MoveEntity(registry, dt, enemy);
