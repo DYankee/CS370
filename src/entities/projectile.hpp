@@ -6,14 +6,11 @@
 #include "../components/components.hpp"
 #include "../components/projectile_stats.hpp"
 
+
 struct Projectile{};
 
-struct Projectile{
-    bool fromPlayer;
-};
-
 //void CreateProjectile(entt::registry&, Transform, Vector3);
-void CreateProjectile(entt:: registry&, Transform, Vector3, ProjectileStats, bool fromPlayer);
+void CreateProjectile(entt:: registry&, Transform, Vector3, ProjectileStats);
 
 
 #endif

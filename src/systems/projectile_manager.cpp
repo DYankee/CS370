@@ -3,8 +3,8 @@
 
 
 void UpdateProjectiles(entt::registry &registry, float dt){
-    registry.view<Projectile, Transform, Vector2, ProjectileStats>().each(
-        [dt, &registry](Transform &pos, Vector2 &targetPos, ProjectileStats &stats) {
+    registry.view<Projectile, Transform, Vector3, ProjectileStats>().each(
+        [dt, &registry](Transform &pos, Vector3 &targetPos, ProjectileStats &stats) {
         
         // Calculate the direction vector from the current position to the target position
         float dx = targetPos.x - pos.translation.x;

@@ -23,6 +23,7 @@ using namespace std;
 void Update(entt::registry &registry, float dt) {
     PlayerInputSystem(registry, dt);
     UpdateEnemies(registry, dt);
+    UpdateProjectiles(registry, dt);
     PlayerEnemyCollisionSystem(registry, dt);
     CameraUpdate(registry, dt);
     SpikeCollision(registry, dt);
@@ -99,11 +100,11 @@ void Render(entt::registry &registry, float dt) {
                 DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, pos.rotation.x, sprite.color);
             });
 
-            // Draw NPCs
-            registry.view<SpriteData, Transform, NPC>().each([](SpriteData &sprite, Transform &transform){
-                Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
+            // Draw Projectiles
+            registry.view<SpriteData, Transform, Projectile>().each([](SpriteData &sprite, Transform &pos){
+                Rectangle dstRec = {pos.translation.x, pos.translation.y, pos.scale.x, pos.scale.y};
                 Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
-                DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
+                DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, pos.rotation.x, sprite.color);
             });
 
             // Draw Health Upgrades

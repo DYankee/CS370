@@ -12,8 +12,7 @@ Direction ChangeDirection(Direction d){
     return direction;
 }
 
-EnemyStats::EnemyStats(EnemyType type, int enemyMaxHealth, float enemySpeed, float dmg, float attackCooldown, Direction direction, bool aggro) {
-    this->type = type;
+EnemyStats::EnemyStats(int enemyMaxHealth, float enemySpeed, float dmg, float attackCooldown, Direction direction, bool followsPlayer) {
     this->enemyHealth = enemyMaxHealth;
     this->enemyMaxHealth = enemyMaxHealth;
     this->enemySpeed = enemySpeed;

@@ -46,7 +46,8 @@ void CreateFarmer(entt::registry &registry, TmxObject enemyInfo) {
     if (statsMap["Direction"] > 0){
         direction = RIGHT;
     }
-    EnemyStats stats = EnemyStats(FARMER, health, moveSpeed, dmg, AttackCoolDown, direction, false);
+
+    EnemyStats stats = EnemyStats(health, moveSpeed, dmg, 4, direction, false);
     registry.emplace<EnemyStats>(enemyEnt, stats);
     
     // Add sprites
@@ -112,7 +113,7 @@ void CreateFarmer(entt::registry &registry, TmxObject enemyInfo) {
 
 
     // Add update function
-    Enemy_behavior behavior = BasicEnemyUpdate;
+    Enemy_behavior behavior = RangedEnemyUpdate;
     registry.emplace<Enemy_behavior>(enemyEnt, behavior);
 
     // Add the rest of the enemy components here

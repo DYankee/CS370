@@ -9,15 +9,13 @@ set(MILK_SOURCES
     components/sprite_data.cpp
     components/animation.cpp
     components/enemy_behavior.cpp
-    components/npc_behavior.cpp
     components/projectile_stats.cpp
-    components/weapon.cpp
     entities/camera.cpp
     entities/enemy.cpp
     entities/map.cpp
     entities/npc.cpp
     entities/player.cpp
-    entities/upgrade.cpp
+    entities/health_upgrade.cpp
     entities/projectile.cpp
     systems/asset_loader.cpp
     systems/collision_system.cpp
@@ -32,9 +30,6 @@ set(MILK_SOURCES
     systems/health_upgrade_controller.cpp
     systems/player_health_upgrade_collision.cpp
     systems/projectile_manager.cpp
-    systems/dialogue_system.cpp
-    systems/upgrade_collision.cpp
-    systems/upgrade_controller.cpp
 )
 
 add_library(milk_lib STATIC ${MILK_SOURCES})
