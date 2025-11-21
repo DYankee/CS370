@@ -29,6 +29,7 @@ typedef enum GameScreen { TITLE = 0, GAMEPLAY } GameScreen;
 void Update(entt::registry &registry, float dt) {
     PlayerInputSystem(registry, dt);
     UpdateEnemies(registry, dt);
+    UpdateProjectiles(registry, dt);
     PlayerEnemyCollisionSystem(registry, dt);
     CameraUpdate(registry, dt);
     SpikeCollision(registry, dt);
@@ -48,7 +49,6 @@ void Render(entt::registry &registry, float dt) {
             ClearBackground(RAYWHITE);
         
             // Draw TMX map
-
             registry.view<TmxMap, Map>().each([&camera](TmxMap &map) {
                 AnimateTMX(&map); // Update animated tiles
                 DrawTMX(&map, &camera, 0, 0, WHITE); // Draw tile map with parallax support 
@@ -56,7 +56,6 @@ void Render(entt::registry &registry, float dt) {
             
             
             // Draw player
-
             registry.view<SpriteData, Player, Animation>().each([&transform](SpriteData &sprite, Animation &animation) {
                 Rectangle srcRec = sprite.srcRec;
                 
@@ -76,6 +75,14 @@ void Render(entt::registry &registry, float dt) {
                 Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
                 DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, pos.rotation.x, sprite.color);
             });
+
+            // Draw Projectiles
+            registry.view<SpriteData, Transform, Projectile>().each([](SpriteData &sprite, Transform &pos){
+                Rectangle dstRec = {pos.translation.x, pos.translation.y, pos.scale.x, pos.scale.y};
+                Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
+                DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, pos.rotation.x, sprite.color);
+            });
+
             // Draw Health Upgrades
 TraceLog(LOG_TRACE, "Drawing Health Upgrades");
 registry.view<SpriteData, Transform, HealthUpgrade>().each([](SpriteData &sprite, Transform &transform){

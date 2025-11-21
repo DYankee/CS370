@@ -46,11 +46,11 @@ void CreateEnemy(entt::registry &registry, TmxObject enemyInfo) {
         direction = RIGHT;
     }
 
-    EnemyStats stats = EnemyStats(health, health, moveSpeed, dmg, direction, false);
+    EnemyStats stats = EnemyStats(health, moveSpeed, dmg, 4, direction, false);
     registry.emplace<EnemyStats>(enemyEnt, stats);
 
     // Add update function
-    Enemy_behavior behavior = BasicEnemyUpdate;
+    Enemy_behavior behavior = RangedEnemyUpdate;
     registry.emplace<Enemy_behavior>(enemyEnt, behavior);
 
     // Add the rest of the enemy components here

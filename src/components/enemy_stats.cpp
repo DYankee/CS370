@@ -12,11 +12,13 @@ Direction ChangeDirection(Direction d){
     return direction;
 }
 
-EnemyStats::EnemyStats(int enemyHealth, int enemyMaxHealth, float enemySpeed, float dmg, Direction direction, bool followsPlayer) {
+EnemyStats::EnemyStats(int enemyMaxHealth, float enemySpeed, float dmg, float attackCooldown, Direction direction, bool followsPlayer) {
     this->enemyHealth = enemyMaxHealth;
     this->enemyMaxHealth = enemyMaxHealth;
     this->enemySpeed = enemySpeed;
     this->dmg = dmg;
+    this->attackCooldown = attackCooldown;
+    this->attackCooldownTimer = 0;
     this->CurrentDirection = direction;
     this->followsPlayer = followsPlayer;
 }
