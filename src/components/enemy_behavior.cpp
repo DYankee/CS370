@@ -35,16 +35,11 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
 
     // Check if we are following the player
     if(stats.followsPlayer){
-
         // Move towards player
         if (pos.translation.x < playerPos.translation.x){
-            physics.velocity.x = stats.enemySpeed * 1;
-            stats.CurrentDirection = LEFT;
-            sprite.SetTexture("FarmerL");
-        } else {
-            physics.velocity.x = stats.enemySpeed * -1;
             stats.CurrentDirection = RIGHT;
-            sprite.SetTexture("FarmerR");
+        } else {
+            stats.CurrentDirection = LEFT;
         }
 
         // Check if we should stop following the player
@@ -53,7 +48,6 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
             stats.followsPlayer = false;
         }
     } else {
-
         // Check distance from spawn point
         int distanceFromSpawn = abs(pos.translation.x - spawn.x);
         
@@ -61,22 +55,10 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
         if(distanceFromSpawn > maxDistance){
             if(pos.translation.x > spawn.x){
                 stats.CurrentDirection = LEFT;
-                sprite.SetTexture("FarmerL");
             }
             else{
                 stats.CurrentDirection = RIGHT;
-                sprite.SetTexture("FarmerR");
             }
-        }
-
-        // Move based on current direction
-        if(stats.CurrentDirection == LEFT){
-            physics.velocity.x = stats.enemySpeed * -1;
-            sprite.SetTexture("FarmerL");
-        }
-        else if(stats.CurrentDirection == RIGHT){
-            physics.velocity.x = stats.enemySpeed * 1;
-            sprite.SetTexture("FarmerR");
         }
 
         // Check if we should start following the player
@@ -85,6 +67,17 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
             stats.followsPlayer = true;
         }
     }
+
+    // Update velocity based on current direction
+    if(stats.CurrentDirection == LEFT){
+        physics.velocity.x = stats.enemySpeed * -1;
+        sprite.SetTexture("FarmerL");
+    }
+    else if(stats.CurrentDirection == RIGHT){
+        physics.velocity.x = stats.enemySpeed * 1;
+        sprite.SetTexture("FarmerR");
+    }
+    // Apply movement
     MoveEntity(registry, dt, enemy);
 }
 
