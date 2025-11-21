@@ -8,9 +8,6 @@ void TestUpdateFunc(entt::registry &registry, float dt, entt::entity enemy){
     auto& pos = registry.get<Transform>(enemy);
     auto& physics = registry.get<PhysicsObject>(enemy);
     auto& stats = registry.get<EnemyStats>(enemy);
-    auto& pos = registry.get<Transform>(enemy);
-    auto& physics = registry.get<PhysicsObject>(enemy);
-    auto& stats = registry.get<EnemyStats>(enemy);
 
     pos.translation.x += stats.enemySpeed * dt;
     TraceLog(LOG_TRACE, "Exiting TestUpdateFunc");
