@@ -19,8 +19,12 @@ void TestUpdateFunc(entt::registry &registry, float dt, entt::entity enemy){
 void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     TraceLog(LOG_TRACE, "Entering Function BasicEnemyUpdate");
     TraceLog(LOG_INFO, "Updating entity: %d", enemy);
-    float maxDistance = 300;    
-
+    float maxDistance = 50;
+    
+    // Get player position
+    auto players = registry.view<Player>();
+    entt::entity player = players.front();
+    auto& playerPos = registry.get<Transform>(player);
 
     // Get components from enemy entity    auto& pos = registry.get<Transform>(enemy);
     auto& pos = registry.get<Transform>(enemy);
@@ -29,14 +33,46 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& spawn = registry.get<Vector2>(enemy);
     auto& sprite = registry.get<SpriteData>(enemy);
 
+    // Apply gravity
     physics.velocity.y += GRAVITY * dt;
 
-    if(!stats.followsPlayer){
-        int distanceFromSpawn = abs(pos.translation.x - spawn.x);
-        if(distanceFromSpawn > maxDistance){
-            stats.CurrentDirection = ChangeDirection(stats.CurrentDirection);
+    // Check if we are following the player
+    if(stats.followsPlayer){
+
+        // Move towards player
+        if (pos.translation.x < playerPos.translation.x){
+            physics.velocity.x = stats.enemySpeed * 1;
+            stats.CurrentDirection = LEFT;
+            sprite.SetTexture("FarmerL");
+        } else {
+            physics.velocity.x = stats.enemySpeed * -1;
+            stats.CurrentDirection = RIGHT;
+            sprite.SetTexture("FarmerR");
         }
 
+        // Check if we should stop following the player
+        float distanceFromPlayer = abs(pos.translation.x - playerPos.translation.x);
+        if (distanceFromPlayer > 200){
+            stats.followsPlayer = false;
+        }
+    } else {
+
+        // Check distance from spawn point
+        int distanceFromSpawn = abs(pos.translation.x - spawn.x);
+        
+        // set direction based on distance from spawn 
+        if(distanceFromSpawn > maxDistance){
+            if(pos.translation.x > spawn.x){
+                stats.CurrentDirection = LEFT;
+                sprite.SetTexture("FarmerL");
+            }
+            else{
+                stats.CurrentDirection = RIGHT;
+                sprite.SetTexture("FarmerR");
+            }
+        }
+
+        // Move based on current direction
         if(stats.CurrentDirection == LEFT){
             physics.velocity.x = stats.enemySpeed * -1;
             sprite.SetTexture("FarmerL");
@@ -44,6 +80,12 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
         else if(stats.CurrentDirection == RIGHT){
             physics.velocity.x = stats.enemySpeed * 1;
             sprite.SetTexture("FarmerR");
+        }
+
+        // Check if we should start following the player
+        float distanceFromPlayer = abs(pos.translation.x - playerPos.translation.x);
+        if (distanceFromPlayer < 100){
+            stats.followsPlayer = true;
         }
     }
     MoveEntity(registry, dt, enemy);
