@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="127">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="130">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <tileset firstgid="1026" source="test_tileset.tsx"/>
@@ -105,30 +105,39 @@
   <object id="112" name="Player" x="113.692" y="450.896">
    <point/>
   </object>
-  <object id="119" name="Enemy" type="Enemy" x="1064.5" y="894">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Health" type="float" value="3"/>
-    <property name="MoveSpeed" type="float" value="30"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="120" name="Enemy" type="Enemy" x="1144.5" y="892.5">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Health" type="float" value="3"/>
-    <property name="MoveSpeed" type="float" value="30"/>
-   </properties>
-   <point/>
-  </object>
   <object id="121" name="HealthUpgrade" type="HealthUpgrade" x="416" y="900">
    <point/>
   </object>
-  <object id="125" name="Enemy" type="Enemy" x="1241" y="893">
+  <object id="127" name="Alien" type="Enemy" x="953.5" y="907.5">
    <properties>
+    <property name="AttackCoolDown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
-    <property name="Health" type="float" value="3"/>
-    <property name="MoveSpeed" type="float" value="30"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="1"/>
+    <property name="MoveSpeed" type="float" value="0"/>
+    <property name="Type" value="Alien"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="128" name="Farmer" type="Enemy" x="831.5" y="902.5">
+   <properties>
+    <property name="AttackCoolDown" type="float" value="4"/>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="1"/>
+    <property name="MoveSpeed" type="float" value="50"/>
+    <property name="Type" value="Farmer"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="129" name="Farmer" type="Enemy" x="1123" y="901">
+   <properties>
+    <property name="AttackCoolDown" type="float" value="4"/>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="1"/>
+    <property name="MoveSpeed" type="float" value="50"/>
+    <property name="Type" value="Farmer"/>
    </properties>
    <point/>
   </object>

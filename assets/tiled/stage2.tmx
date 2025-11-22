@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="115">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="118">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <group id="5" name="bg" offsetx="4" offsety="193.333">
@@ -99,24 +99,39 @@
   <object id="111" name="Spkie" x="1262.91" y="990.727"/>
  </objectgroup>
  <objectgroup id="24" name="Entities">
-  <object id="112" name="Enemy" type="Enemy" x="200.871" y="535.993">
+  <object id="113" name="Player" x="87.5" y="916.917">
+   <point/>
+  </object>
+  <object id="115" name="Alien2" type="Enemy" x="824" y="933.5">
    <properties>
+    <property name="AttackCoolDown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="1"/>
-    <property name="Health" type="float" value="3"/>
-    <property name="MoveSpeed" type="float" value="100"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="1"/>
+    <property name="MoveSpeed" type="float" value="0"/>
+    <property name="Type" value="Alien"/>
    </properties>
    <point/>
   </object>
-  <object id="113" name="Player" x="83" y="728.917">
-   <point/>
-  </object>
-  <object id="114" name="Enemy" type="Enemy" x="809" y="925.5">
+  <object id="116" name="Farmer1" type="Enemy" x="199.5" y="540">
    <properties>
+    <property name="AttackCoolDown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
-    <property name="Health" type="float" value="3"/>
-    <property name="MoveSpeed" type="float" value="30"/>
+    <property name="Health" type="float" value="1"/>
+    <property name="MoveSpeed" type="float" value="0"/>
+    <property name="Type" value="Farmer"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="117" name="Alien1" type="Enemy" x="335" y="669.5">
+   <properties>
+    <property name="AttackCoolDown" type="float" value="4"/>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="1"/>
+    <property name="MoveSpeed" type="float" value="0"/>
+    <property name="Type" value="Alien"/>
    </properties>
    <point/>
   </object>
