@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="119">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="121">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <group id="5" name="bg" offsetx="4" offsety="193.333">
@@ -93,7 +93,7 @@
  </layer>
  <objectgroup id="22" name="Spikes"/>
  <objectgroup id="24" name="Entities">
-  <object id="114" name="Player" x="142.167" y="636.25">
+  <object id="114" name="Player" x="264.167" y="891.583">
    <point/>
   </object>
   <object id="116" name="HealthUpgrade" type="HealthUpgrade" x="1000" y="900">
@@ -105,21 +105,23 @@
    </properties>
    <point/>
   </object>
-  <object id="118" name="Enemy" type="Enemy" x="791.833" y="922.666">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="1"/>
-    <property name="Health" type="float" value="2"/>
-    <property name="MoveSpeed" type="float" value="50"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="117" name="Enemy" type="Enemy" x="520" y="921.333">
+  <object id="119" name="Alien" type="Enemy" x="885" y="906">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
-    <property name="Health" type="float" value="2"/>
-    <property name="MoveSpeed" type="float" value="50"/>
+    <property name="Health" type="float" value="1"/>
+    <property name="MoveSpeed" type="float" value="0"/>
+    <property name="Type" value="Alien"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="120" name="Farmer" type="Enemy" x="694.667" y="910">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="1"/>
+    <property name="MoveSpeed" type="float" value="40"/>
+    <property name="Type" value="Farmer"/>
    </properties>
    <point/>
   </object>
