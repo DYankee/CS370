@@ -13,9 +13,9 @@ struct EnemyStats {
     float attackCooldown;       //Time between enemy attacks
     float attackCooldownTimer;  //Current attack cooldown
     Direction CurrentDirection; //enemy's Current direction
-    bool followsPlayer;         //determines whether enemy follows the player or not
+    bool aggro;         //determines whether enemy follows the player or not
 
-    EnemyStats(int enemyMaxHealth, float enemySpeed, float dmg, float attackCooldown, Direction direction, bool followsPlayer);
+    EnemyStats(int enemyMaxHealth, float enemySpeed, float dmg, float attackCooldown, Direction direction, bool aggro);
 };
 
 #endif

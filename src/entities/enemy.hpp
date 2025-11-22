@@ -2,12 +2,17 @@
 #define ENEMY_HPP
 
 #include "../components/components.hpp"
-#include "../systems/systems.hpp"
+#include "../../include/entt.hpp"
+#include "../../include/raylib.h"
+#include "../../include/raytmx.h"
+
 
 // Create empty struct
 struct Enemy{};
 
-void CreateEnemy(entt::registry &registry, TmxObject enemyInfo);
+
+void CreateFarmer(entt::registry &registry, TmxObject enemyInfo);
+void CreateAlien(entt::registry &registry, TmxObject enemyInfo);
 
 
 

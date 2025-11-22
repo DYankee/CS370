@@ -34,7 +34,7 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     physics.velocity.y += GRAVITY * dt;
 
     // Check if we are following the player
-    if(stats.followsPlayer){
+    if(stats.aggro){
 
         // Move towards player
         if (pos.translation.x < playerPos.translation.x){
@@ -46,7 +46,7 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
         // Check if we should stop following the player
         float distanceFromPlayer = abs(pos.translation.x - playerPos.translation.x);
         if (distanceFromPlayer > 200){
-            stats.followsPlayer = false;
+            stats.aggro = false;
         }
     } else {
 
@@ -68,7 +68,7 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
         // Check if we should start following the player
         float distanceFromPlayer = abs(pos.translation.x - playerPos.translation.x);
         if (distanceFromPlayer < 100){
-            stats.followsPlayer = true;
+            stats.aggro = true;
         }
     }
     // Move based on current direction
@@ -102,10 +102,10 @@ void RangedEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     // Check if we are following the player
     TraceLog(LOG_INFO, "RangedEnemyUpdate: Checking if enemy(%d) should attack", enemy);
     TraceLog(LOG_INFO, "RangedEnemyUpdate: enemy(%d) shouldAttack(%s), cd(%f)",
-        enemy, stats.followsPlayer ? "True" : "False",
+        enemy, stats.aggro ? "True" : "False",
         stats.attackCooldownTimer
     );
-    if(stats.followsPlayer && stats.attackCooldownTimer < 0){
+    if(stats.aggro && stats.attackCooldownTimer < 0){
         TraceLog(LOG_INFO, "RangedEnemyUpdate: enemy(%d) should attack", enemy);
         TraceLog(LOG_INFO, "RangedEnemyUpdate: creating projectile at(%f,%f), with a target of(%f,%f)",
             pos.translation.x, pos.translation.y,
@@ -129,11 +129,17 @@ void RangedEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     float distanceSquared = (dx * dx) + (dy * dy);
     float PlayerDistance = std::sqrt(distanceSquared);
     if(PlayerDistance < 500){
-        stats.followsPlayer = true;
+        stats.aggro = true;
     }
     else {
-        stats.followsPlayer = false;
+        stats.aggro = false;
     }
+    
+    
+    // Apply gravity
+    physics.velocity.y += GRAVITY * dt;
+    
+    MoveEntity(registry, dt, enemy);
 }
 
 
