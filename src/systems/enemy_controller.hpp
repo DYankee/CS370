@@ -8,6 +8,8 @@
 #include "../components/components.hpp"
 #include "systems.hpp"
 
+enum EnemyType {NONE, FARMER, ALIEN};
+
 void SpawnEnemies(entt::registry &registry);
 
 void DeSpawnEnemies(entt::registry &registry);
