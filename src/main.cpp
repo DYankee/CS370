@@ -70,21 +70,28 @@ void Render(entt::registry &registry, float dt) {
             });
 
             // Draw Enemies
-            registry.view<SpriteData, Transform, Enemy>().each([&registry](entt::entity entity, SpriteData &sprite, Transform &pos){
-                Rectangle srcRec = sprite.srcRec;
+            auto enemyView = registry.view<Enemy>();
+            for(entt::entity enemy : enemyView){
+                // Get components for rendering
+                SpriteData &enemySprite = registry.get<SpriteData>(enemy);
+                Transform &enemyPos = registry.get<Transform>(enemy);
+                EnemyStats &enemyStats = registry.get<EnemyStats>(enemy);
                 
-                // Use animation frame if animation component exists
-                if (registry.all_of<Animation>(entity)) {
-                    Animation &animation = registry.get<Animation>(entity);
-                    if (!animation.sequences.empty() && animation.sequences.find(animation.currentSequence) != animation.sequences.end()) {
-                        srcRec = animation.GetCurrentFrame();
-                    }
-                }
-                
-                Rectangle dstRec = {pos.translation.x, pos.translation.y, pos.scale.x, pos.scale.y};
+                // Render enemy
+                Rectangle dstRec = {enemyPos.translation.x, enemyPos.translation.y, enemyPos.scale.x, enemyPos.scale.y};
                 Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
-                DrawTexturePro(sprite.curentTexture, srcRec, dstRec, origin, pos.rotation.x, sprite.color);
-            });
+                DrawTexturePro(enemySprite.curentTexture, enemySprite.srcRec, dstRec, origin, enemyPos.rotation.x, enemySprite.color);
+
+                //Render weapon if they have one
+                if(enemyStats.type == ALIEN){
+                    Weapon &enemyWeapon = registry.get<Weapon>(enemy);
+                    Vector3 weaponPos = CalculateWeaponOffset(enemyWeapon.offset, enemyPos.translation, enemyStats);
+                    Rectangle dstRec = {weaponPos.x , weaponPos.y, enemyWeapon.sprite.curentTexture.width, enemyWeapon.sprite.curentTexture.height};
+                    Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
+                    TraceLog(LOG_TRACE, "Rendering enemy weapon at(%f,%f)", dstRec.x,dstRec.y);
+                    DrawTexturePro(enemyWeapon.sprite.curentTexture, enemyWeapon.sprite.srcRec, dstRec, origin, 0, enemyWeapon.sprite.color);
+                }
+            }
 
             // Draw Projectiles
             registry.view<SpriteData, Transform, Projectile>().each([](SpriteData &sprite, Transform &pos){

@@ -32,6 +32,8 @@
         }
     }
 
+    SpriteData::SpriteData(){};
+
     // Add texture to map
     void SpriteData::AddTexture(std::string name, std::string path) {
         Texture2D texture = LoadTexture(path.c_str());

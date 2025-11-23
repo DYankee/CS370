@@ -5,7 +5,9 @@ enum Direction {LEFT, RIGHT};
 
 Direction ChangeDirection(Direction);
 
+enum EnemyType {NONE, FARMER, ALIEN};
 struct EnemyStats {
+    EnemyType type;             //enemy's type
     int enemyHealth;            //enemy's current health
     int enemyMaxHealth;         //enemy's maximum health
     float enemySpeed;           //enemy's movement speed
@@ -15,7 +17,7 @@ struct EnemyStats {
     Direction CurrentDirection; //enemy's Current direction
     bool aggro;         //determines whether enemy follows the player or not
 
-    EnemyStats(int enemyMaxHealth, float enemySpeed, float dmg, float attackCooldown, Direction direction, bool aggro);
+    EnemyStats(EnemyType type, int enemyMaxHealth, float enemySpeed, float dmg, float attackCooldown, Direction direction, bool aggro);
 };
 
 #endif
