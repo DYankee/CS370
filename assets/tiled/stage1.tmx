@@ -131,12 +131,12 @@
    </properties>
    <point/>
   </object>
-  <object id="120" name="Farmer" type="Enemy" x="694.667" y="910">
+  <object id="120" name="Farmer" type="Enemy" x="696" y="898">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
     <property name="Health" type="float" value="1"/>
-    <property name="MoveSpeed" type="float" value="40"/>
+    <property name="MoveSpeed" type="float" value="50"/>
     <property name="Type" value="Farmer"/>
    </properties>
    <point/>
