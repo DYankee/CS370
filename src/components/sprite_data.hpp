@@ -12,8 +12,11 @@
         Rectangle srcRec;
         Color color;
 
-        // Constructor
+        // Constructors
         SpriteData(std::map<std::string, Texture2D> textures, Color color);
+        SpriteData();
+
+
         // Deconstructor
         //~SpriteData();
 

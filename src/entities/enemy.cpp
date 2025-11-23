@@ -33,7 +33,7 @@ void CreateFarmer(entt::registry &registry, TmxObject enemyInfo) {
     if (statsMap["Direction"] > 0){
         direction = RIGHT;
     }
-    EnemyStats stats = EnemyStats(health, moveSpeed, dmg, AttackCoolDown, direction, false);
+    EnemyStats stats = EnemyStats(FARMER, health, moveSpeed, dmg, AttackCoolDown, direction, false);
     registry.emplace<EnemyStats>(enemyEnt, stats);
     
     // Add sprites
@@ -75,8 +75,6 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
     Enemy enemyComponent;
     registry.emplace<Enemy>(enemyEnt, enemyComponent);
 
-
-
     // Add Transform component to the entity
     Transform enemyTransform = Transform{ {float(enemyInfo.x), float(enemyInfo.y), 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32} };
     registry.emplace<Transform>(enemyEnt, enemyTransform);
@@ -97,11 +95,11 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
     if (statsMap["Direction"] > 0){
         direction = RIGHT;
     }
-    EnemyStats stats = EnemyStats(health, moveSpeed, dmg, 4, direction, false);
+    EnemyStats stats = EnemyStats(ALIEN, health, moveSpeed, dmg, 4, direction, false);
     registry.emplace<EnemyStats>(enemyEnt, stats);
 
     // Add sprites
-    SpriteData farmerSprite = SpriteData(LoadTextures({
+    SpriteData Sprite = SpriteData(LoadTextures({
         {"AlienR", "assets/sprites/enemies/alien/AlienR.png"},
         {"AlienL", "assets/sprites/enemies/alien/AlienL.png"},
     }),
@@ -109,16 +107,40 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
     );
     switch (direction){
         case LEFT: {
-            farmerSprite.SetTexture("AlienL");
+            Sprite.SetTexture("AlienL");
             break;
         }
         case RIGHT: {
-            farmerSprite.SetTexture("AlienR");
+            Sprite.SetTexture("AlienR");
             break;
         }
     }
-    farmerSprite.SetTexture("FarmerR");
-    registry.emplace<SpriteData>(enemyEnt, farmerSprite);
+    Sprite.SetTexture("FarmerR");
+    registry.emplace<SpriteData>(enemyEnt, Sprite);
+
+    // Add weapon to enemy
+    // Load weapon sprite
+    SpriteData weaponSprite = SpriteData(LoadTextures({
+        {"WeaponL", "assets/sprites/powerups/MilkCarton.png"},
+        {"WeaponR", "assets/sprites/powerups/MilkCarton.png"},
+    }),
+    WHITE
+    );
+    switch (direction){
+        case LEFT: {
+            weaponSprite.SetTexture("WeaponL");
+            break;
+        }
+        case RIGHT: {
+            weaponSprite.SetTexture("WeaponR");
+            break;
+        }
+    }
+    TraceLog(LOG_INFO, "Weapon sprite id(%d) size(%d,%d)", weaponSprite.curentTexture.id, weaponSprite.curentTexture.width, weaponSprite.curentTexture.height);
+    //Calculate Weapon position 
+    Vector3 weaponOffset = Vector3{2,-10,0};
+    Weapon weapon = Weapon(weaponOffset, weaponSprite);
+    registry.emplace<Weapon>(enemyEnt, weapon);
 
     // Add update function
     Enemy_behavior behavior = RangedEnemyUpdate;
@@ -126,3 +148,18 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
 
     // Add the rest of the enemy components here
 };
+
+// Function to calculate the position of the enemy's weapon
+Vector3 CalculateWeaponOffset(Vector3 offset, Vector3 enemyPos, EnemyStats stats){
+    Vector3 pos;
+
+    pos.y = enemyPos.y - offset.y;
+
+    if (stats.CurrentDirection == LEFT){
+        pos.x = enemyPos.x - offset.x;
+    }
+    else {
+        pos.x = enemyPos.x + offset.x;
+    }
+    return pos;    
+}
