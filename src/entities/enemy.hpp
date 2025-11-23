@@ -14,9 +14,6 @@ struct Enemy{};
 void CreateFarmer(entt::registry &registry, TmxObject enemyInfo);
 void CreateAlien(entt::registry &registry, TmxObject enemyInfo);
 
-void CreateFarmer(entt::registry &registry, TmxObject enemyInfo);
-void CreateAlien(entt::registry &registry, TmxObject enemyInfo);
-
 Vector3 CalculateWeaponOffset(Vector3 offset, Vector3 enemyPos, EnemyStats stats);
 
 

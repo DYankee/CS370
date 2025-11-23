@@ -10,6 +10,7 @@ set(MILK_SOURCES
     components/animation.cpp
     components/enemy_behavior.cpp
     components/projectile_stats.cpp
+    components/weapon.cpp
     entities/camera.cpp
     entities/enemy.cpp
     entities/map.cpp
