@@ -8,6 +8,7 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath) {
     TraceLog(LOG_INFO, "Changing map to: %s", tmxFilePath.c_str());
 
     DeSpawnEnemies(registry);
+    RemoveAllProjectiles(registry);
     registry.view<Map, TmxMap>().each([&registry, &tmxFilePath](TmxMap &currentMap) {
         // Load new map
         TmxMap* newMapPtr = LoadTMX(tmxFilePath.c_str());
