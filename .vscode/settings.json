@@ -84,16 +84,7 @@
         "variant": "cpp",
         "xstring": "cpp",
         "locale": "cpp",
-        "*.m": "cpp",
-        "filesystem": "cpp",
-        "xmemory": "cpp",
-        "xtr1common": "cpp",
-        "xutility": "cpp",
-        "xlocale": "cpp",
-        "xlocmes": "cpp",
-        "xlocmon": "cpp",
-        "xlocnum": "cpp",
-        "xloctime": "cpp"
+        "*.m": "cpp"
     },
     "FSharp.suggestGitignore": false
 }

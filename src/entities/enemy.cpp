@@ -243,7 +243,7 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
     }
     TraceLog(LOG_INFO, "Weapon sprite id(%d) size(%d,%d)", weaponSprite.curentTexture.id, weaponSprite.curentTexture.width, weaponSprite.curentTexture.height);
     //Calculate Weapon position 
-    Vector3 weaponOffset = Vector3{5,-15,0};
+    Vector3 weaponOffset = Vector3{20,-5,-5};
     Weapon weapon = Weapon(weaponOffset, weaponSprite);
     registry.emplace<Weapon>(enemyEnt, weapon);
 
@@ -258,13 +258,13 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
 Vector3 CalculateWeaponOffset(Vector3 offset, Vector3 enemyPos, EnemyStats stats){
     Vector3 pos;
 
-    pos.y = enemyPos.y - offset.y;
-
     if (stats.CurrentDirection == LEFT){
         pos.x = enemyPos.x - offset.x;
+        pos.y = enemyPos.y - offset.y;
     }
     else {
-        pos.x = enemyPos.x + offset.x;
+        pos.x = enemyPos.x + 8 + offset.x;  
+        pos.y = enemyPos.y - offset.z; 
     }
     return pos;    
 }
