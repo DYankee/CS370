@@ -164,8 +164,8 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
     // Add weapon to enemy
     // Load weapon sprite
     SpriteData weaponSprite = SpriteData(LoadTextures({
-        {"WeaponL", "assets/sprites/enemies/alien/AlienGun.png"},
-        {"WeaponR", "assets/sprites/enemies/alien/AlienGun.png"},
+        {"WeaponL", "assets/sprites/enemies/alien/AlienGunL.png"},
+        {"WeaponR", "assets/sprites/enemies/alien/AlienGunR.png"},
     }),
     WHITE
     );
