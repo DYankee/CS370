@@ -24,7 +24,7 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath) {
         currentMap = *newMapPtr;
         
         // Set player start position
-        registry.view<Player, Transform>().each([&registry, &currentMap](Transform &transform) {
+        registry.view<Player, Transform>().each([&registry, &currentMap](entt::entity playerEnt, Transform &transform) {
 
             TmxObjectGroup entities = FindLayerByName(currentMap.layers, currentMap.layersLength, "Entities")->exact.objectGroup;
             TmxObject player = FindObjectByName(entities.objects, entities.objectsLength, "Player");
@@ -32,6 +32,13 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath) {
             TraceLog(LOG_INFO, "Moving player to map spawn at: %f,%f", player.x, player.y);
             transform.translation.x = player.x;
             transform.translation.y = player.y;
+
+            // Reset player velocity when loading into new stage
+            if (registry.all_of<PhysicsObject>(playerEnt)) {
+                PhysicsObject &physics = registry.get<PhysicsObject>(playerEnt);
+                physics.velocity = {0.0f, 0.0f};
+                TraceLog(LOG_INFO, "Player velocity reset to 0");
+            }
 
             TraceLog(LOG_INFO, "Player new location: %f,%f", transform.translation.x, transform.translation.y);
 

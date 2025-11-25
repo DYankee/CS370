@@ -97,7 +97,7 @@
  </imagelayer>
  <objectgroup id="22" name="Spikes"/>
  <objectgroup id="24" name="Entities">
-  <object id="114" name="Player" x="264.167" y="891.583">
+  <object id="114" name="Player" x="288" y="624">
    <point/>
   </object>
   <object id="116" name="HealthUpgrade" type="HealthUpgrade" x="1000" y="900">
@@ -109,7 +109,7 @@
    </properties>
    <point/>
   </object>
-  <object id="119" name="Alien" type="Enemy" x="885" y="906">
+  <object id="119" name="Alien" type="Enemy" x="896" y="672">
    <properties>
     <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
@@ -120,7 +120,7 @@
    </properties>
    <point/>
   </object>
-  <object id="120" name="Farmer" type="Enemy" x="696" y="898">
+  <object id="120" name="Farmer" type="Enemy" x="704" y="688">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
