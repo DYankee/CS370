@@ -132,11 +132,13 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
     float health = statsMap["Health"];
     float dmg = statsMap["DMG"];
     float moveSpeed = statsMap["MoveSpeed"];
+    float attackCooldown = statsMap["AttackCooldown"];
+
     Direction direction = LEFT;
     if (statsMap["Direction"] > 0){
         direction = RIGHT;
     }
-    EnemyStats stats = EnemyStats(ALIEN, health, moveSpeed, dmg, 4, direction, false);
+    EnemyStats stats = EnemyStats(ALIEN, health, moveSpeed, dmg, attackCooldown, direction, false);
     registry.emplace<EnemyStats>(enemyEnt, stats);
 
     // Add sprites
@@ -162,8 +164,8 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
     // Add weapon to enemy
     // Load weapon sprite
     SpriteData weaponSprite = SpriteData(LoadTextures({
-        {"WeaponL", "assets/sprites/powerups/MilkCarton.png"},
-        {"WeaponR", "assets/sprites/powerups/MilkCarton.png"},
+        {"WeaponL", "assets/sprites/enemies/alien/AlienGun.png"},
+        {"WeaponR", "assets/sprites/enemies/alien/AlienGun.png"},
     }),
     WHITE
     );
@@ -179,7 +181,7 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
     }
     TraceLog(LOG_INFO, "Weapon sprite id(%d) size(%d,%d)", weaponSprite.curentTexture.id, weaponSprite.curentTexture.width, weaponSprite.curentTexture.height);
     //Calculate Weapon position 
-    Vector3 weaponOffset = Vector3{2,-10,0};
+    Vector3 weaponOffset = Vector3{5,-15,0};
     Weapon weapon = Weapon(weaponOffset, weaponSprite);
     registry.emplace<Weapon>(enemyEnt, weapon);
 
