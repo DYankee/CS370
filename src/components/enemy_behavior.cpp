@@ -105,6 +105,7 @@ void RangedEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& stats = registry.get<EnemyStats>(enemy);
     auto& spawn = registry.get<Vector2>(enemy);
     auto& sprite = registry.get<SpriteData>(enemy);
+    auto& weapon = registry.get<Weapon>(enemy);
 
     // Check if we are following the player
     TraceLog(LOG_INFO, "RangedEnemyUpdate: Checking if enemy(%d) should attack", enemy);
@@ -118,7 +119,11 @@ void RangedEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
             pos.translation.x, pos.translation.y,
             playerPos.translation.x, playerPos.translation.y
         );
-        CreateProjectile(registry, pos, playerPos.translation, ProjectileStats{100,1});
+        //Calculate weapon offset
+        Transform startPos;
+        startPos.translation = CalculateWeaponOffset(weapon.offset, pos.translation, stats);
+        
+        CreateProjectile(registry, startPos, playerPos.translation, ProjectileStats{100,1});
         stats.attackCooldownTimer = stats.attackCooldown;
     } 
     else {
