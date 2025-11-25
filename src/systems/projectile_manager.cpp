@@ -96,15 +96,10 @@ bool CheckProjectileMapCollision(entt::registry &registry, entt::entity projecti
     bool collision = false;
 
     // Get projectile components
-    Transform projectilePos = registry.get<Transform>(projectile);
+    Transform &projectilePos = registry.get<Transform>(projectile);
     
     // Get map entity and components
     auto maps = registry.view<Map>();
-
-    if (maps.size() == 0){
-        TraceLog(LOG_FATAL, "No map found!");
-    }
-
     TmxMap &map = registry.get<TmxMap>(maps.front());
     
     // create projectile rect
@@ -114,8 +109,8 @@ bool CheckProjectileMapCollision(entt::registry &registry, entt::entity projecti
     };
 
     TraceLog(LOG_TRACE, "Checking projectile map collision");
-    TmxObject hitObjX;
-    if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, projectileRect, &hitObjX)){
+    TmxObject hitObj;
+    if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, projectileRect, &hitObj)){
         collision = true;
     }
 
