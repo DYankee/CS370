@@ -112,6 +112,7 @@
   </object>
   <object id="119" name="Alien" type="Enemy" x="885" y="906">
    <properties>
+    <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
     <property name="Health" type="float" value="1"/>
