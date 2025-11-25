@@ -110,7 +110,7 @@
   </object>
   <object id="127" name="Alien" type="Enemy" x="953.5" y="907.5">
    <properties>
-    <property name="AttackCoolDown" type="float" value="4"/>
+    <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
     <property name="Health" type="float" value="1"/>
@@ -121,7 +121,7 @@
   </object>
   <object id="128" name="Farmer" type="Enemy" x="831.5" y="902.5">
    <properties>
-    <property name="AttackCoolDown" type="float" value="4"/>
+    <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
     <property name="Health" type="float" value="1"/>
@@ -132,7 +132,7 @@
   </object>
   <object id="129" name="Farmer" type="Enemy" x="1123" y="901">
    <properties>
-    <property name="AttackCoolDown" type="float" value="4"/>
+    <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
     <property name="Health" type="float" value="1"/>
