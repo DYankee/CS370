@@ -36,7 +36,7 @@ void UpdateProjectiles(entt::registry &registry, float dt){
             // Check for player collision
             bool collision = CheckProjectilePlayerCollision(registry, projectile);
             if (collision){
-                // Add function for damaging player here
+                ApplyProjectileDamage(registry, projectile);
             }
             //mark projectile for deletion
             markForDestruction = true;
@@ -55,8 +55,7 @@ void UpdateProjectiles(entt::registry &registry, float dt){
             // Check for player collision
             collision = CheckProjectilePlayerCollision(registry, projectile);
             if (collision){
-
-                // Add function for damaging player here
+                ApplyProjectileDamage(registry, projectile);
 
                 //mark projectile for deletion
                 markForDestruction = true;
@@ -114,8 +113,6 @@ bool CheckProjectileMapCollision(entt::registry &registry, entt::entity projecti
         projectilePos.scale.x, projectilePos.scale.y,
     };
 
-
-    
     TraceLog(LOG_TRACE, "Checking projectile map collision");
     TmxObject hitObjX;
     if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, projectileRect, &hitObjX)){
@@ -124,6 +121,24 @@ bool CheckProjectileMapCollision(entt::registry &registry, entt::entity projecti
 
     TraceLog(LOG_TRACE, "projectile map collision: ", collision ? "True" : "False");
     return collision;
+}
+
+void ApplyProjectileDamage(entt::registry &registry, entt::entity projectile){
+    // Get player components
+    entt::entity player = registry.view<Player>().front();
+    PlayerStats &playerStats = registry.get<PlayerStats>(player);
+
+    // Get projectile components
+    ProjectileStats &projectileStats = registry.get<ProjectileStats>(projectile);
+
+    // Check if player can be damaged
+    if(playerStats.iFrames <= 0.0f){
+        // Apply damage to player
+        playerStats.health -= projectileStats.dmg; 
+        
+        //start I frames
+        playerStats.iFrames = playerStats.maxIFrames;
+    }
 }
 
 void RemoveAllProjectiles(entt::registry &registry){
