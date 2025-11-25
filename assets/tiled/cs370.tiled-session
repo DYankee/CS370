@@ -1,10 +1,11 @@
 {
-    "activeFile": "stage3.tmx",
+    "activeFile": "stage1.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
         "Foliage.tsx": {
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "SpikesNew.tsx": {
@@ -27,11 +28,11 @@
             "expandedObjectLayers": [
                 24
             ],
-            "scale": 1.5,
-            "selectedLayer": 8,
+            "scale": 1,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 960.3333333333333,
-                "y": 584.3333333333333
+                "x": 386,
+                "y": 757
             }
         },
         "stage2.tmx": {
@@ -39,8 +40,8 @@
                 5
             ],
             "expandedObjectLayers": [
-                24,
-                22
+                22,
+                24
             ],
             "scale": 0.5,
             "selectedLayer": 8,
@@ -53,8 +54,8 @@
             "scale": 0.75,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 706,
-                "y": 630.6666666666666
+                "x": 976.6666666666665,
+                "y": 588.6666666666666
             }
         },
         "test.tmx": {
@@ -79,10 +80,10 @@
     ],
     "project": "cs370.tiled-project",
     "recentFiles": [
-        "Foliage.tsx",
         "stage2.tmx",
-        "stage1.tmx",
         "stage3.tmx",
+        "stage1.tmx",
+        "Foliage.tsx",
         "test_tileset.tsx"
     ],
     "tileset.lastUsedFormat": "tsx"
