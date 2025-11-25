@@ -107,6 +107,21 @@ void RangedEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& sprite = registry.get<SpriteData>(enemy);
     auto& weapon = registry.get<Weapon>(enemy);
 
+
+    // Make enemy face player if they are aggro
+    if(stats.aggro){
+        if(playerPos.translation.x < pos.translation.x){
+            stats.CurrentDirection = LEFT;
+            sprite.SetTexture("AlienL");
+            weapon.sprite.SetTexture("WeaponL");
+        }
+        else {
+            stats.CurrentDirection = RIGHT;
+            sprite.SetTexture("AlienR");
+            weapon.sprite.SetTexture("WeaponR");
+        }
+    }
+
     // Check if we are following the player
     TraceLog(LOG_INFO, "RangedEnemyUpdate: Checking if enemy(%d) should attack", enemy);
     TraceLog(LOG_INFO, "RangedEnemyUpdate: enemy(%d) shouldAttack(%s), cd(%f)",
