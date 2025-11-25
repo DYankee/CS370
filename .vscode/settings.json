@@ -83,7 +83,8 @@
         "valarray": "cpp",
         "variant": "cpp",
         "xstring": "cpp",
-        "locale": "cpp"
+        "locale": "cpp",
+        "*.m": "cpp"
     },
     "FSharp.suggestGitignore": false
 }
