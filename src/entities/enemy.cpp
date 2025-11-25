@@ -40,6 +40,8 @@ void CreateFarmer(entt::registry &registry, TmxObject enemyInfo) {
     SpriteData farmerSprite = SpriteData(LoadTextures({
         {"FarmerR", "assets/sprites/enemies/farmer/FarmerR.png"},
         {"FarmerL", "assets/sprites/enemies/farmer/FarmerL.png"},
+        {"FarmerRWalk", "assets/sprites/enemies/farmer/FarmerRWalk.png"},
+        {"FarmerLWalk", "assets/sprites/enemies/farmer/FarmerLWalk.png"},
     }),
     WHITE
     );    
@@ -55,6 +57,45 @@ void CreateFarmer(entt::registry &registry, TmxObject enemyInfo) {
     }
     farmerSprite.SetTexture("FarmerR");
     registry.emplace<SpriteData>(enemyEnt, farmerSprite);
+
+    // Create Animation component for farmer
+    Animation farmerAnimation;
+    
+    // Sprite sheet dimensions for walking
+    int frameWidth = 16;
+    int frameHeight = 16;
+    int totalFrames = 6;
+    
+    // Create walk right animation sequence (6 frames)
+    std::vector<AnimationFrame> walkRightFrames;
+    for (int i = 0; i < totalFrames; i++) {
+        walkRightFrames.push_back(AnimationFrame{
+            Rectangle{(float)(i * frameWidth), 0, (float)frameWidth, (float)frameHeight},
+            0.1f  // 0.1 seconds per frame
+        });
+    }
+    farmerAnimation.AddSequence("walkRight", AnimationSequence(walkRightFrames, true));
+    
+    // Create walk left animation sequence (6 frames)
+    std::vector<AnimationFrame> walkLeftFrames;
+    for (int i = 0; i < totalFrames; i++) {
+        walkLeftFrames.push_back(AnimationFrame{
+            Rectangle{(float)(i * frameWidth), 0, (float)frameWidth, (float)frameHeight},
+            0.1f  // 0.1 seconds per frame
+        });
+    }
+    farmerAnimation.AddSequence("walkLeft", AnimationSequence(walkLeftFrames, true));
+    
+    // Create idle animations (single frame - first frame of each animation)
+    farmerAnimation.AddSequence("idleRight", AnimationSequence({
+        AnimationFrame{Rectangle{0, 0, (float)frameWidth, (float)frameHeight}, 1.0f}
+    }, true));
+    farmerAnimation.AddSequence("idleLeft", AnimationSequence({
+        AnimationFrame{Rectangle{0, 0, (float)frameWidth, (float)frameHeight}, 1.0f}
+    }, true));
+    
+    // Add Animation component to the entity
+    registry.emplace<Animation>(enemyEnt, farmerAnimation);
 
 
     // Add update function
