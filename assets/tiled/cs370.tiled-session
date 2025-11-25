@@ -1,13 +1,18 @@
 {
-    "activeFile": "stage1.tmx",
+    "activeFile": "stage3.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
+        "Foliage.tsx": {
+            "scaleInEditor": 1
+        },
         "SpikesNew.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "maintileset.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "stage1.tmj": {
@@ -22,11 +27,11 @@
             "expandedObjectLayers": [
                 24
             ],
-            "scale": 0.75,
+            "scale": 1.5,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 791.3333333333334,
-                "y": 813.3333333333333
+                "x": 960.3333333333333,
+                "y": 584.3333333333333
             }
         },
         "stage2.tmx": {
@@ -34,24 +39,22 @@
                 5
             ],
             "expandedObjectLayers": [
-                22,
-                24
+                24,
+                22
             ],
-            "scale": 0.5,
-            "selectedLayer": 8,
             "scale": 0.5,
             "selectedLayer": 8,
             "viewCenter": {
                 "x": 961,
-                "y": 582
+                "y": 583
             }
         },
         "stage3.tmx": {
             "scale": 0.75,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 532.6666666666665,
-                "y": 894.6666666666665
+                "x": 706,
+                "y": 630.6666666666666
             }
         },
         "test.tmx": {
@@ -63,9 +66,12 @@
             }
         },
         "test_tileset.tsx": {
-            "scaleInDock": 1
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         }
     },
+    "last.imagePath": "C:/Users/kentp/CS370/assets/graphics/tileset",
     "openFiles": [
         "stage2.tmx",
         "stage3.tmx",
@@ -73,8 +79,11 @@
     ],
     "project": "cs370.tiled-project",
     "recentFiles": [
+        "Foliage.tsx",
         "stage2.tmx",
+        "stage1.tmx",
         "stage3.tmx",
-        "stage1.tmx"
-    ]
+        "test_tileset.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
 }
