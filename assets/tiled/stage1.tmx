@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="143">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="145">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <tileset firstgid="1026" source="Foliage.tsx"/>
@@ -115,6 +115,17 @@
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
     <property name="Health" type="float" value="1"/>
+    <property name="MoveSpeed" type="float" value="10"/>
+    <property name="Type" value="Alien"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="143" name="Alien" type="Enemy" x="1408" y="672">
+   <properties>
+    <property name="AttackCooldown" type="float" value="4"/>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="1"/>
     <property name="MoveSpeed" type="float" value="0"/>
     <property name="Type" value="Alien"/>
    </properties>
@@ -126,6 +137,16 @@
     <property name="Direction" type="float" value="-1"/>
     <property name="Health" type="float" value="1"/>
     <property name="MoveSpeed" type="float" value="50"/>
+    <property name="Type" value="Farmer"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="144" name="Farmer" type="Enemy" x="496" y="688">
+   <properties>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="1"/>
+    <property name="MoveSpeed" type="float" value="0"/>
     <property name="Type" value="Farmer"/>
    </properties>
    <point/>
