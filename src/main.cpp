@@ -70,10 +70,20 @@ void Render(entt::registry &registry, float dt) {
             });
 
             // Draw Enemies
-            registry.view<SpriteData, Transform, Enemy>().each([](SpriteData &sprite, Transform &pos){
+            registry.view<SpriteData, Transform, Enemy>().each([&registry](entt::entity entity, SpriteData &sprite, Transform &pos){
+                Rectangle srcRec = sprite.srcRec;
+                
+                // Use animation frame if animation component exists
+                if (registry.all_of<Animation>(entity)) {
+                    Animation &animation = registry.get<Animation>(entity);
+                    if (!animation.sequences.empty() && animation.sequences.find(animation.currentSequence) != animation.sequences.end()) {
+                        srcRec = animation.GetCurrentFrame();
+                    }
+                }
+                
                 Rectangle dstRec = {pos.translation.x, pos.translation.y, pos.scale.x, pos.scale.y};
                 Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
-                DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, pos.rotation.x, sprite.color);
+                DrawTexturePro(sprite.curentTexture, srcRec, dstRec, origin, pos.rotation.x, sprite.color);
             });
 
             // Draw Projectiles
