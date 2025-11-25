@@ -73,19 +73,30 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
         }
     }
     // Move based on current direction
-    if(stats.CurrentDirection == LEFT){
-        physics.velocity.x = stats.enemySpeed * -1;
-        sprite.SetTexture("FarmerLWalk");
-        animation.PlaySequence("walkLeft");
+    if(stats.enemySpeed > 0){
+        if(stats.CurrentDirection == LEFT){
+            physics.velocity.x = stats.enemySpeed * -1;
+            sprite.SetTexture("FarmerLWalk");
+            animation.PlaySequence("walkLeft");
+        }
+        else if(stats.CurrentDirection == RIGHT){
+            physics.velocity.x = stats.enemySpeed * 1;
+            sprite.SetTexture("FarmerRWalk");
+            animation.PlaySequence("walkRight");
+        }
+        
+        // Update animation
+        animation.Update(dt);
     }
-    else if(stats.CurrentDirection == RIGHT){
-        physics.velocity.x = stats.enemySpeed * 1;
-        sprite.SetTexture("FarmerRWalk");
-        animation.PlaySequence("walkRight");
+    else {
+        // No movement - use static sprites
+        if(stats.CurrentDirection == LEFT){
+            sprite.SetTexture("FarmerL");
+        }
+        else if(stats.CurrentDirection == RIGHT){
+            sprite.SetTexture("FarmerR");
+        }
     }
-    
-    // Update animation
-    animation.Update(dt);
     
     MoveEntity(registry, dt, enemy);
 }
@@ -106,6 +117,7 @@ void RangedEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& spawn = registry.get<Vector2>(enemy);
     auto& sprite = registry.get<SpriteData>(enemy);
     auto& weapon = registry.get<Weapon>(enemy);
+    auto& animation = registry.get<Animation>(enemy);
 
 
     // Make enemy face player if they are aggro
@@ -162,6 +174,31 @@ void RangedEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
         stats.aggro = false;
     }
     
+    // Move based on current direction
+    if(stats.enemySpeed > 0){
+        if(stats.CurrentDirection == LEFT){
+            physics.velocity.x = stats.enemySpeed * -1;
+            sprite.SetTexture("AlienLWalk");
+            animation.PlaySequence("walkLeft");
+        }
+        else if(stats.CurrentDirection == RIGHT){
+            physics.velocity.x = stats.enemySpeed * 1;
+            sprite.SetTexture("AlienRWalk");
+            animation.PlaySequence("walkRight");
+        }
+        
+        // Update animation
+        animation.Update(dt);
+    }
+    else {
+        // No movement - use static sprites
+        if(stats.CurrentDirection == LEFT){
+            sprite.SetTexture("AlienL");
+        }
+        else if(stats.CurrentDirection == RIGHT){
+            sprite.SetTexture("AlienR");
+        }
+    }
     
     // Apply gravity
     physics.velocity.y += GRAVITY * dt;

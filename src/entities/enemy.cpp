@@ -207,6 +207,8 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
     SpriteData Sprite = SpriteData(LoadTextures({
         {"AlienR", "assets/sprites/enemies/alien/AlienR.png"},
         {"AlienL", "assets/sprites/enemies/alien/AlienL.png"},
+        {"AlienRWalk", "assets/sprites/enemies/alien/AlienRWalk.png"},
+        {"AlienLWalk", "assets/sprites/enemies/alien/AlienLWalk.png"},
     }),
     WHITE
     );
@@ -222,6 +224,37 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
     }
     Sprite.SetTexture("FarmerR");
     registry.emplace<SpriteData>(enemyEnt, Sprite);
+
+    // Create Animation component for alien
+    Animation alienAnimation;
+    
+    // Sprite sheet dimensions for walking
+    int frameWidth = 16;
+    int frameHeight = 16;
+    int totalFrames = 6;
+    
+    // Create walk right animation sequence (6 frames)
+    std::vector<AnimationFrame> walkRightFrames;
+    for (int i = 0; i < totalFrames; i++) {
+        walkRightFrames.push_back(AnimationFrame{
+            Rectangle{(float)(i * frameWidth), 0, (float)frameWidth, (float)frameHeight},
+            0.1f  // 0.1 seconds per frame
+        });
+    }
+    alienAnimation.AddSequence("walkRight", AnimationSequence(walkRightFrames, true));
+    
+    // Create walk left animation sequence (4 frames)
+    std::vector<AnimationFrame> walkLeftFrames;
+    for (int i = 0; i < totalFrames; i++) {
+        walkLeftFrames.push_back(AnimationFrame{
+            Rectangle{(float)(i * frameWidth), 0, (float)frameWidth, (float)frameHeight},
+            0.1f  // 0.1 seconds per frame
+        });
+    }
+    alienAnimation.AddSequence("walkLeft", AnimationSequence(walkLeftFrames, true));
+    
+    // Add Animation component to the entity
+    registry.emplace<Animation>(enemyEnt, alienAnimation);
 
     // Add weapon to enemy
     // Load weapon sprite
