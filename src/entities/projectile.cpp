@@ -10,11 +10,17 @@ void CreateProjectile(entt:: registry& registry, Transform startPos, Vector3 tar
     
     // Load projectile sprites
     SpriteData sprite = SpriteData(LoadTextures({
-            {"base", "assets/sprites/enemies/alien/AlienGunProjectile.png"},
+            {"ProjectileL", "assets/sprites/enemies/alien/AlienGunProjectileL.png"},
+            {"ProjectileR", "assets/sprites/enemies/alien/AlienGunProjectileR.png"},
         }),
         WHITE
     );
-    sprite.SetTexture("base");
+    if (startPos.translation.x < targetPos.x){
+        sprite.SetTexture("ProjectileR");
+    }
+    else {
+        sprite.SetTexture("ProjectileL");
+    }
     // Add SpriteData component to the entity
     registry.emplace<SpriteData>(projectile, sprite);
     
