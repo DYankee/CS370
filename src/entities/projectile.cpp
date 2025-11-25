@@ -10,7 +10,7 @@ void CreateProjectile(entt:: registry& registry, Transform startPos, Vector3 tar
     
     // Load projectile sprites
     SpriteData sprite = SpriteData(LoadTextures({
-            {"base", "assets/sprites/powerups/MilkCarton.png"},
+            {"base", "assets/sprites/enemies/alien/AlienGunProjectile.png"},
         }),
         WHITE
     );
