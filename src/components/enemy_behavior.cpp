@@ -29,6 +29,7 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& stats = registry.get<EnemyStats>(enemy);
     auto& spawn = registry.get<Vector2>(enemy);
     auto& sprite = registry.get<SpriteData>(enemy);
+    auto& animation = registry.get<Animation>(enemy);
 
     // Apply gravity
     physics.velocity.y += GRAVITY * dt;
@@ -74,12 +75,18 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     // Move based on current direction
     if(stats.CurrentDirection == LEFT){
         physics.velocity.x = stats.enemySpeed * -1;
-        sprite.SetTexture("FarmerL");
+        sprite.SetTexture("FarmerLWalk");
+        animation.PlaySequence("walkLeft");
     }
     else if(stats.CurrentDirection == RIGHT){
         physics.velocity.x = stats.enemySpeed * 1;
-        sprite.SetTexture("FarmerR");
+        sprite.SetTexture("FarmerRWalk");
+        animation.PlaySequence("walkRight");
     }
+    
+    // Update animation
+    animation.Update(dt);
+    
     MoveEntity(registry, dt, enemy);
 }
 
