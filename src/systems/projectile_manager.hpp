@@ -11,6 +11,8 @@ void UpdateProjectiles(entt::registry&, float);
 bool CheckProjectilePlayerCollision(entt::registry &registry, entt::entity projectile);
 bool CheckProjectileMapCollision(entt::registry &registry, entt::entity projectile);
 
+void ApplyProjectileDamage(entt::registry &registry, entt::entity projectile);
+
 void RemoveAllProjectiles(entt::registry &registry);
 
 
