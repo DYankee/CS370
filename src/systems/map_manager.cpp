@@ -41,6 +41,13 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath) {
                 TraceLog(LOG_INFO, "Player velocity reset to 0");
             }
 
+            // Reset player spawn pause timer when loading into new stage
+            if (registry.all_of<PlayerStats>(playerEnt)) {
+                PlayerStats &stats = registry.get<PlayerStats>(playerEnt);
+                stats.spawnPauseTimer = 1.0f;
+                TraceLog(LOG_INFO, "Player spawn pause timer reset to 1.0s");
+            }
+
             TraceLog(LOG_INFO, "Player new location: %f,%f", transform.translation.x, transform.translation.y);
 
             registry.view<PlayerCamera, Camera2D>().each([&transform](Camera2D &camera){

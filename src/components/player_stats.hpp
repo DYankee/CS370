@@ -13,6 +13,7 @@ struct PlayerStats {
     float gravity;      //gravity affecting player
     Sound jumpSound;    //jump sound effect
     bool isAttacking = false; //is player attacking
+    float spawnPauseTimer;      //Timer for spawn pause (0.5 second)
 
     PlayerStats(int maxHealth, float maxIFrames, float speed, float jumpStrength, float gravity, Sound jumpSound, bool isAttacking);
 };

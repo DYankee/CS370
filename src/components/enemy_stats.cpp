@@ -22,4 +22,5 @@ EnemyStats::EnemyStats(EnemyType type, int enemyMaxHealth, float enemySpeed, flo
     this->attackCooldownTimer = 0;
     this->CurrentDirection = direction;
     this->aggro = aggro;
+    this->spawnPauseTimer = 0.5f; // 0.5 second spawn pause
 }

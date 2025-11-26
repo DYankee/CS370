@@ -11,4 +11,5 @@
         this->gravity = gravity;
         this->jumpSound = jumpSound;
         this->isAttacking = isAttacking;
+        this->spawnPauseTimer = 0.5f; // 0.5 second spawn pause
     }

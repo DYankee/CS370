@@ -16,6 +16,7 @@ struct EnemyStats {
     float attackCooldownTimer;  //Current attack cooldown
     Direction CurrentDirection; //enemy's Current direction
     bool aggro;         //determines whether enemy follows the player or not
+    float spawnPauseTimer;      //Timer for spawn pause (0.5 second)
 
     EnemyStats(EnemyType type, int enemyMaxHealth, float enemySpeed, float dmg, float attackCooldown, Direction direction, bool aggro);
 };
