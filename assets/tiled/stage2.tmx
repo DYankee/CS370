@@ -102,16 +102,9 @@
   <object id="104" name="Spike" gid="1025" x="1243.67" y="979.333" width="32" height="32"/>
   <object id="105" name="Spike" gid="1025" x="1274" y="978.333" width="32" height="32"/>
   <object id="110" x="1214.73" y="940.909" width="93.4545" height="25.0909"/>
-  <object id="127" name="Spike" gid="1025" x="1027.66" y="496.242" width="32" height="32"/>
-  <object id="128" name="Spike" gid="1025" x="1058" y="496.152" width="32" height="32"/>
-  <object id="129" name="Spike" gid="1025" x="1088.33" y="496.242" width="32" height="32"/>
-  <object id="130" name="Spike" gid="1025" x="934.726" y="498.333" width="32" height="32"/>
-  <object id="131" name="Spike" gid="1025" x="965.066" y="497.333" width="32" height="32"/>
-  <object id="132" name="Spike" gid="1025" x="995.396" y="496.333" width="32" height="32"/>
-  <object id="133" x="933.773" y="465.455" width="184.954" height="25.0909"/>
  </objectgroup>
  <objectgroup id="24" name="Entities">
-  <object id="113" name="Player" x="96" y="688">
+  <object id="113" name="Player" x="48" y="912">
    <point/>
   </object>
   <object id="115" name="Alien2" type="Enemy" x="826" y="925.5">

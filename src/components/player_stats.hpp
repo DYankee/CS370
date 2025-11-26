@@ -14,7 +14,6 @@ struct PlayerStats {
     Sound jumpSound;    //jump sound effect
     bool isAttacking = false; //is player attacking
     float spawnPauseTimer;      //Timer for spawn pause (0.5 second)
-    bool hasRanged = false; // Check if player has ranged attack
 
     PlayerStats(int maxHealth, float maxIFrames, float speed, float jumpStrength, float gravity, Sound jumpSound, bool isAttacking, bool hasRanged);
 };
