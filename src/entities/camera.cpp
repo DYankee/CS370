@@ -8,7 +8,7 @@ void CreateCamera(entt::registry &registry, Vector2 screenSize) {
     registry.emplace<PlayerCamera>(cameraEntity);
 
     Camera2D camera;
-    camera.zoom = 2.0f;
+    camera.zoom = 2.5f;
     camera.target = {0.0f, 0.0f};
     camera.offset = {screenSize.x / 2, screenSize.y / 2};
     camera.rotation = 0.0f;
