@@ -124,6 +124,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         );
         if (onGround) {
             physics.velocity.y += stats.jumpStrength;
+            physics.velocity.x = 0;
             PlaySound(stats.jumpSound);
             // Play jump animation based on current direction
             if (animation.currentSequence == "walkLeft" || animation.currentSequence == "idleLeft" || animation.currentSequence == "jumpLeft") {
