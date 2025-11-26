@@ -49,6 +49,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
     if (IsKeyPressed(KEY_R) && !stats.isAttacking && !isJumping) {
         stats.isAttacking = true;
         attackTimer = 0.5f;  // Duration matches animation (5 frames * 0.1s = 0.5s)
+        stats.iFrames = 0.5f;
         float lungePower = 1500.0f;
         TraceLog(LOG_INFO, "Player started attacking");
             
