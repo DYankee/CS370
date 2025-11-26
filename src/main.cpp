@@ -27,6 +27,7 @@ using namespace std;
 typedef enum GameScreen { TITLE = 0, GAMEPLAY } GameScreen;
 
 void Update(entt::registry &registry, float dt) {
+    UpdateProjectiles(registry, dt);
     PlayerInputSystem(registry, dt);
     UpdateEnemies(registry, dt);
     UpdateNPCs(registry, dt);

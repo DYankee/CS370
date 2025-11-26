@@ -25,6 +25,11 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
 
     // Apply gravity
     physics.velocity.y += stats.gravity * dt;
+    
+    // Update player iframes
+    if (stats.iFrames > 0) {
+        stats.iFrames -= dt;
+    }
         
     // Check if currently jumping (jump animation is playing and not finished)
     bool isJumping = (animation.currentSequence == "jumpRight" || animation.currentSequence == "jumpLeft") && !animation.IsFinished();
@@ -117,6 +122,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         );
         if (onGround) {
             physics.velocity.y += stats.jumpStrength;
+            physics.velocity.x = 0;
             PlaySound(stats.jumpSound);
             // Play jump animation based on current direction
             if (animation.currentSequence == "walkLeft" || animation.currentSequence == "idleLeft" || animation.currentSequence == "jumpLeft") {
