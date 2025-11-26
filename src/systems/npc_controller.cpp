@@ -9,7 +9,6 @@ void SpawnNPCs(entt::registry &registry){
         
         // Get the NPCs from the entities list by type
         std::vector<TmxObject> pigs = FindObjectsByType(entities.objects, entities.objectsLength, "Pig");
-        std::vector<TmxObject> hatPigs = FindObjectsByType(entities.objects, entities.objectsLength, "HatPig");
         std::vector<TmxObject> chickens = FindObjectsByType(entities.objects, entities.objectsLength, "Chicken");
         std::vector<TmxObject> sheep = FindObjectsByType(entities.objects, entities.objectsLength, "Sheep");
         std::vector<TmxObject> chicks = FindObjectsByType(entities.objects, entities.objectsLength, "Chick");
@@ -18,12 +17,6 @@ void SpawnNPCs(entt::registry &registry){
         for (TmxObject npc : pigs){
             TraceLog(LOG_INFO, "Creating Pig at: %f,%f", float(npc.x), float(npc.y));
             CreatePig(registry, npc);
-        }
-        
-        // Spawn Hat Pigs
-        for (TmxObject npc : hatPigs){
-            TraceLog(LOG_INFO, "Creating Hat Pig at: %f,%f", float(npc.x), float(npc.y));
-            CreateHatPig(registry, npc);
         }
         
         // Spawn Chickens
@@ -54,13 +47,15 @@ void DeSpawnNPCs(entt::registry &registry){
 
 void UpdateNPCs(entt::registry &registry, float dt){
     TraceLog(LOG_TRACE, "Entering function: UpdateNPCs");
-    
-    auto view = registry.view<NPC, NPC_behavior>();
-    for (entt::entity npc : view){
+
+    auto view = registry.view<NPC>();
+    for (entt::entity npc :view){
         // Get the update function from the entity
-        NPC_behavior& update = registry.get<NPC_behavior>(npc);
+        Enemy_behavior update = registry.get<Enemy_behavior>(npc);
 
         // Call the function with the entity as an argument
+        TraceLog(LOG_TRACE, "Calling update function for enemy entity: %d", npc);
         update.Update(registry, dt, npc);
+
     }
 }
