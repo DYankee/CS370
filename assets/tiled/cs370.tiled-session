@@ -35,8 +35,8 @@
             "scale": 1,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 405,
-                "y": 678
+                "x": 323,
+                "y": 643
             }
         },
         "stage2.tmx": {
@@ -61,16 +61,16 @@
             "scale": 0.5,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 822,
-                "y": 582
+                "x": 961,
+                "y": 583
             }
         },
         "stage3.tmx": {
             "scale": 0.75,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 976,
-                "y": 589.3333333333333
+                "x": 976.6666666666665,
+                "y": 588.6666666666666
             }
         },
         "test.tmx": {

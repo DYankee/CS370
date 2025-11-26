@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="145">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="30" nextobjectid="149">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <tileset firstgid="1026" source="Foliage.tsx"/>
@@ -92,12 +92,24 @@
 70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70
 </data>
  </layer>
- <imagelayer id="26" name="House" offsetx="0" offsety="672">
-  <image source="../graphics/tileset/house.png" width="375" height="300"/>
- </imagelayer>
- <objectgroup id="22" name="Spikes"/>
+ <group id="27" name="Objects">
+  <imagelayer id="26" name="House" offsetx="0" offsety="672">
+   <image source="../graphics/objects/house.png" width="375" height="300"/>
+  </imagelayer>
+  <imagelayer id="28" name="Fence" offsetx="336" offsety="928">
+   <image source="../graphics/objects/fenceHalf.png" width="288" height="32"/>
+  </imagelayer>
+  <imagelayer id="29" name="Fence" offsetx="1632" offsety="928">
+   <image source="../graphics/objects/fenceHalf.png" width="288" height="32"/>
+  </imagelayer>
+ </group>
+ <objectgroup id="22" name="Spikes" offsetx="-32" offsety="176">
+  <object id="148" x="720" y="720" width="83" height="19">
+   <text fontfamily="Stencil" pixelsize="17" wrap="1">hey gang</text>
+  </object>
+ </objectgroup>
  <objectgroup id="24" name="Entities">
-  <object id="114" name="Player" x="288" y="624">
+  <object id="114" name="Player" x="304" y="416">
    <point/>
   </object>
   <object id="151" name="Sheep" type="Sheep" x="70.0606" y="786.424">
@@ -110,7 +122,7 @@
    </properties>
    <point/>
   </object>
-  <object id="119" name="Alien" type="Enemy" x="896" y="672">
+  <object id="119" name="Alien" type="Enemy" x="880" y="416">
    <properties>
     <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
@@ -121,7 +133,7 @@
    </properties>
    <point/>
   </object>
-  <object id="143" name="Alien" type="Enemy" x="1408" y="672">
+  <object id="143" name="Alien" type="Enemy" x="1408" y="416">
    <properties>
     <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
@@ -132,7 +144,7 @@
    </properties>
    <point/>
   </object>
-  <object id="120" name="Farmer" type="Enemy" x="704" y="688">
+  <object id="120" name="Farmer" type="Enemy" x="688" y="416">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
@@ -142,7 +154,7 @@
    </properties>
    <point/>
   </object>
-  <object id="144" name="Farmer" type="Enemy" x="496" y="688">
+  <object id="144" name="Farmer" type="Enemy" x="496" y="416">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>

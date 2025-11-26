@@ -238,7 +238,7 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
     for (int i = 0; i < totalFrames; i++) {
         walkRightFrames.push_back(AnimationFrame{
             Rectangle{(float)(i * frameWidth), 0, (float)frameWidth, (float)frameHeight},
-            0.1f  // 0.1 seconds per frame
+            0.3f  // 0.3 seconds per frame
         });
     }
     alienAnimation.AddSequence("walkRight", AnimationSequence(walkRightFrames, true));
@@ -248,7 +248,7 @@ void CreateAlien(entt::registry &registry, TmxObject enemyInfo) {
     for (int i = 0; i < totalFrames; i++) {
         walkLeftFrames.push_back(AnimationFrame{
             Rectangle{(float)(i * frameWidth), 0, (float)frameWidth, (float)frameHeight},
-            0.1f  // 0.1 seconds per frame
+            0.3f  // 0.3 seconds per frame
         });
     }
     alienAnimation.AddSequence("walkLeft", AnimationSequence(walkLeftFrames, true));
