@@ -1,5 +1,6 @@
 #include "npc.hpp"
 #include "../include/raylib.h"
+#include "../components/npc_behavior.hpp"
 
 void CreatePig(entt::registry &registry, TmxObject npcInfo) {
     TraceLog(LOG_TRACE, "Entering Function: CreatePig");
@@ -20,12 +21,19 @@ void CreatePig(entt::registry &registry, TmxObject npcInfo) {
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
     registry.emplace<PhysicsObject>(npcEnt, physics);
 
-    // Get direction from properties if available
+    // Add Vector2 to mark where the NPC spawned from
+    registry.emplace<Vector2>(npcEnt, Vector2{float(npcInfo.x), float(npcInfo.y)});
+
+    // Add stats to NPC
     std::map<std::string, float> statsMap = GetObjectProperties(npcInfo);
+    float health = statsMap["Health"];
+    float moveSpeed = statsMap["MoveSpeed"];
     Direction direction = LEFT;
-    if (statsMap.count("Direction") > 0 && statsMap["Direction"] > 0){
+    if (statsMap["Direction"] > 0){
         direction = RIGHT;
     }
+    EnemyStats stats = EnemyStats(NONE, health, moveSpeed, 0.0f, 0.0f, direction, false);
+    registry.emplace<EnemyStats>(npcEnt, stats);
     
     // Add sprites
     SpriteData pigSprite = SpriteData(LoadTextures({
@@ -45,6 +53,10 @@ void CreatePig(entt::registry &registry, TmxObject npcInfo) {
         }
     }
     registry.emplace<SpriteData>(npcEnt, pigSprite);
+    
+    // Add NPC_behavior to make NPC face the player
+    NPC_behavior behavior = NPC_behavior(NPCUpdate);
+    registry.emplace<NPC_behavior>(npcEnt, behavior);
 }
 
 void CreateChicken(entt::registry &registry, TmxObject npcInfo) {
@@ -66,12 +78,19 @@ void CreateChicken(entt::registry &registry, TmxObject npcInfo) {
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
     registry.emplace<PhysicsObject>(npcEnt, physics);
 
-    // Get direction from properties if available
+    // Add Vector2 to mark where the NPC spawned from
+    registry.emplace<Vector2>(npcEnt, Vector2{float(npcInfo.x), float(npcInfo.y)});
+
+    // Add stats to NPC
     std::map<std::string, float> statsMap = GetObjectProperties(npcInfo);
+    float health = statsMap["Health"];
+    float moveSpeed = statsMap["MoveSpeed"];
     Direction direction = LEFT;
-    if (statsMap.count("Direction") > 0 && statsMap["Direction"] > 0){
+    if (statsMap["Direction"] > 0){
         direction = RIGHT;
     }
+    EnemyStats stats = EnemyStats(NONE, health, moveSpeed, 0.0f, 0.0f, direction, false);
+    registry.emplace<EnemyStats>(npcEnt, stats);
     
     // Add sprites
     SpriteData chickenSprite = SpriteData(LoadTextures({
@@ -91,6 +110,10 @@ void CreateChicken(entt::registry &registry, TmxObject npcInfo) {
         }
     }
     registry.emplace<SpriteData>(npcEnt, chickenSprite);
+    
+    // Add NPC_behavior to make NPC face the player
+    NPC_behavior behavior = NPC_behavior(NPCUpdate);
+    registry.emplace<NPC_behavior>(npcEnt, behavior);
 }
 
 void CreateSheep(entt::registry &registry, TmxObject npcInfo) {
@@ -112,12 +135,19 @@ void CreateSheep(entt::registry &registry, TmxObject npcInfo) {
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
     registry.emplace<PhysicsObject>(npcEnt, physics);
 
-    // Get direction from properties if available
+    // Add Vector2 to mark where the NPC spawned from
+    registry.emplace<Vector2>(npcEnt, Vector2{float(npcInfo.x), float(npcInfo.y)});
+
+    // Add stats to NPC
     std::map<std::string, float> statsMap = GetObjectProperties(npcInfo);
+    float health = statsMap["Health"];
+    float moveSpeed = statsMap["MoveSpeed"];
     Direction direction = LEFT;
-    if (statsMap.count("Direction") > 0 && statsMap["Direction"] > 0){
+    if (statsMap["Direction"] > 0){
         direction = RIGHT;
     }
+    EnemyStats stats = EnemyStats(NONE, health, moveSpeed, 0.0f, 0.0f, direction, false);
+    registry.emplace<EnemyStats>(npcEnt, stats);
     
     // Add sprites
     SpriteData sheepSprite = SpriteData(LoadTextures({
@@ -137,6 +167,10 @@ void CreateSheep(entt::registry &registry, TmxObject npcInfo) {
         }
     }
     registry.emplace<SpriteData>(npcEnt, sheepSprite);
+    
+    // Add NPC_behavior to make NPC face the player
+    NPC_behavior behavior = NPC_behavior(NPCUpdate);
+    registry.emplace<NPC_behavior>(npcEnt, behavior);
 }
 
 void CreateChick(entt::registry &registry, TmxObject npcInfo) {
@@ -158,12 +192,19 @@ void CreateChick(entt::registry &registry, TmxObject npcInfo) {
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
     registry.emplace<PhysicsObject>(npcEnt, physics);
 
-    // Get direction from properties if available
+    // Add Vector2 to mark where the NPC spawned from
+    registry.emplace<Vector2>(npcEnt, Vector2{float(npcInfo.x), float(npcInfo.y)});
+
+    // Add stats to NPC
     std::map<std::string, float> statsMap = GetObjectProperties(npcInfo);
+    float health = statsMap["Health"];
+    float moveSpeed = statsMap["MoveSpeed"];
     Direction direction = LEFT;
-    if (statsMap.count("Direction") > 0 && statsMap["Direction"] > 0){
+    if (statsMap["Direction"] > 0){
         direction = RIGHT;
     }
+    EnemyStats stats = EnemyStats(NONE, health, moveSpeed, 0.0f, 0.0f, direction, false);
+    registry.emplace<EnemyStats>(npcEnt, stats);
     
     // Add sprites
     SpriteData chickSprite = SpriteData(LoadTextures({
@@ -183,4 +224,8 @@ void CreateChick(entt::registry &registry, TmxObject npcInfo) {
         }
     }
     registry.emplace<SpriteData>(npcEnt, chickSprite);
+    
+    // Add NPC_behavior to make NPC face the player
+    NPC_behavior behavior = NPC_behavior(NPCUpdate);
+    registry.emplace<NPC_behavior>(npcEnt, behavior);
 }
