@@ -31,6 +31,15 @@ void BasicEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& sprite = registry.get<SpriteData>(enemy);
     auto& animation = registry.get<Animation>(enemy);
 
+    // Check spawn pause timer
+    if (stats.spawnPauseTimer > 0) {
+        stats.spawnPauseTimer -= dt;
+        physics.velocity.x = 0; // Keep horizontal velocity at 0 during pause
+        physics.velocity.y += GRAVITY * dt; // Still apply gravity
+        MoveEntity(registry, dt, enemy);
+        return; // Skip rest of update during spawn pause
+    }
+
     // Apply gravity
     physics.velocity.y += GRAVITY * dt;
 
@@ -119,6 +128,14 @@ void RangedEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
     auto& weapon = registry.get<Weapon>(enemy);
     auto& animation = registry.get<Animation>(enemy);
 
+    // Check spawn pause timer
+    if (stats.spawnPauseTimer > 0) {
+        stats.spawnPauseTimer -= dt;
+        physics.velocity.x = 0; // Keep horizontal velocity at 0 during pause
+        physics.velocity.y += GRAVITY * dt; // Still apply gravity
+        MoveEntity(registry, dt, enemy);
+        return; // Skip rest of update during spawn pause
+    }
 
     // Make enemy face player if they are aggro
     if(stats.aggro){

@@ -23,6 +23,15 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
     // Log player starting velocity
     TraceLog(LOG_INFO, "Player current velocity: %f,%f", physics.velocity.x, physics.velocity.y);
 
+    // Check spawn pause timer
+    if (stats.spawnPauseTimer > 0) {
+        stats.spawnPauseTimer -= dt;
+        physics.velocity.x = 0; // Keep horizontal velocity at 0 during pause
+        physics.velocity.y += stats.gravity * dt; // Still apply gravity
+        MoveEntity(registry, dt, player);
+        return; // Skip rest of input processing during spawn pause
+    }
+
     // Apply gravity
     physics.velocity.y += stats.gravity * dt;
     

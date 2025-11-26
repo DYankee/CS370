@@ -102,7 +102,7 @@
   <object id="124" x="319.667" y="950.667"/>
  </objectgroup>
  <objectgroup id="24" name="Entities">
-  <object id="112" name="Player" x="113.692" y="450.896">
+  <object id="112" name="Player" x="96" y="896">
    <point/>
   </object>
   <object id="121" name="HealthUpgrade" type="HealthUpgrade" x="416" y="900">
