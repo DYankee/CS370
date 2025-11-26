@@ -52,10 +52,10 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         stats.iFrames = 0.4f;
         float lungePower;
         if(isJumping){
-            lungePower = 600.0f;
+            lungePower = 400.0f;
         }
         else{
-            lungePower = 1000.0f;
+            lungePower = 500.0f;
         }
         TraceLog(LOG_INFO, "Player started attacking");
             
