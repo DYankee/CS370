@@ -21,10 +21,9 @@
 using namespace std;
 
 void Update(entt::registry &registry, float dt) {
+    UpdateProjectiles(registry, dt);
     PlayerInputSystem(registry, dt);
     UpdateEnemies(registry, dt);
-    UpdateNPCs(registry, dt);
-    UpdateProjectiles(registry, dt);
     PlayerEnemyCollisionSystem(registry, dt);
     CameraUpdate(registry, dt);
     SpikeCollision(registry, dt);
