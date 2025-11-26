@@ -27,6 +27,11 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
 
     // Apply gravity
     physics.velocity.y += stats.gravity * dt;
+    
+    // Update player iframes
+    if (stats.iFrames > 0) {
+        stats.iFrames -= dt;
+    }
         
     // Check if currently jumping (jump animation is playing and not finished)
     bool isJumping = (animation.currentSequence == "jumpRight" || animation.currentSequence == "jumpLeft") && !animation.IsFinished();
