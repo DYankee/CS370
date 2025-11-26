@@ -84,7 +84,12 @@
         "variant": "cpp",
         "xstring": "cpp",
         "locale": "cpp",
-        "*.m": "cpp"
+        "*.m": "cpp",
+        "filesystem": "cpp",
+        "xmemory": "cpp",
+        "xtr1common": "cpp",
+        "xutility": "cpp",
+        "xlocale": "cpp"
     },
     "FSharp.suggestGitignore": false
 }

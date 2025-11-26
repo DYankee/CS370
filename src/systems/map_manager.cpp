@@ -8,6 +8,7 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath) {
     TraceLog(LOG_INFO, "Changing map to: %s", tmxFilePath.c_str());
 
     DeSpawnEnemies(registry);
+    DeSpawnNPCs(registry);
     RemoveAllProjectiles(registry);
     registry.view<Map, TmxMap>().each([&registry, &tmxFilePath](TmxMap &currentMap) {
         // Load new map
@@ -48,6 +49,7 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath) {
         });
     });
     SpawnEnemies(registry);
+    SpawnNPCs(registry);
 }
 
 // Check if the player has reached map boundaries to trigger a map change
