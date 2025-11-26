@@ -14,6 +14,7 @@ set(MILK_SOURCES
     entities/camera.cpp
     entities/enemy.cpp
     entities/map.cpp
+    entities/npc.cpp
     entities/player.cpp
     entities/health_upgrade.cpp
     entities/projectile.cpp
@@ -26,6 +27,7 @@ set(MILK_SOURCES
     systems/hud_system.cpp
     systems/player_enemy_collision.cpp
     systems/enemy_controller.cpp
+    systems/npc_controller.cpp
     systems/health_upgrade_controller.cpp
     systems/player_health_upgrade_collision.cpp
     systems/projectile_manager.cpp
