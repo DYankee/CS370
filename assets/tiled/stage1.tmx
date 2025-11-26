@@ -105,7 +105,7 @@
  </group>
  <objectgroup id="22" name="Spikes" offsetx="-32" offsety="176"/>
  <objectgroup id="24" name="Entities">
-  <object id="114" name="Player" x="304" y="400">
+  <object id="114" name="Player" x="368" y="848">
    <point/>
   </object>
   <object id="116" name="HealthUpgrade" type="HealthUpgrade" x="1000" y="900">
@@ -117,7 +117,7 @@
    </properties>
    <point/>
   </object>
-  <object id="119" name="Alien" type="Enemy" x="880" y="416">
+  <object id="119" name="Alien" type="Enemy" x="880" y="864">
    <properties>
     <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
@@ -128,7 +128,7 @@
    </properties>
    <point/>
   </object>
-  <object id="143" name="Alien" type="Enemy" x="1408" y="416">
+  <object id="143" name="Alien" type="Enemy" x="1360" y="864">
    <properties>
     <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
@@ -139,7 +139,7 @@
    </properties>
    <point/>
   </object>
-  <object id="120" name="Farmer" type="Enemy" x="688" y="416">
+  <object id="120" name="Farmer" type="Enemy" x="688" y="864">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
@@ -149,7 +149,7 @@
    </properties>
    <point/>
   </object>
-  <object id="144" name="Farmer" type="Enemy" x="496" y="416">
+  <object id="144" name="Farmer" type="Enemy" x="496" y="864">
    <properties>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
@@ -159,7 +159,7 @@
    </properties>
    <point/>
   </object>
-  <object id="151" name="Sheep" type="NPC" x="48" y="384">
+  <object id="151" name="Sheep" type="Sheep" x="64" y="848">
    <properties>
     <property name="DMG" value="0.0"/>
     <property name="Direction" value="-1.0"/>
@@ -169,19 +169,19 @@
    </properties>
    <point/>
   </object>
-  <object id="152" name="Pig" type="NPC" x="96" y="384">
+  <object id="152" name="Pig" type="Pig" x="96" y="848">
    <properties>
     <property name="Type" value="Pig"/>
    </properties>
    <point/>
   </object>
-  <object id="154" name="Chicken" type="NPC" x="208" y="400">
+  <object id="154" name="Chicken" type="Chicken" x="288" y="848">
    <properties>
     <property name="Type" value="Chicken"/>
    </properties>
    <point/>
   </object>
-  <object id="153" name="Chick" type="NPC" x="144" y="384">
+  <object id="153" name="Chick" type="Chick" x="320" y="848">
    <properties>
     <property name="Type" value="Chick"/>
    </properties>

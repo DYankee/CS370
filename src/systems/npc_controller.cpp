@@ -47,15 +47,13 @@ void DeSpawnNPCs(entt::registry &registry){
 
 void UpdateNPCs(entt::registry &registry, float dt){
     TraceLog(LOG_TRACE, "Entering function: UpdateNPCs");
-
-    auto view = registry.view<NPC>();
-    for (entt::entity npc :view){
+    
+    auto view = registry.view<NPC, NPC_behavior>();
+    for (entt::entity npc : view){
         // Get the update function from the entity
-        Enemy_behavior update = registry.get<Enemy_behavior>(npc);
+        NPC_behavior& update = registry.get<NPC_behavior>(npc);
 
         // Call the function with the entity as an argument
-        TraceLog(LOG_TRACE, "Calling update function for enemy entity: %d", npc);
         update.Update(registry, dt, npc);
-
     }
 }
