@@ -34,8 +34,6 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
     // Check if currently jumping (jump animation is playing and not finished)
     bool isJumping = (animation.currentSequence == "jumpRight" || animation.currentSequence == "jumpLeft") && !animation.IsFinished();
         
-    // Check if currently headbutting
-    bool isHeadbutting = (animation.currentSequence == "headbuttRight" || animation.currentSequence == "headbuttLeft") && !animation.IsFinished();
         
     // Check if attacking and decrease timer
     if (stats.isAttacking) {
@@ -46,11 +44,17 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         }
     }
     // If button pressed set attacking true and start headbutt animation
-    if (IsKeyPressed(KEY_R) && !stats.isAttacking && !isJumping) {
+    if (IsKeyPressed(KEY_R) && !stats.isAttacking) {
         stats.isAttacking = true;
-        attackTimer = 0.5f;  // Duration matches animation (5 frames * 0.1s = 0.5s)
-        stats.iFrames = 0.5f;
-        float lungePower = 1500.0f;
+        attackTimer = 0.4f;  // Duration matches animation (5 frames * 0.1s = 0.5s)
+        stats.iFrames = 0.4f;
+        float lungePower;
+        if(isJumping){
+            lungePower = 600.0f;
+        }
+        else{
+            lungePower = 1000.0f;
+        }
         TraceLog(LOG_INFO, "Player started attacking");
             
         // Play headbutt animation based on current direction
@@ -67,6 +71,10 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
             physics.velocity.x = lungePower;
         }
     }
+    
+    // Check if currently headbutting
+    bool isHeadbutting = (animation.currentSequence == "headbuttRight" || animation.currentSequence == "headbuttLeft") && !animation.IsFinished();
+    
     // Move box based on key input
     // Don't change animation if currently jumping or headbutting
     if (IsKeyDown(KEY_D) && !isHeadbutting) {
@@ -154,6 +162,7 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
         // Get entity components
         auto &transform = registry.get<Transform>(entity);
         auto &physics = registry.get<PhysicsObject>(entity);
+        auto &stats = registry.get<PlayerStats>(entity);
         TraceLog(LOG_INFO, "MovePlayer: Player starting pos(%f,%f), vel(%f,%f)", 
             transform.translation.x, transform.translation.y,
             physics.velocity.x, physics.velocity.y
@@ -222,7 +231,12 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
             physics.velocity.y = 0;
 
             // Slow x momentum while on floor/ceiling
-            physics.velocity.x -= physics.velocity.x / 5;
+            if(stats.isAttacking){
+                physics.velocity.x -= physics.velocity.x / 10;
+            }
+            else {
+                physics.velocity.x -= physics.velocity.x / 5;
+            }
         }
         TraceLog(LOG_INFO, "MovePlayer: Player after y col pos(%f,%f), vel(%f,%f)", 
             transform.translation.x, transform.translation.y,
