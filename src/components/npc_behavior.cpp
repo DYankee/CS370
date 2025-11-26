@@ -15,15 +15,6 @@ void NPCUpdate(entt::registry & registry, float dt, entt::entity npc){
     auto& stats = registry.get<EnemyStats>(npc);
     auto& sprite = registry.get<SpriteData>(npc);
 
-    // Check spawn pause timer
-    if (stats.spawnPauseTimer > 0) {
-        stats.spawnPauseTimer -= dt;
-        physics.velocity.x = 0; // Keep horizontal velocity at 0 during pause
-        physics.velocity.y += GRAVITY * dt; // Still apply gravity
-        MoveEntity(registry, dt, npc);
-        return; // Skip rest of update during spawn pause
-    }
-
     // Apply gravity
     physics.velocity.y += GRAVITY * dt;
 

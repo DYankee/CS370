@@ -32,11 +32,11 @@
             "expandedObjectLayers": [
                 24
             ],
-            "scale": 1,
-            "selectedLayer": 9,
+            "scale": 0.5,
+            "selectedLayer": 12,
             "viewCenter": {
-                "x": 323,
-                "y": 643
+                "x": 96,
+                "y": 384
             }
         },
         "stage2.tmx": {
@@ -44,8 +44,8 @@
                 27
             ],
             "expandedObjectLayers": [
-                24,
-                22
+                22,
+                24
             ],
             "scale": 0.5,
             "selectedLayer": 10,
