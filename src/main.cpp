@@ -32,6 +32,7 @@ void Update(entt::registry &registry, float dt) {
     UpdateIFrames(registry, dt);
     UpdateHealthUpgrades(registry, dt);
     PlayerHealthCollisionSystem(registry, dt);
+    UpdateDialogue(registry, dt);
 };
 
 void Render(entt::registry &registry, float dt) {
@@ -120,6 +121,9 @@ registry.view<SpriteData, Transform, HealthUpgrade>().each([](SpriteData &sprite
                 const char* msg = "Move A/D, Jump SPACE";
                 //DrawRectangle(8, 8, MeasureText(msg, 20) + 4, 24, Fade(BLACK, 0.5f));
                 //DrawText(msg, 10, 10, 20, WHITE);
+                
+                // Draw dialogue boxes for NPCs
+                DrawDialogue(registry);
         
             });
             EndMode2D(); // End 2D camera mode
