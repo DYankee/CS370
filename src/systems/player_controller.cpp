@@ -1,4 +1,5 @@
 #include "player_controller.hpp"
+#include <cmath>
 // Player movement system
 void PlayerInputSystem(entt::registry &registry, float dt) {
     TraceLog(LOG_TRACE, "Entering Function: PlayerInputSystem");
@@ -53,7 +54,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         }
     }
     // If button pressed set attacking true and start headbutt animation
-    if (IsKeyPressed(KEY_R) && !stats.isAttacking) {
+    if ((IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || IsKeyPressed(KEY_R)) && !stats.isAttacking) {
         stats.isAttacking = true;
         attackTimer = 0.4f;  // Duration matches animation (5 frames * 0.1s = 0.5s)
         stats.iFrames = 0.4f;
@@ -78,6 +79,29 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
             sprite.SetTexture("cowRHeadbutt");
             animation.PlaySequence("headbuttRight");
             physics.velocity.x = lungePower;
+        }
+    }
+    
+    // Check for NPC interaction with ENTER key
+    if (IsKeyPressed(KEY_ENTER)) {
+        TraceLog(LOG_INFO, "Player pressed ENTER key");
+        
+        // Check all NPCs with dialogue
+        auto npcView = registry.view<NPC, Transform, Dialogue>();
+        for (auto npcEntity : npcView) {
+            Transform& npcTransform = registry.get<Transform>(npcEntity);
+            Dialogue& dialogue = registry.get<Dialogue>(npcEntity);
+            
+            // Calculate distance between player and NPC
+            float dx = transform.translation.x - npcTransform.translation.x;
+            float dy = transform.translation.y - npcTransform.translation.y;
+            float distance = sqrt(dx * dx + dy * dy);
+            
+            // If player is within interaction range (e.g., 64 pixels)
+            if (distance < 64.0f) {
+                TraceLog(LOG_INFO, "Player interacted with NPC at distance: %f", distance);
+                dialogue.Show();
+            }
         }
     }
     

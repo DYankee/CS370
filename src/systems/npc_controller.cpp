@@ -9,6 +9,7 @@ void SpawnNPCs(entt::registry &registry){
         
         // Get the NPCs from the entities list by type
         std::vector<TmxObject> pigs = FindObjectsByType(entities.objects, entities.objectsLength, "Pig");
+        std::vector<TmxObject> hatPigs = FindObjectsByType(entities.objects, entities.objectsLength, "HatPig");
         std::vector<TmxObject> chickens = FindObjectsByType(entities.objects, entities.objectsLength, "Chicken");
         std::vector<TmxObject> sheep = FindObjectsByType(entities.objects, entities.objectsLength, "Sheep");
         std::vector<TmxObject> chicks = FindObjectsByType(entities.objects, entities.objectsLength, "Chick");
@@ -17,6 +18,12 @@ void SpawnNPCs(entt::registry &registry){
         for (TmxObject npc : pigs){
             TraceLog(LOG_INFO, "Creating Pig at: %f,%f", float(npc.x), float(npc.y));
             CreatePig(registry, npc);
+        }
+        
+        // Spawn Hat Pigs
+        for (TmxObject npc : hatPigs){
+            TraceLog(LOG_INFO, "Creating Hat Pig at: %f,%f", float(npc.x), float(npc.y));
+            CreateHatPig(registry, npc);
         }
         
         // Spawn Chickens
