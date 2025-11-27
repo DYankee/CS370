@@ -35,7 +35,6 @@ void Update(entt::registry &registry, float dt) {
     UpdateHealthUpgrades(registry, dt);
     UpdateRangeUpgrades(registry, dt);
     PlayerHealthCollisionSystem(registry, dt);
-    UpgradeCollisionSystem(registry, dt);
     UpdateDialogue(registry, dt);
 };
 

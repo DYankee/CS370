@@ -121,7 +121,7 @@
    </properties>
    <point/>
   </object>
-  <object id="156" name="Sheep" type="Sheep" x="144" y="944">
+  <object id="156" name="Shawn" type="Sheep" x="144" y="944">
    <properties>
     <property name="DMG" value="0.0"/>
     <property name="Direction" value="-1.0"/>
@@ -141,13 +141,13 @@
    </properties>
    <point/>
   </object>
-  <object id="152" name="Pig" type="Pig" x="1040" y="912">
+  <object id="152" name="HatPig" type="HatPig" x="1040" y="912">
    <properties>
-    <property name="Type" value="Pig"/>
+    <property name="Type" value="HatPig"/>
    </properties>
    <point/>
   </object>
-  <object id="162" name="Pig" type="Pig" x="1824" y="928">
+  <object id="162" name="Waddles" type="Pig" x="1824" y="928">
    <properties>
     <property name="Type" value="Pig"/>
    </properties>
@@ -159,7 +159,7 @@
    </properties>
    <point/>
   </object>
-  <object id="154" name="Chicken" type="Chicken" x="688" y="912">
+  <object id="154" name="Clucky" type="Chicken" x="688" y="912">
    <properties>
     <property name="Type" value="Chicken"/>
    </properties>

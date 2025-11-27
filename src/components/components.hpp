@@ -12,5 +12,6 @@
 #include "health_pickup.hpp"
 #include "projectile_stats.hpp"
 #include "weapon.hpp"
+#include "dialogue.hpp"
 
 #endif
