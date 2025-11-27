@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="31" nextobjectid="156">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="32" nextobjectid="163">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <tileset firstgid="1026" source="Foliage.tsx"/>
@@ -77,11 +77,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,1038,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,1038,1038,1038,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,1030,0,1031,0,0,0,0,0,0,0,1030,0,1031,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1033,0,1034,0,0,0,0,0,1033,0,1034,0,1030,0,1031,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1030,0,1031,0,0,0,1033,0,1034,0,0,
+0,0,1038,1038,1038,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,1030,0,1031,0,0,0,0,0,0,0,1030,0,1031,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1033,0,1034,0,0,0,0,0,1033,0,1034,0,1030,0,1031,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1033,0,1034,0,0,
 0,1038,1038,1038,1038,1038,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1038,1038,1038,1038,1038,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,1039,0,1040,0,0,0,0,0,0,0,1039,0,1040,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1042,0,1043,0,0,0,0,0,1042,0,1043,0,1039,0,1040,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1039,0,1040,0,0,0,1042,0,1043,0,0,
+0,1038,1038,1038,1038,1038,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,1039,0,1040,0,0,0,0,0,0,0,1039,0,1040,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1042,0,1043,0,0,0,0,0,1042,0,1043,0,1039,0,1040,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1042,0,1043,0,0,
 0,0,1038,1038,1038,0,0,0,0,0,0,1038,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-1062,0,1038,1038,1038,1038,1038,1038,1038,1038,1038,1038,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1064,1048,0,1049,0,0,0,0,0,0,1065,1048,0,1049,0,0,0,0,0,1062,0,0,0,0,0,1063,0,1065,0,0,0,0,0,0,0,0,1065,0,0,0,0,1051,0,1052,0,0,1064,0,0,1051,0,1052,0,1048,0,1049,0,0,1063,0,0,0,0,0,0,0,0,0,0,0,1062,0,0,0,0,0,1065,0,0,1064,0,0,0,1048,0,1049,0,0,1062,1051,0,1052,1063,0,
+1062,0,1038,1038,1038,1038,1038,1038,1038,1038,1038,1038,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1064,1048,0,1049,0,0,0,0,0,0,1065,1048,0,1049,0,0,0,0,0,1062,0,0,0,0,0,1063,0,1065,0,0,0,0,0,0,0,0,1065,0,0,0,0,1051,0,1052,0,0,1064,0,0,1051,0,1052,0,1048,0,1049,0,0,1063,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1062,1051,0,1052,1063,0,
 38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,
 70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,
 70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,70,
@@ -94,72 +94,24 @@
  </layer>
  <group id="27" name="Objects">
   <imagelayer id="26" name="House" offsetx="0" offsety="672">
-   <image source="../graphics/objects/house.png" width="375" height="300"/>
+   <image source="../graphics/objects/house2.png" width="375" height="300"/>
+  </imagelayer>
+  <imagelayer id="31" name="House" offsetx="1488" offsety="672">
+   <image source="../graphics/objects/house2.png" width="375" height="300"/>
   </imagelayer>
   <imagelayer id="28" name="Fence" offsetx="336" offsety="928">
    <image source="../graphics/objects/fenceHalf.png" width="288" height="32"/>
   </imagelayer>
-  <imagelayer id="29" name="Fence" offsetx="1632" offsety="928">
+  <imagelayer id="29" name="Fence" offsetx="1248" offsety="928">
    <image source="../graphics/objects/fenceHalf.png" width="288" height="32"/>
   </imagelayer>
  </group>
  <objectgroup id="22" name="Spikes" offsetx="-32" offsety="176"/>
  <objectgroup id="24" name="Entities">
-  <object id="114" name="Player" x="368" y="928">
+  <object id="114" name="Player" x="880" y="912">
    <point/>
   </object>
-  <object id="116" name="HealthUpgrade" type="HealthUpgrade" x="1000" y="900">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="1"/>
-    <property name="Health" type="float" value="2"/>
-    <property name="MoveSpeed" type="float" value="200"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="119" name="Alien" type="Enemy" x="880" y="944">
-   <properties>
-    <property name="AttackCooldown" type="float" value="4"/>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="-1"/>
-    <property name="Health" type="float" value="1"/>
-    <property name="MoveSpeed" type="float" value="10"/>
-    <property name="Type" value="Alien"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="143" name="Alien" type="Enemy" x="1360" y="944">
-   <properties>
-    <property name="AttackCooldown" type="float" value="4"/>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="-1"/>
-    <property name="Health" type="float" value="1"/>
-    <property name="MoveSpeed" type="float" value="0"/>
-    <property name="Type" value="Alien"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="120" name="Farmer" type="Enemy" x="688" y="944">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="-1"/>
-    <property name="Health" type="float" value="1"/>
-    <property name="MoveSpeed" type="float" value="50"/>
-    <property name="Type" value="Farmer"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="144" name="Farmer" type="Enemy" x="496" y="944">
-   <properties>
-    <property name="DMG" type="float" value="1"/>
-    <property name="Direction" type="float" value="-1"/>
-    <property name="Health" type="float" value="1"/>
-    <property name="MoveSpeed" type="float" value="0"/>
-    <property name="Type" value="Farmer"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="151" name="Sheep" type="Sheep" x="64" y="928">
+  <object id="151" name="Sheep" type="Sheep" x="64" y="944">
    <properties>
     <property name="DMG" value="0.0"/>
     <property name="Direction" value="-1.0"/>
@@ -169,19 +121,69 @@
    </properties>
    <point/>
   </object>
-  <object id="152" name="Pig" type="Pig" x="96" y="928">
+  <object id="156" name="Sheep" type="Sheep" x="144" y="944">
+   <properties>
+    <property name="DMG" value="0.0"/>
+    <property name="Direction" value="-1.0"/>
+    <property name="Health" value="1.0"/>
+    <property name="MoveSpeed" value="0.0"/>
+    <property name="Type" value="Sheep"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="161" name="Sheep" type="Sheep" x="1600" y="928">
+   <properties>
+    <property name="DMG" value="0.0"/>
+    <property name="Direction" value="-1.0"/>
+    <property name="Health" value="1.0"/>
+    <property name="MoveSpeed" value="0.0"/>
+    <property name="Type" value="Sheep"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="152" name="Pig" type="Pig" x="1040" y="912">
    <properties>
     <property name="Type" value="Pig"/>
    </properties>
    <point/>
   </object>
-  <object id="154" name="Chicken" type="Chicken" x="288" y="928">
+  <object id="162" name="Pig" type="Pig" x="1824" y="928">
+   <properties>
+    <property name="Type" value="Pig"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="159" name="Pig" type="Pig" x="240" y="944">
+   <properties>
+    <property name="Type" value="Pig"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="154" name="Chicken" type="Chicken" x="688" y="912">
    <properties>
     <property name="Type" value="Chicken"/>
    </properties>
    <point/>
   </object>
-  <object id="153" name="Chick" type="Chick" x="320" y="928">
+  <object id="153" name="Chick" type="Chick" x="624" y="912">
+   <properties>
+    <property name="Type" value="Chick"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="160" name="Chick" type="Chick" x="1744" y="928">
+   <properties>
+    <property name="Type" value="Chick"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="157" name="Chick" type="Chick" x="576" y="912">
+   <properties>
+    <property name="Type" value="Chick"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="158" name="Chick" type="Chick" x="528" y="912">
    <properties>
     <property name="Type" value="Chick"/>
    </properties>

@@ -26,5 +26,5 @@ void SetCameraPos(Camera2D &camera, Transform newPos) {
 
     // Update camera pos
     camera.target.x = newPos.translation.x;
-    camera.target.y = newPos.translation.y;
+    camera.target.y = newPos.translation.y - 25.0f;  // Position camera 25 pixels above player
 }
