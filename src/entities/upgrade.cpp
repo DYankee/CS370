@@ -4,36 +4,32 @@
 #include "../entities/entities.hpp"
 #include "../include/raylib.h"
 
-void CreateUpgrade(entt::registry &registry, TmxObject upgradeInfo) {
-    TraceLog(LOG_TRACE, "Entering Function: CreateUpgrade");
-    TraceLog(LOG_INFO, "Creating Upgrade Entity");
+void CreateUpgrade(entt::registry &registry, Vector2 position) {
+    TraceLog(LOG_TRACE, "Entering Function: CreateHealthUpgrade");
+    TraceLog(LOG_INFO, "Creating Health Upgrade Entity");
 
     // add to the registry
     entt::entity upgradeEnt = registry.create();
 
 
-    Upgrade upgrades;
-    registry.emplace<Upgrade>(upgradeEnt, upgrades);
+    HealthUpgrade healthComp;
+    registry.emplace<HealthUpgrade>(upgradeEnt, healthComp);
 
     // add sprite
-    SpriteData sprite = SpriteData(LoadTextures({
-                                {"TestUpgrade", "assets/sprites/powerups/testUpgrade.png"},
-                                {"DoubleJumpUpgrade", "assets/sprites/powerups/doubleJumpUpgrade.png"}
-                                }), WHITE);
-                                                                    
-    sprite.SetTexture(upgradeInfo.name);
+    SpriteData sprite = SpriteData(LoadTextures({{"Upgrade_Item", "assets/sprites/cow.png"}}), WHITE);
+                                                                    //placeholder
+    sprite.SetTexture("Upgrade_Item");
     registry.emplace<SpriteData>(upgradeEnt, sprite);
 
-    Transform trans = Transform{{float(upgradeInfo.x), float(upgradeInfo.y), 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32}};
+    Transform trans = Transform{{position.x, position.y, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32}};
     registry.emplace<Transform>(upgradeEnt, trans);
 
 
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
     registry.emplace<PhysicsObject>(upgradeEnt, physics);
 
-    registry.emplace<Vector2>(upgradeEnt, Vector2{float(upgradeInfo.x), float(upgradeInfo.y)});
+    registry.emplace<Vector2>(upgradeEnt, position);
 
-    registry.emplace<TmxObject>(upgradeEnt, upgradeInfo);
 }
 
 void CreateHealthUpgrade(entt::registry &registry, Vector2 position) {

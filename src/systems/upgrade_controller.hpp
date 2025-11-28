@@ -9,6 +9,8 @@
 
 void SpawnUpgrades(entt::registry &registry);
 void UpdateUpgrades(entt::registry &registry, float dt);
-void DespawnUpgrades(entt::registry &registry);
+
+void SpawnHealthUpgrades(entt::registry &registry);
+void UpdateHealthUpgrades(entt::registry &registry, float dt);
 
 #endif
