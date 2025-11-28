@@ -83,7 +83,17 @@
         "valarray": "cpp",
         "variant": "cpp",
         "xstring": "cpp",
-        "locale": "cpp"
+        "locale": "cpp",
+        "*.m": "cpp",
+        "filesystem": "cpp",
+        "xmemory": "cpp",
+        "xtr1common": "cpp",
+        "xutility": "cpp",
+        "xlocale": "cpp",
+        "xlocmes": "cpp",
+        "xlocmon": "cpp",
+        "xlocnum": "cpp",
+        "xloctime": "cpp"
     },
     "FSharp.suggestGitignore": false
 }

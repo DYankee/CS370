@@ -121,17 +121,21 @@ void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
 */
 
 void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
-    TraceLog(LOG_TRACE, "Entering Function: MoveEntity");
+    TraceLog(LOG_TRACE, "Entering Function: MoveEntity: ");
 
     registry.view<Map, TmxMap>().each([&registry, &entity, dt](TmxMap &map) {
         TmxObject hitObj;
 
         // Get entity components
         auto &transform = registry.get<Transform>(entity);
-        auto &physics = registry.get<PhysicsObject>(entity);
-
+        auto &physics = registry.get<PhysicsObject>(entity);        
+        
+        TraceLog(LOG_INFO, "MoveEntity: Entity(), CurrentPos(), CurrentVel()",
+            entity, transform.translation.x, transform.translation.y,
+            physics.velocity.x, physics.velocity.y
+        );
+        
         // Handle X Axis Movement & Collision
-        float originalX = transform.translation.x;
         transform.translation.x += physics.velocity.x * dt;
 
         Rectangle entityRectX = { 
@@ -142,7 +146,7 @@ void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
         };
 
         if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityRectX, &hitObj)) {
-            TraceLog(LOG_INFO, "X Axis Collision");
+            TraceLog(LOG_INFO, "MoveEntity: X Axis Collision");
             
             // Determine direction based on velocity
             if (physics.velocity.x > 0) {
@@ -152,13 +156,11 @@ void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
                 // Moving Left - Snap to right side of object
                 transform.translation.x = hitObj.x + hitObj.width;
             }
-            
             // Kill X momentum on impact
             physics.velocity.x = 0;
         }
-
+        
         // Handle Y Axis Movement & Collision
-        float originalY = transform.translation.y;
         transform.translation.y += physics.velocity.y * dt;
 
         Rectangle entityRectY = { 
@@ -169,7 +171,7 @@ void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
         };
 
         if (CheckCollisionTMXTileLayersRec(&map, map.layers, map.layersLength, entityRectY, &hitObj)) {
-            TraceLog(LOG_INFO, "Y Axis Collision");
+            TraceLog(LOG_INFO, "MoveEntity: Y Axis Collision");
 
             if (physics.velocity.y > 0) {
                 // Falling Down - Snap to top of object (Floor)
@@ -183,7 +185,8 @@ void MoveEntity(entt::registry& registry, float dt, entt::entity &entity){
             physics.velocity.x /= 1.5;
         }
 
+
         // Log final pos
-        TraceLog(LOG_INFO, "Entity Final Pos: %f, %f", transform.translation.x, transform.translation.y);
+        TraceLog(LOG_INFO, "MoveEntity: Entity Final Pos: %f, %f", transform.translation.x, transform.translation.y);
     });
 }

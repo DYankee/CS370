@@ -5,6 +5,7 @@
 #include "camera.hpp"
 #include "enemy.hpp"
 #include "map.hpp"
+#include "npc.hpp"
 #include "player.hpp"
 #include "upgrade.hpp"
 #include "projectile.hpp"

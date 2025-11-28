@@ -2,20 +2,23 @@
 #include "../components/player_stats.hpp"
 #include "../components/enemy_stats.hpp"
 #include "../components/physics_object.hpp"
+#include "../entities/npc.hpp"
 const float knockbackX = 300.0f;
 const float knockbackY = -600.0f;
 void PlayerEnemyCollisionSystem(entt::registry &registry, float dt) {
     registry.view<PlayerStats, Transform, PhysicsObject>().each(
         [&registry, dt](auto playerEntity, PlayerStats& playerStats, Transform& playerTransform, PhysicsObject& playerPhysics) {
-            if (playerStats.iFrames > 0) {
-                playerStats.iFrames -= dt;
-                return;
-            }
+            
 
             bool stompedEnemy = false;
 
             registry.view<EnemyStats, Transform, PhysicsObject>().each(
                 [&](auto enemyEntity, EnemyStats& enemyStats, Transform& enemyTransform, PhysicsObject& enemyPhysics) {
+                    // Skip NPCs - they should not hurt the player
+                    if (registry.any_of<NPC>(enemyEntity)) {
+                        return;
+                    }
+                    
                     bool collisionX = playerTransform.translation.x < enemyTransform.scale.x + enemyTransform.translation.x &&
                          playerTransform.translation.x + playerTransform.scale.x > enemyTransform.translation.x;
 

@@ -18,17 +18,14 @@
 
 using namespace std;
 
-// Player and physics constants
-#define CHAR_WIDTH 32
-#define CHAR_HEIGHT 32
-#define GRAVITY 2000.0f          // Gravity strength 
-#define SPEED 300.0f             // speed 
-
 typedef enum GameScreen { TITLE = 0, GAMEPLAY } GameScreen;
 
 void Update(entt::registry &registry, float dt) {
+    UpdateProjectiles(registry, dt);
     PlayerInputSystem(registry, dt);
     UpdateEnemies(registry, dt);
+    UpdateNPCs(registry, dt);
+    UpdateProjectiles(registry, dt);
     PlayerEnemyCollisionSystem(registry, dt);
     CameraUpdate(registry, dt);
     SpikeCollision(registry, dt);
@@ -37,6 +34,7 @@ void Update(entt::registry &registry, float dt) {
     UpdateIFrames(registry, dt);
     UpdateHealthUpgrades(registry, dt);
     PlayerHealthCollisionSystem(registry, dt);
+    UpdateDialogue(registry, dt);
 };
 
 void Render(entt::registry &registry, float dt) {
@@ -48,7 +46,6 @@ void Render(entt::registry &registry, float dt) {
             ClearBackground(RAYWHITE);
         
             // Draw TMX map
-
             registry.view<TmxMap, Map>().each([&camera](TmxMap &map) {
                 AnimateTMX(&map); // Update animated tiles
                 DrawTMX(&map, &camera, 0, 0, WHITE); // Draw tile map with parallax support 
@@ -56,7 +53,6 @@ void Render(entt::registry &registry, float dt) {
             
             
             // Draw player
-
             registry.view<SpriteData, Player, Animation>().each([&transform](SpriteData &sprite, Animation &animation) {
                 Rectangle srcRec = sprite.srcRec;
                 
@@ -71,11 +67,46 @@ void Render(entt::registry &registry, float dt) {
             });
 
             // Draw Enemies
-            registry.view<SpriteData, Transform, Enemy>().each([](SpriteData &sprite, Transform &pos){
+            registry.view<SpriteData, Transform, EnemyStats, Enemy>().each([&registry](entt::entity entity, SpriteData &sprite, Transform &pos, EnemyStats &enemyStats){
+                Rectangle srcRec = sprite.srcRec;
+                
+                // Use animation frame if animation component exists
+                if (registry.all_of<Animation>(entity)) {
+                    Animation &animation = registry.get<Animation>(entity);
+                    if (!animation.sequences.empty() && animation.sequences.find(animation.currentSequence) != animation.sequences.end()) {
+                        srcRec = animation.GetCurrentFrame();
+                    }
+                }
+                
+                Rectangle dstRec = {pos.translation.x, pos.translation.y, pos.scale.x, pos.scale.y};
+                Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
+                DrawTexturePro(sprite.curentTexture, srcRec, dstRec, origin, pos.rotation.x, sprite.color);
+
+                // Render weapon if 
+                if(registry.all_of<Weapon>(entity)){
+                    Weapon &enemyWeapon = registry.get<Weapon>(entity);
+                    Vector3 weaponPos = CalculateWeaponOffset(enemyWeapon.offset, pos.translation, enemyStats);
+                    Rectangle dstRec = {weaponPos.x , weaponPos.y, float(enemyWeapon.sprite.curentTexture.width), float(enemyWeapon.sprite.curentTexture.height)};
+                    Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
+                    TraceLog(LOG_TRACE, "Rendering enemy weapon at(%f,%f)", dstRec.x,dstRec.y);
+                    DrawTexturePro(enemyWeapon.sprite.curentTexture, enemyWeapon.sprite.srcRec, dstRec, origin, 0, enemyWeapon.sprite.color);
+                }
+            });
+
+            // Draw Projectiles
+            registry.view<SpriteData, Transform, Projectile>().each([](SpriteData &sprite, Transform &pos){
                 Rectangle dstRec = {pos.translation.x, pos.translation.y, pos.scale.x, pos.scale.y};
                 Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
                 DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, pos.rotation.x, sprite.color);
             });
+
+            // Draw NPCs
+            registry.view<SpriteData, Transform, NPC>().each([](SpriteData &sprite, Transform &transform){
+                Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
+                Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
+                DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
+            });
+
             // Draw Health Upgrades
 TraceLog(LOG_TRACE, "Drawing Health Upgrades");
 registry.view<SpriteData, Transform, HealthUpgrade>().each([](SpriteData &sprite, Transform &transform){
@@ -92,6 +123,9 @@ registry.view<SpriteData, Transform, HealthUpgrade>().each([](SpriteData &sprite
                 const char* msg = "Move A/D, Jump SPACE";
                 //DrawRectangle(8, 8, MeasureText(msg, 20) + 4, 24, Fade(BLACK, 0.5f));
                 //DrawText(msg, 10, 10, 20, WHITE);
+                
+                // Draw dialogue boxes for NPCs
+                DrawDialogue(registry);
         
             });
             EndMode2D(); // End 2D camera mode
@@ -225,6 +259,8 @@ int main() {
                         CreatePlayer(registry);
 
                         SpawnEnemies(registry);
+
+                        SpawnNPCs(registry);
 
                         SpawnHealthUpgrades(registry);
                         

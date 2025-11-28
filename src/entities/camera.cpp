@@ -8,7 +8,7 @@ void CreateCamera(entt::registry &registry, Vector2 screenSize) {
     registry.emplace<PlayerCamera>(cameraEntity);
 
     Camera2D camera;
-    camera.zoom = 2.0f;
+    camera.zoom = 2.5f;
     camera.target = {0.0f, 0.0f};
     camera.offset = {screenSize.x / 2, screenSize.y / 2};
     camera.rotation = 0.0f;
@@ -26,5 +26,5 @@ void SetCameraPos(Camera2D &camera, Transform newPos) {
 
     // Update camera pos
     camera.target.x = newPos.translation.x;
-    camera.target.y = newPos.translation.y;
+    camera.target.y = newPos.translation.y - 25.0f;  // Position camera 25 pixels above player
 }

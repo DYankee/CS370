@@ -13,7 +13,10 @@ void UpdateIFrames(entt::registry &registry, float dt) {
             if (stats.iFrames < 0.0f) stats.iFrames = 0.0f;
 
             // make player red
-            sprite.color = Fade(RED, 0.7f);
+            if (!stats.isAttacking){
+                sprite.color = Fade(RED, 0.7f);
+            }
+            
         } else {
             // make default color
             sprite.color = WHITE;
