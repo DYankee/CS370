@@ -1,6 +1,6 @@
 #include "player_health_upgrade_collision.hpp"
 #include "../components/player_stats.hpp"
-#include "../entities/health_upgrade.hpp"
+#include "../entities/upgrade.hpp"
 #include "../include/entt.hpp"
 #include "../include/raylib.h"
 

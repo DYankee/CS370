@@ -1,5 +1,5 @@
-#ifndef HEALTH_UPGRADE_HPP
-#define HEALTH_UPGRADE_HPP
+#ifndef UPGRADE_HPP
+#define UPGRADE_HPP
 
 #include "../../include/entt.hpp"
 #include "../../include/raylib.h"
