@@ -163,6 +163,23 @@ void RenderTitleScreen(const Vector2 &screenSize, Texture2D buttonTexture, Recta
     EndDrawing();
 }
 
+void RenderDeathScreen(const Vector2 &screenSize, Texture2D backgroundTexture) {
+
+
+
+
+    
+    BeginDrawing();
+
+    // Draw background
+    Rectangle bgSource = { 0, 0, (float)backgroundTexture.width, (float)backgroundTexture.height };
+    Rectangle bgDest = { 0, 0, screenSize.x, screenSize.y };
+    Vector2 bgOrigin = { 0, 0 };
+    DrawTexturePro(backgroundTexture, bgSource, bgDest, bgOrigin, 0.0f, WHITE);
+
+
+}
+
 int main() {
     // Set log level
     SetTraceLogLevel(LOG_ALL);
@@ -180,34 +197,55 @@ int main() {
     InitAudioDevice();
     Music titleMusic = LoadMusicStream("assets/audio/acnhtitle.mp3");
     Music gameplayMusic = LoadMusicStream("assets/audio/stardewsummer.mp3");
+    Music deathScreenMusic = LoadMusicStream("assets/audio/deathScreen.mp3");
     SetMusicVolume(titleMusic, 1.0f);
     SetMusicVolume(gameplayMusic, 1.0f);
+    SetMusicVolume(deathScreenMusic, 1.0f);
     PlayMusicStream(titleMusic);
 
     // Load sound effects
     Sound titleMooSound = LoadSound("assets/audio/titleMoo.mp3");
 
-    // Load title texture
-    Texture2D titleTexture = LoadTexture("assets/graphics/title/milksong_logo.png");
-
-    // Load button texture
-    Texture2D buttonTexture = LoadTexture("assets/graphics/title/button.png");
-
-    // Load background texture
-    Texture2D backgroundTexture = LoadTexture("assets/graphics/bgart/mainbackground.png");
     
-    // Define source rectangle for button
-    Rectangle sourceRec = { 0, 0, (float)buttonTexture.width, (float)buttonTexture.height };
+    
+    // Load assets for menu screens
+    Texture2D titleTexture = LoadTexture("assets/graphics/title/milksong_logo.png");        // Load title texture
+    Texture2D backgroundTexture = LoadTexture("assets/graphics/bgart/mainbackground.png");  // Load background texture
+    Texture2D startButtonTexture = LoadTexture("assets/graphics/title/button.png");         // Load start button texture
+    Texture2D restartButtonTexture = LoadTexture("assets/graphics/title/button.png");       // Load restart button texture
+    Texture2D quitButtonTexture = LoadTexture("assets/graphics/title/button.png");          // Load quit button texture
+    
+    // Define source rectangles for buttons
+    Rectangle startSourceRec = { 0, 0, (float)startButtonTexture.width, (float)startButtonTexture.height };
+    Rectangle restartSourceRec = { 0, 0, (float)restartButtonTexture.width, (float)restartButtonTexture.height };
+    Rectangle quitSourceRec = { 0, 0, (float)quitButtonTexture.width, (float)quitButtonTexture.height };
     
     // Define button bounds on screen
-    Rectangle btnBounds = { 
-        screenSize.x/2.0f - buttonTexture.width/2.0f, 
+    Rectangle startBounds = { 
+        screenSize.x/2.0f - startButtonTexture.width/2.0f, 
         screenSize.y/2.0f + 100.0f, 
-        (float)buttonTexture.width, 
-        (float)buttonTexture.height 
+        (float)startButtonTexture.width, 
+        (float)startButtonTexture.height 
     };
-    
-    bool btnAction = false;         // Button action should be activated
+    Rectangle restartBounds = { 
+        screenSize.x/2.0f - restartButtonTexture.width/2.0f, 
+        screenSize.y/2.0f + 100.0f, 
+        (float)restartButtonTexture.width, 
+        (float)restartButtonTexture.height 
+    };
+    Rectangle quitBounds = { 
+        screenSize.x/2.0f - quitButtonTexture.width/2.0f, 
+        screenSize.y/2.0f + 400.0f, 
+        (float)quitButtonTexture.width, 
+        (float)quitButtonTexture.height 
+    };
+   
+    // Button states
+    bool startButtonAction = false;
+    bool restartButtonAction = false;
+    bool quitButtonAction = false;
+
+    // Mouse position
     Vector2 mousePoint = { 0.0f, 0.0f };
 
     // Game state
@@ -221,11 +259,12 @@ int main() {
     while (!WindowShouldClose()) {
         float frameTime = GetFrameTime();
         mousePoint = GetMousePosition();
-        btnAction = false;
+        startButtonAction = false;
 
         // Update music streams
         UpdateMusicStream(titleMusic);
         UpdateMusicStream(gameplayMusic);
+        UpdateMusicStream(deathScreenMusic);
 
         // Handle ESC key to close
         if (IsKeyDown(KEY_ESCAPE)) {
@@ -237,12 +276,12 @@ int main() {
             case TITLE:
             {
                 // Check button state
-                if (CheckCollisionPointRec(mousePoint, btnBounds)) {
-                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) btnAction = true;
+                if (CheckCollisionPointRec(mousePoint, startBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) startButtonAction = true;
                 }
                 
                 // Check if button was clicked to start the game
-                if (btnAction) {
+                if (startButtonAction) {
                     PlaySound(titleMooSound);
                     StopMusicStream(titleMusic);
                     PlayMusicStream(gameplayMusic);
@@ -283,7 +322,7 @@ int main() {
             case TITLE:
             {
                 // Drawing title screen
-                RenderTitleScreen(screenSize, buttonTexture, btnBounds, sourceRec, backgroundTexture, titleTexture);
+                RenderTitleScreen(screenSize, startButtonTexture, startBounds, startSourceRec, backgroundTexture, titleTexture);
             } break;
             
             case GAMEPLAY:
@@ -297,7 +336,7 @@ int main() {
     }
     
     // Cleanup
-    UnloadTexture(buttonTexture);
+    UnloadTexture(startButtonTexture);
     UnloadTexture(backgroundTexture);
     UnloadTexture(titleTexture);
     UnloadSound(titleMooSound);
