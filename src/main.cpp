@@ -20,9 +20,8 @@
 
 using namespace std;
 
-typedef enum GameScreen { TITLE = 0, CONTROLS, GAMEPLAY } GameScreen;
-
 void Update(entt::registry &registry, float dt) {
+    CheckForDeath(registry);
     UpdateProjectiles(registry, dt);
     PlayerInputSystem(registry, dt);
     UpdateEnemies(registry, dt);
@@ -257,16 +256,6 @@ int main() {
     entt::entity gameState = registry.view<GameState>().front();
     GameScreen &currentScreen = registry.get<GameScreen>(gameState);
 
-    // Music setup
-    InitAudioDevice();
-    
-    // Load sound effects
-    Sound titleMooSound = LoadSound("assets/audio/titleMoo.mp3");
-    
-    // Load music and start title track
-    CreateJukebox(registry);
-    StartSong(registry, "title");
-    
     bool gameInitialized = false;
 
     // Main game loop
@@ -275,6 +264,7 @@ int main() {
         mousePoint = GetMousePosition();
         btnAction = false;
         btn2Action = false;
+
 
         // Update music streams
         UpdateMusic(registry);
