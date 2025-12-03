@@ -5,7 +5,7 @@
 #include "../include/raylib.h"
 
 void CreateUpgrade(entt::registry &registry, Vector2 position) {
-    TraceLog(LOG_TRACE, "Entering Function: CreateHealthUpgrade");
+    TraceLog(LOG_TRACE, "Entering Function: CreateUpgrade");
     TraceLog(LOG_INFO, "Creating Health Upgrade Entity");
 
     // add to the registry

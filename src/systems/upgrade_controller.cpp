@@ -3,40 +3,40 @@
 #include "../components/player_stats.hpp"
 #include "../components/health_pickup.hpp"
 
-HealthUpgradeBehavior::HealthUpgradeBehavior(UpgradeUpdateFunction Update) {
+UpgradeBehavior::UpgradeBehavior(UpgradeUpdateFunction Update) {
     this->Update = Update;
 }
 
 
-void SpawnHealthUpgrades(entt::registry &registry){
-    TraceLog(LOG_TRACE, "Entering function: SpawnHealthUpgrades");
+void SpawnUpgrades(entt::registry &registry){
+    TraceLog(LOG_TRACE, "Entering function: SpawnUpgrades");
 
     registry.view<Map, TmxMap>().each([&registry](TmxMap &map){
 
         TmxObjectGroup entitiesLayer = FindLayerByName(map.layers, map.layersLength, "Entities")->exact.objectGroup;
 
 
-        std::vector<TmxObject> healthObjects = FindObjectsByType(entitiesLayer.objects, entitiesLayer.objectsLength, "HealthUpgrade");
-        TraceLog(LOG_INFO, "Found %zu health objects", healthObjects.size());
+        std::vector<TmxObject> upgradeObjects = FindObjectsByType(entitiesLayer.objects, entitiesLayer.objectsLength, "Upgrade");
+        TraceLog(LOG_INFO, "Found %zu upgrade objects", upgradeObjects.size());
 
-        for (TmxObject obj : healthObjects) {
-            TraceLog(LOG_INFO, "Creating health upgrade at: %f,%f", float(obj.x), float(obj.y));
-            CreateHealthUpgrade(registry, {float(obj.x), float(obj.y)});
+        for (TmxObject obj : upgradeObjects) {
+            TraceLog(LOG_INFO, "Creating upgrade at: %f,%f", float(obj.x), float(obj.y));
+            CreateUpgrade(registry, {float(obj.x), float(obj.y)});
         }
     });
 }
 
 
-void DeSpawnHealthUpgrades(entt::registry &registry){
-    for (auto entity : registry.view<HealthUpgrade>()){
+void DespawnUpgrades(entt::registry &registry){
+    for (auto entity : registry.view<Upgrade>()){
         registry.destroy(entity);
     }
 }
 
-void UpdateHealthUpgrades(entt::registry &registry, float dt){
-    TraceLog(LOG_TRACE, "Entering function: UpdateHealthUpgrades");
+void UpdateUpgrades(entt::registry &registry, float dt){
+    TraceLog(LOG_TRACE, "Entering function: UpdateUpgrades");
 
-    auto view = registry.view<HealthUpgrade, HealthUpgradeBehavior, Transform, PhysicsObject, SpriteData>();
+    auto view = registry.view<Upgrade, UpgradeBehavior, Transform, PhysicsObject, SpriteData>();
     for (auto ent : view){
 
         HealthUpgradeBehavior &behavior = registry.get<HealthUpgradeBehavior>(ent);

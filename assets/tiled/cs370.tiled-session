@@ -1,5 +1,5 @@
 {
-    "activeFile": "stage1.tmx",
+    "activeFile": "",
     "expandedProjectPaths": [
         "."
     ],
@@ -32,11 +32,11 @@
             "expandedObjectLayers": [
                 24
             ],
-            "scale": 0.75,
-            "selectedLayer": 8,
+            "scale": 0.33,
+            "selectedLayer": 13,
             "viewCenter": {
-                "x": 975.3333333333334,
-                "y": 814
+                "x": 759.0909090909091,
+                "y": 780.3030303030305
             }
         },
         "stage2.tmx": {
@@ -55,11 +55,29 @@
             }
         },
         "stage3.tmx": {
+            "expandedGroupLayers": [
+                5
+            ],
+            "expandedObjectLayers": [
+                25
+            ],
             "scale": 0.75,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 1064.6666666666665,
-                "y": 894
+                "x": 319.3333333333333,
+                "y": 799.3333333333333
+            }
+        },
+        "stage4.tmx": {
+            "expandedObjectLayers": [
+                24,
+                22
+            ],
+            "scale": 1.5,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 960,
+                "y": 952
             }
         },
         "test.tmx": {
@@ -78,12 +96,6 @@
     },
     "last.imagePath": "C:/Users/kentp/CS370/assets/graphics/tileset",
     "openFiles": [
-        "stage1.tmx",
-        "stage2.tmx",
-        "stage3.tmx",
-        "stage4.tmx",
-        "stage5.tmx",
-        "stage6.tmx"
     ],
     "project": "cs370.tiled-project",
     "recentFiles": [

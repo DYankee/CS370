@@ -26,11 +26,16 @@ struct HealthUpgradeBehavior {
     HealthUpgradeBehavior(UpgradeUpdateFunction Update);
 };
 
+struct UpgradeBehavior {
+    UpgradeUpdateFunction Update;
+    UpgradeBehavior() = default;
+    UpgradeBehavior(UpgradeUpdateFunction Update);
+};
 
 // Functions
 void CreateHealthUpgrade(entt::registry &registry, Vector2 position);
 void FloatUpgrade(entt::registry &registry, float dt, entt::entity upgrade);
 
-void CreateUpgrade(entt::registry &registry, TmxObject upgradeInfo);
+void CreateUpgrade(entt::registry &registry, Vector2 position);
 
 #endif
