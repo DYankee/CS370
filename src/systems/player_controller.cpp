@@ -283,3 +283,22 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
         );
     });
 }
+
+void CheckForDeath(entt::registry &registry){
+    // Get player entity
+    entt::entity player = GetPlayerEntity(registry);
+    // Get player stats
+    PlayerStats &stats = registry.get<PlayerStats>(player);
+
+    //get game state
+    entt::entity gameState = GetGameStateEntity(registry);
+    // Get currentScreen state
+    GameScreen &currentScreen = registry.get<GameScreen>(gameState);
+    
+    if(stats.health <= 0){
+        ResetPlayer(registry);
+        ResetMapIndex();
+        ChangeMap(registry, "assets/tiled/stage1.tmx");
+        currentScreen = TITLE;
+    }
+}
