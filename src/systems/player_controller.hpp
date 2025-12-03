@@ -8,5 +8,6 @@
 
 void PlayerInputSystem(entt::registry &registry, float dt);
 void MovePlayer(entt::registry &registry, float dt, entt::entity entity);
+void CheckForDeath(entt::registry &registry);
 
 #endif
