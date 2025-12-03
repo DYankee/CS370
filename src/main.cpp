@@ -18,9 +18,9 @@
 
 using namespace std;
 
-typedef enum GameScreen { TITLE = 0, GAMEPLAY } GameScreen;
 
-void Update(entt::registry &registry, float dt) {
+void Update(entt::registry &registry, float dt, GameScreen &currentScreen) {
+    TraceLog(LOG_INFO, "Entering main update function");
     UpdateProjectiles(registry, dt);
     PlayerInputSystem(registry, dt);
     UpdateEnemies(registry, dt);
@@ -35,6 +35,8 @@ void Update(entt::registry &registry, float dt) {
     UpdateHealthUpgrades(registry, dt);
     PlayerHealthCollisionSystem(registry, dt);
     UpdateDialogue(registry, dt);
+    CheckForPlayerDeath(registry, currentScreen);
+    TraceLog(LOG_INFO, "Exiting main update function");
 };
 
 void Render(entt::registry &registry, float dt) {
@@ -163,12 +165,10 @@ void RenderTitleScreen(const Vector2 &screenSize, Texture2D buttonTexture, Recta
     EndDrawing();
 }
 
-void RenderDeathScreen(const Vector2 &screenSize, Texture2D backgroundTexture) {
-
-
-
-
-    
+void RenderDeathScreen(const Vector2 &screenSize, Texture2D backgroundTexture, Texture2D deathTexture, 
+    Texture2D restartButtonTexture, Rectangle restartBounds, Rectangle restartSourceRec,
+    Texture2D quitButtonTexture, Rectangle quitBounds, Rectangle quitSourceRec
+){
     BeginDrawing();
 
     // Draw background
@@ -177,7 +177,26 @@ void RenderDeathScreen(const Vector2 &screenSize, Texture2D backgroundTexture) {
     Vector2 bgOrigin = { 0, 0 };
     DrawTexturePro(backgroundTexture, bgSource, bgDest, bgOrigin, 0.0f, WHITE);
 
+    // Draw death texture
+    Rectangle deathSource = { 0, 0, (float)deathTexture.width, (float)deathTexture.height };
+    float deathScale = 1.0f;
+    Rectangle deathDest = { 
+        (screenSize.x - deathTexture.width * deathScale) / 2, 50.0f,
+        deathTexture.width * deathScale, 
+        deathTexture.height * deathScale 
+    };
+    Vector2 deathOrigin = { 0, 0 };
+    DrawTexturePro(deathTexture, deathSource, deathDest, deathOrigin, 0.0f, WHITE);
 
+    // Draw restart button
+    Vector2 restartButtonPosition = { restartBounds.x, restartBounds.y };
+    DrawTextureRec(restartButtonTexture, restartSourceRec, restartButtonPosition, WHITE);
+    
+    // Draw quit button
+    Vector2 quitButtonPosition = { quitBounds.x, quitBounds.y };
+    DrawTextureRec(quitButtonTexture, quitSourceRec, quitButtonPosition, WHITE);
+
+    EndDrawing();
 }
 
 int main() {
@@ -235,7 +254,7 @@ int main() {
     };
     Rectangle quitBounds = { 
         screenSize.x/2.0f - quitButtonTexture.width/2.0f, 
-        screenSize.y/2.0f + 400.0f, 
+        screenSize.y/2.0f + 300.0f, 
         (float)quitButtonTexture.width, 
         (float)quitButtonTexture.height 
     };
@@ -257,6 +276,8 @@ int main() {
 
     // Main game loop
     while (!WindowShouldClose()) {
+        
+        
         float frameTime = GetFrameTime();
         mousePoint = GetMousePosition();
         startButtonAction = false;
@@ -272,9 +293,11 @@ int main() {
         }
 
         // Update based on current screen
+        TraceLog(LOG_INFO,"Main update loop: CurrentScreen()");
         switch (currentScreen) {
             case TITLE:
             {
+                TraceLog(LOG_INFO, "Updating title screen");
                 // Check button state
                 if (CheckCollisionPointRec(mousePoint, startBounds)) {
                     if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) startButtonAction = true;
@@ -311,7 +334,33 @@ int main() {
             case GAMEPLAY:
             {
                 // Update Game State
-                Update(registry, frameTime);
+                TraceLog(LOG_INFO, "Updating game state");
+                Update(registry, frameTime, currentScreen);
+            } break;
+
+            case DEATH:
+            {
+                TraceLog(LOG_INFO, "Updating death screen");
+                StopMusicStream(gameplayMusic);
+                PlayMusicStream(deathScreenMusic);
+                // Check button state
+                if (CheckCollisionPointRec(mousePoint, restartBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) restartButtonAction = true;
+                }
+                if (CheckCollisionPointRec(mousePoint, quitBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) quitButtonAction = true;
+                }
+
+                if(quitButtonAction){
+                    CloseWindow();
+                    break;
+                }
+
+                if (restartButtonAction){
+                    StopMusicStream(deathScreenMusic);
+                    ChangeMap(registry, "assets/tiled/stage1.tmx");
+                    currentScreen = GAMEPLAY;
+                }
             } break;
             
             default: break;
@@ -322,6 +371,7 @@ int main() {
             case TITLE:
             {
                 // Drawing title screen
+                TraceLog(LOG_INFO, "Rendering title screen");
                 RenderTitleScreen(screenSize, startButtonTexture, startBounds, startSourceRec, backgroundTexture, titleTexture);
             } break;
             
@@ -329,6 +379,15 @@ int main() {
             {
                 // Drawing gameplay
                 Render(registry, frameTime);
+            } break;
+
+            case DEATH:
+            {
+                TraceLog(LOG_INFO, "Rendering death screen");
+                RenderDeathScreen(screenSize, backgroundTexture, titleTexture,
+                    restartButtonTexture, restartBounds, restartSourceRec,
+                    quitButtonTexture, quitBounds, quitSourceRec
+                );
             } break;
             
             default: break;

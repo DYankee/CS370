@@ -283,3 +283,11 @@ void MovePlayer(entt::registry &registry, float dt, entt::entity entity){
         );
     });
 }
+
+void CheckForPlayerDeath(entt::registry &registry, GameScreen &currentScreen){
+    entt::entity player = registry.view<Player>().front();
+    PlayerStats &stats = registry.get<PlayerStats>(player);
+    if(stats.health <= 0){
+        currentScreen = DEATH;
+    }
+}
