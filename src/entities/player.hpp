@@ -19,4 +19,10 @@ struct Player{
 // Takes in a pointer to an entt entity
 void CreatePlayer(entt::registry &registry);
 
+// Get a reference to the player entity
+entt::entity GetPlayerEntity(entt::registry &registry);
+
+// Reset player to starting conditions
+void ResetPlayer(entt::registry &registry);
+
 #endif

@@ -158,3 +158,18 @@ void CreatePlayer(entt::registry &registry) {
 
   // Add the rest of the components needed for the player here
 };
+
+entt::entity GetPlayerEntity(entt::registry &registry){
+    entt::entity player = registry.view<Player>().front();
+    return player;
+}
+
+void ResetPlayer(entt::registry &registry){
+    entt::entity player = GetPlayerEntity(registry);
+    
+    PlayerStats &stats = registry.get<PlayerStats>(player);
+
+    stats.maxHealth = MAX_HEALTH;
+    stats.health = MAX_HEALTH;
+    stats.iFrames = 0.0f;
+}
