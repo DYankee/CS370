@@ -21,4 +21,8 @@ std::vector<TmxObject> FindObjectsByType(TmxObject *objects, int objectsLength ,
 
 // Get the properties from a TmxObject
 std::map<std::string, float> GetObjectProperties(TmxObject object);
+
+// Reset the map index back to 1
+void ResetMapIndex();
+
 #endif
