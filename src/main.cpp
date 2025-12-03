@@ -18,9 +18,8 @@
 
 using namespace std;
 
-typedef enum GameScreen { TITLE = 0, CONTROLS, GAMEPLAY } GameScreen;
-
 void Update(entt::registry &registry, float dt) {
+    CheckForDeath(registry);
     UpdateProjectiles(registry, dt);
     PlayerInputSystem(registry, dt);
     UpdateEnemies(registry, dt);
@@ -245,11 +244,16 @@ int main() {
     bool btn2Action = false;        // Second button action
     Vector2 mousePoint = { 0.0f, 0.0f };
 
-    // Game state
-    GameScreen currentScreen = TITLE;
 
     // Create entt registry
     entt::registry registry = entt::registry();
+
+    // init game state
+    CreateGameState(registry);
+    // get Game state
+    entt::entity gameState = registry.view<GameState>().front();
+    GameScreen &currentScreen = registry.get<GameScreen>(gameState);
+
     bool gameInitialized = false;
 
     // Main game loop
@@ -258,6 +262,7 @@ int main() {
         mousePoint = GetMousePosition();
         btnAction = false;
         btn2Action = false;
+
 
         // Update music streams
         UpdateMusicStream(titleMusic);
