@@ -18,6 +18,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
     PhysicsObject &physics = registry.get<PhysicsObject>(player);
     SpriteData &sprite = registry.get<SpriteData>(player);
     PlayerStats &stats = registry.get<PlayerStats>(player);
+    PlayerUpgrades &upgrades = registry.get<PlayerUpgrades>(player);
     Animation &animation = registry.get<Animation>(player);
         
     static float attackTimer;
@@ -32,11 +33,6 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         MoveEntity(registry, dt, player);
         return; // Skip rest of input processing during spawn pause
     }
-    registry.view<Transform, PhysicsObject, SpriteData, PlayerStats, PlayerUpgrades, Player, Animation>().each(
-                    [dt, &registry](Transform &transform, PhysicsObject &physics, SpriteData &sprite, PlayerStats &stats, PlayerUpgrades &upgrades, Animation &animation) {
-        static float attackTimer;
-        // Log player starting velocity
-        TraceLog(LOG_INFO, "Player current velocity: %f,%f", physics.velocity.x, physics.velocity.y);
 
     // Apply gravity
     physics.velocity.y += stats.gravity * dt;
@@ -156,68 +152,11 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
             animation.PlaySequence("idleLeft");
         }
     }
-            // Play headbutt animation based on current direction
-            if (animation.currentSequence == "walkLeft" || animation.currentSequence == "idleLeft" || 
-                animation.currentSequence == "jumpLeft" || animation.currentSequence == "headbuttLeft") {
-                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLHeadbutt");
-                sprite.SetTexture("cowLHeadbutt");
-                animation.PlaySequence("headbuttLeft");
-                physics.velocity.x = -lungePower;
-            } else {
-                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRHeadbutt");
-                sprite.SetTexture("cowRHeadbutt");
-                animation.PlaySequence("headbuttRight");
-                physics.velocity.x = lungePower;
-            }
-        }
-        // Move box based on key input
-        // Don't change animation if currently jumping or headbutting
-        if (IsKeyDown(KEY_D) && !isHeadbutting) {
-            physics.velocity.x = stats.speed;    // Move right
-            if (!isJumping) {
-                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRWalk");
-                sprite.SetTexture("cowRWalk");
-                animation.PlaySequence("walkRight");
-            }
-        } else if (IsKeyDown(KEY_A) && !isHeadbutting) {
-            physics.velocity.x = -stats.speed;   // Move left
-            if (!isJumping) {
-                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLWalk");
-                sprite.SetTexture("cowLWalk");
-                animation.PlaySequence("walkLeft");
-            }
-        } else {
-            physics.velocity.x = physics.velocity.x;        // No horizontal movement
-            // Set idle animation based on last direction
-            if (animation.currentSequence == "walkRight") {
-                sprite.SetTexture("cowR");
-                animation.PlaySequence("idleRight");
-            } else if (animation.currentSequence == "walkLeft") {
-                sprite.SetTexture("cowL");
-                animation.PlaySequence("idleLeft");
-            } else if (animation.currentSequence == "jumpRight" && animation.IsFinished()) {
-                // Transition from jump to idle when jump animation finishes
-                sprite.SetTexture("cowR");
-                animation.PlaySequence("idleRight");
-            } else if (animation.currentSequence == "jumpLeft" && animation.IsFinished()) {
-                // Transition from jump to idle when jump animation finishes
-                sprite.SetTexture("cowL");
-                animation.PlaySequence("idleLeft");
-            } else if (animation.currentSequence == "headbuttRight" && animation.IsFinished()) {
-                // Transition from headbutt to idle when headbutt animation finishes
-                sprite.SetTexture("cowR");
-                animation.PlaySequence("idleRight");
-            } else if (animation.currentSequence == "headbuttLeft" && animation.IsFinished()) {
-                // Transition from headbutt to idle when headbutt animation finishes
-                sprite.SetTexture("cowL");
-                animation.PlaySequence("idleLeft");
-            }
-        }
-
 
         if(IsKeyDown(KEY_O) && upgrades.testUpgrade) {
             TraceLog(LOG_INFO, "Test upgrade: active");
         }
+
 
         
     // Update animation
