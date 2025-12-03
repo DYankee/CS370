@@ -299,6 +299,6 @@ void CheckForDeath(entt::registry &registry){
         ResetPlayer(registry);
         ResetMapIndex();
         ChangeMap(registry, "assets/tiled/stage1.tmx");
-        currentScreen = TITLE;
+        currentScreen = DEATH;
     }
 }
