@@ -18,6 +18,7 @@ set(MILK_SOURCES
     entities/npc.cpp
     entities/player.cpp
     entities/upgrade.cpp
+    entities/projectile.cpp
     systems/asset_loader.cpp
     systems/collision_system.cpp
     systems/player_controller.cpp
@@ -30,7 +31,9 @@ set(MILK_SOURCES
     systems/npc_controller.cpp
     systems/health_upgrade_controller.cpp
     systems/player_health_upgrade_collision.cpp
-    systems/upgrade_controller.cpp
+    systems/projectile_manager.cpp
+    systems/dialogue_system.cpp
+    systems/upgrade_collision.cpp
 )
 
 add_library(milk_lib STATIC ${MILK_SOURCES})
