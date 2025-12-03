@@ -3,7 +3,6 @@
 #include "../components/player_stats.hpp"
 #include "../components/health_pickup.hpp"
 
-
 void SpawnUpgrades(entt::registry &registry){
     TraceLog(LOG_TRACE, "Entering function: SpawnUpgrades");
 
