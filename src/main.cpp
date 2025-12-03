@@ -175,6 +175,38 @@ void RenderTitleScreen(const Vector2 &screenSize, Texture2D buttonTexture, Textu
     EndDrawing();
 }
 
+void RenderDeathScreen(const Vector2 &screenSize, Texture2D buttonTexture, Texture2D button2Texture, Rectangle btnBounds, Rectangle btn2Bounds, Rectangle sourceRec, Rectangle sourceRec2, Texture2D backgroundTexture, Texture2D titleTexture) {
+    BeginDrawing();
+
+    // Draw background
+    Rectangle bgSource = { 0, 0, (float)backgroundTexture.width, (float)backgroundTexture.height };
+    Rectangle bgDest = { 0, 0, screenSize.x, screenSize.y };
+    Vector2 bgOrigin = { 0, 0 };
+    DrawTexturePro(backgroundTexture, bgSource, bgDest, bgOrigin, 0.0f, RED);
+    
+    // Draw title texture
+    Rectangle titleSource = { 0, 0, (float)titleTexture.width, (float)titleTexture.height };
+    float titleScale = 1.0f;
+    Rectangle titleDest = { 
+        (screenSize.x - titleTexture.width * titleScale) / 2, 50.0f,
+        titleTexture.width * titleScale, 
+        titleTexture.height * titleScale 
+    };
+    Vector2 titleOrigin = { 0, 0 };
+    DrawTexturePro(titleTexture, titleSource, titleDest, titleOrigin, 0.0f, RED);
+    
+    // Draw first button (Start Game)
+    Vector2 btnPosition = { btnBounds.x, btnBounds.y };
+    DrawTextureRec(buttonTexture, sourceRec, btnPosition, RED);
+    
+    // Draw second button (Controls)
+    Vector2 btn2Position = { btn2Bounds.x, btn2Bounds.y };
+    DrawTextureRec(button2Texture, sourceRec2, btn2Position, RED);
+    
+    EndDrawing();
+}                
+
+
 void RenderControlsScreen(const Vector2 &screenSize, Texture2D controlsTexture) {
     BeginDrawing();
     ClearBackground(BLACK);
@@ -212,6 +244,9 @@ int main() {
 
     // Load title texture
     Texture2D titleTexture = LoadTexture("assets/graphics/title/milksong_logo.png");
+
+    //Load death texture
+    Texture2D deathTexture = LoadTexture("assets/graphics/title/you_died.png");
 
     // Load button textures
     Texture2D buttonTexture = LoadTexture("assets/graphics/title/button.png");
@@ -328,6 +363,31 @@ int main() {
                     currentScreen = CONTROLS;
                 }
             } break;
+
+            case DEATH:
+            {
+                // Check button states
+                if (CheckCollisionPointRec(mousePoint, btnBounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) btnAction = true;
+                }
+                
+                if (CheckCollisionPointRec(mousePoint, btn2Bounds)) {
+                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) btn2Action = true;
+                }
+                
+                // Check if start button was clicked
+                if (btnAction) {
+                    PlaySound(titleMooSound);
+                    StopMusicStream(titleMusic);
+                    PlayMusicStream(gameplayMusic);
+                    currentScreen = GAMEPLAY;
+                }
+                
+                // Check if controls button was clicked
+                if (btn2Action) {
+                    currentScreen = CONTROLS;
+                }
+            } break;
             
             case CONTROLS:
             {
@@ -349,6 +409,12 @@ int main() {
             {
                 // Drawing title screen
                 RenderTitleScreen(screenSize, buttonTexture, button2Texture, btnBounds, btn2Bounds, sourceRec, sourceRec2, backgroundTexture, titleTexture);
+            } break;
+
+            case DEATH:
+            {
+                // Drawing death screen
+                RenderDeathScreen(screenSize, buttonTexture, button2Texture, btnBounds, btn2Bounds, sourceRec, sourceRec2, backgroundTexture, deathTexture);
             } break;
             
             case CONTROLS:
