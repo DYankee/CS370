@@ -9,5 +9,6 @@
 #include "player.hpp"
 #include "health_upgrade.hpp"
 #include "projectile.hpp"
+#include "game_state.hpp"
 
 #endif // ENTITIES_HPP
