@@ -20,7 +20,7 @@
 
 using namespace std;
 
-typedef enum GameScreen { TITLE = 0, GAMEPLAY } GameScreen;
+typedef enum GameScreen { TITLE = 0, CONTROLS, GAMEPLAY } GameScreen;
 
 void Update(entt::registry &registry, float dt) {
     UpdateProjectiles(registry, dt);
@@ -176,38 +176,6 @@ void RenderTitleScreen(const Vector2 &screenSize, Texture2D buttonTexture, Textu
     EndDrawing();
 }
 
-void RenderDeathScreen(const Vector2 &screenSize, Texture2D buttonTexture, Texture2D button2Texture, Rectangle btnBounds, Rectangle btn2Bounds, Rectangle sourceRec, Rectangle sourceRec2, Texture2D backgroundTexture, Texture2D titleTexture) {
-    BeginDrawing();
-
-    // Draw background
-    Rectangle bgSource = { 0, 0, (float)backgroundTexture.width, (float)backgroundTexture.height };
-    Rectangle bgDest = { 0, 0, screenSize.x, screenSize.y };
-    Vector2 bgOrigin = { 0, 0 };
-    DrawTexturePro(backgroundTexture, bgSource, bgDest, bgOrigin, 0.0f, RED);
-    
-    // Draw title texture
-    Rectangle titleSource = { 0, 0, (float)titleTexture.width, (float)titleTexture.height };
-    float titleScale = 1.0f;
-    Rectangle titleDest = { 
-        (screenSize.x - titleTexture.width * titleScale) / 2, 50.0f,
-        titleTexture.width * titleScale, 
-        titleTexture.height * titleScale 
-    };
-    Vector2 titleOrigin = { 0, 0 };
-    DrawTexturePro(titleTexture, titleSource, titleDest, titleOrigin, 0.0f, RED);
-    
-    // Draw first button (Start Game)
-    Vector2 btnPosition = { btnBounds.x, btnBounds.y };
-    DrawTextureRec(buttonTexture, sourceRec, btnPosition, RED);
-    
-    // Draw second button (Controls)
-    Vector2 btn2Position = { btn2Bounds.x, btn2Bounds.y };
-    DrawTextureRec(button2Texture, sourceRec2, btn2Position, RED);
-    
-    EndDrawing();
-}                
-
-
 void RenderControlsScreen(const Vector2 &screenSize, Texture2D controlsTexture) {
     BeginDrawing();
     ClearBackground(BLACK);
@@ -243,12 +211,12 @@ int main() {
 
 
 
-
     // Load title texture
     Texture2D titleTexture = LoadTexture("assets/graphics/title/milksong_logo.png");
 
-    // Load button texture
+    // Load button textures
     Texture2D buttonTexture = LoadTexture("assets/graphics/title/button.png");
+    Texture2D button2Texture = LoadTexture("assets/graphics/title/button2.png");
 
     // Load background texture
     Texture2D backgroundTexture = LoadTexture("assets/graphics/bgart/mainbackground.png");
@@ -308,7 +276,6 @@ int main() {
         btnAction = false;
         btn2Action = false;
 
-
         // Update music streams
         UpdateMusic(registry);
 
@@ -317,8 +284,8 @@ int main() {
             if (currentScreen != TITLE) {
                 // Stop gameplay music and restart title music if coming from gameplay
                 if (currentScreen == GAMEPLAY) {
-                    StopAllMusic(registry);
-                    StartSong(registry, "title");
+                    StopMusicStream(gameplayMusic);
+                    PlayMusicStream(titleMusic);
                 }
                 currentScreen = TITLE;
             }
@@ -371,31 +338,6 @@ int main() {
                     currentScreen = CONTROLS;
                 }
             } break;
-
-            case DEATH:
-            {
-                // Check button states
-                if (CheckCollisionPointRec(mousePoint, btnBounds)) {
-                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) btnAction = true;
-                }
-                
-                if (CheckCollisionPointRec(mousePoint, btn2Bounds)) {
-                    if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) btn2Action = true;
-                }
-                
-                // Check if start button was clicked
-                if (btnAction) {
-                    PlaySound(titleMooSound);
-                    StopAllMusic(registry);
-                    StartSong(registry, "gameplay");
-                    currentScreen = GAMEPLAY;
-                }
-                
-                // Check if controls button was clicked
-                if (btn2Action) {
-                    currentScreen = CONTROLS;
-                }
-            } break;
             
             case CONTROLS:
             {
@@ -417,12 +359,6 @@ int main() {
             {
                 // Drawing title screen
                 RenderTitleScreen(screenSize, buttonTexture, button2Texture, btnBounds, btn2Bounds, sourceRec, sourceRec2, backgroundTexture, titleTexture);
-            } break;
-
-            case DEATH:
-            {
-                // Drawing death screen
-                RenderDeathScreen(screenSize, buttonTexture, button2Texture, btnBounds, btn2Bounds, sourceRec, sourceRec2, backgroundTexture, deathTexture);
             } break;
             
             case CONTROLS:
