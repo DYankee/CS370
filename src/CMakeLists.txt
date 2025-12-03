@@ -19,6 +19,7 @@ set(MILK_SOURCES
     entities/player.cpp
     entities/health_upgrade.cpp
     entities/projectile.cpp
+    entities/game_state.cpp
     systems/asset_loader.cpp
     systems/collision_system.cpp
     systems/player_controller.cpp
