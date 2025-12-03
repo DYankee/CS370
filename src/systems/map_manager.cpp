@@ -150,3 +150,7 @@ std::map<std::string, float> GetObjectProperties(TmxObject object){
     }
     return stats;
 };
+
+void ResetMapIndex(){
+    mapIndex = 1;
+}
