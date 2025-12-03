@@ -54,7 +54,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         }
     }
     // If button pressed set attacking true and start headbutt animation
-    if ((IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || IsKeyPressed(KEY_R)) && !stats.isAttacking) {
+    if ((IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || IsKeyPressed(KEY_E)) && !stats.isAttacking) {
         stats.isAttacking = true;
         attackTimer = 0.4f;  // Duration matches animation (5 frames * 0.1s = 0.5s)
         stats.iFrames = 0.4f;
