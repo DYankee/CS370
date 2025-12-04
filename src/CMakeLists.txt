@@ -21,6 +21,7 @@ set(MILK_SOURCES
     entities/projectile.cpp
     entities/game_state.cpp
     entities/range_upgrade.cpp
+    entities/jukebox.cpp
     systems/asset_loader.cpp
     systems/collision_system.cpp
     systems/player_controller.cpp
@@ -37,6 +38,7 @@ set(MILK_SOURCES
     systems/dialogue_system.cpp
     systems/range_upgrade_controller.cpp
     systems/player_range_upgrade_collision.cpp
+    systems/music_controller.cpp
 )
 
 add_library(milk_lib STATIC ${MILK_SOURCES})
