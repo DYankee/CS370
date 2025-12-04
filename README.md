@@ -1,54 +1,72 @@
-## CS370 Project Overview Document						    
+# Milksong	
 
-### What is it?
-Video Game (Action Platformer)
+<br>
 
-### Project Name: (Work in progress)
-- Polyester Melody
-- jean jingle
-- Denim dance
+[[[[[[[[[[]]]]]]]]]] picture [[[[[[[[[[]]]]]]]]]]
 
-### Team Members:
-- Nicholas Decinto	-	Decintn@sunypoly.edu
-- Zachary Geary	- 	gearyz@sunypoly.edu
-- Kent Palabon		- 	palabok@sunypoly.edu
-- Alaina Sabo		- 	saboa@sunypoly.edu
+<br>
 
-### Project Description:
-We are planning on making a 2d action platformer. Our main users will be people who enjoy playing platformer video games. The player will be able to explore levels, fight/kill enemies, find and use items, and defeat bosses. We will do this using C++ with the raylib library. 
+Add to your wishlist | Follow | Ignore
+--- | --- | ---
 
-### Elevator pitch:
-Silksong but even more indie.
+<br>
 
-### Core features
-- Player Attack/Movement:
-    - Player can move around, jump and collide with objects
-    - Player can hit and DMG enemies
-- Enemy Attack/Movement
-    - Enemies can attack and DMG Player unit
-    - Enemies move based on predefined behavior
-- Map loading 
-    - Player can move between maps that load and unload
-- Items
-    - Usable items for the players to pick up
-- Bosses
-    - Extra hard enemies with special abilities. 
+### BUY MILKSONG
 
-### Tech Architecture
-- Back-end: C++
-    - All members of the team are familiar with the language.
-- Front-end: Raylib
-    - Professor suggestion
-- High-level Architecture:
-    - Basic game loop using the Raylib while running function to periodically call an update and render function.
-    - Simple entity system to manage game elements and their functions.
+$0.99 | Add to cart 
+--- | ---
 
-### Team Roles and Responsibilities
-- Architectural Lead: Alaina Sabo 
-    - Coordinating and assisting with back-end and front-end development, ensuring that the different parts of the project are properly integrated with each other.
-- DevOps Lead: Zachary Geary
-    - Implementing build systems, writing tests and documenting code. Helping with code/design where needed.
-- Front-End Lead: Kent Palabon
-    - Implementing art, animations, and level design. Ensures these UI/UX elements are incorporated into the project, while working with the back-end.
-- Back-End Lead: Nick Decinto
-    - Implementing back end architecture such as physics system, player and enemy movement, items, and attack/DMG systems. Working with the front-end lead ensuring art is effectively implemented into the frame system.
+### Recent Events & Announcements
+---
+
+[[[[[[[[[[]]]]]]]]]] small picture [[[[[[[[[[]]]]]]]]]] Spike 3 is Complete!
+
+### Reviews
+---
+
+> "Pretty darn <em>amoozing</em>."
+<p>5/5 - <strong>Local Cow</strong>
+
+<br>
+
+> "⏁⊑⟟⌇ ⟟⌇ ⏃ ☊⍜⍜⌰ ☌⏃⋔⟒"
+<p> 5/5 - <strong>Mr. Alien</strong>
+
+<br>
+
+> "Get back in the barn."
+<p> 1/5 - <strong>Angry Farmer</strong>
+
+<br>
+<br>
+
+### About Game
+---
+
+Milksong is a 2D action platformer
+
+[[[[[[[[[[]]]]]]]]]] picture [[[[[[[[[[]]]]]]]]]]
+
+<br>
+
+### Game Features
+---
+
+[[[[[[[[[[]]]]]]]]]] picture [[[[[[[[[[]]]]]]]]]]
+
+- <strong>Explore Levels</strong>
+  <p>Classic side-scrolling with player movement and jumping. Traverse each stage and progress through the narrative of Milksong, through interacting with the environment and obstacles that are present.
+ 
+- <strong>Fight and Defeat Enemies</strong>
+  <p>
+
+- <strong>Obtain and Use Powerups</strong>
+  <p>
+  
+- <strong>Art and Animations</strong>
+  <p>
+
+- <strong>Totally Original (Not) Music</strong>
+  <p>Milksong's exsquisite soundtrack is graciously made by the composers of existing titles, Stardew Valley, Animal Crossing: New Horizons, and Dark Souls
+
+<br>
