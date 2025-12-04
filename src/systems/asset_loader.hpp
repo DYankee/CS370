@@ -13,5 +13,7 @@
 // Created by Zachary Geary
 std::map<std::string, Texture2D> LoadTextures(std::map<std::string, std::string> texturePaths);
 
+std::map<std::string, Music> LoadMusic(std::map<std::string, std::string> songPaths);
+
 
 #endif // ASSET_LOADER_HPP
