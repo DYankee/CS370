@@ -1,14 +1,13 @@
-# <span style="color: white;">Milksong</span>
+# Milksong	
 
 <br>
-<img src="assets/graphics/readme/title.png" alt="Title" width="80%">
+
+[[[[[[[[[[]]]]]]]]]] picture [[[[[[[[[[]]]]]]]]]]
 
 <br>
 
 Add to your wishlist | Follow | Ignore
 --- | --- | ---
-
----
 
 <br>
 
@@ -17,22 +16,12 @@ Add to your wishlist | Follow | Ignore
 $0.99 | Add to cart 
 --- | ---
 
-<br>
-
-### <span style="color: cyan;">Recent Events & Announcements</span>
-
+### Recent Events & Announcements
 ---
 
-<img src="assets/graphics/readme/santa.png" alt="Events" width="20%"> 
-<p>
-<p><span style="color: gold;">NEWS</span>
-<p>Spike 3 is complete for the holidays! 
-<p><sub>Thurs, December 11, 2025</sub>
+[[[[[[[[[[]]]]]]]]]] small picture [[[[[[[[[[]]]]]]]]]] Spike 3 is Complete!
 
-<br>
-
-### <span style="color: cyan;">Reviews</span>
-
+### Reviews
 ---
 
 > "Pretty darn <em>amoozing</em>."
@@ -51,46 +40,33 @@ $0.99 | Add to cart
 <br>
 <br>
 
-### <span style="color: cyan;">About Game</span>
-
+### About Game
 ---
 
-What if we made Silksong but it was even more of an indie game?
+Milksong is a 2D action platformer
 
-![About Game](assets/graphics/readme/aboutgame.gif)
-
-Milk Song is a 2D action platformer where you play as a cow trying to get revenge on the farmers who treated them like cattle.
+[[[[[[[[[[]]]]]]]]]] picture [[[[[[[[[[]]]]]]]]]]
 
 <br>
 
-### <span style="color: cyan;">Game Features</span>
-
+### Game Features
 ---
 
-![Features](assets/graphics/readme/features.gif)
+[[[[[[[[[[]]]]]]]]]] picture [[[[[[[[[[]]]]]]]]]]
 
 - <strong>Explore Levels</strong>
   <p>Classic side-scrolling with player movement and jumping. Traverse each stage and progress through the narrative of Milksong, through interacting with the environment and obstacles that are present.
-  <P>
-
+ 
 - <strong>Fight and Defeat Enemies</strong>
-  <p>Lash out at your foes and strike them down with attacks.
-  <P>
-
-- <strong>Interact with NPCs</strong>
-  <p>Encounter several friendly NPCs on your quest to freedom from the farm, and converse with your fellow animals along the way.
-  <P>
+  <p>
 
 - <strong>Obtain and Use Powerups</strong>
-  <p>Utilize unique player upgrades hidden throughout the levels which provide special gameplay enhancements.
-  <P>
-
-- <strong>Art and Animations</strong>
-  <p>Rich with a plethora of original pixel art and several animations.
-  <P>
-
-- <strong>Totally Original (NOT) Music</strong>
-  <p>Milksong's exsquisite soundtrack is graciously made by the composers of existing titles: Stardew Valley, Animal Crossing: New Horizons, and etc.
   <p>
+  
+- <strong>Art and Animations</strong>
+  <p>
+
+- <strong>Totally Original (Not) Music</strong>
+  <p>Milksong's exsquisite soundtrack is graciously made by the composers of existing titles, Stardew Valley, Animal Crossing: New Horizons, and Dark Souls
 
 <br>
