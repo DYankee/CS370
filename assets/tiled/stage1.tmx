@@ -189,7 +189,7 @@
    </properties>
    <point/>
   </object>
-  <object id="165" name="TestUpgrade" type="Upgrade" x="1420.06" y="736.424">
+  <object id="165" name="Upgrade" type="Upgrade" x="1414" y="854.606">
    <point/>
   </object>
   <object id="170" name="HealthUpgrade" x="1203.03" y="848.485">

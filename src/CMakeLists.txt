@@ -34,6 +34,7 @@ set(MILK_SOURCES
     systems/projectile_manager.cpp
     systems/dialogue_system.cpp
     systems/upgrade_collision.cpp
+    systems/upgrade_controller.cpp
 )
 
 add_library(milk_lib STATIC ${MILK_SOURCES})

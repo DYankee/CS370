@@ -15,6 +15,8 @@
 #include "systems/player_enemy_collision.hpp"
 #include "systems/health_upgrade_controller.hpp"
 #include "systems/player_health_upgrade_collision.hpp"
+#include "systems/upgrade_controller.hpp"
+#include "systems/upgrade_collision.hpp"
 
 using namespace std;
 
@@ -263,6 +265,8 @@ int main() {
                         SpawnNPCs(registry);
 
                         SpawnHealthUpgrades(registry);
+
+                        SpawnUpgrades(registry);
                         
                         gameInitialized = true;
                     }
