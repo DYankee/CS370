@@ -299,6 +299,8 @@ void CheckForDeath(entt::registry &registry){
         ResetPlayer(registry);
         ResetMapIndex();
         ChangeMap(registry, "assets/tiled/stage1.tmx");
+        StopAllMusic(registry);
+        StartSong(registry, "death");
         currentScreen = DEATH;
     }
 }

@@ -231,13 +231,7 @@ int main() {
  	SetTargetFPS(60);
     SetExitKey(KEY_NULL);  // Disable ESC from closing the window
 
-    // Music setup
-    InitAudioDevice();
-    Music titleMusic = LoadMusicStream("assets/audio/acnhtitle.mp3");
-    Music gameplayMusic = LoadMusicStream("assets/audio/stardewsummer.mp3");
-    SetMusicVolume(titleMusic, 1.0f);
-    SetMusicVolume(gameplayMusic, 1.0f);
-    PlayMusicStream(titleMusic);
+
 
     // Load sound effects
     Sound titleMooSound = LoadSound("assets/audio/titleMoo.mp3");
@@ -291,6 +285,11 @@ int main() {
     entt::entity gameState = registry.view<GameState>().front();
     GameScreen &currentScreen = registry.get<GameScreen>(gameState);
 
+    // Music setup
+    InitAudioDevice();
+    CreateJukebox(registry);
+    StartSong(registry, "title");
+    
     bool gameInitialized = false;
 
     // Main game loop
@@ -302,16 +301,15 @@ int main() {
 
 
         // Update music streams
-        UpdateMusicStream(titleMusic);
-        UpdateMusicStream(gameplayMusic);
+        UpdateMusic(registry);
 
         // Handle ESC key - return to title screen
         if (IsKeyDown(KEY_ESCAPE)) {
             if (currentScreen != TITLE) {
                 // Stop gameplay music and restart title music if coming from gameplay
                 if (currentScreen == GAMEPLAY) {
-                    StopMusicStream(gameplayMusic);
-                    PlayMusicStream(titleMusic);
+                    StopAllMusic(registry);
+                    StartSong(registry, "title");
                 }
                 currentScreen = TITLE;
             }
@@ -333,14 +331,14 @@ int main() {
                 // Check if start button was clicked
                 if (btnAction) {
                     PlaySound(titleMooSound);
-                    StopMusicStream(titleMusic);
-                    PlayMusicStream(gameplayMusic);
+                    StopAllMusic(registry);
+                    StartSong(registry, "gameplay");
                     currentScreen = GAMEPLAY;
                     
                     // Initialize game only once
                     if (!gameInitialized) {
                         // Load TMX map using RayTMX
-                        CreateMap(registry, "assets/tiled/stage1.tmx", gameplayMusic);
+                        CreateMap(registry, "assets/tiled/stage1.tmx");
                         CreateCamera(registry, screenSize); 
 
                         // Player setup
@@ -377,8 +375,8 @@ int main() {
                 // Check if start button was clicked
                 if (btnAction) {
                     PlaySound(titleMooSound);
-                    StopMusicStream(titleMusic);
-                    PlayMusicStream(gameplayMusic);
+                    StopAllMusic(registry);
+                    StartSong(registry, "gameplay");
                     currentScreen = GAMEPLAY;
                 }
                 
@@ -439,8 +437,6 @@ int main() {
     UnloadTexture(backgroundTexture);
     UnloadTexture(titleTexture);
     UnloadSound(titleMooSound);
-    UnloadMusicStream(titleMusic);
-    UnloadMusicStream(gameplayMusic);
     CloseAudioDevice();   
     CloseWindow();
     registry.view<HUDResources>().each([&](HUDResources &hud) {
