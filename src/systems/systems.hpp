@@ -13,4 +13,5 @@
 #include "health_upgrade_controller.hpp"
 #include "projectile_manager.hpp"
 #include "dialogue_system.hpp"
+#include "music_controller.hpp"
 #endif
