@@ -91,9 +91,10 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         }
     }
 
+    //Add actions based on upgrades
         if(IsKeyDown(KEY_O) && upgrades.testUpgrade) {
             TraceLog(LOG_INFO, "Test upgrade: active");
-            sprite.SetTexture("cowLJump");
+            sprite.SetTexture("cowR");
         }
         else if(IsKeyDown(KEY_O) && !upgrades.testUpgrade) {
             TraceLog(LOG_INFO, "nope");

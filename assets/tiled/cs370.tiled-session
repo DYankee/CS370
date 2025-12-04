@@ -35,8 +35,8 @@
             "scale": 0.33,
             "selectedLayer": 13,
             "viewCenter": {
-                "x": 759.0909090909091,
-                "y": 780.3030303030305
+                "x": 583.3333333333334,
+                "y": 737.8787878787878
             }
         },
         "stage2.tmx": {
@@ -58,11 +58,8 @@
             "expandedGroupLayers": [
                 5
             ],
-            "expandedObjectLayers": [
-                25
-            ],
             "scale": 0.75,
-            "selectedLayer": 9,
+            "selectedLayer": 1,
             "viewCenter": {
                 "x": 319.3333333333333,
                 "y": 799.3333333333333
