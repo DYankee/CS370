@@ -34,7 +34,7 @@ void Update(entt::registry &registry, float dt) {
     UpdateHealthUpgrades(registry, dt);
     UpdateRangeUpgrades(registry, dt);
     PlayerHealthCollisionSystem(registry, dt);
-    PlayerRangeCollisionSystem(registry, dt);
+    UpgradeCollisionSystem(registry, dt);
     UpdateDialogue(registry, dt);
 };
 
@@ -109,22 +109,23 @@ void Render(entt::registry &registry, float dt) {
             });
 
             // Draw Health Upgrades
-            TraceLog(LOG_TRACE, "Drawing Health Upgrades");
-            registry.view<SpriteData, Transform, HealthUpgrade>().each([](SpriteData &sprite, Transform &transform){
-                Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
-                Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
-                TraceLog(LOG_INFO, "Drawing Health Upgrade at: %f,%f", dstRec.x, dstRec.y);
-                TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
-                DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
-            });
-            TraceLog(LOG_TRACE, "Drawing Range Upgrades");
-            registry.view<SpriteData, Transform, RangeUpgrade>().each([](SpriteData &sprite, Transform &transform){
-                Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
-                Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
-                TraceLog(LOG_INFO, "Drawing Range Upgrade at: %f,%f", dstRec.x, dstRec.y);
-                TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
-                DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
-            });
+    TraceLog(LOG_TRACE, "Drawing Health Upgrades");
+    registry.view<SpriteData, Transform, HealthUpgrade>().each([](SpriteData &sprite, Transform &transform){
+        Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
+        Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
+        TraceLog(LOG_INFO, "Drawing Health Upgrade at: %f,%f", dstRec.x, dstRec.y);
+        TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
+        DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
+    });
+
+    TraceLog(LOG_TRACE, "Drawing Upgrades");
+        registry.view<SpriteData, Transform, Upgrade>().each([](SpriteData &sprite, Transform &transform){
+            Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
+            Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
+            TraceLog(LOG_INFO, "Drawing Upgrade at: %f,%f", dstRec.x, dstRec.y);
+            DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
+        });
+
 
                 
                 // Draw text
