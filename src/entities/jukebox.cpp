@@ -13,7 +13,7 @@ void CreateJukebox(entt::registry &registry){
         {"gameplay","assets/audio/stardewsummer.mp3"},
         {"death","assets/audio/deathScreen.mp3"}
     });
-    registry.emplace<std::map<std::string, Music>>(jukebox, songs);
+    registry.emplace<std::map<std::string, Music>>(jukebox);
 }
 
 entt::entity GetJukeboxEntity(entt::registry &registry){
