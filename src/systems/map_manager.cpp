@@ -154,5 +154,6 @@ std::map<std::string, float> GetObjectProperties(TmxObject object){
 };
 
 void ResetMapIndex(){
+    TraceLog(LOG_TRACE, "Entering Function: ResetMapIndex");
     mapIndex = 1;
 }
