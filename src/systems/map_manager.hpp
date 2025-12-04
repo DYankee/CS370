@@ -6,6 +6,7 @@
 #include "../../include/raytmx.h"
 #include "../components/components.hpp"
 #include "../entities/entities.hpp"
+#include "../systems/systems.hpp"
 
 void CheckForMapChange(entt::registry &registry);
 void ChangeMap(entt::registry &registry, std::string tmxFilePath); 

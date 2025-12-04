@@ -28,11 +28,11 @@
             "expandedObjectLayers": [
                 24
             ],
-            "scale": 0.5,
-            "selectedLayer": 12,
+            "scale": 0.75,
+            "selectedLayer": 13,
             "viewCenter": {
-                "x": 652,
-                "y": 820
+                "x": 730.6666666666666,
+                "y": 792.6666666666667
             }
         },
         "stage2.tmx": {
@@ -43,19 +43,19 @@
                 24,
                 22
             ],
-            "scale": 3,
+            "scale": 1,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 960.1666666666666,
-                "y": 584.5
+                "x": 624,
+                "y": 689.5
             }
         },
         "stage3.tmx": {
             "scale": 0.75,
-            "selectedLayer": 10,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 976.6666666666665,
-                "y": 588.6666666666666
+                "x": 976,
+                "y": 588.6666666666667
             }
         },
         "stage4.tmx": {
@@ -67,15 +67,15 @@
             "selectedLayer": 7,
             "viewCenter": {
                 "x": 960,
-                "y": 952
+                "y": 952.3333333333333
             }
         },
         "test.tmx": {
             "scale": 0.4002864583333333,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 960.562097456249,
-                "y": 582.0831435820702
+                "x": 961.8112029145796,
+                "y": 583.3322490404007
             }
         },
         "test_tileset.tsx": {

@@ -3,6 +3,8 @@
 #include "../../include/entt.hpp"
 #include "../../include/raytmx.h"
 #include "../entities/entities.hpp"
+#include "../entities/projectile.hpp"
+
 
 void PlayerInputSystem(entt::registry &registry, float dt);
 void MovePlayer(entt::registry &registry, float dt, entt::entity entity);
