@@ -3,10 +3,6 @@
 #include "../components/player_stats.hpp"
 #include "../components/health_pickup.hpp"
 
-UpgradeBehavior::UpgradeBehavior(UpgradeUpdateFunction Update) {
-    this->Update = Update;
-}
-
 
 void SpawnUpgrades(entt::registry &registry){
     TraceLog(LOG_TRACE, "Entering function: SpawnUpgrades");
@@ -33,21 +29,3 @@ void DespawnUpgrades(entt::registry &registry){
     }
 }
 
-void UpdateUpgrades(entt::registry &registry, float dt){
-    TraceLog(LOG_TRACE, "Entering function: UpdateUpgrades");
-
-    auto view = registry.view<Upgrade, UpgradeBehavior, Transform, PhysicsObject, SpriteData>();
-    for (auto ent : view){
-
-        HealthUpgradeBehavior &behavior = registry.get<HealthUpgradeBehavior>(ent);
-        Transform &transform = registry.get<Transform>(ent);
-        PhysicsObject &physics = registry.get<PhysicsObject>(ent);
-
-
-        behavior.Update(registry, dt, ent);
-
-        // move
-        transform.translation.x += physics.velocity.x * dt;
-        transform.translation.y += physics.velocity.y * dt;
-    }
-}

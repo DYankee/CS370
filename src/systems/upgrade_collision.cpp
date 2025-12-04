@@ -20,10 +20,11 @@ registry.view<PlayerStats, PlayerUpgrades, Transform, PhysicsObject>().each(
 
     if (collisionX && collisionY) {
             
-
+        playerUpgrades.testUpgrade = true;
 
         registry.destroy(pickupEntity);
     }
+}
 }
 );  
 }

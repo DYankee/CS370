@@ -14,5 +14,5 @@
     }
 
     PlayerUpgrades::PlayerUpgrades(bool testUpgrade) {
-        this->testUpgrade = testUpgrade;
+        this->testUpgrade = false;
     }
