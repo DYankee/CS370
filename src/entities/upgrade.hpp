@@ -26,11 +26,6 @@ struct HealthUpgradeBehavior {
     HealthUpgradeBehavior(UpgradeUpdateFunction Update);
 };
 
-struct UpgradeBehavior {
-    UpgradeUpdateFunction Update;
-    UpgradeBehavior() = default;
-    UpgradeBehavior(UpgradeUpdateFunction Update);
-};
 
 // Functions
 void CreateHealthUpgrade(entt::registry &registry, Vector2 position);

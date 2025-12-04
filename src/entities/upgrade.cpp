@@ -6,14 +6,14 @@
 
 void CreateUpgrade(entt::registry &registry, Vector2 position) {
     TraceLog(LOG_TRACE, "Entering Function: CreateUpgrade");
-    TraceLog(LOG_INFO, "Creating Health Upgrade Entity");
+    TraceLog(LOG_INFO, "Creating Upgrade Entity");
 
     // add to the registry
     entt::entity upgradeEnt = registry.create();
 
 
-    HealthUpgrade healthComp;
-    registry.emplace<HealthUpgrade>(upgradeEnt, healthComp);
+    Upgrade upgrades;
+    registry.emplace<Upgrade>(upgradeEnt, upgrades);
 
     // add sprite
     SpriteData sprite = SpriteData(LoadTextures({{"Upgrade_Item", "assets/sprites/cow.png"}}), WHITE);
