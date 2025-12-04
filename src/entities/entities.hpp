@@ -10,5 +10,6 @@
 #include "health_upgrade.hpp"
 #include "projectile.hpp"
 #include "game_state.hpp"
+#include "jukebox.hpp"
 
 #endif // ENTITIES_HPP
