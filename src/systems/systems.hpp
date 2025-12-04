@@ -15,4 +15,5 @@
 #include "dialogue_system.hpp"
 #include "player_range_upgrade_collision.hpp"
 #include "range_upgrade_controller.hpp"
+#include "music_controller.hpp"
 #endif
