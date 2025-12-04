@@ -291,6 +291,11 @@ int main() {
     entt::entity gameState = registry.view<GameState>().front();
     GameScreen &currentScreen = registry.get<GameScreen>(gameState);
 
+    // Music setup
+    InitAudioDevice();
+    CreateJukebox(registry);
+    StartSong(registry, "title");
+    
     bool gameInitialized = false;
 
     // Main game loop
@@ -309,8 +314,8 @@ int main() {
             if (currentScreen != TITLE) {
                 // Stop gameplay music and restart title music if coming from gameplay
                 if (currentScreen == GAMEPLAY) {
-                    StopMusicStream(gameplayMusic);
-                    PlayMusicStream(titleMusic);
+                    StopAllMusic(registry);
+                    StartSong(registry, "title");
                 }
                 currentScreen = TITLE;
             }
@@ -377,8 +382,8 @@ int main() {
                 // Check if start button was clicked
                 if (btnAction) {
                     PlaySound(titleMooSound);
-                    StopMusicStream(titleMusic);
-                    PlayMusicStream(gameplayMusic);
+                    StopAllMusic(registry);
+                    StartSong(registry, "gameplay");
                     currentScreen = GAMEPLAY;
                 }
                 
