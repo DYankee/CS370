@@ -17,7 +17,7 @@ void SpawnUpgrades(entt::registry &registry){
 
         for (TmxObject obj : upgradeObjects) {
             TraceLog(LOG_INFO, "Creating upgrade at: %f,%f", float(obj.x), float(obj.y));
-            CreateUpgrade(registry, {float(obj.x), float(obj.y)});
+            CreateUpgrade(registry, obj);
         }
     });
 }

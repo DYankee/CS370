@@ -190,6 +190,9 @@
    <point/>
   </object>
   <object id="165" name="Upgrade" type="Upgrade" x="1414" y="854.606">
+   <properties>
+    <property name="Type" value="Upgrade"/>
+   </properties>
    <point/>
   </object>
   <object id="170" name="HealthUpgrade" x="1203.03" y="848.485">
