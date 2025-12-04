@@ -2,7 +2,7 @@
 
 
 // Function to create and setup a map entity
-void CreateMap(entt::registry &registry, std::string tmxFilePath, Music music) {
+void CreateMap(entt::registry &registry, std::string tmxFilePath) {
     TraceLog(LOG_TRACE, "Entering Function: CreateMap");
     TraceLog(LOG_INFO, "Loading TMX map: %s", tmxFilePath.c_str());
     
@@ -16,7 +16,6 @@ void CreateMap(entt::registry &registry, std::string tmxFilePath, Music music) {
     TmxMap map = *mapPtr;
     registry.emplace<Map>(mapEntity, Map());
     registry.emplace<TmxMap>(mapEntity, map);
-    registry.emplace<Music>(mapEntity, music);
 }
 
 
