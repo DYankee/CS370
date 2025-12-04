@@ -4,7 +4,7 @@
 #include "../entities/entities.hpp"
 #include "../include/raylib.h"
 
-void CreateUpgrade(entt::registry &registry, TmxObject UpgradeInfo) {
+void CreateUpgrade(entt::registry &registry, TmxObject upgradeInfo) {
     TraceLog(LOG_TRACE, "Entering Function: CreateUpgrade");
     TraceLog(LOG_INFO, "Creating Upgrade Entity");
 
@@ -21,15 +21,16 @@ void CreateUpgrade(entt::registry &registry, TmxObject UpgradeInfo) {
     sprite.SetTexture("Upgrade_Item");
     registry.emplace<SpriteData>(upgradeEnt, sprite);
 
-    Transform trans = Transform{{float(UpgradeInfo.x), float(UpgradeInfo.y), 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32}};
+    Transform trans = Transform{{float(upgradeInfo.x), float(upgradeInfo.y), 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32}};
     registry.emplace<Transform>(upgradeEnt, trans);
 
 
     PhysicsObject physics = PhysicsObject(1.0f, {0.0f, 0.0f});
     registry.emplace<PhysicsObject>(upgradeEnt, physics);
 
-    registry.emplace<Vector2>(upgradeEnt, Vector2{float(UpgradeInfo.x), float(UpgradeInfo.y)});
+    registry.emplace<Vector2>(upgradeEnt, Vector2{float(upgradeInfo.x), float(upgradeInfo.y)});
 
+    registry.emplace<TmxObject>(upgradeEnt, upgradeInfo);
 }
 
 void CreateHealthUpgrade(entt::registry &registry, Vector2 position) {
