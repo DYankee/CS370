@@ -10,7 +10,7 @@ struct Map{
 };
 
 // Function to create and setup a map entity
-void CreateMap(entt::registry &registry, std::string tmxFilePath, Music music);
+void CreateMap(entt::registry &registry, std::string tmxFilePath);
     
 // Function to update map state
 void UpdateMap(entt::registry &registry, float dt);
