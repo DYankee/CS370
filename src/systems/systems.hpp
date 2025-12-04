@@ -13,4 +13,6 @@
 #include "health_upgrade_controller.hpp"
 #include "projectile_manager.hpp"
 #include "dialogue_system.hpp"
+#include "player_range_upgrade_collision.hpp"
+#include "range_upgrade_controller.hpp"
 #endif

@@ -5,7 +5,7 @@
 void UpdateProjectiles(entt::registry &registry, float dt){
 
     registry.view<Transform, Vector3, ProjectileStats, Projectile>().each(
-        [dt, &registry](entt::entity projectile, Transform &pos, Vector3 &targetPos, ProjectileStats &stats) {
+        [dt, &registry](entt::entity projectile, Transform &pos, Vector3 &targetPos, ProjectileStats &stats, Projectile &proj) {
         
         // Track if the projectile should be destroyed
         bool markForDestruction = false;
@@ -35,7 +35,7 @@ void UpdateProjectiles(entt::registry &registry, float dt){
 
             // Check for player collision
             bool collision = CheckProjectilePlayerCollision(registry, projectile);
-            if (collision){
+            if (!proj.fromPlayer && collision){
                 ApplyProjectileDamage(registry, projectile);
             }
             //mark projectile for deletion
@@ -54,7 +54,7 @@ void UpdateProjectiles(entt::registry &registry, float dt){
 
             // Check for player collision
             collision = CheckProjectilePlayerCollision(registry, projectile);
-            if (collision){
+            if (!proj.fromPlayer && collision){
                 ApplyProjectileDamage(registry, projectile);
 
                 //mark projectile for deletion

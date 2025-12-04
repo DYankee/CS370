@@ -145,7 +145,7 @@ void CreatePlayer(entt::registry &registry) {
     bool isAttacking = false;
 
     // Add PlayerStats component to the entity
-    PlayerStats stats = PlayerStats(MAX_HEALTH, MAX_IFRAMES, SPEED, JUMP_STRENGTH, GRAVITY, jumpSound, isAttacking);
+    PlayerStats stats = PlayerStats(MAX_HEALTH, MAX_IFRAMES, SPEED, JUMP_STRENGTH, GRAVITY, jumpSound, isAttacking, false);
     registry.emplace<PlayerStats>(playerEnt, stats);
 
 
