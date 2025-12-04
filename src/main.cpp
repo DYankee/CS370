@@ -233,8 +233,6 @@ int main() {
 
 
 
-    // Load sound effects
-    Sound titleMooSound = LoadSound("assets/audio/titleMoo.mp3");
 
     // Load title texture
     Texture2D titleTexture = LoadTexture("assets/graphics/title/milksong_logo.png");
@@ -287,6 +285,11 @@ int main() {
 
     // Music setup
     InitAudioDevice();
+    
+    // Load sound effects
+    Sound titleMooSound = LoadSound("assets/audio/titleMoo.mp3");
+    
+    // Load music and start title track
     CreateJukebox(registry);
     StartSong(registry, "title");
     
