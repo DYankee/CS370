@@ -8,7 +8,6 @@
 
 
 void SpawnRangeUpgrades(entt::registry &registry);
-void DeSpawnRangeUpgrades(entt::registry &registry);
 void UpdateRangeUpgrades(entt::registry &registry, float dt);
 
 #endif

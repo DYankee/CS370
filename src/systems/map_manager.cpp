@@ -57,6 +57,8 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath) {
     });
     SpawnEnemies(registry);
     SpawnNPCs(registry);
+    SpawnHealthUpgrades(registry);
+    SpawnRangeUpgrades(registry);
 }
 
 // Check if the player has reached map boundaries to trigger a map change

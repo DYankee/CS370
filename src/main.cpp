@@ -15,8 +15,8 @@
 #include "systems/player_enemy_collision.hpp"
 #include "systems/health_upgrade_controller.hpp"
 #include "systems/player_health_upgrade_collision.hpp"
-#include "systems/upgrade_controller.hpp"
-#include "systems/upgrade_collision.hpp"
+#include "systems/range_upgrade_controller.hpp"
+#include "systems/player_range_upgrade_collision.hpp"
 
 using namespace std;
 
@@ -34,6 +34,7 @@ void Update(entt::registry &registry, float dt) {
     UpdateHealthUpgrades(registry, dt);
     UpdateRangeUpgrades(registry, dt);
     PlayerHealthCollisionSystem(registry, dt);
+    PlayerRangeCollisionSystem(registry, dt);
     UpdateDialogue(registry, dt);
 };
 
@@ -94,7 +95,7 @@ void Render(entt::registry &registry, float dt) {
             });
 
             // Draw Projectiles
-            registry.view<SpriteData, Transform, Projectile>().each([](SpriteData &sprite, Transform &pos){
+            registry.view<SpriteData, Transform, Projectile>().each([](SpriteData &sprite, Transform &pos, Projectile &proj){
                 Rectangle dstRec = {pos.translation.x, pos.translation.y, pos.scale.x, pos.scale.y};
                 Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
                 DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, pos.rotation.x, sprite.color);
@@ -108,23 +109,22 @@ void Render(entt::registry &registry, float dt) {
             });
 
             // Draw Health Upgrades
-    TraceLog(LOG_TRACE, "Drawing Health Upgrades");
-    registry.view<SpriteData, Transform, HealthUpgrade>().each([](SpriteData &sprite, Transform &transform){
-        Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
-        Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
-        TraceLog(LOG_INFO, "Drawing Health Upgrade at: %f,%f", dstRec.x, dstRec.y);
-        TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
-        DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
-    });
-
-    TraceLog(LOG_TRACE, "Drawing Upgrades");
-        registry.view<SpriteData, Transform, Upgrade>().each([](SpriteData &sprite, Transform &transform){
-            Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
-            Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
-            TraceLog(LOG_INFO, "Drawing Upgrade at: %f,%f", dstRec.x, dstRec.y);
-            DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
-        });
-
+            TraceLog(LOG_TRACE, "Drawing Health Upgrades");
+            registry.view<SpriteData, Transform, HealthUpgrade>().each([](SpriteData &sprite, Transform &transform){
+                Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
+                Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
+                TraceLog(LOG_INFO, "Drawing Health Upgrade at: %f,%f", dstRec.x, dstRec.y);
+                TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
+                DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
+            });
+            TraceLog(LOG_TRACE, "Drawing Range Upgrades");
+            registry.view<SpriteData, Transform, RangeUpgrade>().each([](SpriteData &sprite, Transform &transform){
+                Rectangle dstRec = {transform.translation.x, transform.translation.y, transform.scale.x, transform.scale.y};
+                Vector2 origin = {0.0f, 0.0f}; // Top-left corner as origin
+                TraceLog(LOG_INFO, "Drawing Range Upgrade at: %f,%f", dstRec.x, dstRec.y);
+                TraceLog(LOG_INFO, "Width/Height: %f,%f", dstRec.width, dstRec.height);
+                DrawTexturePro(sprite.curentTexture, sprite.srcRec, dstRec, origin, transform.rotation.x, sprite.color);
+            });
 
                 
                 // Draw text
@@ -351,8 +351,7 @@ int main() {
                         SpawnNPCs(registry);
 
                         SpawnHealthUpgrades(registry);
-
-                        SpawnUpgrades(registry);
+                        SpawnRangeUpgrades(registry);
                         
                         gameInitialized = true;
                     }

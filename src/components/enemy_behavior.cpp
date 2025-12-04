@@ -167,7 +167,7 @@ void RangedEnemyUpdate(entt::registry & registry, float dt, entt::entity enemy){
         Transform startPos;
         startPos.translation = CalculateWeaponOffset(weapon.offset, pos.translation, stats);
         
-        CreateProjectile(registry, startPos, playerPos.translation, ProjectileStats{100,1});
+        CreateProjectile(registry, startPos, playerPos.translation, ProjectileStats{100,1}, false);
         stats.attackCooldownTimer = stats.attackCooldown;
     } 
     else {
