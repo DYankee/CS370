@@ -11,5 +11,6 @@
 #include "projectile.hpp"
 #include "game_state.hpp"
 #include "range_upgrade.hpp"
+#include "jukebox.hpp"
 
 #endif // ENTITIES_HPP
