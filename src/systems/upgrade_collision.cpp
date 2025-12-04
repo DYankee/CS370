@@ -1,15 +1,15 @@
-#include "player_health_upgrade_collision.hpp"
+#include "upgrade_collision.hpp"
 #include "../components/player_stats.hpp"
 #include "../entities/upgrade.hpp"
 #include "../include/entt.hpp"
 #include "../include/raylib.h"
 
-void PlayerHealthCollisionSystem(entt::registry &registry, float dt) {
-registry.view<PlayerStats, Transform, PhysicsObject>().each(
-[&registry](auto playerEntity, PlayerStats &playerStats, Transform &playerTransform, PhysicsObject &physics) {
+void UpgradeCollisionSystem(entt::registry &registry, float dt) {
+registry.view<PlayerStats, PlayerUpgrades, Transform, PhysicsObject>().each(
+[&registry](auto playerEntity, PlayerStats &playerStats, PlayerUpgrades &playerUpgrades, Transform &playerTransform, PhysicsObject &physics) {
 
-        auto pickupView = registry.view<HealthUpgrade, Transform>();  
-       for (auto pickupEntity : pickupView) {
+    auto pickupView = registry.view<Upgrade, Transform, TmxObject>();  
+    for (auto pickupEntity : pickupView) {
     auto &pickupTransform = pickupView.get<Transform>(pickupEntity);
 
     bool collisionX = playerTransform.translation.x + playerTransform.scale.x > pickupTransform.translation.x &&
@@ -18,18 +18,18 @@ registry.view<PlayerStats, Transform, PhysicsObject>().each(
     bool collisionY = playerTransform.translation.y + playerTransform.scale.y > pickupTransform.translation.y &&
                       playerTransform.translation.y < pickupTransform.translation.y + pickupTransform.scale.y;
 
-    if (collisionX && collisionY) {
- 
+    auto &info = pickupView.get<TmxObject>(pickupEntity);
+    std::string name = info.name;
 
-        playerStats.maxHealth += 1;
-        playerStats.health = playerStats.maxHealth;
+    if (collisionX && collisionY) {
+        
+        if(name == "TestUpgrade") {
+            playerUpgrades.testUpgrade = true;
+        }
 
         registry.destroy(pickupEntity);
     }
 }
-
-    }  
+}
 );  
-
-
 }

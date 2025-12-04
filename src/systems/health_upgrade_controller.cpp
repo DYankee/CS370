@@ -1,5 +1,5 @@
 #include "health_upgrade_controller.hpp"
-#include "../entities/health_upgrade.hpp"
+#include "../entities/upgrade.hpp"
 #include "../components/player_stats.hpp"
 #include "../components/health_pickup.hpp"
 

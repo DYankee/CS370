@@ -17,7 +17,7 @@ set(MILK_SOURCES
     entities/map.cpp
     entities/npc.cpp
     entities/player.cpp
-    entities/health_upgrade.cpp
+    entities/upgrade.cpp
     entities/projectile.cpp
     entities/game_state.cpp
     entities/range_upgrade.cpp
@@ -36,6 +36,8 @@ set(MILK_SOURCES
     systems/player_health_upgrade_collision.cpp
     systems/projectile_manager.cpp
     systems/dialogue_system.cpp
+    systems/upgrade_collision.cpp
+    systems/upgrade_controller.cpp
     systems/range_upgrade_controller.cpp
     systems/player_range_upgrade_collision.cpp
     systems/music_controller.cpp

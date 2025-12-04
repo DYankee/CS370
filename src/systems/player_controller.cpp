@@ -18,6 +18,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
     PhysicsObject &physics = registry.get<PhysicsObject>(player);
     SpriteData &sprite = registry.get<SpriteData>(player);
     PlayerStats &stats = registry.get<PlayerStats>(player);
+    PlayerUpgrades &upgrades = registry.get<PlayerUpgrades>(player);
     Animation &animation = registry.get<Animation>(player);
         
     static float attackTimer;
@@ -175,6 +176,18 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
             animation.PlaySequence("idleLeft");
         }
     }
+
+    //Add actions based on upgrades
+        if(IsKeyDown(KEY_O) && upgrades.testUpgrade) {
+            TraceLog(LOG_INFO, "Test upgrade: active");
+            sprite.SetTexture("cowR");
+        }
+        else if(IsKeyDown(KEY_O) && !upgrades.testUpgrade) {
+            TraceLog(LOG_INFO, "nope");
+            sprite.SetTexture("cowL");
+        }
+
+
         
     // Update animation
     animation.Update(dt);

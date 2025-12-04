@@ -1,8 +1,9 @@
 {
-    "activeFile": "stage1.tmx",
+    "activeFile": "",
     "expandedProjectPaths": [
         "."
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "Foliage.tsx": {
             "scaleInDock": 1,
@@ -51,6 +52,9 @@
             }
         },
         "stage3.tmx": {
+            "expandedGroupLayers": [
+                5
+            ],
             "scale": 0.75,
             "selectedLayer": 9,
             "viewCenter": {
@@ -86,9 +90,6 @@
     },
     "last.imagePath": "C:/Users/kentp/CS370/assets/graphics/tileset",
     "openFiles": [
-        "stage2.tmx",
-        "stage3.tmx",
-        "stage1.tmx"
     ],
     "project": "cs370.tiled-project",
     "recentFiles": [
