@@ -44,8 +44,8 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath) {
             // Reset player spawn pause timer when loading into new stage
             if (registry.all_of<PlayerStats>(playerEnt)) {
                 PlayerStats &stats = registry.get<PlayerStats>(playerEnt);
-                stats.spawnPauseTimer = 1.0f;
-                TraceLog(LOG_INFO, "Player spawn pause timer reset to 1.0s");
+                stats.spawnPauseTimer = 0.5f;
+                TraceLog(LOG_INFO, "Player spawn pause timer reset to 0.5s");
             }
 
             TraceLog(LOG_INFO, "Player new location: %f,%f", transform.translation.x, transform.translation.y);
