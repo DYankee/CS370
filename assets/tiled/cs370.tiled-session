@@ -26,52 +26,53 @@
             }
         },
         "stage1.tmx": {
+            "expandedGroupLayers": [
+                27
+            ],
             "expandedObjectLayers": [
                 24
             ],
-            "scale": 0.75,
-            "selectedLayer": 13,
+            "scale": 1,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 730.6666666666666,
-                "y": 792.6666666666667
+                "x": 704.5,
+                "y": 753
             }
         },
         "stage2.tmx": {
             "expandedGroupLayers": [
-                5
+                27
             ],
             "expandedObjectLayers": [
-                24,
-                22
+                24
             ],
-            "scale": 1,
-            "selectedLayer": 7,
+            "scale": 0.5,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 624,
-                "y": 689.5
+                "x": 1039,
+                "y": 638
             }
         },
         "stage3.tmx": {
-            "expandedGroupLayers": [
-                5
+            "expandedObjectLayers": [
+                24
             ],
-            "scale": 0.75,
-            "selectedLayer": 9,
+            "scale": 0.5,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 976,
-                "y": 588.6666666666667
+                "x": 913,
+                "y": 762
             }
         },
         "stage4.tmx": {
             "expandedObjectLayers": [
-                24,
-                22
+                24
             ],
-            "scale": 1.5,
-            "selectedLayer": 7,
+            "scale": 0.5,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 960,
-                "y": 952.3333333333333
+                "x": 937,
+                "y": 760
             }
         },
         "test.tmx": {
