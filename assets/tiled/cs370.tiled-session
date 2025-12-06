@@ -1,5 +1,5 @@
 {
-    "activeFile": "stage3.tmx",
+    "activeFile": "stage6.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -35,8 +35,8 @@
             "scale": 1,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 1470.5,
-                "y": 741
+                "x": 960.5,
+                "y": 584.5
             }
         },
         "stage2.tmx": {
@@ -46,11 +46,11 @@
             "expandedObjectLayers": [
                 24
             ],
-            "scale": 2,
+            "scale": 0.5,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 378.25,
-                "y": 726
+                "x": 1081,
+                "y": 628
             }
         },
         "stage3.tmx": {
@@ -60,8 +60,8 @@
             "scale": 0.5,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 747,
-                "y": 732
+                "x": 927,
+                "y": 684
             }
         },
         "stage4.tmx": {
@@ -76,25 +76,25 @@
             "expandedGroupLayers": [
                 27
             ],
-            "scale": 1,
-            "selectedLayer": 13,
+            "expandedObjectLayers": [
+                25
+            ],
+            "scale": 0.5,
+            "selectedLayer": 14,
             "viewCenter": {
-                "x": 1496.5,
-                "y": 517
+                "x": 977,
+                "y": 589
             }
         },
         "stage6.tmx": {
             "expandedGroupLayers": [
                 5
             ],
-            "expandedObjectLayers": [
-                24
-            ],
             "scale": 0.75,
-            "selectedLayer": 9,
+            "selectedLayer": 14,
             "viewCenter": {
-                "x": 1682,
-                "y": 693.3333333333334
+                "x": 1074,
+                "y": 837.3333333333333
             }
         },
         "test.tmx": {
@@ -115,13 +115,19 @@
     "openFiles": [
         "stage1.tmx",
         "stage2.tmx",
-        "stage3.tmx"
+        "stage3.tmx",
+        "stage4.tmx",
+        "stage5.tmx",
+        "stage6.tmx"
     ],
     "project": "cs370.tiled-project",
     "recentFiles": [
         "stage1.tmx",
         "stage2.tmx",
         "stage3.tmx",
+        "stage4.tmx",
+        "stage5.tmx",
+        "stage6.tmx",
         "Foliage.tsx",
         "test_tileset.tsx"
     ],
