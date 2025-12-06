@@ -1,5 +1,5 @@
 {
-    "activeFile": "",
+    "activeFile": "stage3.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -33,10 +33,10 @@
                 24
             ],
             "scale": 1,
-            "selectedLayer": 6,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 704.5,
-                "y": 753
+                "x": 1470.5,
+                "y": 741
             }
         },
         "stage2.tmx": {
@@ -46,11 +46,11 @@
             "expandedObjectLayers": [
                 24
             ],
-            "scale": 0.5,
+            "scale": 2,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 1039,
-                "y": 638
+                "x": 378.25,
+                "y": 726
             }
         },
         "stage3.tmx": {
@@ -58,21 +58,43 @@
                 24
             ],
             "scale": 0.5,
-            "selectedLayer": 8,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 913,
-                "y": 762
+                "x": 747,
+                "y": 732
             }
         },
         "stage4.tmx": {
-            "expandedObjectLayers": [
-                24
-            ],
             "scale": 0.5,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 937,
-                "y": 760
+                "x": 831,
+                "y": 538
+            }
+        },
+        "stage5.tmx": {
+            "expandedGroupLayers": [
+                27
+            ],
+            "scale": 1,
+            "selectedLayer": 13,
+            "viewCenter": {
+                "x": 1496.5,
+                "y": 517
+            }
+        },
+        "stage6.tmx": {
+            "expandedGroupLayers": [
+                5
+            ],
+            "expandedObjectLayers": [
+                24
+            ],
+            "scale": 0.75,
+            "selectedLayer": 9,
+            "viewCenter": {
+                "x": 1682,
+                "y": 693.3333333333334
             }
         },
         "test.tmx": {
@@ -91,12 +113,15 @@
     },
     "last.imagePath": "C:/Users/kentp/CS370/assets/graphics/tileset",
     "openFiles": [
+        "stage1.tmx",
+        "stage2.tmx",
+        "stage3.tmx"
     ],
     "project": "cs370.tiled-project",
     "recentFiles": [
+        "stage1.tmx",
         "stage2.tmx",
         "stage3.tmx",
-        "stage1.tmx",
         "Foliage.tsx",
         "test_tileset.tsx"
     ],
