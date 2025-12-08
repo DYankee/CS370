@@ -21,8 +21,9 @@ struct PlayerStats {
 
 struct PlayerUpgrades {
     bool testUpgrade;
+    bool doubleJumpUpgrade;
 
-    PlayerUpgrades(bool testUpgrade);
+    PlayerUpgrades(bool testUpgrade, bool doubleJumpUpgrade);
 };
 
 #endif

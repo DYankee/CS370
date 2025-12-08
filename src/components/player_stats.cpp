@@ -13,6 +13,7 @@
         this->isAttacking = isAttacking;
     }
 
-    PlayerUpgrades::PlayerUpgrades(bool testUpgrade) {
+    PlayerUpgrades::PlayerUpgrades(bool testUpgrade, bool doubleJumpUpgrade) {
         this->testUpgrade = false;
+        this->doubleJumpUpgrade = false;
     }

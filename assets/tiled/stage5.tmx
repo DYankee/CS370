@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="32" nextobjectid="154">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="32" nextobjectid="155">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <tileset firstgid="1026" source="test_tileset.tsx"/>
@@ -177,7 +177,7 @@
    </properties>
    <point/>
   </object>
-  <object id="140" name="Alien" type="Enemy" x="1214.67" y="765.333">
+  <object id="140" name="Alien" type="Enemy" x="1242.67" y="733.333">
    <properties>
     <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
@@ -188,7 +188,7 @@
    </properties>
    <point/>
   </object>
-  <object id="141" name="Alien" type="Enemy" x="377.333" y="718.667">
+  <object id="141" name="Alien" type="Enemy" x="399.333" y="700.667">
    <properties>
     <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
@@ -265,7 +265,7 @@
    </properties>
    <point/>
   </object>
-  <object id="148" name="Alien" type="Enemy" x="74.6667" y="561.333">
+  <object id="148" name="Alien" type="Enemy" x="84.6667" y="523.333">
    <properties>
     <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
@@ -276,7 +276,7 @@
    </properties>
    <point/>
   </object>
-  <object id="149" name="Alien" type="Enemy" x="133.333" y="569.333">
+  <object id="149" name="Alien" type="Enemy" x="143.333" y="525.333">
    <properties>
     <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
@@ -317,6 +317,12 @@
     <property name="Health" type="float" value="1"/>
     <property name="MoveSpeed" type="float" value="50"/>
     <property name="Type" value="Alien"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="154" name="DoubleJumpUpgrade" type="Upgrade" x="428" y="902">
+   <properties>
+    <property name="Type" value="Upgrade"/>
    </properties>
    <point/>
   </object>
