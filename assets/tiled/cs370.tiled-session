@@ -33,10 +33,10 @@
                 24
             ],
             "scale": 1,
-            "selectedLayer": 10,
+            "selectedLayer": 13,
             "viewCenter": {
-                "x": 960.5,
-                "y": 584.5
+                "x": 1344,
+                "y": 630
             }
         },
         "stage2.tmx": {
@@ -44,12 +44,13 @@
                 27
             ],
             "expandedObjectLayers": [
+                22,
                 24
             ],
             "scale": 0.5,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 1081,
+                "x": 1080,
                 "y": 628
             }
         },
@@ -58,9 +59,9 @@
                 24
             ],
             "scale": 0.5,
-            "selectedLayer": 6,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 927,
+                "x": 926,
                 "y": 684
             }
         },
@@ -68,7 +69,7 @@
             "scale": 0.5,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 831,
+                "x": 830,
                 "y": 538
             }
         },
@@ -76,14 +77,11 @@
             "expandedGroupLayers": [
                 27
             ],
-            "expandedObjectLayers": [
-                25
-            ],
             "scale": 0.5,
             "selectedLayer": 14,
             "viewCenter": {
-                "x": 977,
-                "y": 589
+                "x": 976,
+                "y": 588
             }
         },
         "stage6.tmx": {
@@ -93,8 +91,8 @@
             "scale": 0.75,
             "selectedLayer": 14,
             "viewCenter": {
-                "x": 1074,
-                "y": 837.3333333333333
+                "x": 1354.6666666666667,
+                "y": 962.6666666666666
             }
         },
         "test.tmx": {

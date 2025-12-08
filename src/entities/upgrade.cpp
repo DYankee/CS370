@@ -16,9 +16,12 @@ void CreateUpgrade(entt::registry &registry, TmxObject upgradeInfo) {
     registry.emplace<Upgrade>(upgradeEnt, upgrades);
 
     // add sprite
-    SpriteData sprite = SpriteData(LoadTextures({{"Upgrade_Item", "assets/sprites/cow.png"}}), WHITE);
-                                                                    //placeholder
-    sprite.SetTexture("Upgrade_Item");
+    SpriteData sprite = SpriteData(LoadTextures({
+                                {"TestUpgrade", "assets/sprites/powerups/testUpgrade.png"},
+                                {"DoubleJumpUpgrade", "assets/sprites/powerups/doubleJumpUpgrade.png"}
+                                }), WHITE);
+                                                                    
+    sprite.SetTexture(upgradeInfo.name);
     registry.emplace<SpriteData>(upgradeEnt, sprite);
 
     Transform trans = Transform{{float(upgradeInfo.x), float(upgradeInfo.y), 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}, {32, 32}};

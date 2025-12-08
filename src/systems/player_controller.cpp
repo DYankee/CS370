@@ -1,5 +1,6 @@
 #include "player_controller.hpp"
 #include <cmath>
+bool doubleJumping = false;
 // Player movement system
 void PlayerInputSystem(entt::registry &registry, float dt) {
     TraceLog(LOG_TRACE, "Entering Function: PlayerInputSystem");
@@ -44,8 +45,7 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
         
     // Check if currently jumping (jump animation is playing and not finished)
     bool isJumping = (animation.currentSequence == "jumpRight" || animation.currentSequence == "jumpLeft") && !animation.IsFinished();
-        
-        
+
     // Check if attacking and decrease timer
     if (stats.isAttacking) {
         attackTimer -= dt;
@@ -187,7 +187,6 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
             sprite.SetTexture("cowL");
         }
 
-
         
     // Update animation
     animation.Update(dt);
@@ -200,6 +199,24 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
             &map, map.layers, map.layersLength, testRec, &collidedObj
         );
         if (onGround) {
+            physics.velocity.y += stats.jumpStrength;
+            physics.velocity.x = 0;
+            PlaySound(stats.jumpSound);
+            // Play jump animation based on current direction
+            if (animation.currentSequence == "walkLeft" || animation.currentSequence == "idleLeft" || animation.currentSequence == "jumpLeft") {
+                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowLJump");
+                sprite.SetTexture("cowLJump");
+                animation.PlaySequence("jumpLeft");
+            } else {
+                TraceLog(LOG_INFO, "Setting cow sprite texture to: cowRJump");
+                sprite.SetTexture("cowRJump");
+                animation.PlaySequence("jumpRight");
+            }
+            doubleJumping = false;
+        }
+        else if(!onGround && !doubleJumping && upgrades.doubleJumpUpgrade) {
+            // Allow double jump if double jump upgrade is active
+            doubleJumping = true;
             physics.velocity.y += stats.jumpStrength;
             physics.velocity.x = 0;
             PlaySound(stats.jumpSound);

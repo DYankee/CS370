@@ -26,6 +26,9 @@ registry.view<PlayerStats, PlayerUpgrades, Transform, PhysicsObject>().each(
         if(name == "TestUpgrade") {
             playerUpgrades.testUpgrade = true;
         }
+        else if(name == "DoubleJumpUpgrade") {
+            playerUpgrades.doubleJumpUpgrade = true;
+        }
 
         registry.destroy(pickupEntity);
     }
