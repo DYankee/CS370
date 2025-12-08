@@ -29,7 +29,7 @@ struct PlayerUpgrades {
 struct PlayerUpgrades {
     bool testUpgrade;
 
-    PlayerUpgrades(bool testUpgrade);
+    PlayerUpgrades(bool testUpgrade, bool doubleJumpUpgrade);
 };
 
 #endif

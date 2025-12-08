@@ -325,7 +325,6 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
             sprite.SetTexture("cowL");
         }
 
-
         
     // Update animation
     animation.Update(dt);
