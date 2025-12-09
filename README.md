@@ -1,4 +1,4 @@
-# Milksong	
+# <span style="color: white;">Milksong</span>
 
 <br>
 <img src="assets/graphics/readme/title.png" alt="Title" width="80%">
@@ -19,15 +19,20 @@ $0.99 | Add to cart
 
 <br>
 
-### Recent Events & Announcements
+### <span style="color: cyan;">Recent Events & Announcements</span>
+
 ---
 
 <img src="assets/graphics/readme/santa.png" alt="Events" width="20%"> 
+<p>
+<p><span style="color: gold;">NEWS</span>
 <p>Spike 3 is complete for the holidays! 
+<p><sub>Thurs, December 11, 2025</sub>
 
 <br>
 
-### Reviews
+### <span style="color: cyan;">Reviews</span>
+
 ---
 
 > "Pretty darn <em>amoozing</em>."
@@ -46,38 +51,46 @@ $0.99 | Add to cart
 <br>
 <br>
 
-### About Game
+### <span style="color: cyan;">About Game</span>
+
 ---
 
-Milksong is a 2D action platformer
+What if we made Silksong but it was even more of an indie game?
 
 ![About Game](assets/graphics/readme/aboutgame.gif)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Milk Song is a 2D action platformer where you play as a cow trying to get revenge on the farmers who treated them like cattle.
 
 <br>
 
-### Game Features
+### <span style="color: cyan;">Game Features</span>
+
 ---
 
 ![Features](assets/graphics/readme/features.gif)
 
 - <strong>Explore Levels</strong>
   <p>Classic side-scrolling with player movement and jumping. Traverse each stage and progress through the narrative of Milksong, through interacting with the environment and obstacles that are present.
- 
+  <P>
+
 - <strong>Fight and Defeat Enemies</strong>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  <p>Lash out at your foes and strike them down with attacks.
+  <P>
 
 - <strong>Interact with NPCs</strong>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  <p>Encounter several friendly NPCs on your quest to freedom from the farm, and converse with your fellow animals along the way.
+  <P>
 
 - <strong>Obtain and Use Powerups</strong>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  
-- <strong>Art and Animations</strong>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  <p>Utilize unique player upgrades hidden throughout the levels which provide special gameplay enhancements.
+  <P>
 
-- <strong>Totally Original (Not) Music</strong>
-  <p>Milksong's exsquisite soundtrack is graciously made by the composers of existing titles, Stardew Valley, Animal Crossing: New Horizons, and Dark Souls
+- <strong>Art and Animations</strong>
+  <p>Rich with a plethora of original pixel art and several animations.
+  <P>
+
+- <strong>Totally Original (NOT) Music</strong>
+  <p>Milksong's exsquisite soundtrack is graciously made by the composers of existing titles: Stardew Valley, Animal Crossing: New Horizons, and etc.
+  <p>
 
 <br>
