@@ -32,7 +32,7 @@ void PlayerEnemyCollisionSystem(entt::registry &registry, float dt) {
                             return;
                         }
                         // Else take damage
-                        else{
+                        else if (playerStats.iFrames <= 0) {
                     
                         playerStats.health -= static_cast<int>(enemyStats.dmg);
                         playerStats.iFrames = playerStats.maxIFrames;

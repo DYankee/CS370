@@ -18,7 +18,7 @@ set(TEST_ASSET_DIR ${PROJECT_SOURCE_DIR}/assets)
 FetchContent_Declare(
   GoogleTest
   GIT_REPOSITORY https://github.com/google/googletest
-  GIT_TAG main
+  GIT_TAG v1.15.2
 )
 FetchContent_MakeAvailable(GoogleTest)
 include(GoogleTest)
