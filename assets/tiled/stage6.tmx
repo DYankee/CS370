@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="31" nextobjectid="159">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="31" nextobjectid="162">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <tileset firstgid="1026" source="test_tileset.tsx"/>
@@ -216,6 +216,34 @@
    <point/>
   </object>
   <object id="158" name="HealthUpgrade" type="HealthUpgrade" x="730" y="846.667">
+   <point/>
+  </object>
+  <object id="159" name="Peggy" type="HatPig" x="1021.33" y="930.667">
+   <properties>
+    <property name="Type" value="HatPig"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="160" name="Alien" type="Enemy" x="364" y="682.667">
+   <properties>
+    <property name="AttackCooldown" type="float" value="4"/>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="1"/>
+    <property name="MoveSpeed" type="float" value="0"/>
+    <property name="Type" value="Alien"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="161" name="Alien" type="Enemy" x="1513.33" y="692">
+   <properties>
+    <property name="AttackCooldown" type="float" value="4"/>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="1"/>
+    <property name="MoveSpeed" type="float" value="0"/>
+    <property name="Type" value="Alien"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
