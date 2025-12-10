@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="32" nextobjectid="155">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="120" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="32" nextobjectid="160">
  <tileset firstgid="1" source="maintileset.tsx"/>
  <tileset firstgid="1025" source="SpikesNew.tsx"/>
  <tileset firstgid="1026" source="test_tileset.tsx"/>
@@ -113,11 +113,7 @@
 198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198,198
 </data>
  </layer>
- <objectgroup id="25" name="HealthUpgrades">
-  <object id="153" name="HealthUpgrade" type="HealthUpgrade" x="566" y="408">
-   <point/>
-  </object>
- </objectgroup>
+ <objectgroup id="25" name="HealthUpgrades"/>
  <objectgroup id="24" name="Entities">
   <object id="112" name="Player" x="62.4452" y="907.843">
    <point/>
@@ -221,13 +217,13 @@
    </properties>
    <point/>
   </object>
-  <object id="144" name="Alien" type="Enemy" x="688" y="852">
+  <object id="144" name="Alien" type="Enemy" x="632" y="846">
    <properties>
     <property name="AttackCooldown" type="float" value="4"/>
     <property name="DMG" type="float" value="1"/>
     <property name="Direction" type="float" value="-1"/>
     <property name="Health" type="float" value="1"/>
-    <property name="MoveSpeed" type="float" value="50"/>
+    <property name="MoveSpeed" type="float" value="0"/>
     <property name="Type" value="Alien"/>
    </properties>
    <point/>
@@ -320,7 +316,51 @@
    </properties>
    <point/>
   </object>
-  <object id="154" name="DoubleJumpUpgrade" type="Upgrade" x="428" y="902">
+  <object id="153" name="HealthUpgrade" type="HealthUpgrade" x="926" y="282">
+   <point/>
+  </object>
+  <object id="155" name="Sheep" type="Sheep" x="1158" y="948">
+   <properties>
+    <property name="DMG" value="0.0"/>
+    <property name="Direction" value="-1.0"/>
+    <property name="Health" value="1.0"/>
+    <property name="MoveSpeed" value="0.0"/>
+    <property name="Type" value="Sheep"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="156" name="Sally" type="Sheep" x="1214" y="942">
+   <properties>
+    <property name="DMG" value="0.0"/>
+    <property name="Direction" value="-1.0"/>
+    <property name="Health" value="1.0"/>
+    <property name="MoveSpeed" value="0.0"/>
+    <property name="Type" value="Sheep"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="157" name="Sheep" type="Sheep" x="1278" y="948">
+   <properties>
+    <property name="DMG" value="0.0"/>
+    <property name="Direction" value="-1.0"/>
+    <property name="Health" value="1.0"/>
+    <property name="MoveSpeed" value="0.0"/>
+    <property name="Type" value="Sheep"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="159" name="Alien" type="Enemy" x="1696" y="784">
+   <properties>
+    <property name="AttackCooldown" type="float" value="4"/>
+    <property name="DMG" type="float" value="1"/>
+    <property name="Direction" type="float" value="-1"/>
+    <property name="Health" type="float" value="1"/>
+    <property name="MoveSpeed" type="float" value="0"/>
+    <property name="Type" value="Alien"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="158" name="DoubleJumpUpgrade" type="Upgrade" x="718" y="826">
    <properties>
     <property name="Type" value="Upgrade"/>
    </properties>

@@ -140,7 +140,7 @@ void CreatePlayer(entt::registry &registry) {
 
     // Load jump sound
     Sound jumpSound = LoadSound("assets/audio/jumpMoo.mp3");
-    SetSoundVolume(jumpSound, 0.5f);
+    SetSoundVolume(jumpSound, 0.2f);
     // load bool for isAttacking
     bool isAttacking = false;
 

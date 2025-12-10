@@ -8,6 +8,7 @@
 
 
 void SpawnHealthUpgrades(entt::registry &registry);
+void DeSpawnHealthUpgrades(entt::registry &registry);
 void UpdateHealthUpgrades(entt::registry &registry, float dt);
 
 #endif

@@ -35,8 +35,8 @@
             "scale": 1,
             "selectedLayer": 13,
             "viewCenter": {
-                "x": 1344,
-                "y": 630
+                "x": 787.5,
+                "y": 783
             }
         },
         "stage2.tmx": {
@@ -44,14 +44,14 @@
                 27
             ],
             "expandedObjectLayers": [
-                22,
-                24
+                24,
+                22
             ],
             "scale": 0.5,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 1080,
-                "y": 628
+                "x": 463,
+                "y": 578
             }
         },
         "stage3.tmx": {
@@ -61,16 +61,16 @@
             "scale": 0.5,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 926,
-                "y": 684
+                "x": 887,
+                "y": 656
             }
         },
         "stage4.tmx": {
             "scale": 0.5,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 830,
-                "y": 538
+                "x": 951,
+                "y": 676
             }
         },
         "stage5.tmx": {
@@ -80,8 +80,8 @@
             "scale": 0.5,
             "selectedLayer": 14,
             "viewCenter": {
-                "x": 976,
-                "y": 588
+                "x": 653,
+                "y": 614
             }
         },
         "stage6.tmx": {
@@ -91,8 +91,8 @@
             "scale": 0.75,
             "selectedLayer": 14,
             "viewCenter": {
-                "x": 1354.6666666666667,
-                "y": 962.6666666666666
+                "x": 1360.6666666666665,
+                "y": 729.3333333333334
             }
         },
         "test.tmx": {
@@ -120,11 +120,11 @@
     ],
     "project": "cs370.tiled-project",
     "recentFiles": [
+        "stage5.tmx",
         "stage1.tmx",
         "stage2.tmx",
         "stage3.tmx",
         "stage4.tmx",
-        "stage5.tmx",
         "stage6.tmx",
         "Foliage.tsx",
         "test_tileset.tsx"
