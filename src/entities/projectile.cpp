@@ -27,21 +27,24 @@ void CreateProjectile(entt:: registry& registry, Transform startPos, Vector3 tar
     else if (fromPlayer){
         sprite.SetTexture("PlayerProjectile");
     }
-        Vector3 vec;
-       if (fromPlayer) {
-        vec.x = targetPos.x - startPos.translation.x;
-        vec.y = targetPos.y - startPos.translation.y;
-        vec.z = targetPos.z - startPos.translation.z;
+          Vector3 vec;
+if (fromPlayer) {
+    vec.x = targetPos.x - startPos.translation.x;
+    vec.y = targetPos.y - startPos.translation.y;
+    vec.z = 0;
 
-        float length = sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
-        if (length != 0) {
-            vec.x /= length;
-            vec.y /= length;
-            vec.z /= length;
-        }
-    } else {
-        vec = targetPos;
+    float length = sqrt(vec.x * vec.x + vec.y * vec.y);
+    if (length != 0) {
+        vec.x /= length;
+        vec.y /= length;
     }
+
+    const float projectileSpeed = 800.0f;
+    vec.x *= projectileSpeed;
+    vec.y *= projectileSpeed;
+} else {
+    vec = targetPos;
+}
     // Add SpriteData component to the entity
     registry.emplace<SpriteData>(projectile, sprite);
     

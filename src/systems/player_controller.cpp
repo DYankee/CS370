@@ -109,26 +109,35 @@ void PlayerInputSystem(entt::registry &registry, float dt) {
     static float shootCooldown = 0.0f;
     shootCooldown -= dt;
 
-    if ((IsMouseButtonPressed(MOUSE_RIGHT_BUTTON) || IsKeyPressed(KEY_Q)) && shootCooldown <= 0.0f && stats.hasRanged) {
-        shootCooldown = 0.5f; // cooldown in seconds
-        Vector2 mousePos = GetMousePosition();
-        Transform &playerTransform = registry.get<Transform>(player);
-        Vector2 playerPos = { playerTransform.translation.x + playerTransform.scale.x / 2, playerTransform.translation.y + playerTransform.scale.y / 2 };
-    Vector2 direction;
-    direction.x = mousePos.x - playerPos.x;
-    direction.y = mousePos.y - playerPos.y;
+   if ((IsMouseButtonPressed(MOUSE_RIGHT_BUTTON) || IsKeyPressed(KEY_Q)) && shootCooldown <= 0.0f && stats.hasRanged) {
+    shootCooldown = 0.5f; // cooldown in seconds
 
-    float length = sqrt(direction.x * direction.x + direction.y * direction.y);
-    if (length != 0) {
-        direction.x /= length;
-        direction.y /= length;
-    }
+    // Get camera
+    auto camView = registry.view<PlayerCamera, Camera2D>();
+    entt::entity camEntity = camView.front();
+    Camera2D &camera = registry.get<Camera2D>(camEntity);
 
-        Vector3 targetPos = { playerPos.x + direction.x * 1000.0f, playerPos.y + direction.y * 1000.0f, 0.0f };
+    // Mouse world position
+    Vector2 mouseWorld = GetScreenToWorld2D(GetMousePosition(), camera);
 
-        ProjectileStats projectileStats = ProjectileStats(800.0f, 10.0f); // speed, damage
-        CreateProjectile(registry, playerTransform, targetPos, projectileStats, true);
-    }
+    // Player center
+    Vector2 playerCenter = {
+        transform.translation.x + transform.scale.x / 2.0f,
+        transform.translation.y + transform.scale.y / 2.0f
+    };
+
+    // Start Transform for projectile
+    Transform startTransform = transform;
+    startTransform.translation.x = playerCenter.x;
+    startTransform.translation.y = playerCenter.y;
+
+    // Pass mouseWorld as the target
+    Vector3 targetPos = { mouseWorld.x, mouseWorld.y, 0.0f };
+
+    ProjectileStats projectileStats(800.0f, 10.0f);
+    CreateProjectile(registry, startTransform, targetPos, projectileStats, true);
+}
+
 
     // Check if currently headbutting
     bool isHeadbutting = (animation.currentSequence == "headbuttRight" || animation.currentSequence == "headbuttLeft") && !animation.IsFinished();
