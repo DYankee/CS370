@@ -19,7 +19,7 @@
            "description": "Using compilers: C = /usr/bin/gcc, CXX = /usr/bin/g++",
            "binaryDir": "${sourceDir}/out/build/${presetName}",
            "cacheVariables": {
-               "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/release/MilkSong",
+               "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/release/x86_64-pc-linux/MilkSong",
                "CMAKE_C_COMPILER": "/usr/bin/gcc",
                "CMAKE_CXX_COMPILER": "/usr/bin/g++",
                "CMAKE_BUILD_TYPE": "Release"
@@ -45,7 +45,7 @@
            "generator": "MinGW Makefiles",
            "binaryDir": "${sourceDir}/out/build/${presetName}",
            "cacheVariables": {
-               "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/release/MilkSong",
+               "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/release/x86_64-pc-windows/MilkSong",
                "CMAKE_C_COMPILER": "C:/code/mingw64/bin/gcc.exe",
                "CMAKE_CXX_COMPILER": "C:/code/mingw64/bin/g++.exe",
                "CMAKE_BUILD_TYPE": "Release"
