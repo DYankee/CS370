@@ -155,7 +155,7 @@ void CreatePlayer(entt::registry &registry) {
 
     // Create hud
     {
-        Texture2D heartTex = LoadTexture("assets/sprites/CowFace.png");
+        Texture2D heartTex = LoadTexture("assets/sprites/powerups/CowFace.png");
         entt::entity hudEnt = registry.create();
         registry.emplace<HUDResources>(hudEnt, HUDResources{ heartTex, Vector2{20.0f, 20.0f}, 48, playerEnt });
     }
