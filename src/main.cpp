@@ -251,7 +251,7 @@ void RenderControlsScreen(const Vector2 &screenSize, Texture2D controlsTexture) 
 
 int main() {
     // Set log level
-    SetTraceLogLevel(LOG_ALL);
+    SetTraceLogLevel(LOG_NONE);
 
     // Window setup
     float accumulator = 0.0f;             // Keeps track of leftover frame time
