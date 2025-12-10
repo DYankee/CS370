@@ -9,6 +9,9 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath) {
 
     DeSpawnEnemies(registry);
     DeSpawnNPCs(registry);
+    DespawnUpgrades(registry);
+    DeSpawnHealthUpgrades(registry);
+    DeSpawnRangeUpgrades(registry);
     RemoveAllProjectiles(registry);
     registry.view<Map, TmxMap>().each([&registry, &tmxFilePath](TmxMap &currentMap) {
         // Load new map
@@ -58,6 +61,7 @@ void ChangeMap(entt::registry &registry, std::string tmxFilePath) {
     SpawnEnemies(registry);
     SpawnNPCs(registry);
     SpawnHealthUpgrades(registry);
+    SpawnUpgrades(registry);
     SpawnRangeUpgrades(registry);
 }
 
