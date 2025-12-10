@@ -21,6 +21,7 @@
 using namespace std;
 
 void Update(entt::registry &registry, float dt) {
+    if (dt > 0.016f) dt = 0.016f;
     CheckForDeath(registry);
     UpdateProjectiles(registry, dt);
     PlayerInputSystem(registry, dt);
